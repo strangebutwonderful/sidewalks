@@ -12,6 +12,6 @@ MANDRILL_API_KEY: Your_API_Key
 ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: changeme
-OMNIAUTH_PROVIDER_KEY: Your_OmniAuth_Provider_Key
-OMNIAUTH_PROVIDER_SECRET: Your_OmniAuth_Provider_Secret
+TWITTER_PROVIDER_KEY: Your_OmniAuth_Provider_Key
+TWITTER_PROVIDER_SECRET: Your_OmniAuth_Provider_Secret
 ROLES: [admin, user, VIP]
