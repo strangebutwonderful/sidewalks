@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Twitter:</b>
+  <%= @tweet.twitter_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @tweet.user %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @tweet.text %>
+</p>
+
+<p>
+  <b>Coordinates longitude:</b>
+  <%= @tweet.coordinates_longitude %>
+</p>
+
+<p>
+  <b>Coordinates latitude:</b>
+  <%= @tweet.coordinates_latitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+<%= link_to 'Back', tweets_path %>
