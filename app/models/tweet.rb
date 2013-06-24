@@ -3,6 +3,7 @@ class Tweet < ActiveRecord::Base
   attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :twitter_id
 
   def import(twitter_tweet)
+    logger.info "Importing tweet: [#{twitter_tweet.inspect}]" 
     self.twitter_id = twitter_tweet['id_str']
     self.text = twitter_tweet['text']
     self.created_at = twitter_tweet['created_at']

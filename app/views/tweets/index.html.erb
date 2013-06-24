@@ -1,31 +1,17 @@
 <h1>Listing tweets</h1>
 
-<table>
-  <tr>
-    <th>Twitter</th>
-    <th>User</th>
-    <th>Text</th>
-    <th>Coordinates longitude</th>
-    <th>Coordinates latitude</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tweets.each do |tweet| %>
-  <tr>
-    <td><%= tweet.twitter_id %></td>
-    <td><%= tweet.user %></td>
-    <td><%= tweet.text %></td>
-    <td><%= tweet.coordinates_longitude %></td>
-    <td><%= tweet.coordinates_latitude %></td>
-    <td><%= link_to 'Show', tweet %></td>
-    <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-    <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<dl>
+  <% @tweets.each do |tweet| %>
+    <dt><%= tweet.twitter_id %> by <%= tweet.user %></dt>
+    <dd><%= tweet.text %></dd>
+    <dd><%= tweet.coordinates_longitude %></dd>
+    <dd><%= tweet.coordinates_latitude %></dd>
+    <dd>
+      <%= link_to 'Show', tweet %>
+      <%= link_to 'Edit', edit_tweet_path(tweet) %>
+      <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </dd>
+  <% end %>
+</dl>
 
 <%= link_to 'New Tweet', new_tweet_path %>

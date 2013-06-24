@@ -30,9 +30,9 @@ class TweetsController < ApplicationController
     end
 
     @imported_tweets = Twitter.home_timeline
-    @imported_tweets.each { |imported_tweet|
+    @imported_tweets.each do |imported_tweet|
       Tweet.first_or_import!(imported_tweet)
-    }
+    end
 
     redirect_to tweets_url
   end
