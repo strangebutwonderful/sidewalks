@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(:version => 20130624001410) do
     t.string   "name"
     t.string   "email"
     t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "provider_id"
+    t.string   "provider_screen_name"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "users_roles", :id => false, :force => true do |t|
