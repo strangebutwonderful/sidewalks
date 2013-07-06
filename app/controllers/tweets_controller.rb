@@ -22,17 +22,7 @@ class TweetsController < ApplicationController
   end
 
   def import 
-    Twitter.configure do |config|
-      config.consumer_key = ENV['TWITTER_PROVIDER_KEY']
-      config.consumer_secret = ENV['TWITTER_PROVIDER_SECRET']
-      config.oauth_token = ENV['AJSHARMA_ACCESS_TOKEN']
-      config.oauth_token_secret = ENV['AJSHARMA_ACCESS_TOKEN_SECRET']
-    end
-
-    @imported_tweets = Twitter.home_timeline
-    @imported_tweets.each do |imported_tweet|
-      Tweet.first_or_import!(imported_tweet)
-    end
+    Tweet.import_latest_from_twitter
 
     redirect_to tweets_url
   end

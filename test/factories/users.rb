@@ -5,6 +5,6 @@ FactoryGirl.define do
     name "MyString"
     email "MyString"
     provider "MyString"
-    uid "MyString"
+    provider_id "MyString"
   end
 end

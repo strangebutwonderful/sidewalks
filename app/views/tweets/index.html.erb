@@ -2,7 +2,7 @@
 
 <dl>
   <% @tweets.each do |tweet| %>
-    <dt><%= tweet.twitter_id %> by <%= tweet.user %> at <%= time_ago_in_words(tweet.created_at) %> ago</dt>
+    <dt><%= tweet.twitter_id %> by <%= tweet.user.name %> at <%= time_ago_in_words(tweet.created_at) %> ago</dt>
     <dd><%= tweet.text %></dd>
     <dd><%= tweet.coordinates_longitude %></dd>
     <dd><%= tweet.coordinates_latitude %></dd>
