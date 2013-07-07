@@ -1,0 +1,40 @@
+// variables
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+$sansFontFamily: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// imports
+@import "bootstrap/bootstrap";
+
+body {
+  padding-top: 60px; // fixed header padding
+}
+
+@import "bootstrap/responsive";
+
+// body overall
+body {
+}
+
+// application nav bar
+.navbar-inner {
+  background: #ffffff;
+}
+
+// page container
+.container {
+  max-width: 600px;
+}
+
+// page content
+.content {
+  // margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+}
+
+// 
+.inside {
+  padding: $paddingLarge;
+}
+
+.alert {
+  margin: $paddingLarge;
+}
