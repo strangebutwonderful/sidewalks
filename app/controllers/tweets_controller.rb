@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
   end
 
   def import 
-    Tweet.import_latest_from_twitter
+    Tweet.import_latest_from_sidewalks_twitter
 
     redirect_to tweets_url
   end
