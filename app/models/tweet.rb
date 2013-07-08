@@ -12,7 +12,7 @@ class Tweet < ActiveRecord::Base
       config.oauth_token_secret = ENV['AJSHARMA_ACCESS_TOKEN_SECRET']
     end
 
-    @imported_tweets = Twitter.user_timeline(ENV['TWITTER_ACCOUNT_SCREEN_NAME'])
+    @imported_tweets = Twitter.home_timeline
     @imported_tweets.each do |imported_tweet|
       user = User.first_or_import_from_twitter_tweet(imported_tweet)
       Tweet.first_or_import_from_twitter_tweet(imported_tweet, user)
