@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider
       t.string :provider_id
       t.string :provider_screen_name
+      t.string :provider_access_token
+      t.string :provider_access_token_secret
 
       t.timestamps
     end

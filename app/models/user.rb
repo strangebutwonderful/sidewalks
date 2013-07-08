@@ -24,12 +24,19 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
+    # See https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
     create! do |user|
+      logger.info "Creating a user using omniauth: [#{auth.inspect}]" 
       user.provider = auth['provider']
-      user.provider_id = auth['provider_id']
+      user.provider_id = auth['uid']
       if auth['info']
          user.name = auth['info']['name'] || ""
          user.email = auth['info']['email'] || ""
+         user.provider_screen_name = auth['info']['nickname'] || ""
+      end
+      if auth['credentials']
+        user.provider_access_token = auth['credentials']['token']
+        user.provider_access_token_secret = auth['credentials']['secret']
       end
     end
   end
