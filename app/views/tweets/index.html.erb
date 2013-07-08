@@ -1,9 +1,10 @@
-<h1>Listing tweets</h1>
+<h1>All tweets</h1>
 
 <dl>
   <% @tweets.each do |tweet| %>
-    <dt><%= tweet.twitter_id %> by <%= tweet.user.name %> at <%= time_ago_in_words(tweet.created_at) %> ago</dt>
-    <dd><%= tweet.text %></dd>
+    <dt><%= tweet.text %></dt>
+    <dd>by <%= link_to tweet.user.name, tweet.user.provider_url, target: "_blank" %> at <%= time_ago_in_words(tweet.created_at) %> ago</dd>
+    
     <dd><%= tweet.coordinates_longitude %></dd>
     <dd><%= tweet.coordinates_latitude %></dd>
     <dd>

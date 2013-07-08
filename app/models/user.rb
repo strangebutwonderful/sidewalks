@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
   attr_accessible :provider, :provider_id, :name, :email
   validates_presence_of :name
 
+  attr_accessor :provider_url
+
+  def provider_url
+    "https://twitter.com/" + self.provider_screen_name
+  end
+
   def import_from_twitter_tweet(twitter_tweet)
     if(twitter_tweet.user)
       logger.info "user import_from_twitter_tweet: [#{twitter_tweet.inspect}]" 
