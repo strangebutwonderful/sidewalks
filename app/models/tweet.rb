@@ -2,6 +2,12 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
   attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :twitter_id
 
+  attr_accessor :provider_url
+
+  def provider_url
+    self.user.provider_url + "/status/" + twitter_id
+  end
+
   def self.import_latest_from_sidewalks_twitter 
     # Import the latest tweets from twitter adn saves to db
 

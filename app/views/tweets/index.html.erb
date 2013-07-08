@@ -2,7 +2,7 @@
 
 <dl>
   <% @tweets.each do |tweet| %>
-    <dt><%= tweet.text %></dt>
+    <dt><%= link_to tweet.text, tweet.provider_url, target: "_blank" %></dt>
     <dd>by <%= link_to tweet.user.name, tweet.user.provider_url, target: "_blank" %> at <%= time_ago_in_words(tweet.created_at) %> ago</dd>
     
     <dd><%= tweet.coordinates_longitude %></dd>
