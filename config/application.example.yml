@@ -9,9 +9,17 @@
 #
 MANDRILL_USERNAME: Your_Username
 MANDRILL_API_KEY: Your_API_Key
+
 ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: changeme
-TWITTER_PROVIDER_KEY: Your_OmniAuth_Provider_Key
-TWITTER_PROVIDER_SECRET: Your_OmniAuth_Provider_Secret
+
 ROLES: [admin, user, VIP]
+
+TWITTER_ACCOUNT_SCREEN_NAME: Your_Twitter_Screen_Name
+
+TWITTER_CONSUMER_KEY: Your_OmniAuth_Provider_Key
+TWITTER_COMSUMER_SECRET: Your_OmniAuth_Provider_Secret
+
+TWITTER_OAUTH_ACCESS_TOKEN: Your_Twitter_Access_Token
+TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret
