@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
   def import 
     Tweet.import_latest_from_sidewalks_twitter
 
-    redirect_to tweets_url
+    redirect_to root_path
   end
 
   # GET /tweets/new
