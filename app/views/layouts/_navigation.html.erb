@@ -1,5 +1,8 @@
 <%= link_to "Sidewalks", root_path, :class => 'brand' %>
 <ul class="nav">
+  <li>
+    <%= link_to 'Refresh', import_tweets_path %>
+  </li>
   <% if user_signed_in? %>
     <li>
       <%= link_to 'Logout', signout_path %>
