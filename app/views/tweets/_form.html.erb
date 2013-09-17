@@ -12,18 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :twitter_id %>
-    <%= f.text_field :twitter_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user %>
-    <%= f.text_field :user %>
-  </div>
-  <div class="field">
-    <%= f.label :text %>
-    <%= f.text_area :text %>
-  </div>
-  <div class="field">
     <%= f.label :coordinates_longitude %>
     <%= f.text_field :coordinates_longitude %>
   </div>
@@ -32,6 +20,6 @@
     <%= f.text_field :coordinates_latitude %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn" %>
   </div>
 <% end %>
