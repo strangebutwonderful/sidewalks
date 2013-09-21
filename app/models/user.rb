@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   attr_accessible :provider, :provider_id, :name, :email
   validates_presence_of :name
 
-  attr_accessor :provider_url
+  attr_reader :provider_url
 
   def provider_url
     "https://twitter.com/" + self.provider_screen_name
