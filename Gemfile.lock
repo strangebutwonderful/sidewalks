@@ -218,6 +218,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails (= 3.2.13)
+  rake
   rb-fchange
   rb-fsevent
   rb-inotify
