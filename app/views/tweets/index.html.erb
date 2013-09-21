@@ -3,10 +3,8 @@
 <dl>
   <% @tweets.each do |tweet| %>
     <dt><%= link_to tweet.text, tweet.provider_url, target: "_blank" %></dt>
-    <dd>by <%= link_to tweet.user.name, tweet.user.provider_url, target: "_blank" %> at <%= time_ago_in_words(tweet.created_at) %> ago</dd>
+    <dd>by <%= link_to tweet.user_name, tweet.user_provider_url, target: "_blank" %> at <%= time_ago_in_words(tweet.created_at) %> ago</dd>
     
-    <dd><%= tweet.coordinates_longitude %></dd>
-    <dd><%= tweet.coordinates_latitude %></dd>
     <dd>
       <%= link_to 'Show', tweet %>
       <%= link_to 'Edit', edit_tweet_path(tweet) %>
