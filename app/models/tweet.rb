@@ -2,10 +2,18 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
   attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :twitter_id
 
-  attr_accessor :provider_url
+  attr_reader :provider_url, :user_name, :user_provider_url
 
   def provider_url
-    self.user.provider_url + "/status/" + twitter_id
+    self.user && self.user.provider_url + "/status/" + twitter_id
+  end
+
+  def user_name
+    self.user && self.user.name
+  end
+
+  def user_provider_url
+    self.user && self.user.provider_url
   end
 
   def self.import_latest_from_sidewalks_twitter 
