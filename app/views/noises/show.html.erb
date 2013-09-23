@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Twitter Id:</b>
+  <%= @noise.twitter_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @noise.user_name %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @noise.text %>
+</p>
+
+<p>
+  <b>Coordinates longitude:</b>
+  <%= @noise.coordinates_longitude %>
+</p>
+
+<p>
+  <b>Coordinates latitude:</b>
+  <%= @noise.coordinates_latitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_noise_path(@noise) %> |
+<%= link_to 'Back', noises_path %>

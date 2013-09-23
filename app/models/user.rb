@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   rolify
-  has_many :tweets
+  has_many :noises
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email
   validates_presence_of :name
@@ -11,21 +11,21 @@ class User < ActiveRecord::Base
     "https://twitter.com/" + self.provider_screen_name
   end
 
-  def import_from_twitter_tweet(twitter_tweet)
-    if(twitter_tweet.user)
-      logger.info "user import_from_twitter_tweet: [#{twitter_tweet.inspect}]" 
-      self.name = twitter_tweet.user.name || ""
+  def import_from_twitter_noise(twitter_noise)
+    if(twitter_noise.user)
+      logger.info "user import_from_twitter_noise: [#{twitter_noise.inspect}]" 
+      self.name = twitter_noise.user.name || ""
       self.email = ""
       self.provider = 'twitter'
-      self.provider_id = twitter_tweet.user.id.to_s
-      self.provider_screen_name = twitter_tweet.user.screen_name || ""
+      self.provider_id = twitter_noise.user.id.to_s
+      self.provider_screen_name = twitter_noise.user.screen_name || ""
       self.save!
     end
   end
 
-  def self.first_or_import_from_twitter_tweet(twitter_tweet) 
-    User.where(:provider_id => twitter_tweet.user.id.to_s).first_or_create do |user|
-      user.import_from_twitter_tweet(twitter_tweet)
+  def self.first_or_import_from_twitter_noise(twitter_noise) 
+    User.where(:provider_id => twitter_noise.user.id.to_s).first_or_create do |user|
+      user.import_from_twitter_noise(twitter_noise)
     end
   end
 

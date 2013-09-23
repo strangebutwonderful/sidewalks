@@ -6,7 +6,7 @@ Sidewalks::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   match '/welcome' => 'home#welcome'
 
-  resources :tweets do 
+  resources :noises do 
     collection do 
       get 'import'     
     end
@@ -14,5 +14,5 @@ Sidewalks::Application.routes.draw do
 
   resources :users, :only => [:index, :show, :edit, :update ]
 
-  root :to => "tweets#index"
+  root :to => "noises#index"
 end
