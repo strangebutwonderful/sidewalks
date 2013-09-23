@@ -7,6 +7,10 @@
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
 # Add application configuration variables here, as shown below.
 #
+
+# run `rake secret` to generate
+SECRET_TOKEN: Your_Secret_Token 
+
 MANDRILL_USERNAME: Your_Username
 MANDRILL_API_KEY: Your_API_Key
 
