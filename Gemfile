@@ -33,4 +33,8 @@ group :test do
   gem 'rake' # for travis
 end
 
+# hosting
 gem "heroku"
+
+# code coverage
+gem 'coveralls', require: false
