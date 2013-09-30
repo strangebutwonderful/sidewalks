@@ -22,7 +22,7 @@ class NoisesController < ApplicationController
   end
 
   def import 
-    Noise.import_latest_from_sidewalks_twitter
+    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
 
     redirect_to root_path
   end

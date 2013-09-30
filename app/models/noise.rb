@@ -16,25 +16,8 @@ class Noise < ActiveRecord::Base
     self.user && self.user.provider_url
   end
 
-  def self.import_latest_from_sidewalks_twitter 
-    # Import the latest noises from twitter adn saves to db
-
-    Twitter.configure do |config|
-      config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
-      config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
-      config.oauth_token = ENV['TWITTER_OAUTH_ACCESS_TOKEN']
-      config.oauth_token_secret = ENV['TWITTER_OAUTH_ACCESS_TOKEN_SECRET']
-    end
-
-    @imported_noises = Twitter.home_timeline
-    @imported_noises.each do |imported_noise|
-      user = User.first_or_import_from_twitter_noise(imported_noise)
-      Noise.first_or_import_from_twitter_noise(imported_noise, user)
-    end    
-  end
-
   def import_from_twitter_noise(twitter_noise, user)
-    logger.info "import_from_twitter_noiseing noise: [#{twitter_noise.inspect}]" 
+    logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
     self.twitter_id = twitter_noise.id.to_s
     self.text = twitter_noise.text
     self.created_at = twitter_noise.created_at
@@ -47,13 +30,13 @@ class Noise < ActiveRecord::Base
   end
 
   def import_from_twitter_noise!(twitter_noise, user) 
-    import_from_twitter_noise(twitter_noise)
+    import_from_twitter_noise(twitter_noise, user)
     save
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
     Noise.where(:twitter_id => twitter_noise.id.to_s).first_or_create do |noise|
-      noise.import_from_twitter_noise(twitter_noise, user)
+      noise.import_from_twitter_noise!(twitter_noise, user)
     end
   end
 
