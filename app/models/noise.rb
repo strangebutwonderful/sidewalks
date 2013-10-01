@@ -27,16 +27,13 @@ class Noise < ActiveRecord::Base
     #   self.coordinates_longitude = twitter_noise.coordinates.coordinates[0]
     #   self.coordinates_latitude = twitter_noise.coordinates.coordinates[1]
     # end
-  end
-
-  def import_from_twitter_noise!(twitter_noise, user) 
-    import_from_twitter_noise(twitter_noise, user)
+    
     save
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
     Noise.where(:twitter_id => twitter_noise.id.to_s).first_or_create do |noise|
-      noise.import_from_twitter_noise!(twitter_noise, user)
+      noise.import_from_twitter_noise(twitter_noise, user)
     end
   end
 

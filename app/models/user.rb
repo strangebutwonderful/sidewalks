@@ -19,17 +19,13 @@ class User < ActiveRecord::Base
       self.provider = 'twitter'
       self.provider_id = twitter_noise.user.id.to_s
       self.provider_screen_name = twitter_noise.user.screen_name || ""
+      self.save
     end
-  end
-
-  def import_from_twitter_noise!(twitter_noise)
-    self.import_from_twitter_noise(twitter_noise)
-    self.save!
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise) 
     User.where(:provider_id => twitter_noise.user.id.to_s).first_or_create do |user|
-      user.import_from_twitter_noise!(twitter_noise)
+      user.import_from_twitter_noise(twitter_noise)
     end
   end
 
