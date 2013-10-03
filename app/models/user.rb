@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
       self.provider = 'twitter'
       self.provider_id = twitter_noise.user.id.to_s
       self.provider_screen_name = twitter_noise.user.screen_name || ""
-      self.save
+      self.save!
     end
   end
 
