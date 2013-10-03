@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923192942) do
+ActiveRecord::Schema.define(:version => 20131003172454) do
 
   create_table "noises", :force => true do |t|
-    t.string   "twitter_id"
+    t.string   "provider_id"
     t.integer  "user_id"
     t.text     "text"
     t.decimal  "coordinates_longitude"

@@ -12,7 +12,7 @@ class TwitterNoiseImporter
 
     last_noise = Noise.last
 
-    imported_noises = Twitter.home_timeline({since_id: last_noise.twitter_id})
+    imported_noises = Twitter.home_timeline({since_id: last_noise.provider_id})
     imported_noises.each do |imported_noise|
       user = User.first_or_import_from_twitter_noise(imported_noise)
       Noise.first_or_import_from_twitter_noise(imported_noise, user)

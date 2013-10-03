@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :noise do
-    twitter_id "MyString"
+    provider_id "MyString"
     user nil
     text "MyText"
     coordinates_longitude "9.99"
