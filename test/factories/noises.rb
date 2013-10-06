@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :noise do
+    association :user, factory: :user
     provider "MyProvider"
     provider_id "MyString"
-    user nil
     text "MyText"
     coordinates_longitude "9.99"
     coordinates_latitude "9.99"

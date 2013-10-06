@@ -6,5 +6,6 @@ FactoryGirl.define do
     email "MyString"
     provider "MyString"
     provider_id "MyString"
+    provider_screen_name "MyString"
   end
 end
