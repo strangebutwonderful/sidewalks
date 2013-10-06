@@ -20,7 +20,7 @@ class Noise < ActiveRecord::Base
 
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
-    self.provider = self::PROVIDER_TWITTER
+    self.provider = Noise::PROVIDER_TWITTER
     self.provider_id = twitter_noise.id.to_s
     self.text = twitter_noise.text
     self.created_at = twitter_noise.created_at
@@ -35,7 +35,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
-    Noise.where(:provider => self::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
+    Noise.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
       noise.import_from_twitter_noise(twitter_noise, user)
     end
   end
