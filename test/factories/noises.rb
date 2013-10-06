@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :noise do
+    provider "MyProvider"
     provider_id "MyString"
     user nil
     text "MyText"

@@ -19,7 +19,7 @@ class NoisesControllerTest < ActionController::TestCase
 
   test "should create noise" do
     assert_difference('Noise.count') do
-      post :create, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider_id: @noise.provider_id }
+      post :create, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
     end
 
     assert_redirected_to noise_path(assigns(:noise))
@@ -36,7 +36,7 @@ class NoisesControllerTest < ActionController::TestCase
   end
 
   test "should update noise" do
-    put :update, id: @noise, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider_id: @noise.provider_id }
+    put :update, id: @noise, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
     assert_redirected_to noise_path(assigns(:noise))
   end
 

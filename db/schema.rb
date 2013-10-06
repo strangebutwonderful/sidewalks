@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003172454) do
+ActiveRecord::Schema.define(:version => 20131003180751) do
 
   create_table "noises", :force => true do |t|
     t.string   "provider_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20131003172454) do
     t.decimal  "coordinates_latitude"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.string   "provider"
   end
 
   add_index "noises", ["user_id"], :name => "index_noises_on_user_id"

@@ -1,8 +1,10 @@
 class Noise < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :provider_id
+  attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :provider, :provider_id
 
   attr_reader :provider_url, :user_name, :user_provider_url
+
+  PROVIDER_TWITTER = 'twitter'
 
   def provider_url
     self.user && self.user.provider_url + "/status/" + provider_id
@@ -18,6 +20,7 @@ class Noise < ActiveRecord::Base
 
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
+    self.provider = self::PROVIDER_TWITTER
     self.provider_id = twitter_noise.id.to_s
     self.text = twitter_noise.text
     self.created_at = twitter_noise.created_at
@@ -32,7 +35,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
-    Noise.where(:provider_id => twitter_noise.id.to_s).first_or_create do |noise|
+    Noise.where(:provider => self::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
       noise.import_from_twitter_noise(twitter_noise, user)
     end
   end
