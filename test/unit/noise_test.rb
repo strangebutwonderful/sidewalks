@@ -12,35 +12,32 @@ class NoiseTest < ActiveSupport::TestCase
   end
 
   test "imports raw twitter object" do
-    importable_noiselike_object = OpenStruct.new(
-      FactoryGirl.attributes_for(:noise)
-    )
+    twitter_noise = build_twitter_noise
 
-    user = FactoryGirl.create(:user)
+    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
+
     noise = Noise.new
 
-    assert noise.import_from_twitter_noise(importable_noiselike_object, user)
+    assert noise.import_from_twitter_noise(twitter_noise, user)
   end
 
   test "imports noise when new noise" do
-    importable_noiselike_object = OpenStruct.new(
-      FactoryGirl.attributes_for(:noise)
-    )
+    twitter_noise = build_twitter_noise
 
-    user = FactoryGirl.create(:user)
+    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
 
-    assert Noise.first_or_import_from_twitter_noise(importable_noiselike_object, user)
+    assert Noise.first_or_import_from_twitter_noise(twitter_noise, user)
   end
 
-  test "imports noise when old noise" do
-    noise = FactoryGirl.create(:noise)
+  test "no new noise when importing old tweet" do 
+    twitter_noise = build_twitter_noise
 
-    importable_noiselike_object = OpenStruct.new(
-      noise.attributes
-    )
+    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
 
-    user = FactoryGirl.create(:user)
+    Noise.first_or_import_from_twitter_noise(twitter_noise, user)
 
-    assert Noise.first_or_import_from_twitter_noise(importable_noiselike_object, user)
+    assert_no_difference('Noise.count') do 
+      assert Noise.first_or_import_from_twitter_noise(twitter_noise, user)
+    end
   end
 end

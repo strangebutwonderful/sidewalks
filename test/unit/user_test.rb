@@ -12,34 +12,26 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "imports raw twitter object" do
-    importable_userlike_object = OpenStruct.new(
-      FactoryGirl.attributes_for(:user)
-    )
+    twitter_user = build_twitter_user
 
     user = User.new
 
-    assert user.import_from_twitter_noise_user(importable_userlike_object)
+    assert user.import_from_twitter_noise_user(twitter_user)
   end
 
   test "imports user when new user" do
-    importable_userlike_object = OpenStruct.new(
-      FactoryGirl.attributes_for(:user)
-    )
+    twitter_user = build_twitter_user
 
-    user = FactoryGirl.create(:user)
-
-    assert User.first_or_import_from_twitter_noise(importable_userlike_object)
+    assert User.first_or_import_from_twitter_noise_user(twitter_user)
   end
 
-  test "imports user when old user" do
-    user = FactoryGirl.create(:user)
+  test "no new user when importing an old user" do
+    twitter_user = build_twitter_user
 
-    importable_userlike_object = OpenStruct.new(
-      user.attributes
-    )
+    User.first_or_import_from_twitter_noise_user(twitter_user)
 
-    user = FactoryGirl.create(:user)
-
-    assert User.first_or_import_from_twitter_noise(importable_userlike_object)
-  end  
+    assert_no_difference('User.count') do 
+      assert User.first_or_import_from_twitter_noise_user(twitter_user)
+    end
+  end
 end
