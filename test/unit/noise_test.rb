@@ -21,4 +21,26 @@ class NoiseTest < ActiveSupport::TestCase
 
     assert noise.import_from_twitter_noise(importable_noiselike_object, user)
   end
+
+  test "imports noise when new noise" do
+    importable_noiselike_object = OpenStruct.new(
+      FactoryGirl.attributes_for(:noise)
+    )
+
+    user = FactoryGirl.create(:user)
+
+    assert Noise.first_or_import_from_twitter_noise(importable_noiselike_object, user)
+  end
+
+  test "imports noise when old noise" do
+    noise = FactoryGirl.create(:noise)
+
+    importable_noiselike_object = OpenStruct.new(
+      noise.attributes
+    )
+
+    user = FactoryGirl.create(:user)
+
+    assert Noise.first_or_import_from_twitter_noise(importable_noiselike_object, user)
+  end
 end
