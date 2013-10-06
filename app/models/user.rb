@@ -7,25 +7,25 @@ class User < ActiveRecord::Base
 
   attr_reader :provider_url
 
+  PROVIDER_TWITTER = 'twitter'
+
   def provider_url
     "https://twitter.com/" + self.provider_screen_name
   end
 
-  def import_from_twitter_noise(twitter_noise)
-    if(twitter_noise.user)
-      logger.info "Creating a user from twitter noise: [#{twitter_noise.inspect}]" 
-      self.name = twitter_noise.user.name || ""
-      self.email = ""
-      self.provider = 'twitter'
-      self.provider_id = twitter_noise.user.id.to_s
-      self.provider_screen_name = twitter_noise.user.screen_name || ""
-      self.save!
-    end
+  def import_from_twitter_noise_user(twitter_noise_user)
+    logger.info "Creating a user from twitter noise: [#{twitter_noise_user.inspect}]" 
+    self.name = twitter_noise_user.name || ""
+    self.email = ""
+    self.provider = User::PROVIDER_TWITTER
+    self.provider_id = twitter_noise_user.id.to_s
+    self.provider_screen_name = twitter_noise_user.screen_name || ""
+    self.save!
   end
 
-  def self.first_or_import_from_twitter_noise(twitter_noise) 
-    User.where(:provider_id => twitter_noise.user.id.to_s).first_or_create do |user|
-      user.import_from_twitter_noise(twitter_noise)
+  def self.first_or_import_from_twitter_noise(twitter_noise_user) 
+    User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_noise_user.id.to_s).first_or_create do |user|
+      user.import_from_twitter_noise_user(twitter_noise_user)
     end
   end
 
