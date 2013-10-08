@@ -8,4 +8,9 @@ FactoryGirl.define do
     provider_id "MyString"
     provider_screen_name "MyString"
   end
+
+  factory :admin_user, parent: :user do
+    after(:create) {| user| user.add_role(:admin) }
+  end
+
 end

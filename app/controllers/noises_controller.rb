@@ -1,5 +1,6 @@
 class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :import]
+  before_filter :verify_admin, :except => [:index, :show, :import]
 
   # GET /noises
   # GET /noises.json
