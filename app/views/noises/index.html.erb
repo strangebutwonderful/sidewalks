@@ -7,8 +7,10 @@
     
     <dd>
       <%= link_to 'Show', noise %>
-      <%= link_to 'Edit', edit_noise_path(noise) %>
-      <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if user_signed_in? && current_user.has_role?(:admin) %>
+        <%= link_to 'Edit', edit_noise_path(noise) %>
+        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </dd>
   <% end %>
 </dl>

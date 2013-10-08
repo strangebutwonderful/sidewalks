@@ -9,7 +9,23 @@ class NoisesControllerTest < ActionController::TestCase
     sign_out
   end
 
-  test "should get index" do
+  test "anyone should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
+  test "user should get index" do
+    sign_in(FactoryGirl.create(:user))
+
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
+  test "admin should get index" do
+    sign_in(FactoryGirl.create(:admin_user))
+
     get :index
     assert_response :success
     assert_not_nil assigns(:noises)

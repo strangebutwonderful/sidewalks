@@ -26,5 +26,8 @@
 </p>
 
 
-<%= link_to 'Edit', edit_noise_path(@noise) %> |
+<% if user_signed_in? && current_user.has_role?(:admin) %>
+  <%= link_to 'Edit', edit_noise_path(@noise) %> |
+<% end %>
+
 <%= link_to 'Back', noises_path %>
