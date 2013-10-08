@@ -32,6 +32,9 @@ end
 group :test do 
   gem 'rake' # for travis
 end
+group :production do 
+  gem 'rails_12factor' # requested by heroku to avoid deprecation errors on rails 3
+end
 
 # hosting
 gem "heroku"
