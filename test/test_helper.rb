@@ -20,8 +20,9 @@ class ActiveSupport::TestCase
     @current_user = user
   end
 
-  def signout
-    get :signout
+  def sign_out
+    @request.reset_session
+    @current_user = nil
   end
 
   def build_twitter_user

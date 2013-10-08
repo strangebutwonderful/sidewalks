@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
       user.add_role :admin if User.count == 1 # make the first user an admin
     end
 
+    def sign_out
+      reset_session
+    end
+
     def authenticate_user!
       if !current_user
         redirect_to root_url, :alert => 'You need to sign in for access to this page.'

@@ -2,8 +2,11 @@ require 'test_helper'
 
 class NoisesControllerTest < ActionController::TestCase
   setup do
-    # @noise = noises(:one)
     @noise = FactoryGirl.create(:noise)
+  end
+
+  teardown do
+    sign_out
   end
 
   test "should get index" do
@@ -17,14 +20,14 @@ class NoisesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
+  test "admin can get edit" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :edit, id: @noise
     assert_response :success
   end
 
-  test "should update noise" do
+  test "admin can update noise" do
     user = FactoryGirl.create(:admin_user)
     sign_in(user)
     user.add_role :admin
@@ -33,7 +36,7 @@ class NoisesControllerTest < ActionController::TestCase
     assert_redirected_to noise_path(assigns(:noise))
   end
 
-  test "should destroy noise" do
+  test "admin can destroy noise" do
     sign_in(FactoryGirl.create(:admin_user))
 
     assert_difference('Noise.count', -1) do
