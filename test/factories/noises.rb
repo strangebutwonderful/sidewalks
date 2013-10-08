@@ -6,7 +6,11 @@ FactoryGirl.define do
     provider "MyProvider"
     provider_id "MyString"
     text "MyText"
-    coordinates_longitude "9.99"
+    created_at Time.now
+  end
+
+  factory :noise_with_coordinates, parent: :noise do
     coordinates_latitude "9.99"
+    coordinates_longitude "9.99"
   end
 end

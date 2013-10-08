@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   has_many :noises
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email
-  validates_presence_of :name
+  
+  validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
   attr_reader :provider_url
 

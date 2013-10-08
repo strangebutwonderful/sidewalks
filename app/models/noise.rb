@@ -4,6 +4,8 @@ class Noise < ActiveRecord::Base
 
   attr_reader :provider_url, :user_name, :user_provider_url
 
+  validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
+
   PROVIDER_TWITTER = 'twitter'
 
   def provider_url

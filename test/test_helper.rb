@@ -15,6 +15,15 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  def sign_in(user)
+    session[:user_id] = user.id
+    @current_user = user
+  end
+
+  def signout
+    get :signout
+  end
+
   def build_twitter_user
     OpenStruct.new(
       :id => 'my_twitter_user_id',
