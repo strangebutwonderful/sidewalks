@@ -11,23 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003180751) do
+ActiveRecord::Schema.define(:version => 20131016031929) do
 
   create_table "noises", :force => true do |t|
-    t.string   "provider_id"
-    t.integer  "user_id"
-    t.text     "text"
+    t.string   "provider_id",           :null => false
+    t.integer  "user_id",               :null => false
+    t.text     "text",                  :null => false
     t.decimal  "coordinates_longitude"
     t.decimal  "coordinates_latitude"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "provider"
+    t.string   "provider",              :null => false
   end
 
   add_index "noises", ["user_id"], :name => "index_noises_on_user_id"
 
   create_table "roles", :force => true do |t|
-    t.string   "name"
+    t.string   "name",          :null => false
     t.integer  "resource_id"
     t.string   "resource_type"
     t.datetime "created_at",    :null => false
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(:version => 20131003180751) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.string   "name",                         :null => false
     t.string   "email"
-    t.string   "provider"
-    t.string   "provider_id"
+    t.string   "provider",                     :null => false
+    t.string   "provider_id",                  :null => false
     t.string   "provider_screen_name"
     t.string   "provider_access_token"
     t.string   "provider_access_token_secret"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(:version => 20131003180751) do
   end
 
   create_table "users_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.integer "user_id", :null => false
+    t.integer "role_id", :null => false
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
