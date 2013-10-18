@@ -18,6 +18,7 @@ gem 'rolify'
 gem 'thin'
 gem 'twitter'
 group :development do
+  gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'guard-bundler'
