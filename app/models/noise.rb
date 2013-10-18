@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: noises
+#
+#  id                    :integer          not null, primary key
+#  provider_id           :string(255)      not null
+#  user_id               :integer          not null
+#  text                  :text             not null
+#  coordinates_longitude :decimal(, )
+#  coordinates_latitude  :decimal(, )
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  provider              :string(255)      not null
+#
+
 class Noise < ActiveRecord::Base
   belongs_to :user
   attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :provider, :provider_id

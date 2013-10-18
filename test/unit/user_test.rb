@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                           :integer          not null, primary key
+#  name                         :string(255)      not null
+#  email                        :string(255)
+#  provider                     :string(255)      not null
+#  provider_id                  :string(255)      not null
+#  provider_screen_name         :string(255)
+#  provider_access_token        :string(255)
+#  provider_access_token_secret :string(255)
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#
+
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
