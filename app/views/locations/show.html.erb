@@ -2,7 +2,7 @@
 
 <p>
   <b>User:</b>
-  <%= @location.user %>
+  <%= link_to @location.user.name, user_path(@location.user) %>
 </p>
 
 <p>

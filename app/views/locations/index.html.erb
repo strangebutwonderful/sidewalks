@@ -1,3 +1,5 @@
+<%= render '/layouts/admin_navigation' %>
+
 <h1>Listing locations</h1>
 
 <table>
@@ -16,7 +18,7 @@
 
 <% @locations.each do |location| %>
   <tr>
-    <td><%= location.user %></td>
+    <td><%= link_to location.user.name, user_path(location.user) %></td>
     <td><%= location.address %></td>
     <td><%= location.city %></td>
     <td><%= location.state %></td>
