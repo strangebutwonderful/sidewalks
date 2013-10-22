@@ -17,6 +17,7 @@
 class User < ActiveRecord::Base
   rolify
   has_many :noises
+  has_many :locations
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email
   
@@ -62,6 +63,10 @@ class User < ActiveRecord::Base
         user.provider_access_token_secret = auth['credentials']['secret']
       end
     end
+  end
+
+  def self.order_by_name_ignore_case
+    self.order('lower(name)')
   end
 
 end
