@@ -1,7 +1,7 @@
 class TwitterNoiseImporter
 
   def self.import_latest_from_sidewalks_twitter 
-    # Import the latest noises from twitter adn saves to db
+    # Import the latest noises from twitter and saves to db
 
     self.latest_noises_from_sidewalks_twitter.each do |imported_noise|
       user = User.first_or_import_from_twitter_noise_user(imported_noise.user)

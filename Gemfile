@@ -34,10 +34,11 @@ group :development, :test do
 end
 group :test do 
   gem 'rake' # for travis
+  gem 'mocha', :require => false
 end
 group :production do 
   gem 'rails_12factor' # requested by heroku to avoid deprecation errors on rails 3
 end
 
 # hosting
-gem "heroku"
+gem 'heroku'
