@@ -1,10 +1,12 @@
 class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :import]
-  before_filter :verify_admin, :except => [:index, :show, :import]
+  before_filter :verify_admin, :except => [:index, :show]
 
   # GET /noises
   # GET /noises.json
   def index
+    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+
     @noises = Noise.latest.all
 
     respond_to do |format|

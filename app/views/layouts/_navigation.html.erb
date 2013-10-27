@@ -1,8 +1,5 @@
 <%= link_to "Sidewalks", root_path, :class => 'brand' %>
 <ul class="nav">
-  <li>
-    <%= link_to 'Refresh', import_noises_path %>
-  </li>
   <% if user_signed_in? %>
     <li>
       <%= link_to 'Sign Out', signout_path %>
@@ -14,6 +11,9 @@
   <% end %>
   <% if user_signed_in? %>
     <% if current_user.has_role? :admin %>
+      <li>
+        <%= link_to 'Refresh', import_noises_path %>
+      </li>
       <li>
         <%= link_to 'Admin', users_path %>
       </li>
