@@ -6,6 +6,7 @@ class NoisesControllerTest < ActionController::TestCase
   end
 
   teardown do
+    Rails.cache.clear
     sign_out
   end
 
