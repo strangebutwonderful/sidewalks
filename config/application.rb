@@ -69,5 +69,8 @@ module Sidewalks
 
     # Heroku requires this to be false http://railsapps.github.io/rails-heroku-tutorial.html
     config.assets.initialize_on_precompile=false    
+
+    # Cache in memory by default
+    config.cache_store = :memory_store
   end
 end
