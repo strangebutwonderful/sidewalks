@@ -5,7 +5,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.order("created_at DESC").all
+    @noises = Noise.latest.all
 
     respond_to do |format|
       format.html # index.html.erb
