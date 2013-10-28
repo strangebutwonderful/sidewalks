@@ -19,4 +19,12 @@ class Location < ActiveRecord::Base
   attr_accessible :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
   validates_presence_of :user_id, :address, :city, :state, :zip
+
+  after_validation :geocode # geocoder 
+
+  geocoded_by :full_street_address
+
+  def full_street_address
+    address + ', ' + city + ', ' + state + ' ' + zip.to_s
+  end
 end

@@ -17,6 +17,7 @@ gem 'pg'
 gem 'rolify'
 gem 'thin'
 gem 'twitter'
+gem 'geocoder'
 group :development do
   gem 'annotate'
   gem 'better_errors'
