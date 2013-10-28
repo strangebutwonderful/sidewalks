@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
     redirect_to '/auth/twitter'
   end
 
-
   def create
     auth = request.env["omniauth.auth"]
     user = User.where(:provider => auth['provider'], 
@@ -15,7 +14,6 @@ class SessionsController < ApplicationController
     else
       redirect_to root_url, :notice => 'Signed in!'
     end
-
   end
 
   def destroy
@@ -24,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
+    params[:message] ||= ''
     redirect_to root_url, :alert => "Authentication error: #{params[:message].humanize}"
   end
 
