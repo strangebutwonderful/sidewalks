@@ -60,14 +60,14 @@ class NoisesControllerTest < ActionController::TestCase
   test "user should not update noise" do
     sign_in(FactoryGirl.create(:user))
 
-    put :update, id: @noise, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
+    put :update, id: @noise, noise: { latitude: @noise.latitude, longitude: @noise.longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
     assert_redirected_to :root
   end
 
   test "admin should update noise" do
     sign_in(FactoryGirl.create(:admin_user))
 
-    put :update, id: @noise, noise: { coordinates_latitude: @noise.coordinates_latitude, coordinates_longitude: @noise.coordinates_longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
+    put :update, id: @noise, noise: { latitude: @noise.latitude, longitude: @noise.longitude, text: @noise.text, provider: @noise.provider, provider_id: @noise.provider_id }
     assert_redirected_to noise_path(assigns(:noise))
   end
 

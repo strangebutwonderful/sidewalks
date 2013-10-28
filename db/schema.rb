@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131022173005) do
+ActiveRecord::Schema.define(:version => 20131028174617) do
 
   create_table "locations", :force => true do |t|
     t.integer  "user_id",                                   :null => false
@@ -30,16 +30,17 @@ ActiveRecord::Schema.define(:version => 20131022173005) do
   add_index "locations", ["user_id"], :name => "index_locations_on_user_id"
 
   create_table "noises", :force => true do |t|
-    t.string   "provider_id",           :null => false
-    t.integer  "user_id",               :null => false
-    t.text     "text",                  :null => false
-    t.decimal  "coordinates_longitude"
-    t.decimal  "coordinates_latitude"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "provider",              :null => false
+    t.string   "provider_id",                                :null => false
+    t.integer  "user_id",                                    :null => false
+    t.text     "text",                                       :null => false
+    t.decimal  "longitude",   :precision => 11, :scale => 8
+    t.decimal  "latitude",    :precision => 11, :scale => 8
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "provider",                                   :null => false
   end
 
+  add_index "noises", ["latitude", "longitude"], :name => "index_noises_on_latitude_and_longitude"
   add_index "noises", ["user_id"], :name => "index_noises_on_user_id"
 
   create_table "roles", :force => true do |t|

@@ -6,8 +6,8 @@
 #  provider_id           :string(255)      not null
 #  user_id               :integer          not null
 #  text                  :text             not null
-#  coordinates_longitude :decimal(, )
-#  coordinates_latitude  :decimal(, )
+#  longitude :decimal(, )
+#  latitude  :decimal(, )
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  provider              :string(255)      not null
@@ -15,7 +15,7 @@
 
 class Noise < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :coordinates_latitude, :coordinates_longitude, :text, :provider, :provider_id
+  attr_accessible :latitude, :longitude, :text, :provider, :provider_id
 
   attr_reader :provider_url, :user_name, :user_provider_url
 
@@ -44,8 +44,8 @@ class Noise < ActiveRecord::Base
     self.user_id = user.id
 
     # if twitter_noise.coordinates
-    #   self.coordinates_longitude = twitter_noise.coordinates.coordinates[0]
-    #   self.coordinates_latitude = twitter_noise.coordinates.coordinates[1]
+    #   self.longitude = twitter_noise.coordinates.coordinates[0]
+    #   self.latitude = twitter_noise.coordinates.coordinates[1]
     # end
     
     save

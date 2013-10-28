@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :noise_with_coordinates, parent: :noise do
-    coordinates_latitude "9.99"
-    coordinates_longitude "9.99"
+    latitude "9.99"
+    longitude "9.99"
   end
 end
