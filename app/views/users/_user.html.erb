@@ -2,7 +2,7 @@
   <%= form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&#215;</a>
-      <h3>Change Role</h3>
+      <h1>Change Role</h1>
     </div>
     <div class="modal-body">
       <%= collection_select :user, :role_ids, Role.all, :id, :name, checked: user.role_ids.first %>
