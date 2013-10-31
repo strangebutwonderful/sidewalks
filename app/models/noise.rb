@@ -2,15 +2,15 @@
 #
 # Table name: noises
 #
-#  id                    :integer          not null, primary key
-#  provider_id           :string(255)      not null
-#  user_id               :integer          not null
-#  text                  :text             not null
-#  longitude :decimal(, )
-#  latitude  :decimal(, )
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  provider              :string(255)      not null
+#  id          :integer          not null, primary key
+#  provider_id :string(255)      not null
+#  user_id     :integer          not null
+#  text        :text             not null
+#  longitude   :decimal(11, 8)
+#  latitude    :decimal(11, 8)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  provider    :string(255)      not null
 #
 
 class Noise < ActiveRecord::Base
@@ -43,10 +43,9 @@ class Noise < ActiveRecord::Base
     self.created_at = twitter_noise.created_at
     self.user_id = user.id
 
-    # if twitter_noise.coordinates
-    #   self.longitude = twitter_noise.coordinates.coordinates[0]
-    #   self.latitude = twitter_noise.coordinates.coordinates[1]
-    # end
+    # TODO: get tweet's embedded coordinates
+    self.longitude = user.locations.first.try(:longitude)
+    self.latitude = user.locations.first.try(:latitude)
     
     save
   end
