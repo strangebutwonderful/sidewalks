@@ -1,5 +1,8 @@
 <h1>User</h1>
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<% if @user.provider_url %>
+  <p>External: <%= link_to '@' + @user.provider_screen_name, @user.provider_url %></p>
+<% end %>
 
 <%= link_to 'New Location', new_location_path(:user_id => @user) %>

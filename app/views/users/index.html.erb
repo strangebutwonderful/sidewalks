@@ -4,7 +4,7 @@
 <div class="">
 <dl>
   <% @users.each do |user| %>
-    <dt><%= link_to user.name, user %> (@<%= user.provider_screen_name %>)</dt>
+    <dt><%= link_to user.name, user %> (<%= link_to '@' + user.provider_screen_name, user.provider_url %>)</dt>
     <dd><b>Provider Id:</b> <%= user.provider_id %></dd>
     <dd><b>Provider Access Token:</b> <%= user.provider_access_token %></dd>
     <dd><b>Provider Access Token Secret:</b> <%= user.provider_access_token_secret %></dd>
