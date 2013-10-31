@@ -4,7 +4,10 @@
   <% @noises.each do |noise| %>
     <dt><%= link_to noise.text, noise.provider_url, target: "_blank" %></dt>
     <dd>
-      by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %> 
+      by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
+      <% if current_user_is_admin? %>
+        (<%= link_to 'admin', noise.user %>)
+      <% end %>
       at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
     </dd>
     
