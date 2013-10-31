@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :sign_in
   helper_method :correct_user?
   helper_method :current_user
-  helper_method :user_signed_in?
+  helper_method :current_user_is_admin?
+  helper_method :current_user_signed_in?
   helper_method :verify_admin
 
   private
@@ -42,7 +43,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def user_signed_in?
+    def current_user_is_admin?
+      return true if current_user_signed_in? && current_user.has_role?(:admin)
+    end
+
+    def current_user_signed_in?
       return true if current_user
     end
 

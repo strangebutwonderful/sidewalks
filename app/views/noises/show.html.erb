@@ -25,8 +25,7 @@
   <%= @noise.latitude %>
 </p>
 
-
-<% if user_signed_in? && current_user.has_role?(:admin) %>
+<% if current_user_is_admin? %>
   <%= link_to 'Edit', edit_noise_path(@noise) %> |
 <% end %>
 
