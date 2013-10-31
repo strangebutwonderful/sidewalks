@@ -2,15 +2,14 @@ class LocationsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :verify_admin
 
+  respond_to :html, :json
+
   # GET /locations
   # GET /locations.json
   def index
     @locations = Location.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @locations }
-    end
+    respond_with @locations
   end
 
   # GET /locations/1
@@ -18,21 +17,16 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @location }
-    end
+    respond_with @location
   end
 
   # GET /locations/new
   # GET /locations/new.json
   def new
     @location = Location.new
+    @location.user_id = params[:user_id] unless params[:user_id].blank?
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @location }
-    end
+    respond_with @location
   end
 
   # GET /locations/1/edit
@@ -45,15 +39,11 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(params[:location])
 
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
-        format.json { render json: @location, status: :created, location: @location }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.save
+      flash[:notice] = 'Location was successfully created.'
     end
+
+    respond_with @location
   end
 
   # PUT /locations/1
@@ -61,15 +51,11 @@ class LocationsController < ApplicationController
   def update
     @location = Location.find(params[:id])
 
-    respond_to do |format|
-      if @location.update_attributes(params[:location])
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.update_attributes(params[:location])
+      flash[:notice] = 'Location was successfully updated.'
     end
+
+    respond_with @location
   end
 
   # DELETE /locations/1
@@ -78,9 +64,8 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @location.destroy
 
-    respond_to do |format|
-      format.html { redirect_to locations_url }
-      format.json { head :no_content }
-    end
+    flash[:notice] = 'Location was successfully deleted.'
+
+    respond_with @location
   end
 end

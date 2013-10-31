@@ -2,6 +2,8 @@ class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :import]
   before_filter :verify_admin, :except => [:index, :show]
 
+  respond_to :html, :json
+
   # GET /noises
   # GET /noises.json
   def index
@@ -9,10 +11,7 @@ class NoisesController < ApplicationController
 
     @noises = Noise.latest.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @noises }
-    end
+    respond_with @noises
   end
 
   # GET /noises/1
@@ -20,10 +19,7 @@ class NoisesController < ApplicationController
   def show
     @noise = Noise.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @noise }
-    end
+    respond_with @noise
   end
 
   def import 
@@ -42,15 +38,11 @@ class NoisesController < ApplicationController
   def update
     @noise = Noise.find(params[:id])
 
-    respond_to do |format|
-      if @noise.update_attributes(params[:noise])
-        format.html { redirect_to @noise, notice: 'Noise was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @noise.errors, status: :unprocessable_entity }
-      end
+    if @noise.update_attributes(params[:noise])
+      flash[:notice] = 'Noise was successfully updated.'
     end
+
+    respond_with @noise
   end
 
   # DELETE /noises/1
@@ -59,9 +51,8 @@ class NoisesController < ApplicationController
     @noise = Noise.find(params[:id])
     @noise.destroy
 
-    respond_to do |format|
-      format.html { redirect_to noises_url }
-      format.json { head :no_content }
-    end
+    flash[:notice] = 'Noise was successfully deleted.'
+
+    respond_with @noise
   end
 end
