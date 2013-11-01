@@ -13,4 +13,8 @@ FactoryGirl.define do
     latitude "9.99"
     longitude "9.99"
   end
+
+  factory :week_old_noise, parent: :noise do
+    created_at 1.week.ago
+  end
 end

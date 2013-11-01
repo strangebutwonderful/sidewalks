@@ -54,6 +54,10 @@ class Noise < ActiveRecord::Base
     Noise.where('created_at >= ?', 24.hours.ago).order('created_at DESC')
   end
 
+  def self.located
+    Noise.where('longitude IS NOT NULL').where('latitude IS NOT NULL')
+  end
+
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
     Noise.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
       noise.import_from_twitter_noise(twitter_noise, user)

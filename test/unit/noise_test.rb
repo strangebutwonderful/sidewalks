@@ -55,4 +55,28 @@ class NoiseTest < ActiveSupport::TestCase
       assert Noise.first_or_import_from_twitter_noise(twitter_noise, user)
     end
   end
+
+  test "latest scope includes recent tweets" do
+    assert_difference('Noise.latest.count') do
+      FactoryGirl.create(:noise)
+    end
+  end
+
+  test "latest scope does not include old tweets" do
+    assert_no_difference('Noise.latest.count') do
+      FactoryGirl.create(:week_old_noise)
+    end
+  end
+
+  test "located scope includes noise with coordinates" do
+    assert_difference('Noise.located.count') do
+      FactoryGirl.create(:noise_with_coordinates)
+    end
+  end
+
+  test "located scope does not include noise without coordinates" do
+    assert_no_difference('Noise.located.count') do
+      FactoryGirl.create(:noise)
+    end
+  end
 end
