@@ -1,0 +1,19 @@
+<% @noises.each do |noise| %>
+<dl class="noise card">
+  <dt><%= link_to noise.text, noise.provider_url, target: "_blank" %></dt>
+  <dd>
+    by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
+    <% if current_user_is_admin? %>
+      (<%= link_to 'admin', noise.user %>)
+    <% end %>
+    at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
+  </dd>
+  
+  <dd>
+    <% if current_user_is_admin? %>
+      <%= link_to 'Edit', edit_noise_path(noise) %>
+      <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </dd>
+</dl>
+<% end %>

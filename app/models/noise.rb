@@ -21,6 +21,8 @@ class Noise < ActiveRecord::Base
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
+  reverse_geocoded_by :latitude, :longitude
+
   PROVIDER_TWITTER = 'twitter'
 
   def provider_url

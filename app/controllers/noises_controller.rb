@@ -9,9 +9,15 @@ class NoisesController < ApplicationController
   def index
     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
 
-    @noises = Noise.latest.all
+    @noises = Noise.all
 
     respond_with @noises
+  end
+
+  # GET /noises/nearby
+  # GET /noises.json
+  def nearby
+    @noises = Noise.latest.near([request.location.latitude, request.location.longitude], 100).all
   end
 
   # GET /noises/1

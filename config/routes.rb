@@ -8,7 +8,8 @@ Sidewalks::Application.routes.draw do
 
   resources :noises do 
     collection do 
-      get 'import'     
+      get 'import'
+      get 'nearby'
     end
   end
 
