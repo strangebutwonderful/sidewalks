@@ -9,7 +9,7 @@ class NoisesController < ApplicationController
   def index
     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
 
-    @noises = Noise.all
+    @noises = Noise.latest.all
 
     respond_with @noises
   end
