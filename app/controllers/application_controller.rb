@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_is_admin?
   helper_method :current_user_signed_in?
   helper_method :verify_admin
+  helper_method :import_noises
 
   private
 
@@ -53,6 +54,10 @@ class ApplicationController < ActionController::Base
 
     def verify_admin
       redirect_to root_url unless current_user.has_role? :admin
+    end
+
+    def import_noises
+      TwitterNoiseImporter.import_latest_from_sidewalks_twitter
     end
 
   rescue_from CanCan::AccessDenied do |exception|
