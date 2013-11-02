@@ -5,4 +5,10 @@
   <p>External: <%= link_to '@' + @user.provider_screen_name, @user.provider_url %></p>
 <% end %>
 
+<h2>Locations</h2>
+<% @user.locations.each do |location| %>
+  <p>
+    <%= location.full_street_address %>
+  </p>
+<% end %>
 <%= link_to 'New Location', new_location_path(:user_id => @user) %>
