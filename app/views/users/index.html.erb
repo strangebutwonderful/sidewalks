@@ -13,7 +13,9 @@
       <b>Roles:</b> <%= user.roles.first.name.titleize unless user.roles.first.nil? %>
       <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
       <%= render user %>
-      <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></dd>
+      <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %>
+    </dd>
+    <dd><b>Location Count:</b> <%= user.locations.count %></dd>
   <% end %>
 </dl>
 </div>
