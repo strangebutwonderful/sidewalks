@@ -15,7 +15,14 @@
       <%= render user %>
       <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %>
     </dd>
-    <dd><b>Location Count:</b> <%= user.locations.count %></dd>
+    <dd>
+      <b>Locations:</b>
+      <% if user.locations.count > 0 %>
+        <%= user.locations.count %>
+      <% else %>
+        <%= link_to 'add new location', new_location_path(:user_id => user) %>
+      <% end %>
+    </dd>
   <% end %>
 </dl>
 </div>
