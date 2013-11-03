@@ -18,7 +18,6 @@ class Location < ActiveRecord::Base
   belongs_to :user
   attr_accessible :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
-  validates :zip, :numericality => true, :allow_nil => true
   validates_presence_of :user_id, :address, :city, :state
 
   after_validation :geocode # geocoder 
