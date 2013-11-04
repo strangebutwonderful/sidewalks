@@ -1,24 +1,23 @@
 require 'test_helper'
 
 class TwitterNoiseImporterTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
-  # test "should import on empty table" do 
-  #   Noise.delete_all
+  setup do
+    Rails.cache.clear
+  end
 
-  #   assert_difference('Noise.count', 20) do
-  #     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
-  #   end
-  # end
+  test "should import on empty table" do 
+    Twitter.expects(:home_timeline).returns([])
+    Noise.delete_all
 
-  # test "should import on non-empty table" do
-  #   FactoryGirl.build(:noise)
+    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+  end
 
-  #   assert_difference('Noise.count', 20) do
-  #     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
-  #   end
-  # end
+  test "should import on non-empty table" do
+    Twitter.expects(:home_timeline).returns([])
+    FactoryGirl.build(:noise) # ensure there's at least one noise 
+
+    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+  end
 
 end
