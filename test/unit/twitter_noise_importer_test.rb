@@ -19,5 +19,4 @@ class TwitterNoiseImporterTest < ActiveSupport::TestCase
 
     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
   end
-
 end

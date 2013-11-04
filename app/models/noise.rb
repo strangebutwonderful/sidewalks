@@ -39,17 +39,22 @@ class Noise < ActiveRecord::Base
 
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
-    self.provider = Noise::PROVIDER_TWITTER
-    self.provider_id = twitter_noise.id.to_s
-    self.text = twitter_noise.text
-    self.created_at = twitter_noise.created_at
+    
     self.user_id = user.id
 
-    # TODO: get tweet's embedded coordinates
-    self.longitude = user.locations.first.try(:longitude)
-    self.latitude = user.locations.first.try(:latitude)
+    self.provider = Noise::PROVIDER_TWITTER
+
+    self.provider_id = twitter_noise.try(:id).to_s
+    self.text = twitter_noise.try(:text)
+    self.created_at = twitter_noise.try(:created_at)
     
-    save
+    # TODO: get tweet's embedded coordinates
+    if user.locations.first
+      self.longitude = user.locations.first.longitude
+      self.latitude = user.locations.first.latitude
+    end
+    
+    save!
   end
 
   def self.latest
