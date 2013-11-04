@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @users = User.order('name ASC').all
+    @users = User.order('name ASC').includes(:locations, :roles).all
 
     respond_with @users
   end
