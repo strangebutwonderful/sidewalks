@@ -16,7 +16,7 @@ class NoisesController < ApplicationController
   # GET /noises/nearby
   # GET /noises.json
   def nearby
-    @noises = Noise.latest.near([request.location.latitude, request.location.longitude], 100).all
+    @noises = Noise.latest.near([request.location.latitude, request.location.longitude], 1).all
   end
 
   # GET /noises/1
