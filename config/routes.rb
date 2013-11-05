@@ -6,6 +6,11 @@ Sidewalks::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   match '/welcome' => 'home#welcome'
 
+  namespace :admin do
+    resources :locations
+    resources :users
+  end
+
   resources :noises do 
     collection do 
       get 'import'
@@ -14,7 +19,6 @@ Sidewalks::Application.routes.draw do
   end
 
   resources :users, :only => [:index, :show, :edit, :update ]
-  resources :locations
 
   root :to => "noises#index"
 end

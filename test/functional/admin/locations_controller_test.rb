@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LocationsControllerTest < ActionController::TestCase
+class Admin::LocationsControllerTest < ActionController::TestCase
   setup do
     @location = FactoryGirl.create(:location)
     @user = FactoryGirl.create(:user)
@@ -34,7 +34,7 @@ class LocationsControllerTest < ActionController::TestCase
       post :create, location: { user_id: @user.id, address: @location.address, city: @location.city, latitude: @location.latitude, longitude: @location.longitude, state: @location.state, zip: @location.zip }
     end
 
-    assert_redirected_to location_path(assigns(:location))
+    assert_redirected_to admin_location_path(assigns(:location))
   end
 
   test "should show location" do
@@ -55,7 +55,7 @@ class LocationsControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:admin_user))
 
     put :update, id: @location, location: { address: @location.address, city: @location.city, latitude: @location.latitude, longitude: @location.longitude, state: @location.state, zip: @location.zip }
-    assert_redirected_to location_path(assigns(:location))
+    assert_redirected_to admin_location_path(assigns(:location))
   end
 
   test "should destroy location" do
@@ -65,6 +65,6 @@ class LocationsControllerTest < ActionController::TestCase
       delete :destroy, id: @location
     end
 
-    assert_redirected_to locations_path
+    assert_redirected_to admin_locations_path
   end
 end

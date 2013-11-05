@@ -1,6 +1,4 @@
-class LocationsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :verify_admin
+class Admin::LocationsController < Admin::AdminController
 
   respond_to :html, :json
 
@@ -9,7 +7,7 @@ class LocationsController < ApplicationController
   def index
     @locations = Location.all
 
-    respond_with @locations
+    respond_with(:admin, @locations)
   end
 
   # GET /locations/1
@@ -17,7 +15,7 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
 
-    respond_with @location
+    respond_with(:admin, @location)
   end
 
   # GET /locations/new
@@ -26,7 +24,7 @@ class LocationsController < ApplicationController
     @location = Location.new
     @location.user_id = params[:user_id] unless params[:user_id].blank?
 
-    respond_with @location
+    respond_with(:admin, @location)
   end
 
   # GET /locations/1/edit
@@ -43,7 +41,7 @@ class LocationsController < ApplicationController
       flash[:notice] = 'Location was successfully created.'
     end
 
-    respond_with @location
+    respond_with(:admin, @location)
   end
 
   # PUT /locations/1
@@ -55,7 +53,7 @@ class LocationsController < ApplicationController
       flash[:notice] = 'Location was successfully updated.'
     end
 
-    respond_with @location
+    respond_with(:admin, @location)
   end
 
   # DELETE /locations/1
@@ -66,6 +64,6 @@ class LocationsController < ApplicationController
 
     flash[:notice] = 'Location was successfully deleted.'
 
-    respond_with @location
+    respond_with(:admin, @location)
   end
 end
