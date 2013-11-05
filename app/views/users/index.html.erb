@@ -2,27 +2,27 @@
 
 <h1>Users</h1>
 <div class="">
-<dl>
   <% @users.each do |user| %>
-    <dt><%= link_to user.name, user %> (<%= link_to '@' + user.provider_screen_name, user.provider_url %>)</dt>
-    <dd><b>Provider Id:</b> <%= user.provider_id %></dd>
-    <dd><b>Provider Access Token:</b> <%= user.provider_access_token %></dd>
-    <dd><b>Provider Access Token Secret:</b> <%= user.provider_access_token_secret %></dd>
-    <dd><b>Added:</b> <%= user.created_at %></dd>
-    <dd>
-      <b>Roles:</b> <%= user.roles.first.name.titleize unless user.roles.first.nil? %>
-      <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
-      <%= render user %>
-      <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %>
-    </dd>
-    <dd>
-      <b>Locations:</b>
-      <% if user.locations.count > 0 %>
-        <%= user.locations.count %>
-      <% else %>
-        <%= link_to 'add new location', new_location_path(:user_id => user) %>
-      <% end %>
-    </dd>
+    <dl class="card">
+      <dt><%= link_to user.name, user %> (<%= link_to '@' + user.provider_screen_name, user.provider_url %>)</dt>
+      <dd><b>Provider Id:</b> <%= user.provider_id %></dd>
+      <dd><b>Provider Access Token:</b> <%= user.provider_access_token %></dd>
+      <dd><b>Provider Access Token Secret:</b> <%= user.provider_access_token_secret %></dd>
+      <dd><b>Added:</b> <%= user.created_at %></dd>
+      <dd>
+        <b>Roles:</b> <%= user.roles.first.name.titleize unless user.roles.first.nil? %>
+        <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
+        <%= render user %>
+        <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %>
+      </dd>
+      <dd>
+        <b>Locations:</b>
+        <% if user.locations.count > 0 %>
+          <%= user.locations.count %>
+        <% else %>
+          <%= link_to 'add new location', new_location_path(:user_id => user) %>
+        <% end %>
+      </dd>
+    </dl>
   <% end %>
-</dl>
 </div>
