@@ -2,36 +2,21 @@
 
 <h1>Listing locations</h1>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Zip</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @locations.each do |location| %>
-  <tr>
-    <td><%= link_to location.user.name, user_path(location.user) %></td>
-    <td><%= location.address %></td>
-    <td><%= location.city %></td>
-    <td><%= location.state %></td>
-    <td><%= location.zip %></td>
-    <td><%= location.latitude %></td>
-    <td><%= location.longitude %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <dl class="card">
+    <dd><b>User</b> <%= link_to location.user.name, user_path(location.user) %></dd>
+    <dd><b>Address</b> <%= location.address %></dd>
+    <dd><b>City</b> <%= location.city %></dd>
+    <dd><b>State</b> <%= location.state %></dd>
+    <dd><b>Zip</b> <%= location.zip %></dd>
+    <dd><b>Latitude</b> <%= location.latitude %></dd>
+    <dd><b>Longitude</b> <%= location.longitude %></dd>
+    <dd>
+      <%= link_to 'Show', location %>
+      <%= link_to 'Edit', edit_location_path(location) %>
+      <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </dd>
+  </dl>
 <% end %>
-</table>
-
-<br />
 
 <%= link_to 'New Location', new_location_path %>
