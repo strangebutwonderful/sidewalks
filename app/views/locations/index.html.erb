@@ -4,7 +4,7 @@
 
 <% @locations.each do |location| %>
   <dl class="card">
-    <dd><b>User</b> <%= link_to location.user.name, user_path(location.user) %></dd>
+    <dt><%= link_to location.user.name, user_path(location.user) %></dt>
     <dd><b>Address</b> <%= location.address %></dd>
     <dd><b>City</b> <%= location.city %></dd>
     <dd><b>State</b> <%= location.state %></dd>
