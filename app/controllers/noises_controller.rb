@@ -1,7 +1,7 @@
 class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :nearby, :show, :import]
   before_filter :verify_admin, :except => [:index, :nearby, :show]
-  before_filter :import_noises, :only => [:index]
+  before_filter :import_noises, :only => [:index, :nearby]
 
   respond_to :html, :json
 
