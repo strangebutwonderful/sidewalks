@@ -1,8 +1,10 @@
 h1. Sidewalks
 
 "!https://codeclimate.com/github/ajsharma/sidewalks.png!":https://codeclimate.com/github/ajsharma/sidewalks
-"!https://travis-ci.org/ajsharma/sidewalks.png?branch=master!":https://travis-ci.org/ajsharma/sidewalks
 "!https://coveralls.io/repos/ajsharma/sidewalks/badge.png(Coverage Status)!":https://coveralls.io/r/ajsharma/sidewalks
+"!https://gemnasium.com/ajsharma/sidewalks.png(Dependency Status)!":https://gemnasium.com/ajsharma/sidewalks
+"!https://travis-ci.org/ajsharma/sidewalks.png?branch=master!":https://travis-ci.org/ajsharma/sidewalks
+
 
 This application was generated with the "rails_apps_composer":https://github.com/RailsApps/rails_apps_composer gem provided by the "RailsApps Project":http://railsapps.github.io/.
 
