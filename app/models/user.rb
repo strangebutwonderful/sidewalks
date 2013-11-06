@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def self.providers
+    providers = [User::PROVIDER_TWITTER]
+  end
+
   def self.first_or_import_from_twitter_noise_user(twitter_noise_user) 
     User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_noise_user.id.to_s).first_or_create do |user|
       user.import_from_twitter_noise_user(twitter_noise_user)
