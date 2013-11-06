@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
     "https://twitter.com/" + self.provider_screen_name
   end
 
+  def update_credentials(auth)
+    if auth['credentials']
+      self.provider_access_token = auth['credentials']['token']
+      self.provider_access_token_secret = auth['credentials']['secret']
+      self.save!
+    end
+  end
+
   def import_from_twitter_noise_user(twitter_noise_user)
     logger.info "Creating a user from twitter noise: [#{twitter_noise_user.inspect}]" 
     self.name = twitter_noise_user.name || ""
@@ -61,10 +69,6 @@ class User < ActiveRecord::Base
          user.name = auth['info']['name'] || ""
          user.email = auth['info']['email'] || ""
          user.provider_screen_name = auth['info']['nickname'] || ""
-      end
-      if auth['credentials']
-        user.provider_access_token = auth['credentials']['token']
-        user.provider_access_token_secret = auth['credentials']['secret']
       end
     end
   end
