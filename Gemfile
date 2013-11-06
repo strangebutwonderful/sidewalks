@@ -18,6 +18,7 @@ gem 'rolify'
 gem 'thin'
 gem 'twitter'
 gem 'geocoder'
+gem 'newrelic_rpm'
 group :development do
   gem 'annotate'
   gem 'better_errors'

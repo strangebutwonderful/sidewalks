@@ -131,6 +131,7 @@ GEM
     multi_json (1.8.2)
     multipart-post (1.2.0)
     netrc (0.7.7)
+    newrelic_rpm (3.6.8.168)
     oauth (0.4.7)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
@@ -245,6 +246,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   mocha
+  newrelic_rpm
   omniauth
   omniauth-twitter
   pg
