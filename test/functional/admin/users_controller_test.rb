@@ -21,6 +21,20 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:users)
   end
 
+  test "user should not get new" do
+    sign_in(FactoryGirl.create(:user))
+
+    get :new
+    assert_redirected_to :root
+  end
+
+  test "admin should get new" do
+    sign_in(FactoryGirl.create(:admin_user))
+
+    get :new
+    assert_response :success
+  end
+
   test "user should not get edit" do
     sign_in(FactoryGirl.create(:user))
 
@@ -46,7 +60,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:admin_user))
 
     put :update, id: @user, user: { provider: @user.provider, provider_id: @user.provider_id }
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to admin_user_path(assigns(:user))
   end
 
 end
