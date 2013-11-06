@@ -27,3 +27,6 @@ TWITTER_COMSUMER_SECRET: Your_OmniAuth_Provider_Secret
 
 TWITTER_OAUTH_ACCESS_TOKEN: Your_Twitter_Access_Token
 TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret
+
+# Optional
+NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
