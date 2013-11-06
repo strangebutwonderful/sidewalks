@@ -35,6 +35,16 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should follow account" do
+    Twitter.expects(:follow).returns(true)
+
+    sign_in(FactoryGirl.create(:admin_user))
+
+    post :create, user: { provider: Noise::PROVIDER_TWITTER, provider_screen_name: Faker::Internet.user_name }
+
+    assert_redirected_to admin_users_path
+  end
+
   test "user should not get edit" do
     sign_in(FactoryGirl.create(:user))
 
