@@ -17,7 +17,10 @@ class NoisesController < ApplicationController
   # GET /noises.json
   def nearby
     distance = params[:distance] || 1
-    @noises = Noise.latest.near([request.location.latitude, request.location.longitude], distance).includes(:user).all
+    latitude = params[:latitude] || request.location.latitude
+    longitude = params[:longitude] || request.location.longitude
+    
+    @noises = Noise.latest.near([latitude, longitude], distance).includes(:user).all
   end
 
   # GET /noises/1
