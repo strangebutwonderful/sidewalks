@@ -7,8 +7,12 @@ class TwitterNoiseImporter
 
     unless Rails.cache.exist?(TwitterNoiseImporter::IMPORT_LOCK_KEY_NAME)
       self.latest_noises_from_sidewalks_twitter.each do |tweet|
-        user = User.first_or_import_from_twitter_noise_user(tweet.user)
-        Noise.first_or_import_from_twitter_noise(tweet, user)
+        begin
+          user = User.first_or_import_from_twitter_noise_user(tweet.user)
+          Noise.first_or_import_from_twitter_noise(tweet, user)
+        rescue => exception
+          logger.error exception
+        end
       end
 
       Rails.cache.write(TwitterNoiseImporter::IMPORT_LOCK_KEY_NAME, true, expires_in: 5.minutes)
@@ -18,10 +22,15 @@ class TwitterNoiseImporter
   def self.latest_noises_from_sidewalks_twitter
     last_noise = Noise.last
 
-    if last_noise && last_noise.provider_id
-      Twitter.home_timeline({since_id: last_noise.provider_id})
-    else
-      Twitter.home_timeline
+    begin 
+      if last_noise && last_noise.provider_id
+        Twitter.home_timeline({since_id: last_noise.provider_id})
+      else
+        Twitter.home_timeline
+      end
+    rescue => exception
+      logger.error exception
+      return []
     end
   end
 

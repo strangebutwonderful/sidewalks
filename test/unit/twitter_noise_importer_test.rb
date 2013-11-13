@@ -19,4 +19,10 @@ class TwitterNoiseImporterTest < ActiveSupport::TestCase
 
     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
   end
+
+  test "should return empty list on exception" do
+    Twitter.expects(:home_timeline).toThrow(new Error("test error"))
+
+    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+  end
 end
