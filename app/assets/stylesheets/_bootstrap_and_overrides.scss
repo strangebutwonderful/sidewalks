@@ -8,7 +8,7 @@ $bodyBackground: #eee !default; // $grayLighter
 @import "bootstrap/bootstrap";
 
 body {
-  padding-top: 60px; // fixed header padding
+  // padding-top: 60px; // fixed header padding
 }
 
 @import "bootstrap/responsive";
@@ -19,7 +19,8 @@ body {
 
 // application nav bar
 .navbar-inner {
-  background: #ffffff;
+  background: transparent;
+  border: none;
 }
 
 // page container
