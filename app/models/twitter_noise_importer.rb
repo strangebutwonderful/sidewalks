@@ -11,7 +11,7 @@ class TwitterNoiseImporter
           user = User.first_or_import_from_twitter_noise_user(tweet.user)
           Noise.first_or_import_from_twitter_noise(tweet, user)
         rescue => exception
-          logger.error exception
+          Rails.logger.error exception
         end
       end
 
@@ -29,7 +29,7 @@ class TwitterNoiseImporter
         Twitter.home_timeline
       end
     rescue => exception
-      logger.error exception
+      Rails.logger.error exception
       return []
     end
   end
