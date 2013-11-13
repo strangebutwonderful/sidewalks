@@ -1,5 +1,12 @@
+//
+// Wells
+// --------------------------------------------------
+
+
+// Variables
 $card-border-color: darken($navbarBackground, 12%) !default;
 
+// Base class
 .card {
   background-color: $white;
   padding: $base-block-spacing;
