@@ -8,7 +8,7 @@ group :assets do
   gem 'compass-rails'  
 end
 gem 'jquery-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2'
 gem 'cancan'
 gem 'figaro'
 gem 'omniauth'
@@ -16,7 +16,7 @@ gem 'omniauth-twitter'
 gem 'pg'
 gem 'rolify'
 gem 'thin'
-gem 'twitter'
+gem 'twitter', '~> 4.8'
 gem 'geocoder'
 gem 'newrelic_rpm'
 group :development do
