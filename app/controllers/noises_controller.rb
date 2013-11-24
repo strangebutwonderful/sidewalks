@@ -8,19 +8,11 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.latest.includes(:user).all
+    distance = params[:distance] || 1
+
+    @noises = Noise.search(params).latest.all
 
     respond_with @noises
-  end
-
-  # GET /noises/nearby
-  # GET /noises.json
-  def nearby
-    distance = params[:distance] || 1
-    latitude = params[:latitude] || request.location.latitude
-    longitude = params[:longitude] || request.location.longitude
-    
-    @noises = Noise.latest.near([latitude, longitude], distance).includes(:user).all
   end
 
   # GET /noises/1

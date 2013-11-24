@@ -14,11 +14,10 @@ Sidewalks::Application.routes.draw do
   resources :noises do 
     collection do 
       get 'import'
-      get 'nearby'
     end
   end
 
-  resources :users, :only => [:index, :show, :edit, :update ]
+  resources :users, :only => [:index, :show, :edit, :update]
 
   root :to => "noises#index"
 end

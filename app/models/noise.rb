@@ -57,6 +57,25 @@ class Noise < ActiveRecord::Base
     save!
   end
 
+  def self.search(params)
+    location = params[:location]
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+    distance = params[:distance] || 1
+
+    if latitude && longitude
+      search_location = [latitude, longitude]
+    elsif location
+      search_location = location
+    end
+
+    if search_location
+      self.near(search_location, distance)
+    else
+      self
+    end
+  end
+
   def self.latest
     Noise.where('created_at >= ?', 24.hours.ago).order('created_at DESC')
   end
