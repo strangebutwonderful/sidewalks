@@ -3,11 +3,11 @@
   <li>
     <form class="navbar-form pull-left">
       <%= link_to root_path, :class => 'hidden btn btn-primary', :title => "See nearby only", :data => { :geolocatable => true} do %>
-        Nearby
+        <i class="icon-map-marker icon-white"></i> Nearby
       <% end %>
     </form>
   </li> 
   <li>
-    <%= render 'search_form' %>
+    <%= render '/noises/search_form' %>
   </li>  
 </ul>
