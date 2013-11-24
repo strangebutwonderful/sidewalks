@@ -1,1 +1,10 @@
+<div class="row">
+  <%= render '/noises/search_form' %>
+</div>
+<div class="row">
+  <%= link_to root_path, :class => 'hidden btn btn-large btn-block btn-primary', :title => "See nearby only", :data => { :geolocatable => true} do %>
+    <i class="icon-map-marker icon-white"></i> Nearby
+  <% end %>
+</div>
+
 <%= render 'list' %>
