@@ -8,7 +8,7 @@ class Admin::NoisesController < Admin::AdminController
   def index
     distance = params[:distance] || 1
 
-    @noises = Noise.latest.all
+    @noises = Noise.latest.search(params).all
 
     respond_with(:admin, @noises)
   end
