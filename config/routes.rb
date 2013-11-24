@@ -8,6 +8,7 @@ Sidewalks::Application.routes.draw do
 
   namespace :admin do
     resources :locations
+    resources :noises
     resources :users
   end
 

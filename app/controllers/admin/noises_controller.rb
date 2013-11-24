@@ -1,6 +1,4 @@
-class NoisesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :nearby, :show]
-  before_filter :verify_admin, :except => [:index, :nearby, :show]
+class Admin::NoisesController < Admin::AdminController
   before_filter :import_noises, :only => [:index, :nearby]
 
   respond_to :html, :json
@@ -10,9 +8,9 @@ class NoisesController < ApplicationController
   def index
     distance = params[:distance] || 1
 
-    @noises = Noise.latest.search(params).all
+    @noises = Noise.latest.all
 
-    respond_with @noises
+    respond_with(:admin, @noises)
   end
 
   # GET /noises/1
@@ -20,7 +18,7 @@ class NoisesController < ApplicationController
   def show
     @noise = Noise.find(params[:id])
 
-    respond_with @noise
+    respond_with(:admin, @noise)
   end
 
   # GET /noises/1/edit
@@ -37,7 +35,7 @@ class NoisesController < ApplicationController
       flash[:notice] = 'Noise was successfully updated.'
     end
 
-    respond_with @noise
+    respond_with(:admin, @noise)
   end
 
   # DELETE /noises/1
@@ -48,6 +46,6 @@ class NoisesController < ApplicationController
 
     flash[:notice] = 'Noise was successfully deleted.'
 
-    respond_with @noise
+    respond_with(:admin, @noise)
   end
 end
