@@ -1,17 +1,27 @@
-<dl class="noise card">
-  <dt><%= link_to noise.text, noise.provider_url, target: "_blank" %></dt>
-  <dd>
-    by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-    <% if current_user_is_admin? %>
-      (<%= link_to 'admin', admin_user_path(noise.user) %>)
+<div class="noise card media">
+  <% if noise.avatar_image_url %>
+    <%= link_to noise.user_provider_url, class: "avatar pull-left", target: "_blank", title: noise.user_name do %>
+      <%= image_tag noise.avatar_image_url, alt: noise.user_name, class: "avatar-image", size: '48x48' %>
     <% end %>
-    at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
-  </dd>
-  
-  <dd>
-    <% if current_user_is_admin? %>
-      <%= link_to 'Edit', edit_noise_path(noise) %>
-      <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </dd>
-</dl>
+  <% end %>
+
+  <div class="media-body">
+    <h5 class="media-heading">
+      <%= link_to noise.text, noise.provider_url, target: "_blank" %>
+    </h5>
+    <p>
+      by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
+      <% if current_user_is_admin? %>
+        (<%= link_to 'admin', admin_user_path(noise.user) %>)
+      <% end %>
+      at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
+    </p>
+    
+    <p>
+      <% if current_user_is_admin? %>
+        <%= link_to 'Edit', edit_noise_path(noise) %>
+        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
+  </div>
+</div>
