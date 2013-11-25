@@ -70,22 +70,22 @@ class Noise < ActiveRecord::Base
     end
 
     if search_location
-      self.near(search_location, distance)
+      near(search_location, distance)
     else
-      self
+      where(true)
     end
   end
 
   def self.latest
-    self.where('created_at >= ?', 24.hours.ago).order('created_at DESC')
+    where('created_at >= ?', 24.hours.ago).order('created_at DESC')
   end
 
   def self.located
-    self.where('longitude IS NOT NULL').where('latitude IS NOT NULL')
+    where('longitude IS NOT NULL').where('latitude IS NOT NULL')
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
-    self.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
+    where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
       noise.import_from_twitter_noise(twitter_noise, user)
     end
   end
