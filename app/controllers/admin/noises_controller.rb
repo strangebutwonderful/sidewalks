@@ -6,8 +6,6 @@ class Admin::NoisesController < Admin::AdminController
   # GET /noises
   # GET /noises.json
   def index
-    distance = params[:distance] || 1
-
     @noises = Noise.latest.search(params).all
 
     respond_with(:admin, @noises)
