@@ -2,15 +2,16 @@
 #
 # Table name: noises
 #
-#  id          :integer          not null, primary key
-#  provider_id :string(255)      not null
-#  user_id     :integer          not null
-#  text        :text             not null
-#  longitude   :decimal(11, 8)
-#  latitude    :decimal(11, 8)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  provider    :string(255)      not null
+#  id               :integer          not null, primary key
+#  provider_id      :string(255)      not null
+#  user_id          :integer          not null
+#  text             :text             not null
+#  longitude        :decimal(11, 8)
+#  latitude         :decimal(11, 8)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  provider         :string(255)      not null
+#  avatar_image_url :string(255)
 #
 
 require 'test_helper'
