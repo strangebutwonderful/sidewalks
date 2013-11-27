@@ -73,6 +73,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.search(params)
+    order = params[:order]
+
+    if order && order.casecmp('name') == 0
+      self.order_by_name_ignore_case
+    elsif order
+      self.order(order)
+    else
+      self.order('id')
+    end
+  end
+
   def self.order_by_name_ignore_case
     self.order('lower(name)')
   end

@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::AdminController
   respond_to :html, :json
 
   def index
-    @users = User.order('name ASC').includes(:locations, :roles).all
+    @users = User.search(params).includes(:locations, :roles).all
 
     respond_with(:admin, @users)
   end
