@@ -19,6 +19,7 @@ gem 'thin'
 gem 'twitter', '~> 4.8'
 gem 'geocoder'
 gem 'newrelic_rpm'
+gem "leaflet-rails", "~> 0.7"
 group :development do
   gem 'annotate'
   gem 'better_errors'

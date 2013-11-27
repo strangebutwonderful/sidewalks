@@ -1,3 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <%= render 'card', :noise => @noise %>
+
+<% if @noise.has_coordinates? %>
+  <div class="card">
+    <div data-map style="height: 360px"></div>
+  </div>
+<% end %>

@@ -26,6 +26,10 @@ class Noise < ActiveRecord::Base
 
   PROVIDER_TWITTER = 'twitter'
 
+  def google_map_url
+    "https://maps.google.com/maps?ll=" + self.latitude + ',' + self.longitude
+  end
+
   def provider_url
     self.user && self.user.provider_url + "/status/" + provider_id
   end

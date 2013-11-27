@@ -1,4 +1,10 @@
-<div class="noise card media">
+<div class="noise card media" 
+  data-mappable
+  data-mappable-latitude="<%= noise.latitude %>" 
+  data-mappable-longitude="<%= noise.longitude %>"
+  data-mappable-name="<%= noise.user_name %>"
+  data-mappable-details="<%= noise.text %>"
+  >
   <% if noise.avatar_image_url %>
     <%= link_to noise.user_provider_url, class: "avatar pull-left", target: "_blank", title: noise.user_name do %>
       <%= image_tag noise.avatar_image_url, alt: noise.user_name, class: "avatar-image", size: '48x48' %>
