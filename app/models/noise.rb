@@ -38,6 +38,10 @@ class Noise < ActiveRecord::Base
     self.user && self.user.provider_url
   end
 
+  def has_coordinates?
+    return if self.latitude && self.longitude
+  end
+
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
     
