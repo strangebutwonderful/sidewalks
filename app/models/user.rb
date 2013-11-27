@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.search(params)
+  def self.where_search(params)
     order = params[:order]
 
     if order && order.casecmp('name') == 0

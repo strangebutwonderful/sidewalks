@@ -63,7 +63,7 @@ class Noise < ActiveRecord::Base
     save!
   end
 
-  def self.search(params)
+  def self.where_search(params)
     location = params[:location]
     latitude = params[:latitude]
     longitude = params[:longitude]
@@ -82,11 +82,11 @@ class Noise < ActiveRecord::Base
     end
   end
 
-  def self.latest
+  def self.where_latest
     where("#{table_name}.created_at >= ?", 24.hours.ago).order("#{table_name}.created_at DESC")
   end
 
-  def self.located
+  def self.where_has_coordinates
     where('longitude IS NOT NULL').where('latitude IS NOT NULL')
   end
 
