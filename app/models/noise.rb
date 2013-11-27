@@ -39,7 +39,7 @@ class Noise < ActiveRecord::Base
   end
 
   def has_coordinates?
-    return if self.latitude && self.longitude
+    return true if self.latitude && self.longitude
   end
 
   def import_from_twitter_noise(twitter_noise, user)
