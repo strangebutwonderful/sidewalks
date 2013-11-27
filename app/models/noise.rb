@@ -78,12 +78,12 @@ class Noise < ActiveRecord::Base
     if search_location
       near(search_location, distance)
     else
-      where(true)
+      scoped
     end
   end
 
   def self.latest
-    where('created_at >= ?', 24.hours.ago).order('created_at DESC')
+    where("#{table_name}.created_at >= ?", 24.hours.ago).order("#{table_name}.created_at DESC")
   end
 
   def self.located

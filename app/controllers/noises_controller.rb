@@ -8,7 +8,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.latest.search(params).all
+    @noises = Noise.latest.search(params).joins(:user).preload(:user).all
 
     respond_with @noises
   end
