@@ -13,7 +13,10 @@ success = (position) ->
 error = (msg) ->
   window.location = '/noises/?'
 
-if navigator.geolocation
-  navigator.geolocation.watchPosition success, error
-else
-  error "not supported"
+$ = jQuery
+
+$ ->
+  if navigator.geolocation
+    navigator.geolocation.watchPosition success, error
+  else
+    error "not supported"
