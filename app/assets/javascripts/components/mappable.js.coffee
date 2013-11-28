@@ -20,4 +20,4 @@ $ ->
       marker.bindPopup("<b>#{name}</b><br>#{details}")
 
       currentPosition = new L.LatLng(latitude, longitude)
-      map.setView(currentPosition, 15)
+      map.setView(currentPosition, 16)
