@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_user_is_admin?
   helper_method :current_user_signed_in?
-  helper_method :verify_admin
+  helper_method :google_universal_analytics_tracking_code
   helper_method :import_noises
+  helper_method :verify_admin
 
   private
 
@@ -62,7 +63,9 @@ class ApplicationController < ActionController::Base
     end
 
     def google_universal_analytics_tracking_code
-      ENV['GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE']
+      if Rails.env.production?
+        ENV['GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE']
+      end
     end
 
   rescue_from CanCan::AccessDenied do |exception|
