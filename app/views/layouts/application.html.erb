@@ -10,6 +10,7 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
+    <%= render 'google/analytics' %>
     <div class="navbar navbar-static-top">
       <nav class="navbar-inner">
         <div class="container">

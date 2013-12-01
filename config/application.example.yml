@@ -30,3 +30,5 @@ TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret
 
 # Optional
 NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
+
+GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code

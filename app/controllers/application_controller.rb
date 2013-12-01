@@ -61,6 +61,10 @@ class ApplicationController < ActionController::Base
       TwitterNoiseImporter.import_latest_from_sidewalks_twitter
     end
 
+    def google_universal_analytics_tracking_code
+      ENV['GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE']
+    end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
   end
