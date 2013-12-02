@@ -227,6 +227,7 @@ GEM
     uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    yui-compressor (0.12.0)
 
 PLATFORMS
   ruby
@@ -265,3 +266,4 @@ DEPENDENCIES
   thin
   twitter (~> 4.8)
   uglifier (>= 1.0.3)
+  yui-compressor
