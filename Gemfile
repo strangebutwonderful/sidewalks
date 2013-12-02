@@ -8,7 +8,6 @@ group :assets do
   gem 'yui-compressor'
   gem 'compass-rails'
 end
-gem 'jquery-rails', '~> 3'
 gem 'bootstrap-sass', '~> 2'
 gem 'cancan'
 gem 'figaro'
