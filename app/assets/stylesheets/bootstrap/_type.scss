@@ -9,6 +9,9 @@
 p {
   margin: 0 0 $baseLineHeight / 2;
 }
+p:last-child {
+  margin: 0;
+}
 .lead {
   margin-bottom: $baseLineHeight;
   font-size: $baseFontSize * 1.5;
