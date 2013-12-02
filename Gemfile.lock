@@ -247,7 +247,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   heroku
-  jquery-rails
+  jquery-rails (~> 3)
   leaflet-rails (~> 0.7)
   mocha
   newrelic_rpm

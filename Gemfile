@@ -7,7 +7,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'  
 end
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3'
 gem 'bootstrap-sass', '~> 2'
 gem 'cancan'
 gem 'figaro'
