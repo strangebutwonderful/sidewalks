@@ -31,11 +31,11 @@
       <% end %>
     </p>
     
-    <p>
-      <% if current_user_is_admin? %>
+    <% if current_user_is_admin? %>
+      <p>
         <%= link_to 'Edit', edit_noise_path(noise) %>
         <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </p>
+      </p>
+    <% end %>
   </div>
 </div>
