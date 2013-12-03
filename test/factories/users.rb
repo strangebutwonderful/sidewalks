@@ -7,7 +7,7 @@ FactoryGirl.define do
 
   factory :user do
     name Faker::Name.name
-    email "MyString@example.com"
+    email Faker::Internet.email
     provider "MyString"
     provider_id
     provider_screen_name Faker::Internet.user_name

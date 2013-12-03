@@ -6,7 +6,22 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
 
-    respond_with(@user)
+    if can?(:update, @user) 
+      respond_with(@user)
+    else 
+      redirect_to :root
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    authorize! :update, @user
+    
+    if @user.update_attributes(params[:user])
+      flash[:notice] = 'User was successfully updated.'
+    end
+
+    redirect_to :root
   end
 
 end
