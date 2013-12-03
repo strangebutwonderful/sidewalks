@@ -9,7 +9,7 @@
 >
   <% if noise.avatar_image_url %>
     <%= link_to noise.user_provider_url, class: "avatar pull-left", target: "_blank", title: noise.user_name do %>
-      <%= image_tag noise.avatar_image_url, alt: noise.user_name, class: "avatar-image", size: '48x48' %>
+      <%= image_tag noise.avatar_image_url, alt: noise.user_name, class: "media-object avatar-image", size: '48x48' %>
     <% end %>
   <% end %>
 
@@ -36,8 +36,12 @@
 <% if current_user_is_admin? %>
   <div class="card-addendum"> 
     <p>
-      <%= link_to 'Edit', edit_noise_path(noise) %> 
-      <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if can? :update, noise %>
+        <%= link_to 'Edit', edit_noise_path(noise) %> 
+      <% end %>
+      <% if can? :destroy, noise %>
+        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </p>
   </div>
 <% end %>
