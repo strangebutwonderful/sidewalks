@@ -19,16 +19,7 @@
     </h5>
     <p>
       by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-      <% if current_user_is_admin? %>
-        (<%= link_to 'admin', admin_user_path(noise.user) %>)
-      <% end %>
       at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
-      <% if current_user_is_admin? && noise.has_coordinates? %>
-        (
-        <%= noise.latitude %>,
-        <%= noise.longitude %>
-        )
-      <% end %>
     </p>
   </div>
 </div>
@@ -36,11 +27,23 @@
 <% if current_user_is_admin? %>
   <div class="card-addendum"> 
     <p>
+      <b>
+        Admin:
+      </b>
+      <% if can? :update, noise.user %>
+        <%= link_to 'User', admin_user_path(noise.user) %>
+      <% end %>
       <% if can? :update, noise %>
         <%= link_to 'Edit', edit_noise_path(noise) %> 
       <% end %>
       <% if can? :destroy, noise %>
         <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+      <% if noise.has_coordinates? %>
+        (
+        <%= noise.latitude %>,
+        <%= noise.longitude %>
+        )
       <% end %>
     </p>
   </div>
