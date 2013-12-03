@@ -5,12 +5,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-
-    if can?(:update, @user) 
-      respond_with(@user)
-    else 
-      redirect_to :root
-    end
+    authorize! :update, @user
+  
+    respond_with(@user)
   end
 
   def update

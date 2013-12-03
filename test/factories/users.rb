@@ -14,7 +14,7 @@ FactoryGirl.define do
   end
 
   factory :admin_user, parent: :user do
-    after(:create) {| user| user.add_role(:admin) }
+    after(:create) { |user| user.add_role(:admin) }
   end
 
 end

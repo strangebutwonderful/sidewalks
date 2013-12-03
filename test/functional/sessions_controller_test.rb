@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
-  setup do
-
-  end
 
   teardown do
     Rails.cache.clear
@@ -16,6 +13,8 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "destroy clears session user" do
+    sign_in(FactoryGirl.create(:user))
+    
     get :destroy
     assert_redirected_to :root
     assert_blank session[:user_id]
