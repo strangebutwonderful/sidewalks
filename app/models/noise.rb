@@ -94,6 +94,11 @@ class Noise < ActiveRecord::Base
     where('longitude IS NOT NULL').where('latitude IS NOT NULL')
   end
 
+  def self.where_since(user_id, noise_id)
+    where(:user_id => user_id).
+    where("#{table_name}.id < ?", noise_id)
+  end
+
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
     where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
       noise.import_from_twitter_noise(twitter_noise, user)

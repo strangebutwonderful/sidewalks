@@ -7,3 +7,7 @@
     <div data-map></div>
   </div>
 <% end %>
+
+<% @noises.each do |noise| %>
+  <%= render 'card', :noise => noise %>
+<% end %>

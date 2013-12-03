@@ -13,6 +13,10 @@ class NoisesController < ApplicationController
       .joins(:user).preload(:user) # cuz nearby overrides includes
       .all
 
+    @noises = @noises.group_by do |noise|
+      noise.user_id
+    end
+
     respond_with @noises
   end
 
@@ -20,6 +24,10 @@ class NoisesController < ApplicationController
   # GET /noises/1.json
   def show
     @noise = Noise.find(params[:id])
+    @noises = Noise.where_since(@noise.user_id, @noise.id)
+      .where_latest
+      .joins(:user).preload(:user) # cuz nearby overrides includes
+      .all
 
     respond_with @noise
   end

@@ -1,5 +1,10 @@
-<% if @noises.each do |noise| %>
-  <%= render 'card', :noise => noise %>
+<% if @noises.each do |user_id, noises| %>
+  <%= render 'card', :noise => noises.first %>
+  <% if noises.count > 1 %>
+    <%= link_to noises.first, class: 'card-addendum' do %> 
+      +<%= noises.count - 1 %> more
+    <% end %>
+  <% end %>
 <% end.empty? %>
   <p>Couldn't find anything</p>
 <% end %>
