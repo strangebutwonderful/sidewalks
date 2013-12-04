@@ -4,6 +4,9 @@ $sansFontFamily: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $bodyBackground: #eee !default; // $grayLighter
 
+$baseBorderRadius: 0;
+$borderRadiusLarge: 0;
+
 // imports
 @import "bootstrap/bootstrap";
 
