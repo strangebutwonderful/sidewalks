@@ -1,10 +1,7 @@
 
 .card-addendum {
-  background-color: $white;
-  display: block;
-  margin-left: -1 * $base-block-spacing;
-  margin-right: -1 * $base-block-spacing;
+  @extend .card;
+
   margin-top: 1px; // acts as transparent border top
-  padding: $base-block-spacing;
   text-align: center;
 }
