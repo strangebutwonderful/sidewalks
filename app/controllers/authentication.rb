@@ -9,12 +9,7 @@ module Authentication
   end
 
   def sign_out
-    begin
-      request.reset_session
-    rescue Exception => exception
-      Rails.logger.error exception
-      nil
-    end
+    request.reset_session
   end
 
   def authenticate_user!
