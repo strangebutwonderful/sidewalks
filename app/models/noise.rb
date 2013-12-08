@@ -59,14 +59,13 @@ class Noise < ActiveRecord::Base
     self.created_at = twitter_noise.try(:created_at)
     self.provider_id = twitter_noise.try(:id).to_s
     self.text = twitter_noise.try(:text)
+
+    save!
     
     # TODO: get tweet's embedded coordinates
-    if user.locations.first
-      self.longitude = user.locations.first.longitude
-      self.latitude = user.locations.first.latitude
+    user.locations.each do |location|
+      self.origins.create(latitude: location.latitude, longitude: location.longitude)
     end
-    
-    save!
   end
 
   def self.where_search(params)
