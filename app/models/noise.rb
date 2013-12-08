@@ -16,6 +16,8 @@
 
 class Noise < ActiveRecord::Base
   belongs_to :user
+  has_many :origins
+  
   attr_accessible :latitude, :longitude, :text, :provider, :provider_id
 
   attr_reader :provider_url, :user_name, :user_provider_url

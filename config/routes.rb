@@ -10,7 +10,10 @@ Sidewalks::Application.routes.draw do
   resources :users, :only => [:edit, :update]
 
   namespace :admin do
-    resources :locations, :noises, :users
+    resources :locations, :users
+    resources :noises do
+      resources :origins
+    end
   end
 
   root :to => "noises#index"

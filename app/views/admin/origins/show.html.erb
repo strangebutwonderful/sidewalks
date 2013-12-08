@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Noise:</b>
+  <%= @origin.noise.id %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @origin.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @origin.longitude %>
+</p>
+
+
+<%= link_to 'Edit', [:admin, @noise, @origin] %>

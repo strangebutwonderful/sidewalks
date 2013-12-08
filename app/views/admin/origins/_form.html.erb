@@ -1,0 +1,25 @@
+<%= form_for([:admin, @noise, @origin]) do |f| %>
+  <% if @origin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@origin.errors.count, "error") %> prohibited this origin from being saved:</h2>
+
+      <ul>
+      <% @origin.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

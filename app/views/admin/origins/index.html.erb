@@ -1,0 +1,27 @@
+<h1>Listing Origins</h1>
+
+<table>
+  <tr>
+    <th>Noise</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @origins.each do |origin| %>
+  <tr>
+    <td><%= origin.noise.id %></td>
+    <td><%= origin.latitude %></td>
+    <td><%= origin.longitude %></td>
+    <td><%= link_to 'Show', [:admin, @noise, origin] %></td>
+    <td><%= link_to 'Edit', edit_admin_noise_origin_path(@noise, origin) %></td>
+    <td><%= link_to 'Destroy', [:admin, @noise, origin], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Origin', new_admin_noise_origin_path %>
