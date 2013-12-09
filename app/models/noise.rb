@@ -88,7 +88,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_latest
-    where("#{table_name}.created_at >= ?", 24.hours.ago).order("#{table_name}.created_at DESC")
+    where("#{table_name}.created_at >= ?", 12.hours.ago).order("#{table_name}.created_at DESC")
   end
 
   def self.where_has_coordinates
