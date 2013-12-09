@@ -48,6 +48,13 @@ class Noise < ActiveRecord::Base
     return true if self.latitude && self.longitude
   end
 
+  # temporary function to help migrate noise columsn to origins table
+  def to_origin 
+    if self.has_coordinates?
+      self.origins << Origin.new(latitude: self.latitude, longitude: self.longitude)
+    end
+  end
+
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
     
@@ -63,8 +70,16 @@ class Noise < ActiveRecord::Base
     save!
     
     # TODO: get tweet's embedded coordinates
+
+    # Support old system of one location only while migrating
+    if user.locations.first
+      self.longitude = user.locations.first.longitude
+      self.latitude = user.locations.first.latitude
+    end
+    # end old support
+
     user.locations.each do |location|
-      self.origins.create(latitude: location.latitude, longitude: location.longitude)
+      self.origins << location.to_origin
     end
   end
 

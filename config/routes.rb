@@ -6,7 +6,7 @@ Sidewalks::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   match '/welcome' => 'home#welcome'
 
-  resources :noises
+  resources :noises, :only => [:index, :show]
   resources :users, :only => [:edit, :update]
 
   namespace :admin do

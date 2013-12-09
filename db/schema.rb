@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20131204174416) do
 
   create_table "origins", :force => true do |t|
     t.integer  "noise_id",                                  :null => false
-    t.decimal  "latitude",   :precision => 11, :scale => 8
-    t.decimal  "longitude",  :precision => 11, :scale => 8
+    t.decimal  "latitude",   :precision => 11, :scale => 8, :null => false
+    t.decimal  "longitude",  :precision => 11, :scale => 8, :null => false
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end

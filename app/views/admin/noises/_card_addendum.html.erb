@@ -1,0 +1,19 @@
+<% if current_user_is_admin? %>
+  <div class="card-addendum"> 
+    <p>
+      <b>
+        Admin:
+      </b>
+      <% if can? :update, noise.user %>
+        <%= link_to 'User', admin_user_path(noise.user) %>
+      <% end %>
+      <%= link_to 'Noise', admin_noise_path(noise) %>
+      <% if can? :update, noise %>
+        <%= link_to 'Edit', edit_admin_noise_path(noise) %> 
+      <% end %>
+      <% if can? :destroy, noise %>
+        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

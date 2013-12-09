@@ -31,32 +31,4 @@ class NoisesController < ApplicationController
 
     respond_with @noise
   end
-
-  # GET /noises/1/edit
-  def edit
-    @noise = Noise.find(params[:id])
-  end
-
-  # PUT /noises/1
-  # PUT /noises/1.json
-  def update
-    @noise = Noise.find(params[:id])
-
-    if @noise.update_attributes(params[:noise])
-      flash[:notice] = 'Noise was successfully updated.'
-    end
-
-    respond_with @noise
-  end
-
-  # DELETE /noises/1
-  # DELETE /noises/1.json
-  def destroy
-    @noise = Noise.find(params[:id])
-    @noise.destroy
-
-    flash[:notice] = 'Noise was successfully deleted.'
-
-    respond_with @noise
-  end
 end

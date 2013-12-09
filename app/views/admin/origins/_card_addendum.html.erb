@@ -1,0 +1,13 @@
+<% if current_user_is_admin? %>
+  <% noise.origins.each do |origin| %>
+    <div class="card-addendum"> 
+      <p>
+        <%= noise.latitude %>,
+        <%= noise.longitude %>
+        <% if can? :update, origin %>
+          <%= link_to 'Edit', edit_admin_noise_origin_path(noise, origin) %> 
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+<% end %>

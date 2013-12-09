@@ -33,4 +33,8 @@ class Location < ActiveRecord::Base
   def full_street_address
     address + ', ' + city + ', ' + state + ' ' + zip.to_s
   end
+
+  def to_origin 
+    Origin.new(latitude: self.latitude, longitude: self.longitude)
+  end
 end

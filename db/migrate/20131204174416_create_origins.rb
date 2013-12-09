@@ -3,8 +3,8 @@ class CreateOrigins < ActiveRecord::Migration
     create_table :origins do |t|
       t.belongs_to :noise, :null => false
 
-      t.decimal :latitude, :precision => 11, :scale => 8
-      t.decimal :longitude, :precision => 11, :scale => 8
+      t.decimal :latitude, :precision => 11, :scale => 8, :null => false
+      t.decimal :longitude, :precision => 11, :scale => 8, :null => false
 
       t.timestamps
     end
