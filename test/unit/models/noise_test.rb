@@ -13,6 +13,11 @@
 #  provider         :string(255)      not null
 #  avatar_image_url :string(255)
 #
+# Indexes
+#
+#  index_noises_on_latitude_and_longitude  (latitude,longitude)
+#  index_noises_on_user_id                 (user_id)
+#
 
 require 'test_helper'
 

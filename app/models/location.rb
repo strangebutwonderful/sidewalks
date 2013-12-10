@@ -13,6 +13,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_locations_on_latitude_and_longitude  (latitude,longitude)
+#  index_locations_on_user_id                 (user_id)
+#  unique_user_and_locations                  (user_id,address,city,state,zip) UNIQUE
+#
 
 class Location < ActiveRecord::Base
   belongs_to :user
