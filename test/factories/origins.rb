@@ -16,7 +16,7 @@ FactoryGirl.define do
   factory :origin do
     association :noise, factory: :noise
 
-    latitude Faker::Address.latitude
-    longitude Faker::Address.longitude
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
   end
 end

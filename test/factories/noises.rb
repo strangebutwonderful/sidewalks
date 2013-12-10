@@ -22,17 +22,22 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+
   factory :noise do
+    sequence :provider_id do |n|
+      "MyProviderNoiseId#{n}"
+    end
+
     association :user, factory: :user
+
     provider "MyProvider"
-    provider_id "MyString"
-    text Faker::Lorem.sentences
+    text { Faker::Lorem.sentences.join(' ') }
     created_at Time.now
   end
 
   factory :noise_with_coordinates, parent: :noise do
-    latitude Faker::Address.latitude
-    longitude Faker::Address.longitude
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
 
     after(:create) do |noise|
       FactoryGirl.create(:origin, :noise => noise, :latitude => noise.latitude, :longitude => noise.longitude)
