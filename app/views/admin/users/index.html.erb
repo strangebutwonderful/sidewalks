@@ -1,9 +1,11 @@
 <%= render '/layouts/admin_navigation' %>
 
 <h1>Users</h1>
-<p>
-  <%= link_to 'new user', new_admin_user_path %>
-</p>
+<ul class="nav nav-pills">
+  <li>
+    <%= link_to 'new user', new_admin_user_path %>
+  </li>
+</ul>
 
 <% @users.each do |user| %>
   <dl class="card">
