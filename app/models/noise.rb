@@ -89,24 +89,6 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_search(params)
-    location = params[:location]
-    latitude = params[:latitude]
-    longitude = params[:longitude]
-
-    noises = Noise.joins(:user).preload(:user) # cuz nearby overrides includes
-
-    unless (latitude.blank? && longitude.blank?) && location.blank?
-      Rails.logger.debug 'do origin search'
-
-      noises = noises.with_nearby_origins(params)
-    else
-      Rails.logger.debug 'do not do origin search'
-    end
-    
-    noises
-  end
-
-  def self.where_search(params)
     where_nearby(params)
     .where_latest
   end
