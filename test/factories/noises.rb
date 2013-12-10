@@ -26,13 +26,17 @@ FactoryGirl.define do
     association :user, factory: :user
     provider "MyProvider"
     provider_id "MyString"
-    text "MyText"
+    text Faker::Lorem.sentences
     created_at Time.now
   end
 
   factory :noise_with_coordinates, parent: :noise do
-    latitude "9.99"
-    longitude "9.99"
+    latitude Faker::Address.latitude
+    longitude Faker::Address.longitude
+
+    after(:create) do |noise|
+      FactoryGirl.create(:origin, :noise => noise, :latitude => noise.latitude, :longitude => noise.longitude)
+    end
   end
 
   factory :week_old_noise, parent: :noise do
