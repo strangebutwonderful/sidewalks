@@ -87,19 +87,16 @@ class Noise < ActiveRecord::Base
     location = params[:location]
     latitude = params[:latitude]
     longitude = params[:longitude]
-    distance = params[:distance] || 1
 
-    if latitude && longitude
-      search_location = [latitude, longitude]
-    elsif location
-      search_location = location
-    end
+    noises = Noise.where_latest
+      .joins(:user).preload(:user) # cuz nearby overrides includes
 
-    if search_location
-      near(search_location, distance)
-    else
-      scoped
+    if((latitude && longitude) || location)
+      noises = noises.joins(:origins).preload(:origins)
+        .merge(Origin.where_search(params))
     end
+    
+    noises
   end
 
   def self.where_latest

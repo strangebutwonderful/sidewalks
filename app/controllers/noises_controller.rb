@@ -8,10 +8,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.where_search(params)
-      .where_latest
-      .joins(:user).preload(:user) # cuz nearby overrides includes
-      .all
+    @noises = Noise.where_search(params).all
 
     @noises = @noises.group_by do |noise|
       noise.user_id
