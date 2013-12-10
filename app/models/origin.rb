@@ -19,8 +19,8 @@ class Origin < ActiveRecord::Base
 
     if search_location
       near(search_location, distance)
+    else
+      scoped
     end
-
-    scoped
   end
 end

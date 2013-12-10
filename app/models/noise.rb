@@ -88,15 +88,42 @@ class Noise < ActiveRecord::Base
     latitude = params[:latitude]
     longitude = params[:longitude]
 
-    noises = Noise.where_latest
-      .joins(:user).preload(:user) # cuz nearby overrides includes
+    noises = Noise.joins(:user).preload(:user) # cuz nearby overrides includes
 
-    if((latitude && longitude) || location)
-      noises = noises.joins(:origins).preload(:origins)
-        .merge(Origin.where_search(params))
+    unless (latitude.blank? && longitude.blank?) && location.blank?
+      Rails.logger.debug 'do origin search'
+
+      noises = noises.with_nearby_origins(params)
+    else
+      Rails.logger.debug 'do not do origin search'
     end
     
     noises
+  end
+
+  def self.where_search(params)
+    where_nearby(params)
+    .where_latest
+  end
+
+  def self.where_nearby(params)
+    location = params[:location]
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+    distance = params[:distance] || 1
+
+    if latitude && longitude
+      search_location = [latitude, longitude]
+    elsif location
+      search_location = location
+    end
+
+    if search_location
+      near(search_location, distance)
+    else
+      scoped
+    end
+
   end
 
   def self.where_latest
@@ -110,6 +137,12 @@ class Noise < ActiveRecord::Base
   def self.where_since(user_id, noise_id)
     where(:user_id => user_id).
     where("#{table_name}.id < ?", noise_id)
+  end
+
+  def self.with_nearby_origins(params)
+    joins(:origins)
+      .preload(:origins)
+      .merge(Origin.where_search(params))
   end
 
   def self.first_or_import_from_twitter_noise(twitter_noise, user) 
