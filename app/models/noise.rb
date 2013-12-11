@@ -74,16 +74,20 @@ class Noise < ActiveRecord::Base
 
     save!
     
+    import_twitter_locations(user.locations)
+  end
+
+  def import_locations(locations)
     # TODO: get tweet's embedded coordinates
 
     # Support old system of one location only while migrating
-    if user.locations.first
-      self.longitude = user.locations.first.longitude
-      self.latitude = user.locations.first.latitude
+    if locations.first
+      self.longitude = locations.first.longitude
+      self.latitude = locations.first.latitude
     end
     # end old support
 
-    user.locations.each do |location|
+    locations.each do |location|
       self.origins << location.to_origin
     end
   end
@@ -106,11 +110,12 @@ class Noise < ActiveRecord::Base
     end
 
     if search_location
+      Rails.logger.debug "Location detected " + search_location.to_s
+
       near(search_location, distance)
     else
       scoped
     end
-
   end
 
   def self.where_latest
