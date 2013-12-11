@@ -73,8 +73,6 @@ class Noise < ActiveRecord::Base
     self.text = twitter_noise.try(:text)
 
     save!
-    
-    import_twitter_locations(user.locations)
   end
 
   def import_locations(locations)
