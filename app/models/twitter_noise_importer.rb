@@ -25,7 +25,7 @@ class TwitterNoiseImporter
   end
 
   def self.latest_noises_from_sidewalks_twitter
-    last_noise = Noise.last
+    last_noise = Noise.where(provider_id: Noise::PROVIDER_TWITTER).last
 
     begin 
       if last_noise && last_noise.provider_id
