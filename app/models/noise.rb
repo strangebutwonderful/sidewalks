@@ -119,9 +119,9 @@ class Noise < ActiveRecord::Base
       Rails.logger.debug "Location detected " + search_location.to_s
 
       # near(search_location, distance)
-      ids = Origin.where_search(params).where_latest.all.map(&:noise_id)
-      Rails.logger.debug "Found origins " + ids.to_s
-      where_ids(ids)
+      noise_ids = Origin.where_search(params).where_latest.all.map(&:noise_id)
+      Rails.logger.debug "Found origins " + noise_ids.to_s
+      where_ids(noise_ids)
     else
       scoped
     end
