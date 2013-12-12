@@ -12,7 +12,7 @@ class TwitterNoiseImporter
         begin
           user = User.first_or_import_from_twitter_noise_user(tweet.user)
           noise = Noise.first_or_import_from_twitter_noise(tweet, user)
-          noise.import_twitter_locations(user.locations)
+          noise.import_locations(user.locations)
         rescue => exception
           Rails.logger.error exception
         end
