@@ -41,6 +41,7 @@ FactoryGirl.define do
 
     after(:create) do |noise|
       FactoryGirl.create(:origin, :noise => noise, :latitude => noise.latitude, :longitude => noise.longitude)
+      FactoryGirl.create_list(:origin, rand(0..4), :noise => noise)
     end
   end
 
