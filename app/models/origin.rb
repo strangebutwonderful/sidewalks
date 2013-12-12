@@ -17,6 +17,10 @@ class Origin < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
+  def self.where_latest
+    where("#{table_name}.created_at >= ?", 12.hours.ago).order("#{table_name}.created_at DESC")
+  end
+
   def self.where_search(params)
     latitude = params[:latitude]
     longitude = params[:longitude]

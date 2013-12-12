@@ -95,6 +95,14 @@ class Noise < ActiveRecord::Base
     .where_latest
   end
 
+  def self.where_ids(ids) 
+    unless ids.nil?
+      where(:id => ids)
+    else
+      scoped
+    end
+  end
+
   def self.where_nearby(params)
     location = params[:location]
     latitude = params[:latitude]
@@ -110,7 +118,10 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      near(search_location, distance)
+      # near(search_location, distance)
+      ids = Origin.where_search(params).where_latest.all.map(&:noise_id)
+      Rails.logger.debug "Found origins " + ids.to_s
+      where_ids(ids)
     else
       scoped
     end
