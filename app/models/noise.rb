@@ -21,7 +21,7 @@
 
 class Noise < ActiveRecord::Base
   belongs_to :user
-  has_many :origins
+  has_many :origins, uniq: true
   
   attr_accessible :latitude, :longitude, :text, :provider, :provider_id
 

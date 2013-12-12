@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204174416) do
+ActiveRecord::Schema.define(:version => 20131212055320) do
 
   create_table "locations", :force => true do |t|
     t.integer  "user_id",                                                                :null => false
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20131204174416) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
+
+  add_index "origins", ["noise_id", "latitude", "longitude"], :name => "index_origin_on_latitude_and_longitude", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string   "name",          :null => false
