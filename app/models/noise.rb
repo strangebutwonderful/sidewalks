@@ -93,6 +93,8 @@ class Noise < ActiveRecord::Base
   def self.where_search(params)
     where_nearby(params)
     .where_latest
+    .joins(:origins).preload(:origins) # cuz nearby overrides includes
+    .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.where_ids(ids) 
