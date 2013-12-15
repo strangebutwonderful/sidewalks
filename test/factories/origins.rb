@@ -9,6 +9,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_origin_on_latitude_and_longitude  (noise_id,latitude,longitude) UNIQUE
+#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
