@@ -1,4 +1,4 @@
-geolocatableSelector = "a[data-geolocatable=true]";
+geolocatableSelector = "a[data-geolocatable]";
 
 geolocatableSuccess = (position) ->
   console.log position.coords
