@@ -54,11 +54,7 @@ class Noise < ActiveRecord::Base
   end
 
   def coordinates
-    coordinates = []
-    self.origins.each do |origin|
-      coordinates << origin.coordinates
-    end
-    return coordinates
+    @coordinates ||= self.origins.map { origin.coordinates }
   end
 
   # temporary function to help migrate noise columsn to origins table
