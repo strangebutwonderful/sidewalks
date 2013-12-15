@@ -29,10 +29,7 @@ FactoryGirl.define do
     city { Faker::Address.city }
     state { Faker::Address.state }
     zip { Faker::Address.zip }
-
-    trait :geocoded do
-      latitude { Faker::Address.latitude }
-      longitude { Faker::Address.longitude }
-    end
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
   end
 end

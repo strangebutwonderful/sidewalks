@@ -24,9 +24,9 @@ class Location < ActiveRecord::Base
   belongs_to :user
   attr_accessible :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
-  validates_presence_of :user_id, :address, :city, :state
+  validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
-  after_validation :geocode # geocoder 
+  before_validation :geocode # geocoder 
 
   geocoded_by :full_street_address do |location, results|
     if geocode = results.first
