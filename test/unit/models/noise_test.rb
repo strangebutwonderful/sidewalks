@@ -29,6 +29,18 @@ class NoiseTest < ActiveSupport::TestCase
     end
   end
 
+  test "FactoryGirl noise_with_coordinates works" do
+    assert_difference('Noise.count') do
+      noise = FactoryGirl.create(:noise_with_coordinates)
+    end
+  end
+
+  test "FactoryGirl week_old_noise works" do
+    assert_difference('Noise.count') do
+      noise = FactoryGirl.create(:week_old_noise)
+    end
+  end
+
   test "imports raw twitter object" do
     twitter_noise = build_twitter_noise
 
