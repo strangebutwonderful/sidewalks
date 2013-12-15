@@ -2,7 +2,10 @@
 A map expects the following:
 a tag with the attribute of 'data-map'
 the tag can have 0..n marker tags with the attribute of 'data-map-marker'
+the tag should have at least one child tag with the attribute 'data-map-panel'
 ###
+
+$ = jQuery
 
 $ ->
   $("[data-map]").each (index, mapElement) ->
