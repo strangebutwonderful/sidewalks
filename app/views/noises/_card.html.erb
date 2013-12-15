@@ -7,11 +7,11 @@
 
   <div class="media-body">
     <h5 class="media-heading">
-      <%= link_to noise.text, noise.provider_url, target: "_blank" %>
+      <%= link_to noise.text, noise %>
     </h5>
     <p>
       by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-      at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise %>
+      at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise.provider_url, target: "_blank" %>
     </p>
   </div>
 </div>
