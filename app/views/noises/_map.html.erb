@@ -1,0 +1,18 @@
+<% if noise.has_coordinates? %>
+  <div class="card">
+    <%# TODO: set location for map %>
+    <div data-map id="map-noise-<%= noise.id %>">
+      <% noise.origins.each do |origin| %>
+        <div data-map-marker
+          data-map-marker-latitude="<%= origin.latitude %>" 
+          data-map-marker-longitude="<%= origin.longitude %>"
+          data-map-marker-name="<%= noise.user_name %>"
+          data-map-marker-details="<%= noise.text %>"
+        >
+        </div>
+      <% end %>
+      <div data-map-panel id="map-panel-noise-<%= noise.id %>">
+      </div>
+    </div>
+  </div>
+<% end %>

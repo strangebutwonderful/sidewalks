@@ -17,6 +17,10 @@ class Origin < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
+  def coordinates
+    return [self.latitude, self.longitude]
+  end
+
   def self.deduplicate
     # find all Origins and group them on keys which should be common
     grouped = all.group_by{ |origin| [origin.noise_id, origin.latitude, origin.longitude] }

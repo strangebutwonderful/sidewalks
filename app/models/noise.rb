@@ -50,7 +50,15 @@ class Noise < ActiveRecord::Base
   end
 
   def has_coordinates?
-    return true if self.latitude && self.longitude
+    return !self.origins.empty?
+  end
+
+  def coordinates
+    coordinates = []
+    self.origins.each do |origin|
+      coordinates << origin.coordinates
+    end
+    return coordinates
   end
 
   # temporary function to help migrate noise columsn to origins table
