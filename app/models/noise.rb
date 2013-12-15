@@ -6,8 +6,6 @@
 #  provider_id      :string(255)      not null
 #  user_id          :integer          not null
 #  text             :text             not null
-#  longitude        :decimal(11, 8)
-#  latitude         :decimal(11, 8)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  provider         :string(255)      not null
@@ -15,27 +13,20 @@
 #
 # Indexes
 #
-#  index_noises_on_latitude_and_longitude  (latitude,longitude)
-#  index_noises_on_user_id                 (user_id)
+#  index_noises_on_user_id  (user_id)
 #
 
 class Noise < ActiveRecord::Base
   belongs_to :user
   has_many :origins, uniq: true
   
-  attr_accessible :latitude, :longitude, :text, :provider, :provider_id
+  attr_accessible :text, :provider, :provider_id
 
   attr_reader :provider_url, :user_name, :user_provider_url
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
-  reverse_geocoded_by :latitude, :longitude
-
   PROVIDER_TWITTER = 'twitter'
-
-  def google_map_url
-    "https://maps.google.com/maps?ll=" + self.latitude + ',' + self.longitude
-  end
 
   def provider_url
     self.user && self.user.provider_url + "/status/" + provider_id
@@ -57,13 +48,6 @@ class Noise < ActiveRecord::Base
     @coordinates ||= self.origins.map { origin.coordinates }
   end
 
-  # temporary function to help migrate noise columsn to origins table
-  def to_origin 
-    if self.has_coordinates?
-      self.origins << Origin.new(latitude: self.latitude, longitude: self.longitude)
-    end
-  end
-
   def import_from_twitter_noise(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
     
@@ -81,13 +65,6 @@ class Noise < ActiveRecord::Base
 
   def import_locations(locations)
     # TODO: get tweet's embedded coordinates
-
-    # Support old system of one location only while migrating
-    if locations.first
-      self.longitude = locations.first.longitude
-      self.latitude = locations.first.latitude
-    end
-    # end old support
 
     locations.each do |location|
       self.origins << location.to_origin
@@ -135,10 +112,6 @@ class Noise < ActiveRecord::Base
 
   def self.where_latest
     where("#{table_name}.created_at >= ?", 12.hours.ago).order("#{table_name}.created_at DESC")
-  end
-
-  def self.where_has_coordinates
-    where('longitude IS NOT NULL').where('latitude IS NOT NULL')
   end
 
   def self.where_since(user_id, noise_id)

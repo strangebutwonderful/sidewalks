@@ -6,8 +6,6 @@
 #  provider_id      :string(255)      not null
 #  user_id          :integer          not null
 #  text             :text             not null
-#  longitude        :decimal(11, 8)
-#  latitude         :decimal(11, 8)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  provider         :string(255)      not null
@@ -15,8 +13,7 @@
 #
 # Indexes
 #
-#  index_noises_on_latitude_and_longitude  (latitude,longitude)
-#  index_noises_on_user_id                 (user_id)
+#  index_noises_on_user_id  (user_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -36,9 +33,6 @@ FactoryGirl.define do
   end
 
   factory :noise_with_coordinates, parent: :noise do
-    latitude { Faker::Address.latitude }
-    longitude { Faker::Address.longitude }
-
     after(:create) do |noise|
       FactoryGirl.create(:origin, :noise => noise, :latitude => noise.latitude, :longitude => noise.longitude)
       FactoryGirl.create_list(:origin, rand(0..4), :noise => noise)

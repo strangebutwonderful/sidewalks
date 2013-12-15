@@ -6,8 +6,6 @@
 #  provider_id      :string(255)      not null
 #  user_id          :integer          not null
 #  text             :text             not null
-#  longitude        :decimal(11, 8)
-#  latitude         :decimal(11, 8)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  provider         :string(255)      not null
@@ -15,8 +13,7 @@
 #
 # Indexes
 #
-#  index_noises_on_latitude_and_longitude  (latitude,longitude)
-#  index_noises_on_user_id                 (user_id)
+#  index_noises_on_user_id  (user_id)
 #
 
 require 'test_helper'
@@ -71,18 +68,6 @@ class NoiseTest < ActiveSupport::TestCase
   test "latest scope does not include old tweets" do
     assert_no_difference('Noise.where_latest.count') do
       FactoryGirl.create(:week_old_noise)
-    end
-  end
-
-  test "located scope includes noise with coordinates" do
-    assert_difference('Noise.where_has_coordinates.count') do
-      FactoryGirl.create(:noise_with_coordinates)
-    end
-  end
-
-  test "located scope does not include noise without coordinates" do
-    assert_no_difference('Noise.where_has_coordinates.count') do
-      FactoryGirl.create(:noise)
     end
   end
 end
