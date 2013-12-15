@@ -14,7 +14,7 @@ geolocatableSuccess = (position) ->
 
 geolocatableError = (msg) ->
   $(geolocatableSelector).each (index, element) =>
-    console.log 'geolocation failed' + error
+    console.log 'geolocation failed ' + error
     $elementObject = $(element)
     $elementObject.addClass('hidden')
 
