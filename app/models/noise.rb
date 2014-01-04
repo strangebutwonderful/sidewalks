@@ -17,6 +17,8 @@
 #
 
 class Noise < ActiveRecord::Base
+  delegate :url_helpers, to: 'Rails.application.routes' 
+
   belongs_to :user
   has_many :origins, uniq: true
   
@@ -26,10 +28,16 @@ class Noise < ActiveRecord::Base
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
+  PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
   def provider_url
-    self.user && self.user.provider_url + "/status/" + provider_id
+    case provider
+    when PROVIDER_TWITTER
+      self.user && self.user.provider_url + "/status/" + provider_id
+    else
+      url_helpers.noise_path(self)
+    end
   end
 
   def user_name

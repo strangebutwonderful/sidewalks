@@ -15,20 +15,30 @@
 #
 
 class User < ActiveRecord::Base
+  delegate :url_helpers, to: 'Rails.application.routes' 
+
   rolify
+  
   has_many :noises
   has_many :locations
+  
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email
-  
-  validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
   attr_reader :provider_url
 
+  validates_presence_of :name, :provider, :provider_id, :provider_screen_name
+
+  PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
   def provider_url
-    "https://twitter.com/" + self.provider_screen_name
+    case provider
+    when PROVIDER_TWITTER
+      "https://twitter.com/" + self.provider_screen_name
+    else
+      url_helpers.noise_path(self)
+    end
   end
 
   def update_credentials(auth)
