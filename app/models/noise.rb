@@ -24,7 +24,7 @@ class Noise < ActiveRecord::Base
   
   attr_accessible :text, :provider, :provider_id
 
-  attr_reader :provider_url, :user_name, :user_provider_url
+  attr_reader :provider_url, :user_name, :user_provider_url, :map
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
@@ -53,7 +53,11 @@ class Noise < ActiveRecord::Base
   end
 
   def coordinates
-    @coordinates ||= self.origins.map { origin.coordinates }
+    @coordinates ||= self.origins.map { |origin| origin.coordinates }
+  end
+
+  def map 
+    @map ||= Map.new(self.coordinates)
   end
 
   def import_from_twitter_noise(twitter_noise, user)

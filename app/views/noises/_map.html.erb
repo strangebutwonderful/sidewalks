@@ -1,7 +1,10 @@
 <% if noise.has_coordinates? %>
   <div class="card">
     <%# TODO: set location for map %>
-    <div data-map id="map-noise-<%= noise.id %>">
+    <div id="map-noise-<%= noise.id %>"
+      data-map 
+      data-map-bounds="<%= JSON(noise.map.boundaries) %>"
+      >
       <% noise.origins.each do |origin| %>
         <div data-map-marker
           data-map-marker-latitude="<%= origin.latitude %>" 
