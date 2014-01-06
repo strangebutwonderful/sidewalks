@@ -1,22 +1,27 @@
 class Map
-  attr_reader :boundaries, :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
+  attr_accessor :coordinates
+  attr_reader :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
   def initialize(coordinates)
-    self.set_boundaries(coordinates)
+    self.coordinates = coordinates
   end
 
-  def set_boundaries(coordinates)
-    coordinates.each do |coordinate|
-      self.stretch_north_east_boundary_latitude(coordinate[0])
-      self.stretch_north_east_boundary_longitude(coordinate[1])
-      self.stretch_south_west_boundary_latitude(coordinate[0])
-      self.stretch_south_west_boundary_longitude(coordinate[1])
+  def boundaries
+    unless @boundaries
+      coordinates.each do |coordinate|
+        self.stretch_north_east_boundary_latitude(coordinate[0])
+        self.stretch_north_east_boundary_longitude(coordinate[1])
+        self.stretch_south_west_boundary_latitude(coordinate[0])
+        self.stretch_south_west_boundary_longitude(coordinate[1])
+      end
+
+      @boundaries = [
+        [self.south_west_boundary_latitude, self.south_west_boundary_longitude],
+        [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
+      ]
     end
 
-    @boundaries = [
-      [self.south_west_boundary_latitude, self.south_west_boundary_longitude],
-      [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
-    ]
+    @boundaries
   end
 
   def stretch_north_east_boundary_latitude(latitude)
