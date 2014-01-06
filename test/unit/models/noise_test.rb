@@ -82,4 +82,9 @@ class NoiseTest < ActiveSupport::TestCase
       FactoryGirl.create(:week_old_noise)
     end
   end
+
+  test "noise with coordinates generates map" do
+    noise = FactoryGirl.create(:noise_with_coordinates)
+    assert_not_nil(noise.map)    
+  end
 end
