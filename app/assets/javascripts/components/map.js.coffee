@@ -5,6 +5,10 @@ the tag can have 0..n marker tags with the attribute of 'data-map-marker'
 the tag should have at least one child tag with the attribute 'data-map-panel'
 ###
 
+# see http://leafletjs.com/reference.html#map-options
+mapOptions =
+  scrollWheelZoom: false
+
 $ = jQuery
 
 $ ->
@@ -14,7 +18,7 @@ $ ->
     
     # Assign map panel div
     mapPanelElement = $map.find('[data-map-panel]').eq(0)
-    map = L.map(mapPanelElement.attr('id'))
+    map = L.map(mapPanelElement.attr('id'), mapOptions)
 
     # Set source of map layers pngs
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
