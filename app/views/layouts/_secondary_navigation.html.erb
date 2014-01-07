@@ -1,19 +1,21 @@
-<ul class="nav nav-pills">
-  <% if current_user_is_admin? %>
+<div class="docket">
+  <ul class="nav nav-pills">
+    <% if current_user_is_admin? %>
+      <li>
+        <%= link_to 'Admin', admin_users_path %>
+      </li>
+    <% end %>
+    <% if current_user_signed_in? %>
+      <li>
+        <%= link_to 'Sign Out', signout_path %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to 'Sign In', signin_path %>
+      </li>
+    <% end %>
     <li>
-      <%= link_to 'Admin', admin_users_path %>
+      <%= link_to 'Developers', 'https://github.com/ajsharma/sidewalks', :target => '_blank' %>
     </li>
-  <% end %>
-  <% if current_user_signed_in? %>
-    <li>
-      <%= link_to 'Sign Out', signout_path %>
-    </li>
-  <% else %>
-    <li>
-      <%= link_to 'Sign In', signin_path %>
-    </li>
-  <% end %>
-  <li>
-    <%= link_to 'Developers', 'https://github.com/ajsharma/sidewalks', :target => '_blank' %>
-  </li>
-</ul>
+  </ul>
+</div>
