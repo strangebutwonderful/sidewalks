@@ -7,6 +7,7 @@ the tag should have at least one child tag with the attribute 'data-map-panel'
 
 # see http://leafletjs.com/reference.html#map-options
 mapOptions =
+  dragging: false
   scrollWheelZoom: false
 
 $ = jQuery
