@@ -1,0 +1,7 @@
+.docket {
+  @include box-sizing(border-box);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $base-max-readability-width;
+}

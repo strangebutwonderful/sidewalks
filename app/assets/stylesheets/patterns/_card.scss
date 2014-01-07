@@ -8,7 +8,7 @@ $card-border-color: darken($navbarBackground, 12%) !default;
 
 // Base class
 .card {
+  @extend .docket;
   background-color: $white;
-  display: block;
   padding: $base-block-spacing;
 }
