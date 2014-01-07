@@ -1,20 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Twitter Id:</b>
-  <%= @noise.provider_id %>
-</p>
+<div class="docket">
+  <p>
+    <b>Twitter Id:</b>
+    <%= @noise.provider_id %>
+  </p>
 
-<p>
-  <b>User:</b>
-  <%= @noise.user_name %>
-</p>
+  <p>
+    <b>User:</b>
+    <%= @noise.user_name %>
+  </p>
 
-<p>
-  <b>Text:</b>
-  <%= @noise.text %>
-</p>
+  <p>
+    <b>Text:</b>
+    <%= @noise.text %>
+  </p>
+</div>
 
 <% if current_user_is_admin? %>
-  <%= link_to 'Edit', edit_admin_noise_path(@noise) %> |
+  <div class="docket">
+    <%= link_to 'Edit', edit_admin_noise_path(@noise) %>
+  </div>
 <% end %>

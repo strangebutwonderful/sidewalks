@@ -1,40 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= link_to @location.user.name, admin_user_path(@location.user) %>
-</p>
+<div class="docket">
+  <p>
+    <b>User:</b>
+    <%= link_to @location.user.name, admin_user_path(@location.user) %>
+  </p>
 
-<p>
-  <b>Address:</b>
-  <%= @location.address %>
-</p>
+  <p>
+    <b>Address:</b>
+    <%= @location.address %>
+  </p>
 
-<p>
-  <b>City:</b>
-  <%= @location.city %>
-</p>
+  <p>
+    <b>City:</b>
+    <%= @location.city %>
+  </p>
 
-<p>
-  <b>State:</b>
-  <%= @location.state %>
-</p>
+  <p>
+    <b>State:</b>
+    <%= @location.state %>
+  </p>
 
-<p>
-  <b>Zip:</b>
-  <%= @location.zip %>
-</p>
+  <p>
+    <b>Zip:</b>
+    <%= @location.zip %>
+  </p>
 
-<p>
-  <b>Latitude:</b>
-  <%= @location.latitude %>
-</p>
+  <p>
+    <b>Latitude:</b>
+    <%= @location.latitude %>
+  </p>
 
-<p>
-  <b>Longitude:</b>
-  <%= @location.longitude %>
-</p>
+  <p>
+    <b>Longitude:</b>
+    <%= @location.longitude %>
+  </p>
+</div>
 
-
-<%= link_to 'Edit', edit_admin_location_path(@location) %> |
-<%= link_to 'Back', admin_location_path(@location) %>
+<div class="docket">
+  <%= link_to 'Edit', edit_admin_location_path(@location) %> |
+  <%= link_to 'Back', admin_location_path(@location) %>
+</div>
