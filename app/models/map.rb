@@ -2,7 +2,7 @@ class Map
   attr_accessor :coordinates
   attr_reader :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
-  def initialize(coordinates)
+  def initialize(coordinates = nil)
     self.coordinates = coordinates
   end
 
