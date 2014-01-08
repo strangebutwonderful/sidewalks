@@ -9,6 +9,7 @@ group :assets do
   gem 'compass-rails'
 end
 gem 'bootstrap-sass', '~> 2'
+gem "font-awesome-sass", "~> 4"
 gem 'cancan'
 gem 'figaro'
 gem 'omniauth'

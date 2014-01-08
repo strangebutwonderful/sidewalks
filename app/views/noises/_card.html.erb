@@ -11,7 +11,11 @@
     </h5>
     <p>
       by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-      at <%= link_to time_ago_in_words(noise.created_at) + ' ago', noise.provider_url, target: "_blank" %>
+      at 
+      <%= link_to noise.provider_url, class: "provider", target: "_blank" do %>
+        <%= time_ago_in_words(noise.created_at) %> ago
+        <i class="provider-<%= noise.provider.downcase %>"></i>
+      <% end %>
     </p>
   </div>
 </div>

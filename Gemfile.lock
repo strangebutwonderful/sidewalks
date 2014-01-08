@@ -85,6 +85,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    font-awesome-sass (4.0.2)
+      sass-rails (>= 3.1.1)
     formatador (0.2.4)
     fssm (0.2.10)
     geocoder (1.1.8)
@@ -242,6 +244,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
+  font-awesome-sass (~> 4)
   geocoder
   guard-bundler
   guard-rails

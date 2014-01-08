@@ -12,3 +12,8 @@ $card-border-color: darken($navbarBackground, 12%) !default;
   background-color: $white;
   padding: $base-block-spacing;
 }
+
+.provider-twitter {
+  @extend .fa;
+  @extend .fa-twitter;
+}
