@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     when PROVIDER_TWITTER
       "https://twitter.com/" + self.provider_screen_name
     else
-      url_helpers.noise_path(self)
+      url_helpers.user_path(self)
     end
   end
 
