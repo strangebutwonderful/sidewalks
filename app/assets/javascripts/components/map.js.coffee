@@ -39,7 +39,7 @@ $ ->
 
       latitude = $marker.data("map-marker-latitude")
       longitude = $marker.data("map-marker-longitude")
-      name = $marker.data("map-marker-name")
-      details = $marker.data("map-marker-details")
+      name = $marker.data("map-marker-name") || ""
+      details = $marker.data("map-marker-details") || ""
       marker = L.marker([latitude, longitude]).addTo(map)
       marker.bindPopup("<b>#{name}</b><br>#{details}")
