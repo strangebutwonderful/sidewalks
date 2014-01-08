@@ -25,6 +25,10 @@ class Origin < ActiveRecord::Base
     return [self.latitude, self.longitude]
   end
 
+  def map 
+    @map ||= Map.new([self.coordinates])
+  end
+
   def self.deduplicate
     # find all Origins and group them on keys which should be common
     grouped = all.group_by{ |origin| [origin.noise_id, origin.latitude, origin.longitude] }

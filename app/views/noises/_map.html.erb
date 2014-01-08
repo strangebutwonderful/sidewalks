@@ -1,21 +1,19 @@
 <% if noise.has_coordinates? %>
-  <div class="row">
-    <%# TODO: set location for map %>
-    <div id="map-noise-<%= noise.id %>"
-      data-map 
-      data-map-bounds="<%= JSON(noise.map.boundaries) %>"
+  <%# TODO: set location for map %>
+  <div id="map-noise-<%= noise.id %>"
+    data-map 
+    data-map-bounds="<%= JSON(noise.map.boundaries) %>"
+    >
+    <% noise.origins.each do |origin| %>
+      <div data-map-marker
+        data-map-marker-latitude="<%= origin.latitude %>" 
+        data-map-marker-longitude="<%= origin.longitude %>"
+        data-map-marker-name="<%= noise.user_name %>"
+        data-map-marker-details="<%= noise.text %>"
       >
-      <% noise.origins.each do |origin| %>
-        <div data-map-marker
-          data-map-marker-latitude="<%= origin.latitude %>" 
-          data-map-marker-longitude="<%= origin.longitude %>"
-          data-map-marker-name="<%= noise.user_name %>"
-          data-map-marker-details="<%= noise.text %>"
-        >
-        </div>
-      <% end %>
-      <div data-map-panel id="map-panel-noise-<%= noise.id %>">
       </div>
+    <% end %>
+    <div data-map-panel id="map-panel-noise-<%= noise.id %>">
     </div>
   </div>
 <% end %>

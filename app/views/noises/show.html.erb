@@ -2,12 +2,11 @@
 
 <%= render 'map', :noise => @noise %>
 
-<%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => @noise} %>
-<%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => @noise} %>  
-
+<%= render 'admin/noises/card_addendum', :noise => @noise %>
+<%= render 'admin/origins/card_addendum', :noise => @noise %>  
 
 <% @noises.each do |noise| %>
   <%= render 'card', :noise => noise %>
-  <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
-  <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>  
+  <%= render 'admin/noises/card_addendum', :noise => noise %>
+  <%= render 'admin/origins/card_addendum', :noise => noise %>  
 <% end %>
