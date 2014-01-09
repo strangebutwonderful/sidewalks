@@ -5,7 +5,7 @@ class OriginsController < ApplicationController
   # GET /origins
   # GET /origins.json
   def index
-    @origins = Origin.find(params[:id])
+    @origins = Origin.where_search(params).all
 
     respond_with @origins
   end
@@ -20,7 +20,6 @@ class OriginsController < ApplicationController
       .all
 
     respond_with @origin
-
   end
 
 end

@@ -16,6 +16,7 @@
 
 class Origin < ActiveRecord::Base
   belongs_to :noise
+  has_one :user, :through => :noise
   
   attr_accessible :latitude, :longitude
 
@@ -41,11 +42,19 @@ class Origin < ActiveRecord::Base
     end
   end
 
+  def self.where_ids(ids) 
+    unless ids.nil?
+      where(:id => ids)
+    else
+      scoped
+    end
+  end
+
   def self.where_latest
     where("#{table_name}.created_at >= ?", 12.hours.ago).order("#{table_name}.created_at DESC")
   end
 
-  def self.where_search(params)
+  def self.where_nearby(params)
     latitude = params[:latitude]
     longitude = params[:longitude]
     location = params[:location]
@@ -63,4 +72,15 @@ class Origin < ActiveRecord::Base
       scoped
     end
   end
+
+  def self.where_search(params)
+    nearby_origin_ids = Origin.where_nearby(params)
+      .where_latest
+      .pluck(:id)
+
+    where_ids(nearby_origin_ids)
+      .order("#{table_name}.created_at DESC")
+      .joins(:noise).preload(:noise) # cuz nearby overrides includes
+      .joins(:user).preload(:user) # cuz nearby overrides includes
+  end  
 end
