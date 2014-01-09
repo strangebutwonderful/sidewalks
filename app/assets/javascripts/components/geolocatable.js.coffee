@@ -3,13 +3,19 @@ geolocatableSelector = "a[data-geolocatable]";
 geolocatableSuccess = (position) ->
   console.log position.coords
 
-  nearbyParams = 
-    latitude: position.coords.latitude
-    longitude: position.coords.longitude
+  latitude = position.coords.latitude
+  longitude = position.coords.longitude
   
   $(geolocatableSelector).each (index, element) =>
     $elementObject = $(element)
-    $elementObject.attr("href", '/noises/?' + $.param( nearbyParams ))
+    
+    href = $elementObject.attr("href") || window.location.href
+    uri = new URI(href)
+    uri.removeQuery("latitude").removeQuery("longitude")
+    uri.addQuery("latitude", latitude).addQuery("longitude", longitude)
+    
+    $elementObject.attr("href", uri.toString())
+    
     $elementObject.removeClass('hidden')
 
 geolocatableError = (msg) ->
