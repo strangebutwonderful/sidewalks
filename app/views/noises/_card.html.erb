@@ -9,10 +9,10 @@
     <h5 class="media-heading">
       <%= link_to noise.text, noise %>
     </h5>
-    <p>
-      by <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-      at 
-      <%= link_to noise.provider_url, class: "provider", target: "_blank" do %>
+    <p class="muted">
+      <%= link_to noise.user_name, noise.user_provider_url, class: "muted", target: "_blank" %>
+      |
+      <%= link_to noise.provider_url, class: "muted provider", target: "_blank" do %>
         <%= time_ago_in_words(noise.created_at) %> ago
         <i class="provider-<%= noise.provider.downcase %>"></i>
       <% end %>
