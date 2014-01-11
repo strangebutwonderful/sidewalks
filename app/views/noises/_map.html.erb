@@ -8,9 +8,10 @@
       <div data-map-marker
         data-map-marker-latitude="<%= origin.latitude %>" 
         data-map-marker-longitude="<%= origin.longitude %>"
-        data-map-marker-name="<%= noise.user_name %>"
-        data-map-marker-details="<%= noise.text %>"
       >
+        <p>
+          <%= link_to "Directions", origin.directions_url, :target => "_blank" %>
+        </p>
       </div>
     <% end %>
     <div data-map-panel id="map-panel-noise-<%= noise.id %>">

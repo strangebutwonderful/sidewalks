@@ -30,6 +30,10 @@ class Origin < ActiveRecord::Base
     @map ||= Map.new([self.coordinates])
   end
 
+  def directions_url
+    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
+  end
+
   def self.deduplicate
     # find all Origins and group them on keys which should be common
     grouped = all.group_by{ |origin| [origin.noise_id, origin.latitude, origin.longitude] }
