@@ -23,4 +23,8 @@ FactoryGirl.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
   end
+
+  factory :week_old_origin, parent: :noise do
+    created_at 1.week.ago
+  end
 end
