@@ -9,4 +9,8 @@ class MapTest < ActiveSupport::TestCase
     assert_not_nil FactoryGirl.build(:map)
   end
 
+  test "Boundaries not null" do
+    assert_not_nil FactoryGirl.build(:map).boundaries
+  end  
+
 end
