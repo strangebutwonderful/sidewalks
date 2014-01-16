@@ -11,6 +11,16 @@ $card-border-color: darken($navbarBackground, 12%) !default;
   @extend .docket;
   background-color: $white;
   padding: $base-block-spacing;
+
+  h1 {
+    @extend h5;
+    font-weight: normal;
+    margin: 0;
+
+    a {
+      color: inherit;
+    }
+  }
 }
 
 .provider-twitter {

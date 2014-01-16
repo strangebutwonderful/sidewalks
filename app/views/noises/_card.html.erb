@@ -6,11 +6,11 @@
   <% end %>
 
   <div class="media-body">
-    <h5 class="media-heading">
+    <h1 class="media-heading">
       <%= link_to noise.text, noise %>
-    </h5>
+    </h1>
     <p class="muted">
-      <%= link_to noise.user_name, noise.user_provider_url, class: "muted", target: "_blank" %>
+      <%= link_to noise.user_name, noise.user, class: "muted" %>
       |
       <%= link_to noise.provider_url, class: "muted provider", target: "_blank" do %>
         <%= time_ago_in_words(noise.created_at) %> ago
