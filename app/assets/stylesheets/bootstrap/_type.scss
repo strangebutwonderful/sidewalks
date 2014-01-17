@@ -31,7 +31,10 @@ em      { font-style: italic; }
 cite    { font-style: normal; }
 
 // Utility classes
-.muted               { color: $grayLight; }
+.muted { 
+  color: $grayLight; 
+  font-weight: 100;
+}
 a.muted:hover,
 a.muted:focus        { color: darken($grayLight, 10%); }
 
