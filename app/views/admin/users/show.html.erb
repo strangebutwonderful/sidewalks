@@ -10,17 +10,25 @@
   <% end %>
 </div>
 
-<div class="docket">
-  <h2>Locations</h2>
+<div class="row">
+  <div class="docket">
+    <h2>Locations</h2>
+  </div>
+</div>
+<%= render 'map', :user => @user %>
+
+<div class="row">
   <% @user.locations.each do |location| %>
-    <p>
-      <%= location.full_street_address %>
-      (
-        <%= location.latitude %>
-        ,
-        <%= location.longitude %>
-      )
-    </p>
+    <div class="docket">
+      <p>
+        <%= location.full_street_address %>
+        (
+          <%= location.latitude %>
+          ,
+          <%= location.longitude %>
+        )
+      </p>
+    </div>
   <% end %>
 </div>
 

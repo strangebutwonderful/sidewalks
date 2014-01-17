@@ -41,6 +41,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_coordinates?
+    return !self.locations.empty?
+  end
+
+  def coordinates
+    @coordinates ||= self.locations.map { |location| location.coordinates }
+  end
+
+  def map 
+    @map ||= Map.new(self.coordinates)
+  end  
+
   def update_credentials(auth)
     if auth['credentials']
       self.provider_access_token = auth['credentials']['token']

@@ -1,0 +1,20 @@
+<% if user.has_coordinates? %>
+  <%# TODO: set location for map %>
+  <div id="map-user-<%= user.id %>"
+    data-map 
+    data-map-bounds="<%= JSON(user.map.boundaries) %>"
+    >
+    <% user.locations.each do |location| %>
+      <div data-map-marker
+        data-map-marker-latitude="<%= location.latitude %>" 
+        data-map-marker-longitude="<%= location.longitude %>"
+      >
+        <p>
+          <%= link_to "Directions to " + user.name, location.directions_url, :target => "_blank" %>
+        </p>
+      </div>
+    <% end %>
+    <div data-map-panel id="map-panel-user-<%= user.id %>">
+    </div>
+  </div>
+<% end %>

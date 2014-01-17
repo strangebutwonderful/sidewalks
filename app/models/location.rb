@@ -36,6 +36,18 @@ class Location < ActiveRecord::Base
     end
   end
 
+  def directions_url
+    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
+  end
+
+  def coordinates
+    return [self.latitude, self.longitude]
+  end
+
+  def map 
+    @map ||= Map.new([self.coordinates])
+  end
+
   def full_street_address
     address + ', ' + city + ', ' + state + ' ' + zip.to_s
   end
