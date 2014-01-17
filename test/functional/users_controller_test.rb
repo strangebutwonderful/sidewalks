@@ -2,6 +2,28 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
+  test "anyone should get user" do
+    user = FactoryGirl.create(:user)
+    
+    get :show, id: user
+    assert_response :success
+  end
+
+  test "user should get user" do
+    user = FactoryGirl.create(:user)
+    
+    get :show, id: user
+    assert_response :success
+  end  
+
+  test "admin should get user" do
+    user = FactoryGirl.create(:user)
+    sign_in(FactoryGirl.create(:admin_user))
+    
+    get :show, id: user
+    assert_response :success
+  end
+
   test "user should get edit self" do
     user = FactoryGirl.create(:user)
     sign_in(user)

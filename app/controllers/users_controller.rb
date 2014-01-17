@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => [:edit, :update]
 
   respond_to :html, :json
+
+  def show
+    @user = User.find(params[:id])
+    @noises = @user.noises.where_latest
+
+    respond_with(@user, @noises)
+  end
 
   def edit
     @user = User.find(params[:id])
