@@ -6,8 +6,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor'
-  gem 'compass-rails'
 end
+gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2'
 gem "font-awesome-sass", "~> 4"
 gem 'cancan'
