@@ -1,0 +1,11 @@
+$avatar-height: 48px;
+$avatar-width: 48px;
+$avatar-border-radius: $avatar-width / 2;
+
+.avatar {
+  .avatar-image {
+    @include border-radius($avatar-border-radius);
+    height: $avatar-height;
+    width: $avatar-width;
+  }
+}
