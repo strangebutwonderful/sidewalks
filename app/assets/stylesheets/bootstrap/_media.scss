@@ -26,6 +26,9 @@
 // For images and videos, set to block
 .media-object {
   display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
 
 // Reset margins on headings for tighter default spacing

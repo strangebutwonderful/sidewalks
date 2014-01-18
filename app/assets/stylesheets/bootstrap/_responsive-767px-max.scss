@@ -171,8 +171,8 @@
   }
   // Remove side margins since we stack instead of indent
   .media-object {
-    margin-right: 0;
-    margin-left: 0;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   // Modals
