@@ -17,6 +17,8 @@ development:
   encoding: utf8
   database: sidewalks_development
   pool: 5
+  username: USERNAME
+  password: PASSWORD
   template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -42,6 +44,8 @@ test:
   encoding: utf8
   database: sidewalks_test
   pool: 5
+  username: USERNAME
+  password: PASSWORD
   template: template0
 
 production:
@@ -49,4 +53,6 @@ production:
   encoding: utf8
   database: sidewalks_production
   pool: 5
+  username: USERNAME
+  password: PASSWORD
   template: template0
