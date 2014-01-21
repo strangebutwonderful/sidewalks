@@ -13,6 +13,14 @@ class TwitterNoiseImporter
           user = User.first_or_import_from_twitter_noise_user(tweet.user)
           noise = Noise.first_or_import_from_twitter_noise(tweet, user)
           noise.import_locations(user.locations)
+
+          # import locations of any mentioned users as well
+          tweet.user_mentions.each do |user_mention|
+            mentioned_user = User.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => user_mention.id.to_s).first
+            if mentioned_user
+              noise.import_locations(mentioned_user.locations)
+            end
+          end
         rescue => exception
           Rails.logger.error exception
         end
