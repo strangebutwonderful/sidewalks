@@ -14,8 +14,11 @@ $card-border-color: darken($navbarBackground, 12%) !default;
 
   h1 {
     @extend h5;
+    font-size: 24px;
     font-weight: normal;
+    line-height: 30px;
     margin: 0;
+    margin-top: -5px;
 
     a {
       color: inherit;
