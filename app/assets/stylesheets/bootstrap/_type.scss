@@ -33,7 +33,6 @@ cite    { font-style: normal; }
 // Utility classes
 .muted { 
   color: $gray;
-  font-weight: 100;
 }
 a.muted:hover,
 a.muted:focus        { color: darken($grayLight, 10%); }
