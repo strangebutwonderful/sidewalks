@@ -1,0 +1,13 @@
+[data-geolocatable] {
+  @extend .btn-large;
+  @extend .btn-block;
+
+  &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="active"],
+  &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="error"],
+  &[data-geolocatable-state="active"] [data-geolocatable-state-label="thinking"],
+  &[data-geolocatable-state="active"] [data-geolocatable-state-label="error"],
+  &[data-geolocatable-state="error"] [data-geolocatable-state-label="active"],
+  &[data-geolocatable-state="error"] [data-geolocatable-state-label="thinking"] {
+    @extend .hidden;
+  }
+}

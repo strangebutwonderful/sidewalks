@@ -1,3 +1,11 @@
-<%= link_to nil, :class => 'hidden btn btn-large btn-block', :title => "See nearby only", :data => { :geolocatable => :geolocatable } do %>
-  <i class="fa fa-map-marker"></i> Nearby
+<%= link_to nil, :class => 'btn', :data => { :geolocatable => :geolocatable, :"geolocatable-state" => "thinking" }, :disabled => :disabled do %>
+  <span class="btn-label" data-geolocatable-state-label="thinking" >
+    <i class="fa fa-refresh fa-spin"></i> Thinking
+  </span>
+  <span class="btn-label" data-geolocatable-state-label="active" >
+    <i class="fa fa-map-marker"></i> Nearby
+  </span>
+  <span class="btn-label" data-geolocatable-state-label="error" >
+    <i class="fa fa-ban"></i> Could not determine location
+  </span>
 <% end %>

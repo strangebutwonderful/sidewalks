@@ -15,14 +15,15 @@ geolocatableSuccess = (position) ->
     uri.addQuery("latitude", latitude).addQuery("longitude", longitude)
     
     $elementObject.attr("href", uri.toString())
-    
-    $elementObject.removeClass('hidden')
+    $elementObject.attr('data-geolocatable-state', 'active');
+    $elementObject.attr('disabled', false);
 
 geolocatableError = (msg) ->
   $(geolocatableSelector).each (index, element) =>
     console.log 'geolocation failed ' + error
     $elementObject = $(element)
-    $elementObject.addClass('hidden')
+    $elementObject.attr('data-geolocatable-state', 'error');
+    $elementObject.attr('disabled', 'disabled');
 
 $ = jQuery
 
