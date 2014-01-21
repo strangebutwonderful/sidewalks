@@ -21,7 +21,7 @@ gem 'twitter', '~> 4.8'
 gem 'geocoder'
 gem 'newrelic_rpm'
 gem "leaflet-rails", "~> 0.7"
-gem 'capistrano', '~> 3.1.0'
+gem 'capistrano', '~> 3'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'

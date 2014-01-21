@@ -30,11 +30,12 @@ set :deploy_to, '/apps/sidewalks'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+# set :rvm, '2.0.0-p247'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# set :bundle_flags, "--deployment"
+set :bundle_flags, "--deployment"
 
 namespace :deploy do
 
@@ -51,10 +52,19 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      within release_path do
-        execute :rake, 'cache:clear'
-      end
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
+
+  task :configure_symlinks do
+    on roles(:all) do 
+      execute "cp #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+      execute "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    end
+  end
+
+before "deploy:assets:precompile", :configure_symlinks
 
 end
