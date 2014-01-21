@@ -6,12 +6,18 @@
   border: none;
   box-shadow: none;
 
-  &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="active"],
+  &[data-geolocatable-state="error"] [data-geolocatable-state-label="ready"],
+  &[data-geolocatable-state="error"] [data-geolocatable-state-label="thinking"],
+  &[data-geolocatable-state="error"] [data-geolocatable-state-label="waiting"],
+  &[data-geolocatable-state="ready"] [data-geolocatable-state-label="error"],
+  &[data-geolocatable-state="ready"] [data-geolocatable-state-label="thinking"],
+  &[data-geolocatable-state="ready"] [data-geolocatable-state-label="waiting"],
   &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="error"],
-  &[data-geolocatable-state="active"] [data-geolocatable-state-label="thinking"],
-  &[data-geolocatable-state="active"] [data-geolocatable-state-label="error"],
-  &[data-geolocatable-state="error"] [data-geolocatable-state-label="active"],
-  &[data-geolocatable-state="error"] [data-geolocatable-state-label="thinking"] {
+  &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="ready"],
+  &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="waiting"],
+  &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="error"],
+  &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="ready"],
+  &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="thinking"] {
     @extend .hidden;
   }
 }
