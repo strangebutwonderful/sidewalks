@@ -263,7 +263,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails (~> 1.1)
   capistrano-rvm
-  coffee-rails (~> 3.2.1)
+  coffee-rails (~> 3.2)
   compass-rails
   coveralls
   factory_girl_rails
@@ -287,7 +287,7 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify
   rolify
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.2)
   thin
   twitter (~> 4.8)
   uglifier (>= 1.0.3)
