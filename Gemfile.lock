@@ -42,6 +42,17 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
+    capistrano (3.1.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.0.0)
+      capistrano (>= 3.0.0.pre)
+    capistrano-rails (1.1.0)
+      capistrano (>= 3.0.0)
+      capistrano-bundler (>= 1.0.0)
+    capistrano-rvm (0.0.3)
+      capistrano
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.2.9)
@@ -133,6 +144,9 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.8.4)
     multipart-post (2.0.0)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     netrc (0.7.7)
     newrelic_rpm (3.7.1.182)
     oauth (0.4.7)
@@ -207,6 +221,10 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sshkit (1.3.0)
+      net-scp (>= 1.1.2)
+      net-ssh
+      term-ansicolor
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     thin (1.6.1)
@@ -239,6 +257,10 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 2)
   cancan
+  capistrano (~> 3.1.0)
+  capistrano-bundler
+  capistrano-rails (~> 1.1)
+  capistrano-rvm
   coffee-rails (~> 3.2.1)
   compass-rails
   coveralls
