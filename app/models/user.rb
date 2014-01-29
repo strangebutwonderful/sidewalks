@@ -19,8 +19,10 @@ class User < ActiveRecord::Base
 
   rolify
   
-  has_many :noises
   has_many :locations
+  has_many :noises
+  has_many :trails
+  has_many :users
   
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email

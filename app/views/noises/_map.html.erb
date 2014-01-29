@@ -4,6 +4,19 @@
     data-map 
     data-map-bounds="<%= JSON(noise.map.boundaries) %>"
     >
+
+    <% if current_user_last_trail %>
+      <div data-map-marker
+        data-map-marker-trail
+        data-map-marker-latitude="<%= current_user_last_trail.latitude %>" 
+        data-map-marker-longitude="<%= current_user_last_trail.longitude %>"
+      >
+        <p>
+          Your location
+        </p>
+      </div>
+    <% end %>
+
     <% noise.origins.each do |origin| %>
       <div data-map-marker
         data-map-marker-latitude="<%= origin.latitude %>" 
@@ -14,7 +27,9 @@
         </p>
       </div>
     <% end %>
+
     <div data-map-panel id="map-panel-noise-<%= noise.id %>">
     </div>
+
   </div>
 <% end %>

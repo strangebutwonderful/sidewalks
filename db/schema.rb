@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215204448) do
+ActiveRecord::Schema.define(:version => 20140129010855) do
 
   create_table "locations", :force => true do |t|
     t.integer  "user_id",                                                                :null => false
@@ -71,6 +71,18 @@ ActiveRecord::Schema.define(:version => 20131215204448) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "trails", :force => true do |t|
+    t.integer  "user_id",                                   :null => false
+    t.decimal  "latitude",   :precision => 11, :scale => 8, :null => false
+    t.decimal  "longitude",  :precision => 11, :scale => 8, :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "trails", ["latitude"], :name => "index_trails_on_latitude"
+  add_index "trails", ["longitude"], :name => "index_trails_on_longitude"
+  add_index "trails", ["user_id"], :name => "index_trails_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                         :null => false
