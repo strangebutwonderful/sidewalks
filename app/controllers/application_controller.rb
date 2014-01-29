@@ -34,8 +34,11 @@ class ApplicationController < ActionController::Base
   end
 
   def save_current_user_last_trail
-    if current_user 
-      Trail.update_recent(current_user, request_latitude, request_longitude)
+    begin 
+      Trail.update_recent(current_user, request_latitude, request_longitude) if current_user 
+    rescue Exception => exception
+      Rails.logger.error exception
+      nil
     end
   end
 
