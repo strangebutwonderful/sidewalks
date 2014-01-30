@@ -55,7 +55,7 @@ class Origin < ActiveRecord::Base
   end
 
   def self.where_latest
-    where("#{table_name}.created_at >= ?", 12.hours.ago).order("#{table_name}.created_at DESC")
+    where("#{table_name}.created_at >= ?", 12.hours.ago)
   end
 
   def self.where_nearby(params)
@@ -78,13 +78,6 @@ class Origin < ActiveRecord::Base
   end
 
   def self.where_search(params)
-    nearby_origin_ids = Origin.where_nearby(params)
-      .where_latest
-      .pluck(:id)
-
-    where_ids(nearby_origin_ids)
-      .order("#{table_name}.created_at DESC")
-      .joins(:noise).preload(:noise) # cuz nearby overrides includes
-      .joins(:user).preload(:user) # cuz nearby overrides includes
+    Origin.where_nearby(params)
   end  
 end

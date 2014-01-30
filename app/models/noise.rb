@@ -115,11 +115,17 @@ class Noise < ActiveRecord::Base
 
       # near(search_location, distance)
       noise_ids = Origin.where_search(params).where_latest.pluck(:noise_id)
-      Rails.logger.debug "Found origins " + noise_ids.to_s
       where_ids(noise_ids)
+      .order_by_ids(noise_ids)
     else
       scoped
     end
+  end
+
+  def self.order_by_ids(ids) 
+    order_by = ids.map { |id| "#{table_name}.id = #{id} DESC" }
+    order_by = order_by.join(", ")
+    order(order_by)
   end
 
   def self.where_latest
