@@ -43,7 +43,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_last_trail
-    @current_user_last_trail ||= current_user.trails.last
+    if current_user
+      @current_user_last_trail ||= current_user.trails.last
+    end
   end
 
   def import_noises
