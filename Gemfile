@@ -25,6 +25,7 @@ gem 'capistrano', '~> 3'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'
+gem "rails_autolink", '~> 1.1.5'
 group :development do
   gem 'annotate'
   gem 'better_errors'
