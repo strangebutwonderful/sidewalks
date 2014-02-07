@@ -1,4 +1,4 @@
-<%= render 'card', :noise => @noise %>
+<%= render 'card', :noise => @noise, :additional_noises_count => 0 %>
 
 <%= render 'map', :noise => @noise %>
 
@@ -6,7 +6,7 @@
 <%= render 'admin/origins/card_addendum', :noise => @noise %>  
 
 <% @noises.each do |noise| %>
-  <%= render 'card', :noise => noise %>
+  <%= render 'card', :noise => noise, :additional_noises_count => 0 %>
   <%= render 'admin/noises/card_addendum', :noise => noise %>
   <%= render 'admin/origins/card_addendum', :noise => noise %>  
 <% end %>
