@@ -1,11 +1,8 @@
 ## Sidewalks
 
 [![Code Climate](https://codeclimate.com/github/ajsharma/sidewalks.png)](https://codeclimate.com/github/ajsharma/sidewalks)
-
 [![Coverage Status](https://coveralls.io/repos/ajsharma/sidewalks/badge.png?branch=master)](https://coveralls.io/r/ajsharma/sidewalks?branch=master)
-
 [![Dependency Status](https://gemnasium.com/ajsharma/sidewalks.png)](https://gemnasium.com/ajsharma/sidewalks)
-
 [![Build Status](https://travis-ci.org/ajsharma/sidewalks.png?branch=master)](https://travis-ci.org/ajsharma/sidewalks)
 
 ## Ruby on Rails
