@@ -9,11 +9,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.where_search(params).all
-
-    @noises = @noises.group_by do |noise|
-      noise.user_id
-    end
+    @noises = Noise.where_grouped_search(params)
 
     respond_with @noises
   end

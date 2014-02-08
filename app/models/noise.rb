@@ -83,6 +83,16 @@ class Noise < ActiveRecord::Base
     end
   end
 
+  def self.where_grouped_search(params)
+    @noises = Noise.where_search(params).all
+
+    @noises = @noises.group_by do |noise|
+      noise.user_id
+    end
+
+    @noises
+  end
+
   def self.where_search(params)
     where_nearby(params)
     .where_latest
