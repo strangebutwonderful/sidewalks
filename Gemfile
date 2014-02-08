@@ -46,8 +46,4 @@ group :test do
   gem 'mocha', :require => false
 end
 group :production do 
-  gem 'rails_12factor' # requested by heroku to avoid deprecation errors on rails 3
 end
-
-# hosting
-gem 'heroku'
