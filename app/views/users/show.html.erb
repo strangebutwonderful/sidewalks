@@ -1,5 +1,5 @@
 <% @noises.each do |noise| %>
-  <%= render 'noises/card', :noise => noise %>
+  <%= render 'noises/card', :noise => noise, :additional_noises_count => 0 %>
   <%= render 'admin/noises/card_addendum', :noise => noise %>
   <%= render 'admin/origins/card_addendum', :noise => noise %>  
 <% end %>
