@@ -47,3 +47,7 @@ group :test do
 end
 group :production do 
 end
+
+# For backups
+gem 'backup', :require => false
+gem 'whenever', :require => false
