@@ -6,3 +6,7 @@ before_script:
   - psql -c 'create database sidewalks_test;' -U postgres
   - rake db:migrate
 bundler_args: --without development
+
+notifications:
+  hipchat:
+    secure: "G925WnKtN4yeDqmdNOFy7g6ieTPgj//sS1Os79gImXOCs2NxcWQu1sQCDqMvYczft4Xy1aPILtUk5cVpa1VhZx5HPZ8CYb7TC7hsrB5LyhbM5Q2u9c1UvUs9tPChkBSfu/yr5rBX0OrA9xv0t5W1wFhOUzGnVc7iHogq9wVLZW0="
