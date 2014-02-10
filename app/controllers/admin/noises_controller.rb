@@ -1,5 +1,4 @@
 class Admin::NoisesController < Admin::AdminController
-  before_filter :import_noises, :only => [:index, :nearby]
 
   respond_to :html, :json
 
