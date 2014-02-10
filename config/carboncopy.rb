@@ -1,6 +1,8 @@
 # cheat a little and use the Rails application configs to keep DRY
+RAILS_ENV = ENV['RAILS_ENV'] || 'development'
+
 require 'yaml'
-database_config = YAML.load_file(File.dirname(__FILE__) + '/../config/database.yml')['production']
+database_config = YAML.load_file(File.dirname(__FILE__) + '/../config/database.yml')[RAILS_ENV]
 application_config = YAML.load_file(File.dirname(__FILE__) + '/../config/application.yml')
 
 # encoding: utf-8
@@ -14,7 +16,7 @@ application_config = YAML.load_file(File.dirname(__FILE__) + '/../config/applica
 # For more information about Backup's components, see the documentation at:
 # http://meskyanichi.github.io/backup
 #
-Model.new(:carboncopy, 'Create a backup of database') do
+Backup::Model.new(:carboncopy, 'Create a backup of database') do
 
   ##
   # PostgreSQL [Database]
