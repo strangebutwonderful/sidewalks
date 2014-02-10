@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '~> 3.2'
 group :assets do
-  gem 'sass-rails',   '~> 3.2'
-  gem 'coffee-rails', '~> 3.2'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor'
 end
@@ -26,6 +26,7 @@ gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'
 gem "rails_autolink", '~> 1.1.5'
+gem 'whenever', :require => false
 group :development do
   gem 'annotate'
   gem 'better_errors'
@@ -49,5 +50,4 @@ group :production do
 end
 
 # For backups
-gem 'backup', :require => false
-gem 'whenever', :require => false
+# gem 'backup', '~> 4', :require => false
