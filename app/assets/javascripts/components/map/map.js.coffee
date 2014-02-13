@@ -64,5 +64,6 @@ $ ->
     # Set map boundaries
     map.fitBounds(getMapBounds($map))
     map.panTo(getMapCenter($map)) if getMapCenter($map)
+    map.setZoom(17)
 
     bindMapMarkers($map, map)
