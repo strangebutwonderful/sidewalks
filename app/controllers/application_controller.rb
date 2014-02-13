@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :google_universal_analytics_tracking_code
   helper_method :import_noises
   helper_method :request_geolocation
+  helper_method :request_coordinates
 
   private
 
@@ -32,6 +33,10 @@ class ApplicationController < ActionController::Base
     end
 
     @request_longitude
+  end
+
+  def request_coordinates
+    [request_latitude, request_longitude]
   end
 
   def request_geolocation

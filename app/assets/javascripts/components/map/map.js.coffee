@@ -33,6 +33,9 @@ getMapPanelId = ($map) ->
 getMapBounds = ($map) ->
   $map.data("map-bounds")
 
+getMapCenter = ($map) ->
+  $map.data("map-center")
+
 bindMapMarkers = ($map, map) ->
   # load map markers
   for markerElement in $map.find("[data-map-marker]")
@@ -60,5 +63,6 @@ $ ->
 
     # Set map boundaries
     map.fitBounds(getMapBounds($map))
+    map.panTo(getMapCenter($map)) if getMapCenter($map)
 
     bindMapMarkers($map, map)

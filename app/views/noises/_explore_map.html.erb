@@ -1,6 +1,7 @@
 <div id="explore-map"
   data-map 
   data-map-bounds="<%= JSON(@map.boundaries) %>"
+  data-map-center="<%= JSON(request_coordinates) %>"
   >
 
   <% @noises.each do |user_id, noises| %>
