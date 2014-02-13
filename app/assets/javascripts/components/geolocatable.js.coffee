@@ -1,7 +1,7 @@
 geolocatableSelector = 'a[data-geolocatable]';
 
 geolocatableSuccess = (position) ->
-  console.log position.coords
+  # console.log position.coords
 
   latitude = position.coords.latitude
   longitude = position.coords.longitude
@@ -26,7 +26,7 @@ geolocatableSuccess = (position) ->
 
 geolocatableError = (msg) ->
   $(geolocatableSelector).each (index, element) =>
-    console.log 'geolocation failed ' + error
+    # console.log 'geolocation failed ' + error
     $elementObject = $(element)
     $elementObject.attr('data-geolocatable-state', 'error');
     $elementObject.attr('disabled', 'disabled');

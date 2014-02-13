@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_last_trail
   helper_method :google_universal_analytics_tracking_code
   helper_method :import_noises
+  helper_method :request_geolocation
 
   private
 
@@ -13,9 +14,9 @@ class ApplicationController < ActionController::Base
     @request_latitude ||= params[:latitude]
 
     if Rails.env.development?
-      @request_latitude ||= 37.7833 # san francisco
+      @request_latitude ||= "37.7833" # san francisco
     elsif @request_latitude.blank? && request.location.present?
-      @request_latitude ||= request.location.latitude
+      @request_latitude ||= request.location.latitude.to_s
     end
 
     @request_latitude
@@ -25,12 +26,17 @@ class ApplicationController < ActionController::Base
     @request_longitude ||= params[:longitude]
     
     if Rails.env.development?
-      @request_longitude ||= -122.4167 # san francisco
+      @request_longitude ||= "-122.4167" # san francisco
     elsif @request_longitude.blank? && request.location.present?
-      @request_longitude ||= request.location.longitude
+      @request_longitude ||= request.location.longitude.to_s
     end
 
     @request_longitude
+  end
+
+  def request_geolocation
+    params[:latitude] = request_latitude
+    params[:longitude] = request_longitude
   end
 
   def save_current_user_last_trail

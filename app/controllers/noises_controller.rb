@@ -2,6 +2,7 @@ class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :nearby, :show]
   before_filter :save_current_user_last_trail, :only => [:index, :nearby]
   before_filter :verify_admin, :except => [:index, :nearby, :show]
+  before_filter :request_geolocation, :only => [:index]
 
   respond_to :html, :json
 
@@ -9,7 +10,15 @@ class NoisesController < ApplicationController
   # GET /noises.json
   def index
     @noises = Noise.where_grouped_search(params)
-    @map = Map.new([request_latitude, request_longitude])
+    @map = Map.new([[params[:latitude], params[:longitude]]])
+
+    @noises.each do |user_id, noises|
+      noises.each do |noise|
+        if noise.has_coordinates?
+          @map.add_coordinates(noise.coordinates)
+        end
+      end
+    end
 
     respond_with @noises
   end

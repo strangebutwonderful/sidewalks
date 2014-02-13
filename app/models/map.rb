@@ -8,9 +8,9 @@ class Map
 
   def add_coordinates(coordinates)
     self.coordinates ||= []
-    if coordinates
+    unless coordinates.blank?
       @boundaries = nil
-      self.coordinates << coordinates
+      self.coordinates += coordinates
     end
 
     self.coordinates
@@ -35,6 +35,8 @@ class Map
   end
 
   def stretch_north_east_boundary_latitude(latitude)
+    Rails.logger.debug latitude.class.to_s + " " + latitude.to_s
+    latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal
     if @north_east_boundary_latitude.nil?
       @north_east_boundary_latitude = latitude
     end
@@ -42,6 +44,7 @@ class Map
   end 
 
   def stretch_north_east_boundary_longitude(longitude)
+    longitude = BigDecimal.new(longitude) unless longitude.is_a? BigDecimal
     if @north_east_boundary_longitude.nil?
       @north_east_boundary_longitude = longitude
     end
@@ -49,6 +52,7 @@ class Map
   end 
 
   def stretch_south_west_boundary_latitude(latitude)
+    latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal
     if @south_west_boundary_latitude.nil?
       @south_west_boundary_latitude = latitude
     end
@@ -56,6 +60,7 @@ class Map
   end 
 
   def stretch_south_west_boundary_longitude(longitude)
+    longitude = BigDecimal.new(longitude) unless longitude.is_a? BigDecimal
     if @south_west_boundary_longitude.nil?
       @south_west_boundary_longitude = longitude
     end

@@ -10,13 +10,15 @@
           data-map-marker-latitude="<%= origin.latitude %>" 
           data-map-marker-longitude="<%= origin.longitude %>"
         >
-          <p>
-            <%= link_to "Directions to " + noise.user.name, origin.directions_url, :target => "_blank" %>
-          </p>
         </div>
       <% end %>
     <% end %>
   <% end %>
+
+  <div data-map-attribution>
+    Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors
+    <%= render '/shared/geolocatable' %>
+  </div>
 
   <div data-map-panel id="explore-map-panel">
   </div>
