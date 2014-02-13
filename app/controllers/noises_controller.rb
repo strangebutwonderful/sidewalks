@@ -9,6 +9,7 @@ class NoisesController < ApplicationController
   # GET /noises.json
   def index
     @noises = Noise.where_grouped_search(params)
+    @map = Map.new([request_latitude, request_longitude])
 
     respond_with @noises
   end

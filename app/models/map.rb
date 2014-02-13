@@ -3,12 +3,22 @@ class Map
   attr_reader :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
   def initialize(coordinates = nil)
-    self.coordinates = coordinates
+    self.add_coordinates(coordinates)
+  end
+
+  def add_coordinates(coordinates)
+    self.coordinates ||= []
+    if coordinates
+      @boundaries = nil
+      self.coordinates << coordinates
+    end
+
+    self.coordinates
   end
 
   def boundaries
     unless @boundaries
-      coordinates.each do |coordinate|
+      self.coordinates.each do |coordinate|
         self.stretch_north_east_boundary_latitude(coordinate[0])
         self.stretch_north_east_boundary_longitude(coordinate[1])
         self.stretch_south_west_boundary_latitude(coordinate[0])

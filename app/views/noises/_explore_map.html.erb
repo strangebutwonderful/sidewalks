@@ -1,0 +1,24 @@
+<div id="explore-map"
+  data-map 
+  data-map-bounds="<%= JSON(@map.boundaries) %>"
+  >
+
+  <% @noises.each do |user_id, noises| %>
+    <% noises.each do |noise| %>
+      <% noise.origins.each do |origin| %>
+        <div data-map-marker
+          data-map-marker-latitude="<%= origin.latitude %>" 
+          data-map-marker-longitude="<%= origin.longitude %>"
+        >
+          <p>
+            <%= link_to "Directions to " + noise.user.name, origin.directions_url, :target => "_blank" %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div data-map-panel id="explore-map-panel">
+  </div>
+
+</div>
