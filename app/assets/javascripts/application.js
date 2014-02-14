@@ -11,6 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery/jquery.js
+//= require leaflet
 //= require bootstrap
 //= require_tree .
-//= require leaflet

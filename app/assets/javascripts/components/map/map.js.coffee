@@ -77,11 +77,7 @@ markerClickHander = (event) ->
   # scroll to anchor if set
   if target.options.scrollTo
     scrollToSelector = '#' + target.options.scrollTo
-    scrollTo = $('#' + target.options.scrollTo)
-    if(scrollTo.length)
-      $("html,body").animate
-        scrollTop: scrollTo.offset().top
-      , 1000
+    App.Browser.scrollTo('#' + target.options.scrollTo)
 
 bindMapMarkers = ($map, map) ->
   # load map markers
