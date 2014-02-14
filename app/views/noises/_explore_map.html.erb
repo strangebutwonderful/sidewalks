@@ -6,15 +6,13 @@
   >
 
   <% @noises.each do |user_id, noises| %>
-    <% noises.each do |noise| %>
-      <% noise.origins.each do |origin| %>
-        <div data-map-marker
-          data-map-marker-latitude="<%= origin.latitude %>" 
-          data-map-marker-longitude="<%= origin.longitude %>"
-          data-map-marker-scrollto="noise-<%= noise.id %>"
-        >
-        </div>
-      <% end %>
+    <% noises.first.origins.each do |origin| %>
+      <div data-map-marker
+        data-map-marker-latitude="<%= origin.latitude %>" 
+        data-map-marker-longitude="<%= origin.longitude %>"
+        data-map-marker-scrollto="noise-<%= noises.first.id %>"
+      >
+      </div>
     <% end %>
   <% end %>
 
