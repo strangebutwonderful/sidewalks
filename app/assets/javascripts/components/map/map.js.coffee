@@ -13,6 +13,8 @@ mapOptions =
   maxZoom: 18
   scrollWheelZoom: false
 
+mapMarkerOptionNames = ['icon', 'clickable', 'draggable', 'keyboard', 'title', 'alt', 'zIndexOffset', 'opacity', 'riseOnHover', 'riseOffset']
+
 $ = jQuery
 
 getMapAttribution = ($map) ->
@@ -45,7 +47,12 @@ bindMapMarkers = ($map, map) ->
 
     latitude = $marker.data("map-marker-latitude")
     longitude = $marker.data("map-marker-longitude")
-    marker = L.marker([latitude, longitude]).addTo(map)
+    markerOptions = {}
+    for option in mapMarkerOptionNames
+      optionValue = $marker.data("map-marker-" + option)
+      markerOptions[option] = optionValue if optionValue?
+    
+    marker = L.marker([latitude, longitude], markerOptions).addTo(map)
     marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
 
 $ ->
@@ -64,7 +71,7 @@ $ ->
     # Set map boundaries
     map.fitBounds(getMapBounds($map))
     bindMapMarkers($map, map)
-    
+
     map.panTo(getMapCenter($map)) if getMapCenter($map)
     map.setZoom(17)
 

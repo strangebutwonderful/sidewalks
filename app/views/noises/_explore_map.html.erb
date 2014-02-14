@@ -10,10 +10,8 @@
         <div data-map-marker
           data-map-marker-latitude="<%= origin.latitude %>" 
           data-map-marker-longitude="<%= origin.longitude %>"
+          data-map-marker-clickable=false
         >
-          <%= link_to request.url, :data => { :"scroll-to" => "#noise-#{noise.id}" } do %>
-            See thing
-          <% end %>
         </div>
       <% end %>
     <% end %>
