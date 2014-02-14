@@ -46,7 +46,7 @@ mapOptionNames = [
   'zoomAnimationThreshold'
   'markerZoomAnimation'
 ]
-mapMarkerOptionNames = ['icon', 'clickable', 'draggable', 'keyboard', 'title', 'alt', 'zIndexOffset', 'opacity', 'riseOnHover', 'riseOffset']
+mapMarkerOptionNames = ['icon', 'clickable', 'draggable', 'keyboard', 'title', 'alt', 'zIndexOffset', 'opacity', 'riseOnHover', 'riseOffset', 'scrollTo']
 
 $ = jQuery
 
@@ -71,6 +71,18 @@ getMapBounds = ($map) ->
 getMapCenter = ($map) ->
   $map.data("map-center")
 
+markerClickHander = (event) ->
+  target = event.target
+
+  # scroll to anchor if set
+  if target.options.scrollTo
+    scrollToSelector = '#' + target.options.scrollTo
+    scrollTo = $('#' + target.options.scrollTo)
+    if(scrollTo.length)
+      $("html,body").animate
+        scrollTop: scrollTo.offset().top
+      , 1000
+
 bindMapMarkers = ($map, map) ->
   # load map markers
   for markerElement in $map.find("[data-map-marker]")
@@ -87,6 +99,7 @@ bindMapMarkers = ($map, map) ->
     
     marker = L.marker([latitude, longitude], markerOptions).addTo(map)
     marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
+    marker.on('click', markerClickHander)
 
 $ ->
   $("[data-map]").each (index, mapElement) ->
