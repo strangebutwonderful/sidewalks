@@ -128,4 +128,4 @@ $ ->
     setTimeout ( =>
       map.panTo(center, { animate: true, duration: 3 })
       map.setZoom(zoom)
-    ), 2000
+    ), 500
