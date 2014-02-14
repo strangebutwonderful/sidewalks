@@ -34,6 +34,26 @@ class Map
     @boundaries
   end
 
+  def centered_latitude
+    unless @centered_latitude
+      @centered_latitude = (self.boundaries[0][0] + self.boundaries[1][0]) / 2
+    end
+
+    @centered_latitude
+  end
+
+  def centered_longitude
+    unless @centered_longitude
+      @centered_longitude = (self.boundaries[0][1] + self.boundaries[1][1]) / 2
+    end
+
+    @centered_longitude
+  end
+
+  def center 
+    [centered_latitude, centered_longitude]
+  end
+
   def stretch_north_east_boundary_latitude(latitude)
     Rails.logger.debug latitude.class.to_s + " " + latitude.to_s
     latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal

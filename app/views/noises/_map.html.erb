@@ -3,16 +3,16 @@
   <div id="map-noise-<%= noise.id %>"
     data-map 
     data-map-bounds="<%= JSON(noise.map.boundaries) %>"
+    data-map-center="<%= JSON(noise.map.center) %>"
+    data-map-zoom="16"
     >
 
     <% noise.origins.each do |origin| %>
       <div data-map-marker
         data-map-marker-latitude="<%= origin.latitude %>" 
         data-map-marker-longitude="<%= origin.longitude %>"
+        data-map-marker-clickable=false
       >
-        <p>
-          <%= link_to "Directions to " + noise.user.name, origin.directions_url, :target => "_blank" %>
-        </p>
       </div>
     <% end %>
 
