@@ -8,11 +8,44 @@ Worth remembering: `$map` is the jquery DOM object, `map` is the Leaflet map obj
 ###
 
 # see http://leafletjs.com/reference.html#map-options
-mapOptions =
-  dragging: false
-  maxZoom: 18
-  scrollWheelZoom: false
+# mapOptions =
+#   dragging: false
+#   maxZoom: 18
+#   scrollWheelZoom: false
 
+mapOptionNames = [
+  'center'
+  'zoom'
+  'layers'
+  'minZoom'
+  'maxZoom'
+  'maxBounds'
+  'crs'
+  'dragging'
+  'touchZoom'
+  'scrollWheelZoom'
+  'doubleClickZoom'
+  'boxZoom'
+  'tap'
+  'tapTolerance'
+  'trackResize'
+  'worldCopyJump'
+  'closePopupOnClick'
+  'bounceAtZoomLimits'
+  'keyboard'
+  'keyboardPanOffset'
+  'keyboardZoomOffset'
+  'inertia'
+  'inertiaDeceleration'
+  'inertiaMaxSpeed'
+  'inertiaThreshold'
+  'zoomControl'
+  'attributionControl'
+  'fadeAnimation'
+  'zoomAnimation'
+  'zoomAnimationThreshold'
+  'markerZoomAnimation'
+]
 mapMarkerOptionNames = ['icon', 'clickable', 'draggable', 'keyboard', 'title', 'alt', 'zIndexOffset', 'opacity', 'riseOnHover', 'riseOffset']
 
 $ = jQuery
@@ -49,7 +82,7 @@ bindMapMarkers = ($map, map) ->
     longitude = $marker.data("map-marker-longitude")
     markerOptions = {}
     for option in mapMarkerOptionNames
-      optionValue = $marker.data("map-marker-" + option)
+      optionValue = $marker.data("map-marker-" + option.toLowerCase())
       markerOptions[option] = optionValue if optionValue?
     
     marker = L.marker([latitude, longitude], markerOptions).addTo(map)
@@ -60,7 +93,13 @@ $ ->
     $map = $(mapElement)
     # console.log $map
     
+    mapOptions = {}
+    for option in mapOptionNames
+      optionValue = $map.data("map-" + option.toLowerCase())
+      mapOptions[option] = optionValue if optionValue?
+
     # Assign map panel div
+    console.log mapOptions
     map = L.map(getMapPanelId($map), mapOptions)
 
     # Set source of map layers pngs
@@ -69,9 +108,5 @@ $ ->
     }).addTo(map)
 
     # Set map boundaries
-    map.fitBounds(getMapBounds($map))
+    # map.fitBounds(getMapBounds($map))
     bindMapMarkers($map, map)
-
-    map.panTo(getMapCenter($map)) if getMapCenter($map)
-    map.setZoom(17)
-
