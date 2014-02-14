@@ -74,6 +74,9 @@ getMapCenter = ($map) ->
 markerClickHander = (event) ->
   target = event.target
 
+  # center map to marker
+  target._map.panTo(target.getLatLng(), { animate: true, duration: 2 })
+
   # scroll to anchor if set
   if target.options.scrollTo
     scrollToSelector = '#' + target.options.scrollTo
