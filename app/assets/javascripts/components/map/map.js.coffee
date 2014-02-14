@@ -100,6 +100,8 @@ $ ->
 
     # Assign map panel div
     map = L.map(getMapPanelId($map), mapOptions)
+    center = map.getCenter()
+    zoom = map.getZoom()
 
     # Set source of map layers pngs
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -110,8 +112,7 @@ $ ->
     map.fitBounds(getMapBounds($map))
     bindMapMarkers($map, map)
 
-    
     setTimeout ( =>
-      map.panTo(getMapCenter($map), { animate: true, duration: 3 })
-      map.setZoom(map.getZoom() + 4)
+      map.panTo(center, { animate: true, duration: 3 })
+      map.setZoom(zoom)
     ), 2000
