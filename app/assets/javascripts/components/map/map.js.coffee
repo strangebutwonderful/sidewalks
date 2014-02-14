@@ -109,7 +109,7 @@ $ ->
     }).addTo(map)
 
     # Set map boundaries
-    map.fitBounds(getMapBounds($map))
+    # map.fitBounds(getMapBounds($map))
     bindMapMarkers($map, map)
 
     setTimeout ( =>
