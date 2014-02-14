@@ -99,7 +99,6 @@ $ ->
       mapOptions[option] = optionValue if optionValue?
 
     # Assign map panel div
-    console.log mapOptions
     map = L.map(getMapPanelId($map), mapOptions)
 
     # Set source of map layers pngs
@@ -108,5 +107,11 @@ $ ->
     }).addTo(map)
 
     # Set map boundaries
-    # map.fitBounds(getMapBounds($map))
+    map.fitBounds(getMapBounds($map))
     bindMapMarkers($map, map)
+
+    
+    setTimeout ( =>
+      map.panTo(getMapCenter($map), { animate: true, duration: 3 })
+      map.setZoom(map.getZoom() + 4)
+    ), 2000
