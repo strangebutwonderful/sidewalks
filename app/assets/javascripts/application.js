@@ -12,5 +12,6 @@
 //
 //= require jquery/jquery.js
 //= require leaflet
+//= require uri/uri.js
 //= require bootstrap
 //= require_tree .
