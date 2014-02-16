@@ -98,18 +98,20 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_search_nearest(params)
-    params[:created_at] ||= 7.days.ago
-    params[:distance] = 0.05
+    search_params = params.clone
+    search_params[:created_at] ||= 7.days.ago
+    search_params[:distance] = 0.05
 
-    where_nearby(params)
+    where_nearby(search_params)
     .joins_origins
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.where_search_latest(params)
-    params[:created_at] ||= 12.hours.ago
+    search_params = params.clone
+    search_params[:created_at] ||= 12.hours.ago
 
-    where_nearby(params)
+    where_nearby(search_params)
     .where_latest
     .joins_origins
     .joins(:user).preload(:user) # cuz nearby overrides includes
@@ -131,7 +133,6 @@ class Noise < ActiveRecord::Base
     location = params[:location]
     latitude = params[:latitude]
     longitude = params[:longitude]
-    distance = params[:distance] || 1
 
     if latitude && longitude
       search_location = [latitude, longitude]
