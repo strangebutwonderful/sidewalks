@@ -3,6 +3,8 @@
   <div id="map-user-<%= user.id %>"
     data-map 
     data-map-bounds="<%= JSON(user.map.boundaries) %>"
+    data-map-center="<%= JSON(user.map.center) %>"
+    data-map-zoom="16"
     >
     <% user.locations.each do |location| %>
       <div data-map-marker
