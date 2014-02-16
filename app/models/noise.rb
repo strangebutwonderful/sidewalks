@@ -170,11 +170,17 @@ class Noise < ActiveRecord::Base
     where_since(12.hours.ago)
   end
 
-  def self.where_authored_by_user_since(user_id, noise_id)
-    where(:user_id => user_id).
-    where("#{table_name}.id < ?", noise_id)
+  def self.where_authored_by_user_before(user_id, time)
+    where(:user_id => user_id)
+    .where("#{table_name}.created_at < ?", time)
+    .order("#{table_name}.created_at DESC")
   end
 
+  def self.where_authored_by_user_since(user_id, time)
+    where(:user_id => user_id)
+    .where("#{table_name}.created_at > ?", time)
+    .order("#{table_name}.created_at ASC")
+  end
 
   def self.with_nearby_origins(params)
     joins(:origins)
