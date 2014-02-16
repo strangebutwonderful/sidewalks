@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 every 5.minutes do 
-  rake "import:all"
+  rake "import"
 end
 
 # every 1.day, :at => '4:30 am' do
