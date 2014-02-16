@@ -55,7 +55,6 @@ class Map
   end
 
   def stretch_north_east_boundary_latitude(latitude)
-    Rails.logger.debug latitude.class.to_s + " " + latitude.to_s
     latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal
     if @north_east_boundary_latitude.nil?
       @north_east_boundary_latitude = latitude
