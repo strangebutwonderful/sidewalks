@@ -38,8 +38,7 @@ class Admin::LocationsController < Admin::AdminController
     @location = Location.new(params[:location])
 
     if @location.save
-      noises_updated = @location.backtrack_user_noises
-      flash[:notice] = "Location was successfully created and #{noises_updated} noise(s) were updated"
+      flash[:notice] = "Location was successfully created"
     end
 
     respond_with(:admin, @location)
