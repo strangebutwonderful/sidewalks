@@ -5,7 +5,7 @@ class Admin::NoisesController < Admin::AdminController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.where_search(params).all
+    @noises = Noise.where_search(params)
 
     respond_with(:admin, @noises)
   end

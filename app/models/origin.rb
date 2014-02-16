@@ -54,8 +54,12 @@ class Origin < ActiveRecord::Base
     end
   end
 
+  def self.where_since(time)
+    where("#{table_name}.created_at >= ?", time)
+  end
+
   def self.where_latest
-    where("#{table_name}.created_at >= ?", 12.hours.ago)
+    where_since(12.hours.ago)
   end
 
   def self.where_nearby(params)
