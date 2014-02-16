@@ -55,4 +55,15 @@ class Location < ActiveRecord::Base
   def to_origin 
     Origin.new(latitude: self.latitude, longitude: self.longitude)
   end
+
+  def backtrack_user_noises
+    success_count = 0
+
+    self.user.noises.each do |noise|
+      success_count += noise.import_locations(user.locations)
+    end
+
+    success_count
+  end
+
 end

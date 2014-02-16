@@ -78,9 +78,14 @@ class Noise < ActiveRecord::Base
   def import_locations(locations)
     # TODO: get tweet's embedded coordinates
 
+    success_count = 0
+
     locations.each do |location|
       self.origins << location.to_origin
+      success_count = success_count + 1
     end
+
+    success_count
   end
 
   def self.where_grouped_search(params)
