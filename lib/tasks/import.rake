@@ -5,7 +5,6 @@ namespace :import do
     TwitterNoiseImporter.import_latest_from_sidewalks_twitter
   end
 
-  task :all => [:twitter]
-
 end
 
+task :import => ['import:twitter']

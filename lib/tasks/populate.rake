@@ -8,6 +8,6 @@ namespace :populate do
     end
   end
 
-  task :all => [:noises]
-
 end
+
+task :populate => ['populate:noises']
