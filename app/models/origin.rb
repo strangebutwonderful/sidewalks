@@ -55,7 +55,7 @@ class Origin < ActiveRecord::Base
   end
 
   def self.where_since(time)
-    where("#{table_name}.created_at >= ?", time)
+    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
   end
 
   def self.where_latest

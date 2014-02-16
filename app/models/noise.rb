@@ -143,7 +143,6 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      # near(search_location, distance)
       noise_ids = Origin.where_search(params).where_since(params[:created_at]).pluck(:noise_id)
       where_ids(noise_ids)
       .order_by_ids(noise_ids)
@@ -159,11 +158,11 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_since(time)
-    where("#{table_name}.created_at >= ?", time)
+    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
   end
 
   def self.where_latest
-    where_since(12.hours.ago).order("#{table_name}.created_at DESC")
+    where_since(12.hours.ago)
   end
 
   def self.where_authored_by_user_since(user_id, noise_id)
