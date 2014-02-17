@@ -4,6 +4,11 @@ $ = jQuery
 # L = Leaflet
 
 class App.Map
+  ### 
+  public static variables
+  ###
+  @selector = "[data-map]"
+
   ###
   private static variables
   ### 
@@ -169,5 +174,5 @@ Initialize atlases on document ready
 ###
 
 $ ->
-  $("[data-map]").each (index, mapElement) ->
+  $(App.Map.selector).each (index, mapElement) ->
     new App.Map(mapElement)
