@@ -1,9 +1,9 @@
 root = exports ? this # root and window are same thing in browser
-root.App ?= {}
+root.App.Maps ?= {}
 $ = jQuery
 # L = Leaflet
 
-class App.Map
+class App.Maps.Map
   ### 
   public static variables
   ###
@@ -130,7 +130,7 @@ class App.Map
     window.location = uri.toString()
 
   bindMapEvents: () ->
-    @_map.on('dragend', @mapMoveEndHandler)
+    # @_map.on('dragend', @mapMoveEndHandler)
 
   markerClickHander: (event) ->
     target = event.target
@@ -153,7 +153,7 @@ class App.Map
       latitude = $marker.data("map-marker-latitude")
       longitude = $marker.data("map-marker-longitude")
       markerOptions = {}
-      for option in App.Map._mapMarkerOptionNames
+      for option in App.Maps.Map._mapMarkerOptionNames
         optionValue = $marker.data("map-marker-" + option.toLowerCase())
         markerOptions[option] = optionValue if optionValue?
       
@@ -163,7 +163,7 @@ class App.Map
 
   mapOptions: ->
     mapOptions = {}
-    for option in App.Map._mapOptionNames
+    for option in App.Maps.Map._mapOptionNames
       optionValue = @_$map.data("map-" + option.toLowerCase())
       mapOptions[option] = optionValue if optionValue?
 
@@ -174,5 +174,5 @@ Initialize atlases on document ready
 ###
 
 $ ->
-  $(App.Map.selector).each (index, mapElement) ->
-    new App.Map(mapElement)
+  $(App.Maps.Map.selector).each (index, mapElement) ->
+    new App.Maps.Map(mapElement)
