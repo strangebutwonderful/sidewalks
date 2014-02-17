@@ -172,14 +172,14 @@ class Noise < ActiveRecord::Base
 
   def self.where_authored_by_user_before(user_id, time)
     where(:user_id => user_id)
-    .where("#{table_name}.created_at < ?", time)
-    .order("#{table_name}.created_at DESC")
+      .where("#{table_name}.created_at < ?", time)
+      .order("#{table_name}.created_at DESC")
   end
 
   def self.where_authored_by_user_since(user_id, time)
     where(:user_id => user_id)
-    .where("#{table_name}.created_at > ?", time)
-    .order("#{table_name}.created_at ASC")
+      .where("#{table_name}.created_at > ?", time)
+      .order("#{table_name}.created_at ASC")
   end
 
   def self.with_nearby_origins(params)
