@@ -21,6 +21,7 @@
   <% @user.locations.each do |location| %>
     <div class="docket">
       <p>
+        <%= link_to location.id, admin_location_path(location) %>
         <%= location.full_street_address %>
         (
           <%= location.latitude %>
