@@ -1,6 +1,5 @@
 class Map
-  attr_accessor :coordinates
-  attr_reader :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
+  attr_accessor :coordinates, :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
   def initialize(coordinates = nil)
     self.add_coordinates(coordinates)
@@ -8,74 +7,49 @@ class Map
 
   def add_coordinates(coordinates)
     self.coordinates ||= []
+    
     unless coordinates.blank?
       @boundaries = nil
       self.coordinates += coordinates
+
+      self.coordinates.each do |coordinate|
+        self.south_west_boundary_latitude  = evaluate_boundary(self.south_west_boundary_latitude,  coordinate[0]).min
+        self.south_west_boundary_longitude = evaluate_boundary(self.south_west_boundary_longitude, coordinate[1]).min
+        self.north_east_boundary_latitude  = evaluate_boundary(self.north_east_boundary_latitude,  coordinate[0]).max
+        self.north_east_boundary_longitude = evaluate_boundary(self.north_east_boundary_longitude, coordinate[1]).max
+      end      
     end
 
     self.coordinates
   end
 
   def boundaries
-    unless @boundaries
-      self.coordinates.each do |coordinate|
-        self.stretch_north_east_boundary_latitude(coordinate[0])
-        self.stretch_north_east_boundary_longitude(coordinate[1])
-        self.stretch_south_west_boundary_latitude(coordinate[0])
-        self.stretch_south_west_boundary_longitude(coordinate[1])
-      end
-
-      @boundaries = [
-        [self.south_west_boundary_latitude, self.south_west_boundary_longitude],
-        [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
-      ]
-    end
-
-    @boundaries
+    @boundaries = [
+      [self.south_west_boundary_latitude, self.south_west_boundary_longitude],
+      [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
+    ] unless @boundaries
   end
 
   def centered_latitude
-    @centered_latitude = (self.boundaries[0][0] + self.boundaries[1][0]) / 2 unless @centered_latitude
+    @centered_latitude = (self.south_west_boundary_latitude + self.north_east_boundary_latitude) / 2 unless @centered_latitude
   end
 
   def centered_longitude    
-    @centered_longitude = (self.boundaries[0][1] + self.boundaries[1][1]) / 2 unless @centered_longitude
+    @centered_longitude = (self.south_west_boundary_longitude + self.north_east_boundary_longitude) / 2 unless @centered_longitude
   end
 
   def center 
     [centered_latitude, centered_longitude]
   end
 
-  def stretch_north_east_boundary_latitude(latitude)
-    latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal
-    if @north_east_boundary_latitude.nil?
-      @north_east_boundary_latitude = latitude
-    end
-    @north_east_boundary_latitude = [@north_east_boundary_latitude, latitude].max
-  end 
+  private 
 
-  def stretch_north_east_boundary_longitude(longitude)
-    longitude = BigDecimal.new(longitude) unless longitude.is_a? BigDecimal
-    if @north_east_boundary_longitude.nil?
-      @north_east_boundary_longitude = longitude
+  def evaluate_boundary(boundary_coordinate, coordinate)
+    coordinate = BigDecimal.new(coordinate) unless coordinate.is_a? BigDecimal
+    if boundary_coordinate.nil?
+      boundary_coordinate = coordinate
     end
-    @north_east_boundary_longitude = [@north_east_boundary_longitude, longitude].max
-  end 
-
-  def stretch_south_west_boundary_latitude(latitude)
-    latitude = BigDecimal.new(latitude) unless latitude.is_a? BigDecimal
-    if @south_west_boundary_latitude.nil?
-      @south_west_boundary_latitude = latitude
-    end
-    @south_west_boundary_latitude = [@south_west_boundary_latitude, latitude].min
-  end 
-
-  def stretch_south_west_boundary_longitude(longitude)
-    longitude = BigDecimal.new(longitude) unless longitude.is_a? BigDecimal
-    if @south_west_boundary_longitude.nil?
-      @south_west_boundary_longitude = longitude
-    end
-    @south_west_boundary_longitude = [@south_west_boundary_longitude, longitude].min
-  end 
+    [boundary_coordinate, coordinate]
+  end
 
 end
