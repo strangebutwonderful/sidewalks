@@ -7,7 +7,6 @@ Sidewalks::Application.routes.draw do
   match '/welcome' => 'home#welcome'
 
   resources :noises, :only => [:index, :show]
-  resources :origins, :only => [:index, :show]
   resources :users, :only => [:show, :edit, :update]
 
   namespace :admin do

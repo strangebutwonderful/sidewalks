@@ -5,7 +5,6 @@
         <%= origin.latitude %>,
         <%= origin.longitude %>
         <% if can? :update, origin %>
-          <%= link_to 'Show', origin_path(origin) %> 
           <%= link_to 'Edit', edit_admin_noise_origin_path(noise, origin) %> 
         <% end %>
       </p>
