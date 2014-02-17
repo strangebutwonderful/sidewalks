@@ -1,4 +1,3 @@
-#= require jquery
 #= require ./map
 
 root = exports ? this # root and window are same thing in browser

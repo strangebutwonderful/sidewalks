@@ -49,20 +49,6 @@ class App.Maps.Map
     'markerZoomAnimation'
   ]
 
-  @_mapMarkerOptionNames: [
-    'icon'
-    'clickable'
-    'draggable'
-    'keyboard'
-    'title'
-    'alt'
-    'zIndexOffset'
-    'opacity'
-    'riseOnHover'
-    'riseOffset'
-    'scrollTo'
-  ]
-
   ###
   private variables
   ###
@@ -134,34 +120,10 @@ class App.Maps.Map
   bindMapEvents: () ->
     # @_map.on('dragend', @mapMoveEndHandler)
 
-  markerClickHander: (event) ->
-    target = event.target
-
-    # center map to marker
-    target._map.panTo(target.getLatLng(), { animate: true, duration: 2 })
-
-    # scroll to anchor if set
-    if target.options.scrollTo
-      scrollToSelector = '#' + target.options.scrollTo
-      App.Browser.scrollTo('#' + target.options.scrollTo)
-
   bindMapMarkers: () ->
     # load map markers
     for markerElement in @_$map.find("[data-map-marker]")
-      # console.log markerElement
-      $marker = $(markerElement)
-      $markerHtml = $marker.html()
-
-      latitude = $marker.data("map-marker-latitude")
-      longitude = $marker.data("map-marker-longitude")
-      markerOptions = {}
-      for option in App.Maps.Map._mapMarkerOptionNames
-        optionValue = $marker.data("map-marker-" + option.toLowerCase())
-        markerOptions[option] = optionValue if optionValue?
-      
-      marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
-      marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
-      marker.on('click', @markerClickHander)
+      new App.Maps.Marker(markerElement, @_map)
 
   mapOptions: ->
     mapOptions = {}
