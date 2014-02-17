@@ -35,19 +35,11 @@ class Map
   end
 
   def centered_latitude
-    unless @centered_latitude
-      @centered_latitude = (self.boundaries[0][0] + self.boundaries[1][0]) / 2
-    end
-
-    @centered_latitude
+    @centered_latitude = (self.boundaries[0][0] + self.boundaries[1][0]) / 2 unless @centered_latitude
   end
 
-  def centered_longitude
-    unless @centered_longitude
-      @centered_longitude = (self.boundaries[0][1] + self.boundaries[1][1]) / 2
-    end
-
-    @centered_longitude
+  def centered_longitude    
+    @centered_longitude = (self.boundaries[0][1] + self.boundaries[1][1]) / 2 unless @centered_longitude
   end
 
   def center 
