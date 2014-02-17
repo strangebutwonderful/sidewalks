@@ -11,18 +11,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def request_coordinate(parameter)
-    _request_coordinate ||= params[:latitude]
-
-    if Rails.env.development?
-      _request_coordinate ||= "37.7833" # san francisco
-    elsif _request_coordinate.blank? && request.location.present?
-      _request_coordinate ||= request.location.latitude.to_s
-    end
-
-    _request_coordinate
-  end
-
   def request_latitude
     @request_latitude ||= params[:latitude]
 
