@@ -7,6 +7,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor'
 end
+gem 'jquery-rails', '~> 2.1'
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2'
 gem "font-awesome-sass", "~> 4"
