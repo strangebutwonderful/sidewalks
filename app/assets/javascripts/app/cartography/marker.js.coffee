@@ -39,19 +39,19 @@ class App.Cartography.Marker
 
   constructor: (markerElement, leafletMap) ->
     @_map = leafletMap
-    $marker = $(markerElement)
-    $markerHtml = $marker.html()
+    @_$marker = $(markerElement)
+    $markerHtml = @_$marker.html()
 
-    latitude = $marker.data("cartography-map-marker-latitude")
-    longitude = $marker.data("cartography-map-marker-longitude")
+    latitude = @_$marker.data("cartography-map-marker-latitude")
+    longitude = @_$marker.data("cartography-map-marker-longitude")
     markerOptions = {}
     for option in App.Cartography.Marker._mapMarkerOptionNames
-      optionValue = $marker.data("cartography-map-marker-" + option.toLowerCase())
+      optionValue = @_$marker.data("cartography-map-marker-" + option.toLowerCase())
       markerOptions[option] = optionValue if optionValue?
     
-    marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
-    marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
-    marker.on('click', @markerClickHander)
+    @_marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
+    @_marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
+    @_marker.on('click', @markerClickHander)
 
   markerClickHander: (event) ->
     target = event.target
