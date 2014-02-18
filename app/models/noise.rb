@@ -105,7 +105,7 @@ class Noise < ActiveRecord::Base
   def self.where_search_nearest(params)
     search_params = params.clone
     search_params[:created_at] ||= 7.days.ago
-    search_params[:distance] = 0.05
+    search_params[:distance] = 0.025
 
     where_nearby(search_params)
     .joins_origins
