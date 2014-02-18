@@ -1,8 +1,9 @@
 class Map
   attr_accessor :coordinates, :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
-  def initialize(coordinates = nil)
+  def initialize(coordinates = nil, center = nil)
     self.add_coordinates(coordinates)
+    self.center = center
   end
 
   def add_coordinates(coordinates)
@@ -38,8 +39,12 @@ class Map
     @centered_longitude = (self.south_west_boundary_longitude + self.north_east_boundary_longitude) / 2 unless @centered_longitude
   end
 
+  def center=(value)
+    @center = value
+  end
+
   def center 
-    [centered_latitude, centered_longitude]
+    @center ||= [centered_latitude, centered_longitude]
   end
 
   private 
