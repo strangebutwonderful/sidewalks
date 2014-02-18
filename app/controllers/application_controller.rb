@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
-  include Geography
+  include Cartography
 
   protect_from_forgery
 

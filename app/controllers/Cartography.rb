@@ -1,4 +1,4 @@
-module Geography
+module Cartography
 
   def request_latitude
     @request_latitude ||= params[:latitude]
