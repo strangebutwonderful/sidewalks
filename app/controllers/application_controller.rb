@@ -12,24 +12,20 @@ class ApplicationController < ActionController::Base
   private
 
   def request_latitude
-    @request_latitude ||= params[:latitude]
+    @request_latitude ||= params[:latitude] || request.location.latitude.to_s
 
-    if Rails.env.development?
+    if @request_latitude.blank? && Rails.env.development?
       @request_latitude ||= "37.7833" # san francisco
-    elsif @request_latitude.blank? && request.location.present?
-      @request_latitude ||= request.location.latitude.to_s
     end
 
     @request_latitude
   end
 
   def request_longitude
-    @request_longitude ||= params[:longitude]
+    @request_longitude ||= params[:longitude] || request.location.longitude.to_s
     
-    if Rails.env.development?
+    if @request_longitude.blank? && Rails.env.development?
       @request_longitude ||= "-122.4167" # san francisco
-    elsif @request_longitude.blank? && request.location.present?
-      @request_longitude ||= request.location.longitude.to_s
     end
 
     @request_longitude
