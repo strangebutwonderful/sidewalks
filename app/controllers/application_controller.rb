@@ -1,44 +1,13 @@
 class ApplicationController < ActionController::Base
   include Authentication
+  include Geography
 
   protect_from_forgery
 
   helper_method :current_user_last_trail
   helper_method :google_universal_analytics_tracking_code
   helper_method :import_noises
-  helper_method :request_geolocation
-  helper_method :request_coordinates
-
   private
-
-  def request_latitude
-    @request_latitude ||= params[:latitude] || request.location.latitude.to_s
-
-    if @request_latitude.blank? && Rails.env.development?
-      @request_latitude ||= "37.7833" # san francisco
-    end
-
-    @request_latitude
-  end
-
-  def request_longitude
-    @request_longitude ||= params[:longitude] || request.location.longitude.to_s
-    
-    if @request_longitude.blank? && Rails.env.development?
-      @request_longitude ||= "-122.4167" # san francisco
-    end
-
-    @request_longitude
-  end
-
-  def request_coordinates
-    [request_latitude, request_longitude]
-  end
-
-  def request_geolocation
-    params[:latitude] = request_latitude
-    params[:longitude] = request_longitude
-  end
 
   def save_current_user_last_trail
     begin 
