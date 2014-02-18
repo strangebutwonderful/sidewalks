@@ -16,3 +16,12 @@ class App.Browser
       $("html, body").animate # body required for older browsers -_-
         scrollTop: $target.offset().top
       , 1000
+
+  ### 
+  Smoothly scroll the browser to the given element
+  @example App.Browser.scrollTo("myDiv")
+  @param anchorId id (without #) of the targer scroll to
+  @see scrollTo
+  ### 
+  @scrollToAnchor: (anchorId) ->
+    @scrollTo('#' + anchorId)

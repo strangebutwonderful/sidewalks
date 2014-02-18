@@ -61,5 +61,4 @@ class App.Maps.Marker
 
     # scroll to anchor if set
     if target.options.scrollTo
-      scrollToSelector = '#' + target.options.scrollTo
-      App.Browser.scrollTo('#' + target.options.scrollTo)
+      App.Browser.scrollToAnchor(target.options.scrollTo)
