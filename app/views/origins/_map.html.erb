@@ -1,12 +1,12 @@
 <div id="map-origin-<%= origin.id %>"
-  data-map 
-  data-map-bounds="<%= JSON(origin.map.boundaries) %>"
+  data-cartography-map 
+  data-cartography-map-bounds="<%= JSON(origin.map.boundaries) %>"
   >
-  <div data-map-marker
-    data-map-marker-latitude="<%= origin.latitude %>" 
-    data-map-marker-longitude="<%= origin.longitude %>"
+  <div data-cartography-map-marker
+    data-cartography-map-marker-latitude="<%= origin.latitude %>" 
+    data-cartography-map-marker-longitude="<%= origin.longitude %>"
   >
   </div>
-  <div data-map-panel id="map-panel-origin-<%= origin.id %>">
+  <div data-cartography-map-panel id="map-panel-origin-<%= origin.id %>">
   </div>
 </div>

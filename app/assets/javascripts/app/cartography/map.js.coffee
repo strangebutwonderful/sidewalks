@@ -9,7 +9,7 @@ class App.Cartography.Map
   ### 
   public static variables
   ###
-  @selector = "[data-map]"
+  @selector = "[data-cartography-map]"
 
   ###
   private static variables
@@ -83,7 +83,7 @@ class App.Cartography.Map
   getMapAttribution: () ->
     attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     
-    mapAttributionElement = @_$map.find('[data-map-attribution]').eq(0)
+    mapAttributionElement = @_$map.find('[data-cartography-map-attribution]').eq(0)
     attributionHtml = $(mapAttributionElement).html()
     unless $.trim(attributionHtml).length <= 0
       attribution = attributionHtml
@@ -92,14 +92,14 @@ class App.Cartography.Map
 
   getMapPanelId: () ->
     # TODO: create an element if one doesn't exist
-    mapPanelElement = @_$map.find('[data-map-panel]').eq(0)
+    mapPanelElement = @_$map.find('[data-cartography-map-panel]').eq(0)
     mapPanelElement.attr('id')
 
   getMapBounds: () ->
-    @_$map.data("map-bounds")
+    @_$map.data("cartography-map-bounds")
 
   getMapCenter:() ->
-    @_$map.data("map-center")
+    @_$map.data("cartography-map-center")
 
   mapMoveEndHandler:(event) =>
     center = @_map.getCenter()
@@ -122,13 +122,13 @@ class App.Cartography.Map
 
   bindMapMarkers: () ->
     # load map markers
-    for markerElement in @_$map.find("[data-map-marker]")
+    for markerElement in @_$map.find("[data-cartography-map-marker]")
       new App.Cartography.Marker(markerElement, @_map)
 
   mapOptions: ->
     mapOptions = {}
     for option in App.Cartography.Map._mapOptionNames
-      optionValue = @_$map.data("map-" + option.toLowerCase())
+      optionValue = @_$map.data("cartography-map-" + option.toLowerCase())
       mapOptions[option] = optionValue if optionValue?
 
     mapOptions

@@ -1,27 +1,27 @@
 <div id="explore-map"
-  data-explore-map
-  data-map-bounds="<%= JSON(@map.boundaries) %>"
-  data-map-center="<%= JSON(request_coordinates) %>"
-  data-map-zoom="15"
+  data-cartography-exploremap
+  data-cartography-map-bounds="<%= JSON(@map.boundaries) %>"
+  data-cartography-map-center="<%= JSON(request_coordinates) %>"
+  data-cartography-map-zoom="15"
   >
 
   <% @noises.each do |user_id, noises| %>
     <% noises.first.origins.each do |origin| %>
-      <div data-map-marker
-        data-map-marker-latitude="<%= origin.latitude %>" 
-        data-map-marker-longitude="<%= origin.longitude %>"
-        data-map-marker-scrollto="noise-<%= noises.first.id %>"
+      <div data-cartography-map-marker
+        data-cartography-map-marker-latitude="<%= origin.latitude %>" 
+        data-cartography-map-marker-longitude="<%= origin.longitude %>"
+        data-cartography-map-marker-scrollto="noise-<%= noises.first.id %>"
       >
       </div>
     <% end %>
   <% end %>
 
-  <div data-map-attribution>
+  <div data-cartography-map-attribution>
     Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors
     <%= render '/shared/geolocatable' %>
   </div>
 
-  <div data-map-panel id="explore-map-panel">
+  <div data-cartography-map-panel id="explore-map-panel">
   </div>
 
 </div>

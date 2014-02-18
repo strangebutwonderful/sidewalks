@@ -10,7 +10,7 @@ class App.Cartography.ExploreMap extends App.Cartography.Map
   ### 
   public static variables
   ###
-  @selector = "[data-explore-map]"
+  @selector = "[data-cartography-exploremap]"
 
   bindMapEvents: () ->
     super

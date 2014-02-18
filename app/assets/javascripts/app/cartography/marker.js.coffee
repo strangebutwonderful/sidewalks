@@ -9,7 +9,7 @@ class App.Cartography.Marker
   ### 
   public static variables
   ###
-  @selector = "[data-map-marker]"
+  @selector = "[data-cartography-map-marker]"
 
   ###
   private static variables
@@ -42,11 +42,11 @@ class App.Cartography.Marker
     $marker = $(markerElement)
     $markerHtml = $marker.html()
 
-    latitude = $marker.data("map-marker-latitude")
-    longitude = $marker.data("map-marker-longitude")
+    latitude = $marker.data("cartography-map-marker-latitude")
+    longitude = $marker.data("cartography-map-marker-longitude")
     markerOptions = {}
     for option in App.Cartography.Marker._mapMarkerOptionNames
-      optionValue = $marker.data("map-marker-" + option.toLowerCase())
+      optionValue = $marker.data("cartography-map-marker-" + option.toLowerCase())
       markerOptions[option] = optionValue if optionValue?
     
     marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
