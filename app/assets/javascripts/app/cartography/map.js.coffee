@@ -1,11 +1,11 @@
 #= require leaflet
 
 root = exports ? this # root and window are same thing in browser
-root.App.Maps ?= {}
+root.App.Cartography ?= {}
 $ = jQuery
 # L = Leaflet
 
-class App.Maps.Map
+class App.Cartography.Map
   ### 
   public static variables
   ###
@@ -123,11 +123,11 @@ class App.Maps.Map
   bindMapMarkers: () ->
     # load map markers
     for markerElement in @_$map.find("[data-map-marker]")
-      new App.Maps.Marker(markerElement, @_map)
+      new App.Cartography.Marker(markerElement, @_map)
 
   mapOptions: ->
     mapOptions = {}
-    for option in App.Maps.Map._mapOptionNames
+    for option in App.Cartography.Map._mapOptionNames
       optionValue = @_$map.data("map-" + option.toLowerCase())
       mapOptions[option] = optionValue if optionValue?
 
@@ -138,5 +138,5 @@ Initialize atlases on document ready
 ###
 
 $ ->
-  $(App.Maps.Map.selector).each (index, mapElement) ->
-    new App.Maps.Map(mapElement)
+  $(App.Cartography.Map.selector).each (index, mapElement) ->
+    new App.Cartography.Map(mapElement)

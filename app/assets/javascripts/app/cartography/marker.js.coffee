@@ -1,11 +1,11 @@
 #= require ./map
 
 root = exports ? this # root and window are same thing in browser
-root.App.Maps ?= {}
+root.App.Cartography ?= {}
 $ = jQuery
 # L = Leaflet
 
-class App.Maps.Marker
+class App.Cartography.Marker
   ### 
   public static variables
   ###
@@ -45,7 +45,7 @@ class App.Maps.Marker
     latitude = $marker.data("map-marker-latitude")
     longitude = $marker.data("map-marker-longitude")
     markerOptions = {}
-    for option in App.Maps.Marker._mapMarkerOptionNames
+    for option in App.Cartography.Marker._mapMarkerOptionNames
       optionValue = $marker.data("map-marker-" + option.toLowerCase())
       markerOptions[option] = optionValue if optionValue?
     

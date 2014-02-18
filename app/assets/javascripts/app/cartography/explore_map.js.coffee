@@ -1,11 +1,11 @@
 #= require ./map
 
 root = exports ? this # root and window are same thing in browser
-root.App.Maps ?= {}
+root.App.Cartography ?= {}
 $ = jQuery
 # L = Leaflet
 
-class App.Maps.ExploreMap extends App.Maps.Map
+class App.Cartography.ExploreMap extends App.Cartography.Map
 
   ### 
   public static variables
@@ -21,5 +21,5 @@ Initialize map on document ready
 ###
 
 $ ->
-  $(App.Maps.ExploreMap.selector).each (index, mapElement) ->
-    new App.Maps.ExploreMap(mapElement)
+  $(App.Cartography.ExploreMap.selector).each (index, mapElement) ->
+    new App.Cartography.ExploreMap(mapElement)
