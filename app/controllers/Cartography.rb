@@ -4,7 +4,7 @@ module Cartography
     @request_latitude ||= params[:latitude]
 
     if Rails.env.development?
-      @request_latitude ||= "37.7833" # san francisco
+      @request_latitude ||= Neighborhood::city(:sanfrancisco).latitude
     elsif @request_latitude.blank? && request.location.present?
       @request_latitude ||= request.location.latitude.to_s
     end
@@ -16,7 +16,7 @@ module Cartography
     @request_longitude ||= params[:longitude]
     
     if Rails.env.development?
-      @request_longitude ||= "-122.4167" # san francisco
+      @request_longitude ||= Neighborhood::city(:sanfrancisco).longitude
     elsif @request_longitude.blank? && request.location.present?
       @request_longitude ||= request.location.longitude.to_s
     end

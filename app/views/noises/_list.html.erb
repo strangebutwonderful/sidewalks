@@ -4,6 +4,18 @@
   <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noises.first} %>
 <% end.empty? %>
   <div class="docket">
-    <p>Couldn't find anything</p>
+    <h2>It's quiet. Too quiet.</h2>
+    <p>
+      Sorry about this, looks like there's nothing going on in the vicinity.  
+      Why not try see if anything going on in one of these areas?
+    </p>
+
+    <ul class="unstyled">
+      <% Neighborhood.districts.each do |hood| %>
+        <li>
+          <%= link_to hood.name, noises_path(:latitude => hood.latitude, :longitude => hood.longitude), :class => "btn btn-link" %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
