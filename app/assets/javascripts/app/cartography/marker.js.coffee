@@ -29,6 +29,19 @@ class App.Cartography.Marker
     'scrollTo'
   ]
 
+  @_mapMarkerIconOptionNames: [
+    'iconUrl'
+    'iconRetinaUrl'
+    'iconSize'
+    'iconAnchor'
+    'shadowUrl'
+    'shadowRetinaUrl'
+    'shadowSize'
+    'shadowAnchor'
+    'popupAnchor'
+    'className'
+  ]
+
   ###
   private variables
   ###
@@ -44,14 +57,41 @@ class App.Cartography.Marker
 
     latitude = @_$marker.data("cartography-map-marker-latitude")
     longitude = @_$marker.data("cartography-map-marker-longitude")
-    markerOptions = {}
-    for option in App.Cartography.Marker._mapMarkerOptionNames
-      optionValue = @_$marker.data("cartography-map-marker-" + option.toLowerCase())
-      markerOptions[option] = optionValue if optionValue?
+    
+    markerOptions = @loadOptions()
     
     @_marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
     @_marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
     @_marker.on('click', @markerClickHander)
+
+  loadOptions: ->
+    options = {}
+    for option in App.Cartography.Marker._mapMarkerOptionNames
+      optionValue = @_$marker.data("cartography-map-marker-" + option.toLowerCase())
+      options[option] = optionValue if optionValue?
+
+    options['icon'] = @loadIcon()
+
+    options
+
+  loadIcon: ->
+    icon = null
+    options = @loadIconOptions()
+
+    if options['iconUrl']
+      icon = new L.Icon(options)
+    else
+      icon = new L.Icon.Default(options)
+
+    icon
+
+  loadIconOptions: ->
+    options = {}
+    for option in App.Cartography.Marker._mapMarkerIconOptionNames
+      optionValue = @_$marker.data("cartography-map-marker-icon-" + option.toLowerCase())
+      options[option] = optionValue if optionValue?
+
+    options
 
   markerClickHander: (event) ->
     target = event.target
