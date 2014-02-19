@@ -17,8 +17,10 @@ geolocatableSuccess = (position) ->
     if(Number(uriQuery['latitude']) == latitude && Number(uriQuery['longitude']) == longitude)
       nextState = 'waiting'
 
-    uri.removeQuery('latitude').removeQuery('longitude')
-    uri.addQuery('latitude', latitude).addQuery('longitude', longitude)
+    uri.setQuery({
+      latitude: latitude
+      longitude: longitude
+      })
     
     $elementObject.attr('href', uri.toString())
     $elementObject.attr('data-geolocatable-state', nextState);
