@@ -4,7 +4,7 @@
     data-cartography-map 
     data-cartography-map-bounds="<%= JSON(user.map.boundaries) %>"
     data-cartography-map-center="<%= JSON(user.map.center) %>"
-    data-cartography-map-zoom="16"
+    data-cartography-map-zoom="<%= user.map.zoom %>"
     >
     <% user.locations.each do |location| %>
       <div data-cartography-map-marker

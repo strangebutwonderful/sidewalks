@@ -1,9 +1,10 @@
 class Map
   attr_accessor :coordinates, :north_east_boundary_latitude, :north_east_boundary_longitude, :south_west_boundary_latitude, :south_west_boundary_longitude
 
-  def initialize(coordinates = nil, center = nil)
+  def initialize(coordinates = nil, params = {})
     self.add_coordinates(coordinates)
-    self.center = center
+    self.center = params[:center]
+    self.zoom = params[:zoom]
   end
 
   def add_coordinates(coordinates)
@@ -45,6 +46,14 @@ class Map
 
   def center 
     @center ||= [centered_latitude, centered_longitude]
+  end
+
+  def zoom=(value)
+    @zoom = value
+  end
+
+  def zoom 
+    @zoom ||= 16
   end
 
   private 

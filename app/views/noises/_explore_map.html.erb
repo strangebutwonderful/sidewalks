@@ -2,7 +2,7 @@
   data-cartography-exploremap
   data-cartography-map-bounds="<%= JSON(@map.boundaries) %>"
   data-cartography-map-center="<%= JSON(request_coordinates) %>"
-  data-cartography-map-zoom="15"
+  data-cartography-map-zoom="<%= @map.zoom %>"
   >
 
   <% @noises.each do |user_id, noises| %>

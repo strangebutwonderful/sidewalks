@@ -4,7 +4,7 @@
     data-cartography-map 
     data-cartography-map-bounds="<%= JSON(noise.map.boundaries) %>"
     data-cartography-map-center="<%= JSON(noise.map.center) %>"
-    data-cartography-map-zoom="16"
+    data-cartography-map-zoom="<%= noise.map.zoom %>"
     >
 
     <% noise.origins.each do |origin| %>

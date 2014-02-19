@@ -111,8 +111,11 @@ class App.Cartography.Map
     if(uriQuery['latitude']? && uriQuery['longitude']? && Number(uriQuery['latitude']) == latitude && Number(uriQuery['longitude']) == longitude)
       nextState = 'waiting'
 
-    uri.removeQuery('latitude').removeQuery('longitude')
-    uri.addQuery('latitude', latitude).addQuery('longitude', longitude)
+    uri.setQuery({
+      latitude: latitude
+      longitude: longitude
+      zoom: @_map.getZoom()
+      })
 
     # TODO: don't reload the whole page, just show new listings
     window.location = uri.toString()
