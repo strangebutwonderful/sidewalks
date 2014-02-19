@@ -105,13 +105,8 @@ class App.Cartography.Map
     center = @_map.getCenter()
     latitude = center.lat
     longitude = center.lng
-    uri = new URI(window.location)
       
-    uriQuery = uri.query(true);
-    if(uriQuery['latitude']? && uriQuery['longitude']? && Number(uriQuery['latitude']) == latitude && Number(uriQuery['longitude']) == longitude)
-      nextState = 'waiting'
-
-    uri.setQuery({
+    uri = App.URILocation.replaceQuery(window.location, {
       latitude: latitude
       longitude: longitude
       zoom: @_map.getZoom()

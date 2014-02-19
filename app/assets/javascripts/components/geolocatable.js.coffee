@@ -11,13 +11,7 @@ geolocatableSuccess = (position) ->
     nextState = 'ready'
     
     href = $elementObject.attr('href') || window.location.href
-    uri = new URI(href)
-    
-    uriQuery = uri.query(true);
-    if(Number(uriQuery['latitude']) == latitude && Number(uriQuery['longitude']) == longitude)
-      nextState = 'waiting'
-
-    uri.setQuery({
+    uri = App.URILocation.replaceQuery(href, {
       latitude: latitude
       longitude: longitude
       })
