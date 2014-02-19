@@ -70,7 +70,7 @@ class Noise < ActiveRecord::Base
     self.avatar_image_url = twitter_noise.try(:profile_image_url_https)
     self.created_at = twitter_noise.try(:created_at)
     self.provider_id = twitter_noise.try(:id).to_s
-    self.text = twitter_noise.try(:text)
+    self.text = twitter_noise.try(:full_text)
 
     save!
   end
