@@ -122,7 +122,7 @@ class App.Cartography.Map
 
   bindMapMarkers: () ->
     # load map markers
-    for markerElement in @_$map.find("[data-cartography-map-marker]")
+    for markerElement in @_$map.find(App.Cartography.Marker.selector)
       new App.Cartography.Marker(markerElement, @_map)
 
   mapOptions: ->
