@@ -32,6 +32,7 @@ class ActiveSupport::TestCase
     OpenStruct.new(
       :id => 'my_twitter_noise_id',
       :text => 'my_twitter_noise_text',
+      :full_text => 'my_twitter_noise_text',
       :created_at => Time.now,
       :user => twitter_user
     )
