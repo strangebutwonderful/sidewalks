@@ -58,7 +58,7 @@ class App.Cartography.Map
 
   constructor: (mapElement) ->
     @_$map = $(mapElement)
-    # console.log @_$map
+    # App.Logger.debug @_$map
     
     # compose map options
 

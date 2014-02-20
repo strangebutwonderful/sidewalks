@@ -33,7 +33,7 @@ class App.Geolocation.Geolocatable
       @_$geolocatable.attr('disabled', false);
 
   geolocatableSuccessHandler: (position) =>
-    # console.log position.coords
+    # App.Logger.debug position.coords
 
     latitude = position.coords.latitude
     longitude = position.coords.longitude
@@ -50,7 +50,7 @@ class App.Geolocation.Geolocatable
     @setState(nextState)
 
   geolocatableErrorHandler: (msg) =>
-    # console.log 'geolocation failed ' + error
+    # App.Logger.debug 'geolocation failed ' + error
     @setState('error')
 
 $ ->
