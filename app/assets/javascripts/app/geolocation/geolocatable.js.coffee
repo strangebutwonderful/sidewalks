@@ -7,7 +7,7 @@ class App.Geolocation.Geolocatable
   ### 
   public static variables
   ###
-  @selector = 'a[data-geolocatable]';
+  @selector = '[data-geolocatable]';
 
   ###
   private variables
