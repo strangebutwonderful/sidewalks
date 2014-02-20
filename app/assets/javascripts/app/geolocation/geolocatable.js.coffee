@@ -33,7 +33,7 @@ class App.Geolocation.Geolocatable
       @_$geolocatable.attr('disabled', false);
 
   geolocatableSuccessHandler: (position) =>
-    console.log position.coords
+    # console.log position.coords
 
     latitude = position.coords.latitude
     longitude = position.coords.longitude
