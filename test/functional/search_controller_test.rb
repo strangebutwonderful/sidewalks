@@ -10,5 +10,11 @@ class SearchControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:noises)
   end
+
+  test "anyone should put index" do
+    put :index
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
     
 end
