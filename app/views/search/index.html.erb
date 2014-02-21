@@ -9,7 +9,7 @@
   <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
   <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>
 <% end %>
-<% if params[:q].blank? && @noises.empty? %>
+<% if params[:q].present? && @noises.empty? %>
   <div class="card">
     <h2>Looked and looked, but nothing could be found.</h2>
     <p>
