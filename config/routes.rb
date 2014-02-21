@@ -8,6 +8,7 @@ Sidewalks::Application.routes.draw do
 
   resources :noises, :only => [:index, :show]
   resources :users, :only => [:show, :edit, :update]
+  resources :search, :only => [:index]
 
   namespace :admin do
     resources :config, :locations, :users

@@ -1,0 +1,21 @@
+<% if @noises.each do |noise| %>
+  <%= render '/noises/card', :noise => noise, :additional_noises_count => 0 %>
+  <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
+  <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>
+<% end.empty? %>
+  <div class="card">
+    <h2>It's quiet. Too quiet.</h2>
+    <p>
+      Sorry about this, looks like there's nothing going on in the vicinity.  
+      Why not try see if anything going on in one of these areas?
+    </p>
+
+    <ul class="unstyled">
+      <% Neighborhood.districts.each do |hood| %>
+        <li>
+          <%= link_to hood.name, noises_path(:latitude => hood.latitude, :longitude => hood.longitude), :class => "btn btn-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
