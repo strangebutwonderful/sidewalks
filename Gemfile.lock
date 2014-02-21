@@ -86,6 +86,9 @@ GEM
     docile (1.1.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.0.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -262,6 +265,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   coveralls
+  exception_notification
   factory_girl_rails
   faker
   figaro

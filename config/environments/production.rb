@@ -84,3 +84,11 @@ Sidewalks::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+Sidewalks::Application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Sidewalks] ",
+    :sender_address => %{ENV["NOTIFIER_EMAIL_SENDER_ADDRESS"]},
+    :exception_recipients => %w{ENV["NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS"]}
+  }
+
