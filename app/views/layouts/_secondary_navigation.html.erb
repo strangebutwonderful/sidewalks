@@ -1,5 +1,11 @@
 <div class="docket">
   <ul class="nav nav-pills">
+    <li>
+      <%= link_to 'Search', search_index_path %>
+    </li>
+    <li>
+      <%= link_to 'Developers', 'https://github.com/ajsharma/sidewalks', :target => '_blank' %>
+    </li>
     <% if current_user_is_admin? %>
       <li>
         <%= link_to 'Admin', admin_config_index_path %>
@@ -13,9 +19,6 @@
       <li>
         <%= link_to 'Sign In', signin_path %>
       </li>
-    <% end %>
-    <li>
-      <%= link_to 'Developers', 'https://github.com/ajsharma/sidewalks', :target => '_blank' %>
-    </li>
+    <% end %>    
   </ul>
 </div>

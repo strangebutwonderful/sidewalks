@@ -1,0 +1,7 @@
+<ul class="unstyled">
+  <% Neighborhood.districts.each do |hood| %>
+    <li>
+      <%= link_to hood.name, noises_path(:latitude => hood.latitude, :longitude => hood.longitude), :class => "btn btn-link" %>
+    </li>
+  <% end %>
+</ul>

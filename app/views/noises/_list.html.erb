@@ -10,12 +10,6 @@
       Why not try see if anything going on in one of these areas?
     </p>
 
-    <ul class="unstyled">
-      <% Neighborhood.districts.each do |hood| %>
-        <li>
-          <%= link_to hood.name, noises_path(:latitude => hood.latitude, :longitude => hood.longitude), :class => "btn btn-link" %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render '/neighborhoods/list' %>
   </div>
 <% end %>
