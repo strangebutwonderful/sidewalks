@@ -25,7 +25,7 @@ class App.Web.BlockLink
 
   childLinkClickHandler: (event) =>
     # prevent the child blank links from popping in same window too
-    e.stopPropagation()
+    event.stopPropagation()
 
   bindEventListeners: ->
     console.log 'binding'
