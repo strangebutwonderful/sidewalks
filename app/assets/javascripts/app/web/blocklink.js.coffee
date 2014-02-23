@@ -28,7 +28,6 @@ class App.Web.BlockLink
     event.stopPropagation()
 
   bindEventListeners: ->
-    console.log 'binding'
     @_$element.on('click', @clickHandler)
     @_$element.find('a').on('click', @childLinkClickHandler)
 
