@@ -11,7 +11,6 @@ class Map
     self.coordinates ||= []
     
     unless coordinates.blank?
-      @boundaries = nil
       self.coordinates += coordinates
 
       self.coordinates.each do |coordinate|
