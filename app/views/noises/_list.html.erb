@@ -1,5 +1,5 @@
 <% if @noises.each do |user_id, noises| %>
-  <%= render 'card', :noise => noises.first, :additional_noises_count => noises.count %>
+  <%= render 'card', :noise => noises.first %>
   <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noises.first} %>
   <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noises.first} %>
 <% end.empty? %>

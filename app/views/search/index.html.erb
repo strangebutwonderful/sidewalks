@@ -5,7 +5,7 @@
 </div>
 
 <% @noises.each do |noise| %>
-  <%= render '/noises/card', :noise => noise, :additional_noises_count => 0 %>
+  <%= render '/noises/card', :noise => noise %>
   <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
   <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>
 <% end %>
