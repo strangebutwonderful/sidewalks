@@ -1,13 +1,14 @@
 root = exports ? this # root and window are same thing in browser
 root.App ?= {}
+root.App.Web ?= {}
 $ = jQuery
 
-class App.Browser
+class App.Web.Window
 
   ### 
   Smoothly scroll the browser to the given element
-  @example App.Browser.scrollTo("#myDiv")
-  @example App.Browser.scrollTo($jQueryObj)
+  @example App.Web.Window.scrollTo("#myDiv")
+  @example App.Web.Window.scrollTo($jQueryObj)
   @param target selector|jQuery Object to scroll to
   ### 
   @scrollTo: (target) ->
@@ -19,7 +20,7 @@ class App.Browser
 
   ### 
   Smoothly scroll the browser to the given element
-  @example App.Browser.scrollTo("myDiv")
+  @example App.Web.Window.scrollTo("myDiv")
   @param anchorId id (without #) of the targer scroll to
   @see scrollTo
   ### 

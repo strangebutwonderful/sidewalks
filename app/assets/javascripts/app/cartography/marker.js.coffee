@@ -101,4 +101,4 @@ class App.Cartography.Marker
 
     # scroll to anchor if set
     if target.options.scrollTo
-      App.Browser.scrollToAnchor(target.options.scrollTo)
+      App.Web.Window.scrollToAnchor(target.options.scrollTo)
