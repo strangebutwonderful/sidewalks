@@ -5,9 +5,7 @@ class SearchController < ApplicationController
   # GET /search
   # GET /search.json
   def index
-    @noises = Noise.fuzzy_search(params[:q])
-    .limit(50)
-    .all
+    @noises = Noise.advanced_search(:text => params[:q])
 
     respond_with @noises
   end
