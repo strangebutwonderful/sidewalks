@@ -12,6 +12,20 @@ class App.Cartography.ExploreMap extends App.Cartography.Map
   ###
   @selector = "[data-cartography-exploremap]"
 
+  mapMoveEndHandler:(event) =>
+    center = @_map.getCenter()
+    latitude = center.lat
+    longitude = center.lng
+      
+    uri = App.URILocation.replaceQuery(window.location, {
+      latitude: latitude
+      longitude: longitude
+      zoom: @_map.getZoom()
+      })
+
+    # TODO: don't reload the whole page, just show new listings
+    window.location = uri.toString()
+
   bindMapEvents: () ->
     super
     @_map.on('dragend', @mapMoveEndHandler)

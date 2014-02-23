@@ -74,7 +74,7 @@ class App.Cartography.Map
 
     # Set map boundaries
     # @_map.fitBounds(getMapBounds(@_$map))
-    @bindMapMarkers(@_$map, @_map)
+    @bindMapMarkers()
 
     @_map.panTo(center, { animate: true, duration: 3 })
     @_map.setZoom(zoom)
@@ -101,22 +101,8 @@ class App.Cartography.Map
   getMapCenter:() ->
     @_$map.data("cartography-map-center")
 
-  mapMoveEndHandler:(event) =>
-    center = @_map.getCenter()
-    latitude = center.lat
-    longitude = center.lng
-      
-    uri = App.URILocation.replaceQuery(window.location, {
-      latitude: latitude
-      longitude: longitude
-      zoom: @_map.getZoom()
-      })
-
-    # TODO: don't reload the whole page, just show new listings
-    window.location = uri.toString()
-
   bindMapEvents: () ->
-    # @_map.on('dragend', @mapMoveEndHandler)
+    # 'Abstract' function for children classes
 
   bindMapMarkers: () ->
     # load map markers
