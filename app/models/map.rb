@@ -26,10 +26,18 @@ class Map
   end
 
   def boundaries
-    @boundaries = [
-      [self.south_west_boundary_latitude, self.south_west_boundary_longitude],
-      [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
-    ] unless @boundaries
+    [
+      south_west_boundary,
+      north_east_boundary
+    ]
+  end
+
+  def south_west_boundary
+    [self.south_west_boundary_latitude, self.south_west_boundary_longitude]
+  end
+
+  def north_east_boundary
+    [self.north_east_boundary_latitude, self.north_east_boundary_longitude]
   end
 
   def centered_latitude
