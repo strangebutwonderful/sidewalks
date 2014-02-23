@@ -16,13 +16,6 @@
         <%= time_ago_in_words(noise.created_at) %> ago
         <i class="provider-<%= noise.provider.downcase %>"></i>
       <% end %>
-      <% if additional_noises_count && (additional_noises_count > 1) %>
-      |
-        <%= link_to noise, class: 'muted' do %> 
-          +<%= additional_noises_count - 1 %> more
-        <% end %>
-      <% end %>
-
     </p>
   </div>
 </div>
