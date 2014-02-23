@@ -1,4 +1,4 @@
-<div class="noise card media" id="noise-<%= noise.id %>" data-hyperlink data-hyperlink-href="<%= noise_url noise %>">
+<div class="noise card media" id="noise-<%= noise.id %>" data-blocklink data-blocklink-href="<%= noise_url noise %>">
   <% if noise.avatar_image_url %>
     <%= link_to noise.user, class: "avatar pull-left", title: noise.user_name do %>
       <%= image_tag noise.avatar_image_url, alt: noise.user_name, class: "media-object avatar-image", size: '48x48' %>
