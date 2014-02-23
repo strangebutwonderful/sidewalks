@@ -68,6 +68,12 @@ module Sidewalks
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.precompile << Proc.new { |path|
+      if path =~ /\.(otf|eot|svg|ttf|woff)\z/
+        true
+      end
+    }
+
     # Cache in memory by default
     config.cache_store = :memory_store
   end
