@@ -18,10 +18,10 @@ $card-border-color: darken($navbarBackground, 12%) !default;
     font-weight: normal;
     line-height: 30px;
     margin: 0;
-    margin-top: -5px;
+    margin-top: -5px; 
 
     a {
-      color: inherit;
+      // color: inherit;
     }
   }
 }
