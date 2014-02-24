@@ -44,7 +44,7 @@ class NoiseTest < ActiveSupport::TestCase
   test "imports raw twitter object" do
     twitter_noise = build_twitter_noise
 
-    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
+    user = User.first_or_import_from_twitter(twitter_noise.user)
 
     noise = Noise.new
 
@@ -54,7 +54,7 @@ class NoiseTest < ActiveSupport::TestCase
   test "imports noise when new noise" do
     twitter_noise = build_twitter_noise
 
-    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
+    user = User.first_or_import_from_twitter(twitter_noise.user)
 
     assert Noise.first_or_import_from_twitter_noise(twitter_noise, user)
   end
@@ -62,7 +62,7 @@ class NoiseTest < ActiveSupport::TestCase
   test "no new noise when importing old tweet" do 
     twitter_noise = build_twitter_noise
 
-    user = User.first_or_import_from_twitter_noise_user(twitter_noise.user)
+    user = User.first_or_import_from_twitter(twitter_noise.user)
 
     Noise.first_or_import_from_twitter_noise(twitter_noise, user)
 

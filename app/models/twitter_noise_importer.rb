@@ -10,7 +10,7 @@ class TwitterNoiseImporter
 
       self.latest_noises_from_sidewalks_twitter.reverse!.each do |tweet|
         begin
-          user = User.first_or_import_from_twitter_noise_user(tweet.user)
+          user = User.first_or_import_from_twitter(tweet.user)
           noise = Noise.first_or_import_from_twitter_noise(tweet, user)
           noise.import_locations(user.locations)
 

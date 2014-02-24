@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def import_from_twitter_noise_user(twitter_noise_user)
+  def import_from_twitter(twitter_noise_user)
     logger.info "Creating a user from twitter noise: [#{twitter_noise_user.inspect}]" 
     self.name = twitter_noise_user.name || ""
     self.email = ""
@@ -77,9 +77,9 @@ class User < ActiveRecord::Base
     providers = [User::PROVIDER_TWITTER]
   end
 
-  def self.first_or_import_from_twitter_noise_user(twitter_noise_user) 
+  def self.first_or_import_from_twitter(twitter_noise_user) 
     User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_noise_user.id.to_s).first_or_create do |user|
-      user.import_from_twitter_noise_user(twitter_noise_user)
+      user.import_from_twitter(twitter_noise_user)
     end
   end
 

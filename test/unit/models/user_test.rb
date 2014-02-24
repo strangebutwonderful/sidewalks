@@ -32,22 +32,22 @@ class UserTest < ActiveSupport::TestCase
 
     user = User.new
 
-    assert user.import_from_twitter_noise_user(twitter_user)
+    assert user.import_from_twitter(twitter_user)
   end
 
   test "imports user when new user" do
     twitter_user = build_twitter_user
 
-    assert User.first_or_import_from_twitter_noise_user(twitter_user)
+    assert User.first_or_import_from_twitter(twitter_user)
   end
 
   test "no new user when importing an old user" do
     twitter_user = build_twitter_user
 
-    User.first_or_import_from_twitter_noise_user(twitter_user)
+    User.first_or_import_from_twitter(twitter_user)
 
     assert_no_difference('User.count') do 
-      assert User.first_or_import_from_twitter_noise_user(twitter_user)
+      assert User.first_or_import_from_twitter(twitter_user)
     end
   end
 end
