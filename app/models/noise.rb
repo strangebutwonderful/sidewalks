@@ -23,6 +23,8 @@ class Noise < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
 
+  scope :none, where('1 = 0')
+
   delegate :url_helpers, to: 'Rails.application.routes' 
 
   belongs_to :user
@@ -92,6 +94,15 @@ class Noise < ActiveRecord::Base
     end
 
     success_count
+  end
+
+  def self.search(params)
+    query = params[:q]
+    unless query.blank?
+      self.search_text(params[:q]).where_since(1.week.ago)
+    else
+      self.none # Needs to be updated in rails 4 to use none query and avoid db altogether
+    end
   end
 
   def self.where_grouped_search(params)
