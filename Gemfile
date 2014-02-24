@@ -54,3 +54,4 @@ end
 
 # For backups
 # gem 'backup', '~> 4', :require => false
+gem "replicate", '~> 1.5.1'

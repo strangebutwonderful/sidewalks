@@ -1,0 +1,48 @@
+namespace :db do
+
+  desc <<-DESC
+  Replicates data from production site database to the local database.
+   
+  By default all database objects are downloaded:
+   
+    cap db:replicate
+   
+  Set the DATA variable to specify the objects to download:
+   
+    cap db:replicate DATA='User.find(1); Page.find(1)'
+   
+  Dependant records are automatically downloaded by Replicate, e.g. this downloads
+  both the Project records and the User record:
+   
+    cap db:replicate DATA='User.find_by_name("dave").projects'
+   
+  To empty the local database first, set CLEAR=1:
+   
+    cap db:replicate CLEAR=1
+   
+    cap db:replicate CLEAR=1 DATA='User.all'
+   
+  See https://github.com/rtomayko/replicate for more details about Replicate.
+  DESC
+  task :replicate do
+    on roles(:app) do 
+ 
+      # Download data from the production database
+      # NOTE: YOU NEED TO ALTER THE LINE BELOW TO LIST ALL THE OBJECTS YOU WANT TO DUMP BY DEFAULT
+      code = ENV["DATA"] || "Ability.all; Location.all; Noise.all; Origin.all; Role.all; Trail.all; User.all"
+      code = code.split(";").map{|c| c.strip.shellescape }.join(" ")
+      data = capture("cd #{release_path} && RAILS_ENV=production bundle exec replicate -q -r '#{release_path}/config/environment' -d #{code}")
+   
+      # Clear the local database
+      system "rake db:schema:load" if ENV["CLEAR"] == "1"
+   
+      # Load the data into the local database
+      require File.dirname(__FILE__) + '/../config/environment'
+      require 'replicate'
+      Replicate::Loader.new do |loader|
+        loader.log_to $stdout
+        loader.read StringIO.new(data)
+      end
+   end
+  end
+end

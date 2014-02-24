@@ -201,6 +201,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    replicate (1.5.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rolify (3.4.0)
@@ -289,6 +290,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  replicate (~> 1.5.1)
   rolify
   sass-rails
   thin
