@@ -23,6 +23,6 @@ every 5.minutes do
   rake "import"
 end
 
-# every 1.day, :at => '4:30 am' do
-#   rake "carboncopy:all"
-# end
+every 1.day, :at => '3:30 am' do
+  rake "import:twitter_accounts"
+end

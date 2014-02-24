@@ -8,7 +8,7 @@ class TwitterImporter
     unless Rails.cache.exist?(TwitterImporter::IMPORT_LOCK_KEY_NAME)
       Rails.logger.debug "Begin importing from twitter"
 
-      self.latest_noises_from_sidewalks_twitter.reverse!.each do |tweet|
+      self.latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
         begin
           user = User.first_or_import_from_twitter(tweet.user)
           noise = Noise.first_or_import_from_tweet(tweet, user)
@@ -26,7 +26,19 @@ class TwitterImporter
     Rails.logger.debug "Completed importing from twitter"
   end
 
-  def self.latest_noises_from_sidewalks_twitter
+  def self.import_followers
+    Twitter.followers.each do |user|
+      begin
+        User.first_or_import_from_twitter(user)
+      rescue => exception
+        Rails.logger.error exception
+      end
+    end
+  end
+
+  private 
+
+  def self.latest_tweets_from_sidewalks_twitter
     last_noise = Noise.where(provider: Noise::PROVIDER_TWITTER).last
 
     begin 
@@ -39,9 +51,7 @@ class TwitterImporter
       Rails.logger.error exception
       return []
     end
-  end
-
-  private 
+  end  
 
   def self.import_mentions_of_existing_users(noise, user_mentions)
     user_mentions.each do |user_mention|
