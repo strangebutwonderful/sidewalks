@@ -1,0 +1,31 @@
+namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
+  task :configure_symlinks do
+    on roles(:all) do 
+      execute "cp #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+      execute "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    end
+  end
+
+  before "deploy:assets:precompile", :configure_symlinks
+
+end
