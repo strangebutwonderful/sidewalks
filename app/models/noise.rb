@@ -17,6 +17,12 @@
 #
 
 class Noise < ActiveRecord::Base
+  include PgSearch
+
+  pg_search_scope :search_text, against: [:text],
+    using: {tsearch: {dictionary: "english"}},
+    associated_against: { user: :name }
+
   delegate :url_helpers, to: 'Rails.application.routes' 
 
   belongs_to :user

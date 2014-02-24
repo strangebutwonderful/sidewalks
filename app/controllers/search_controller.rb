@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   # GET /search
   # GET /search.json
   def index
-    @noises = Noise.advanced_search(:text => params[:q])
+    @noises = Noise.search_text(params[:q]).where_since(1.week.ago)
 
     respond_with @noises
   end
