@@ -60,7 +60,7 @@ class Noise < ActiveRecord::Base
     @map ||= Map.new(self.coordinates)
   end
 
-  def import_from_twitter_noise(twitter_noise, user)
+  def import_from_tweet(twitter_noise, user)
     logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
     
     self.user_id = user.id
@@ -188,9 +188,9 @@ class Noise < ActiveRecord::Base
       .merge(Origin.where_search(params))
   end
 
-  def self.first_or_import_from_twitter_noise(twitter_noise, user) 
+  def self.first_or_import_from_tweet(twitter_noise, user) 
     where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
-      noise.import_from_twitter_noise(twitter_noise, user)
+      noise.import_from_tweet(twitter_noise, user)
     end
   end
 

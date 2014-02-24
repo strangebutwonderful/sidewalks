@@ -11,7 +11,7 @@ class TwitterImporter
       self.latest_noises_from_sidewalks_twitter.reverse!.each do |tweet|
         begin
           user = User.first_or_import_from_twitter(tweet.user)
-          noise = Noise.first_or_import_from_twitter_noise(tweet, user)
+          noise = Noise.first_or_import_from_tweet(tweet, user)
           noise.import_locations(user.locations)
 
           self.import_mentions_of_existing_users(noise, tweet.user_mentions)
