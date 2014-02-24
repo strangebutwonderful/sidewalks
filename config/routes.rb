@@ -11,7 +11,7 @@ Sidewalks::Application.routes.draw do
   resources :search, :only => [:index]
 
   namespace :admin do
-    resources :config, :locations, :users
+    resources :config, :errors, :locations, :users
     resources :noises do
       resources :origins
     end

@@ -35,4 +35,6 @@ NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Recipients_Emails
 # Optional
 NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
 
+BUGSNAG_API_KEY: Your_Bugsnag_Key
+
 GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code

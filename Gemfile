@@ -50,6 +50,7 @@ group :test do
   gem 'mocha', :require => false
 end
 group :production do 
+  gem "bugsnag"
 end
 
 # For backups
