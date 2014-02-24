@@ -1,11 +1,11 @@
-class TwitterNoiseImporter
+class TwitterImporter
 
   IMPORT_LOCK_KEY_NAME = 'twitter_noise_importer_lock'
 
   def self.import_latest_from_sidewalks_twitter 
     # Import the latest noises from twitter and saves to db
 
-    unless Rails.cache.exist?(TwitterNoiseImporter::IMPORT_LOCK_KEY_NAME)
+    unless Rails.cache.exist?(TwitterImporter::IMPORT_LOCK_KEY_NAME)
       Rails.logger.debug "Begin importing from twitter"
 
       self.latest_noises_from_sidewalks_twitter.reverse!.each do |tweet|
@@ -20,7 +20,7 @@ class TwitterNoiseImporter
         end
       end
 
-      Rails.cache.write(TwitterNoiseImporter::IMPORT_LOCK_KEY_NAME, true, expires_in: 5.minutes)
+      Rails.cache.write(TwitterImporter::IMPORT_LOCK_KEY_NAME, true, expires_in: 5.minutes)
     end
 
     Rails.logger.debug "Completed importing from twitter"

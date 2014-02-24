@@ -2,7 +2,7 @@
 namespace :import do
   
   task :twitter => :environment do
-    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+    TwitterImporter.import_latest_from_sidewalks_twitter
   end
 
 end

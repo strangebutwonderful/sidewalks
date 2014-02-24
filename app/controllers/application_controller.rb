@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def import_noises
-    TwitterNoiseImporter.import_latest_from_sidewalks_twitter
+    TwitterImporter.import_latest_from_sidewalks_twitter
   end
 
   def google_universal_analytics_tracking_code
