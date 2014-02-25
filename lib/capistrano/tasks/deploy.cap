@@ -26,6 +26,4 @@ namespace :deploy do
     end
   end
 
-  before "deploy:assets:precompile", :configure_symlinks
-
 end
