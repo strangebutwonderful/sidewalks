@@ -29,6 +29,8 @@ class Noise < ActiveRecord::Base
 
   belongs_to :user
   has_many :origins, uniq: true
+
+  replicate_associations :origins # for replicate gem
   
   attr_accessible :text, :provider, :provider_id
 
