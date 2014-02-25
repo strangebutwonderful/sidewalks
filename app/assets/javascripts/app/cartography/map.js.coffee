@@ -68,7 +68,7 @@ class App.Cartography.Map
     zoom = @_map.getZoom()
 
     # Set source of map layers pngs
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer(@getMapTiles(), {
         attribution: @getMapAttribution()
     }).addTo(@_map)
 
@@ -79,6 +79,12 @@ class App.Cartography.Map
     @_map.panTo(center, { animate: true, duration: 3 })
     @_map.setZoom(zoom)
     @bindMapEvents()
+
+  getMapTiles: () ->
+    if App.Env.isProduction()
+      "https://{s}.tiles.mapbox.com/v3/" + App.config('MAPBOX_ID') +  "/{z}/{x}/{y}.png"
+    else
+      "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
   getMapAttribution: () ->
     attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
@@ -118,9 +124,9 @@ class App.Cartography.Map
     mapOptions
 
 ### 
-Initialize atlases on document ready
+Initialize atlases on application ready
 ###
 
-$ ->
+$(document).on 'app.ready', ->
   $(App.Cartography.Map.selector).each (index, mapElement) ->
     new App.Cartography.Map(mapElement)

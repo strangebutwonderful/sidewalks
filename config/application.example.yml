@@ -33,6 +33,8 @@ NOTIFIER_EMAIL_SENDER_ADDRESS: '"Your_Notifier_Name" <My_Email_Address>'
 NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Recipients_Emails
 
 # Optional
+MAPBOX_ID: Your_MapBox_Id
+
 NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
 
 BUGSNAG_API_KEY: Your_Bugsnag_Key
