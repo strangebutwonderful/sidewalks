@@ -22,8 +22,9 @@ namespace :rails do
     command << "#{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" if rvm_loaded?
     command << "bundle exec" if bundler_loaded?
     command << "rails console #{fetch(:rails_env)}"
+    command = command.join(' ')
 
-    exec %Q(ssh #{app_server.user}@#{app_server.hostname} -p #{app_server.port || 22} -t "cd #{current_path} && #{command.join(' ')}")
+    exec %Q(ssh #{app_server.user}@#{app_server.hostname} -p #{app_server.port || 22} -t "cd #{current_path} && #{command}")
   end
 
 end
