@@ -81,7 +81,7 @@ class App.Cartography.Map
     @bindMapEvents()
 
   getMapTiles: () ->
-    if App.Env.isProduction()
+    if App.Env.isProduction() && App.config('MAPBOX_ID')?
       "https://{s}.tiles.mapbox.com/v3/" + App.config('MAPBOX_ID') +  "/{z}/{x}/{y}.png"
     else
       "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
