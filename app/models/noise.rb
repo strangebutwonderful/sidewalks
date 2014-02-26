@@ -70,17 +70,17 @@ class Noise < ActiveRecord::Base
     @map ||= Map.new(self.coordinates)
   end
 
-  def import_from_tweet(twitter_noise, user)
-    logger.info "Creating a noise from twitter noise: [#{twitter_noise.inspect}]" 
+  def import_from_tweet(tweet, user)
+    logger.info "Creating a noise from twitter noise: [#{tweet.inspect}]" 
     
     self.user_id = user.id
 
     self.provider = Noise::PROVIDER_TWITTER
 
-    self.avatar_image_url = twitter_noise.try(:profile_image_url_https)
-    self.created_at = twitter_noise.try(:created_at)
-    self.provider_id = twitter_noise.try(:id).to_s
-    self.text = twitter_noise.try(:full_text)
+    self.avatar_image_url = tweet.try(:profile_image_url_https)
+    self.created_at = tweet.try(:created_at)
+    self.provider_id = tweet.try(:id).to_s
+    self.text = tweet.try(:full_text)
 
     save!
   end
@@ -207,9 +207,9 @@ class Noise < ActiveRecord::Base
       .merge(Origin.where_search(params))
   end
 
-  def self.first_or_import_from_tweet(twitter_noise, user) 
-    where(:provider => Noise::PROVIDER_TWITTER, :provider_id => twitter_noise.id.to_s).first_or_create do |noise|
-      noise.import_from_tweet(twitter_noise, user)
+  def self.first_or_import_from_tweet(tweet, user) 
+    where(:provider => Noise::PROVIDER_TWITTER, :provider_id => tweet.id.to_s).first_or_create do |noise|
+      noise.import_from_tweet(tweet, user)
     end
   end
 
