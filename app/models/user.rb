@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   rolify
   
+  has_one :original, :as => :importable
   has_many :locations
   has_many :noises
   has_many :trails
@@ -71,6 +72,8 @@ class User < ActiveRecord::Base
     self.provider_id = twitter_user.id.to_s
     self.provider_screen_name = twitter_user.screen_name || ""
     self.save!
+
+    self.create_original(:dump => twitter_user.to_json)
   end
 
   def blank

@@ -129,6 +129,39 @@ ALTER SEQUENCE noises_id_seq OWNED BY noises.id;
 
 
 --
+-- Name: originals; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE originals (
+    id integer NOT NULL,
+    importable_id integer NOT NULL,
+    importable_type character varying(255) NOT NULL,
+    dump json NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: originals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE originals_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: originals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE originals_id_seq OWNED BY originals.id;
+
+
+--
 -- Name: origins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -333,6 +366,13 @@ ALTER TABLE ONLY noises ALTER COLUMN id SET DEFAULT nextval('noises_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY originals ALTER COLUMN id SET DEFAULT nextval('originals_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY origins ALTER COLUMN id SET DEFAULT nextval('origins_id_seq'::regclass);
 
 
@@ -378,6 +418,14 @@ ALTER TABLE ONLY locations
 
 ALTER TABLE ONLY noises
     ADD CONSTRAINT noises_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: originals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY originals
+    ADD CONSTRAINT originals_pkey PRIMARY KEY (id);
 
 
 --
@@ -563,3 +611,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131215204448');
 INSERT INTO schema_migrations (version) VALUES ('20140129010855');
 
 INSERT INTO schema_migrations (version) VALUES ('20140221024615');
+
+INSERT INTO schema_migrations (version) VALUES ('20140226182708');

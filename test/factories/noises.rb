@@ -32,6 +32,12 @@ FactoryGirl.define do
     created_at Time.now
   end
 
+  factory :noise_with_original, parent: :noise do
+    after(:create) do |noise| 
+      noise.create_original(:dump => noise.to_json)
+    end
+  end
+
   factory :noise_with_coordinates, parent: :noise do
     after(:create) do |noise|
       FactoryGirl.create_list(:origin, rand(1..5), :noise => noise)

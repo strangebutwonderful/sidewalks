@@ -27,6 +27,18 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "FactoryGirl admin_user works" do
+    assert_difference('User.count') do
+      FactoryGirl.create(:admin_user)
+    end
+  end
+
+  test "FactoryGirl user_with_original works" do
+    assert_difference('User.count') do
+      FactoryGirl.create(:user_with_original)
+    end
+  end
+
   test "imports raw twitter object" do
     twitter_user = build_twitter_user
 

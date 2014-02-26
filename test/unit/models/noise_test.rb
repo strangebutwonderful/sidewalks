@@ -29,6 +29,12 @@ class NoiseTest < ActiveSupport::TestCase
     end
   end
 
+test "FactoryGirl noise_with_original works" do
+    assert_difference('Noise.count') do
+      noise = FactoryGirl.create(:noise_with_original)
+    end
+  end
+
   test "FactoryGirl noise_with_coordinates works" do
     assert_difference('Noise.count') do
       noise = FactoryGirl.create(:noise_with_coordinates)
