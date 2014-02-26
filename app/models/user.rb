@@ -73,6 +73,14 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def blank
+    [:email, :provider_screen_name, :provider_access_token, :provider_access_token_secret].each do |attr|
+      self[attr] = nil if self[attr].blank?
+    end
+
+    self
+  end
+
   def self.providers
     providers = [User::PROVIDER_TWITTER]
   end
