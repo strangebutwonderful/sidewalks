@@ -15,7 +15,10 @@
     <h2>Locations</h2>
   </div>
 </div>
-<%= render 'map', :user => @user %>
+
+<div class="row">
+  <%= render 'map', :user => @user %>
+</div>
 
 <div class="row">
   <% @user.locations.each do |location| %>
@@ -31,8 +34,20 @@
       </p>
     </div>
   <% end %>
+
+  <div class="docket">
+    <%= link_to 'New Location', new_admin_location_path(:user_id => @user) %>
+  </div>
+
 </div>
 
-<div class="docket">
-  <%= link_to 'New Location', new_admin_location_path(:user_id => @user) %>
-</div>
+<% if @user.original.present? %>
+  <div class="row">
+    <div class="docket">
+      <h2>Original</h2>
+    </div>
+    <pre>
+      <%= @user.original.pretty_dump %>
+    </pre>
+  </div>
+<% end %>
