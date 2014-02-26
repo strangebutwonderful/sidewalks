@@ -74,8 +74,8 @@ class User < ActiveRecord::Base
   end
 
   def blank
-    [:email, :provider_screen_name, :provider_access_token, :provider_access_token_secret].each do |attr|
-      self[attr] = nil if self[attr].blank?
+    [:email, :provider_screen_name, :provider_access_token, :provider_access_token_secret].each do |attribute|
+      self[attribute] = nil if self[attribute].blank?
     end
 
     self
