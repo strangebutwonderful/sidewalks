@@ -1,7 +1,9 @@
 <% if @noises.each do |user_id, noises| %>
-  <%= render 'card', :noise => noises.first %>
-  <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noises.first} %>
-  <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noises.first} %>
+  <div class="row">
+    <%= render 'card', :noise => noises.first %>
+    <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noises.first} %>
+    <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noises.first} %>
+  </div>
 <% end.empty? %>
   <div class="card">
     <h2>It's quiet. Too quiet.</h2>
