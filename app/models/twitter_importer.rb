@@ -11,7 +11,10 @@ class TwitterImporter
       self.latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
         begin
           user = User.first_or_import_from_twitter(tweet.user)
+          user.create_original!(:dump => tweet.user.to_json)
+          
           noise = Noise.first_or_import_from_tweet(tweet, user)
+          noise.create_original!(:dump => tweet.to_json)
           noise.import_locations(user.locations)
 
           self.import_mentions_of_existing_users(noise, tweet.user_mentions)
@@ -30,6 +33,8 @@ class TwitterImporter
     Twitter.followers.each do |user|
       begin
         User.first_or_import_from_twitter(user)
+        user.create_original!(:dump => user.to_json)
+
       rescue => exception
         Rails.logger.error exception
       end
