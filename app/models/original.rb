@@ -22,6 +22,14 @@ class Original < ActiveRecord::Base
   
   validate :dump_is_json_format
 
+  def parsed_dump
+    @dump_json ||= JSON.parse(dump) 
+  end
+
+  def pretty_dump
+    JSON.pretty_generate parsed_dump
+  end
+
   protected
 
   def dump_is_json_format
