@@ -24,7 +24,6 @@ FactoryGirl.define do
     end
 
     name { Faker::Name.name }
-    email { Faker::Internet.email }
     provider "MyString"
     provider_screen_name { Faker::Internet.user_name }
   end

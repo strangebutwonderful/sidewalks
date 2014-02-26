@@ -90,9 +90,9 @@ class User < ActiveRecord::Base
       user.provider = auth['provider']
       user.provider_id = auth['uid']
       if auth['info']
-         user.name = auth['info']['name'] || ""
-         user.email = auth['info']['email'] || ""
-         user.provider_screen_name = auth['info']['nickname'] || ""
+         user.name = auth['info']['name']
+         user.email = auth['info']['email']
+         user.provider_screen_name = auth['info']['nickname']
       end
     end
   end
