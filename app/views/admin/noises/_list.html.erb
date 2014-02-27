@@ -1,6 +1,11 @@
 <% if @noises.each do |noise| %>
   <dl class="noise card">
-    <dt><%= link_to noise.text, noise, target: "_blank" %></dt>
+    <dt>
+      <%= link_to noise.text, noise, target: "_blank" %>
+      <% if current_user_is_admin? %>
+        (<%= link_to 'admin', admin_noise_path(noise) %>)
+      <% end %>
+    </dt>
     <dd>
       by
       <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
