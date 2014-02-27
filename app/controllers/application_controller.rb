@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/cartography/Cartography"
+
 class ApplicationController < ActionController::Base
   include Authentication
   include Cartography
