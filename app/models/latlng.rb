@@ -18,9 +18,7 @@ class LatLng
   private 
 
   def value_to_coordinate(value)
-    
     raise "Setting a blank coordinate is not allowed" if value.blank?
-
     BigDecimal.new(value)
   end
 
