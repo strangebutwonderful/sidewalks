@@ -29,16 +29,10 @@ class LatLngTest < ActiveSupport::TestCase
     end
   end
 
-  test "Constructor works with BigDecimal inputs" do
-    assert_nothing_raised RuntimeError do
-      LatLng.new(BigDecimal.new("0.0"), BigDecimal.new("0.0"))
-    end
-  end
-
-  test "Constructor works with BigDecimal inputs" do
-    assert_nothing_raised RuntimeError do
-      LatLng.new(BigDecimal.new("0.0"), BigDecimal.new("0.0"))
-    end
+  test "Latitude and longitude are BigDecimals" do
+    latlng = LatLng.new(0,0)
+    assert latlng.latitude.is_a? BigDecimal
+    assert latlng.longitude.is_a? BigDecimal
   end  
 
 end
