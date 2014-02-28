@@ -25,8 +25,8 @@
     </dd>
     <dd>
       <b>Locations:</b>
-      <% if user.locations.count > 0 %>
-        <%= user.locations.count %>
+      <% if user.locations_count > 0 %>
+        <%= user.locations_count %>
       <% else %>
         <%= link_to 'add new location', new_admin_location_path(:user_id => user) %>
       <% end %>

@@ -317,7 +317,8 @@ CREATE TABLE users (
     provider_access_token_secret character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    following boolean DEFAULT false NOT NULL
+    following boolean DEFAULT false NOT NULL,
+    locations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -617,3 +618,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140221024615');
 INSERT INTO schema_migrations (version) VALUES ('20140226182708');
 
 INSERT INTO schema_migrations (version) VALUES ('20140228052601');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228064013');

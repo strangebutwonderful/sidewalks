@@ -21,7 +21,7 @@
 #
 
 class Location < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   attr_accessible :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
   validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip
