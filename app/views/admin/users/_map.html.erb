@@ -1,4 +1,4 @@
-<% if user.has_coordinates? %>
+<% if user.latlngs? %>
   <%# TODO: set location for map %>
   <div id="map-user-<%= user.id %>"
     data-cartography-map 

@@ -5,12 +5,14 @@ class MapTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  test "FactoryGirl works" do
-    assert_not_nil FactoryGirl.build(:map)
+  test "Constructor works with latitude and longitude" do
+    latlng = LatLng.new(Faker::Address.latitude, Faker::Address.longitude)
+    assert_not_nil Map.new(latlng)
   end
 
   test "Boundaries not null" do
-    assert_not_nil FactoryGirl.build(:map).boundaries
+    latlng = LatLng.new(Faker::Address.latitude, Faker::Address.longitude)
+    assert_not_nil Map.new(latlng).boundaries
   end  
 
 end

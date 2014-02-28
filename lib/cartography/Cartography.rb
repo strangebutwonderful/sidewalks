@@ -24,8 +24,8 @@ module Cartography
     @request_longitude
   end
 
-  def request_coordinates
-    [request_latitude, request_longitude]
+  def request_latlng
+    LatLng.new(request_latitude, request_longitude)
   end
 
   def request_geolocation
@@ -35,7 +35,7 @@ module Cartography
 
   def self.included method 
     return unless method < ActionController::Base
-    method.helper_method :request_latitude, :request_longitude, :request_coordinates, :request_geolocation # , :any_other_helper_methods
+    method.helper_method :request_latitude, :request_longitude, :request_latlng, :request_geolocation # , :any_other_helper_methods
 
   end
 

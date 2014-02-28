@@ -44,16 +44,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def has_coordinates?
-    return !self.locations.empty?
+  def latlngs?
+    self.locations.any?
   end
 
-  def coordinates
-    @coordinates ||= self.locations.map { |location| location.coordinates }
+  def latlngs
+    @latlngs ||= self.locations.map { |location| location.latlng }
   end
-
+  
   def map 
-    @map ||= Map.new(self.coordinates)
+    @map ||= Map.new(self.latlngs) if self.latlngs?
   end  
 
   def update_credentials(auth)

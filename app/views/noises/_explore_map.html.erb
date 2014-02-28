@@ -1,7 +1,7 @@
 <div id="explore-map"
   data-cartography-exploremap
   data-cartography-map-bounds="<%= JSON(@map.boundaries) %>"
-  data-cartography-map-center="<%= JSON(request_coordinates) %>"
+  data-cartography-map-center="<%= JSON(request_latlng.to_a) %>"
   data-cartography-map-zoom="<%= @map.zoom %>"
   >
 

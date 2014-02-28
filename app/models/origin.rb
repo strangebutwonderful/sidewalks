@@ -22,12 +22,16 @@ class Origin < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
-  def coordinates
-    return [self.latitude, self.longitude]
+  def latlng?
+    self.latitude.present? && self.longitude.present?
+  end
+
+  def latlng
+    @latlng ||= LatLng.new(self.latitude, self.longitude) if latlng?
   end
 
   def map 
-    @map ||= Map.new([self.coordinates])
+    @map ||= Map.new(self.latlngs) if self.latlngs?
   end
 
   def directions_url

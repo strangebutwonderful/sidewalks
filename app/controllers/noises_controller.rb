@@ -10,13 +10,11 @@ class NoisesController < ApplicationController
   # GET /noises.json
   def index
     @noises = Noise.where_grouped_search(params)
-    @map = Map.new([[params[:latitude], params[:longitude]]], params)
+    @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|
       noises.each do |noise|
-        if noise.has_coordinates?
-          @map.add_coordinates(noise.coordinates)
-        end
+        @map.add_latlngs(noise.latlngs)
       end
     end
 

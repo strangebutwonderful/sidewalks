@@ -59,16 +59,16 @@ class Noise < ActiveRecord::Base
     self.user && self.user.provider_url
   end
 
-  def has_coordinates?
-    return !self.origins.empty?
+  def latlngs?
+    self.origins.any?
   end
 
-  def coordinates
-    @coordinates ||= self.origins.map { |origin| origin.coordinates }
+  def latlngs
+    @latlngs ||= self.origins.map { |origin| origin.latlng }
   end
 
   def map 
-    @map ||= Map.new(self.coordinates)
+    @map ||= Map.new(self.latlngs) if self.latlngs?
   end
 
   def import_from_tweet(tweet, user)
