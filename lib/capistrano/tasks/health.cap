@@ -16,4 +16,14 @@ namespace :health do
     end
   end
 
+  desc "check free memory"
+  task :free_memory do
+    on roles(:all) do |host|
+      info 'free memory on host'
+      capture 'free'
+    end
+  end
+
 end
+
+task :health => ['health:check_write_permissions', 'health:free_memory']
