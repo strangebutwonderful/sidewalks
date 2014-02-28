@@ -1,4 +1,4 @@
-require "#{Rails.root}/lib/cartography/Cartography"
+require "#{Rails.root}/lib/cartography/cartography"
 
 class ApplicationController < ActionController::Base
   include Authentication
