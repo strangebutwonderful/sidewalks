@@ -13,6 +13,7 @@
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #  following                    :boolean          default(FALSE), not null
+#  locations_count              :integer          default(0), not null
 #
 
 require 'test_helper'
