@@ -32,14 +32,14 @@ module Cartography
     LatLng.new(request_latitude, request_longitude)
   end
 
-  def request_geolocation
+  def override_request_geolocation
     params[:latitude] = request_latitude
     params[:longitude] = request_longitude
   end
 
   def self.included method 
     return unless method < ActionController::Base
-    method.helper_method :request_latitude, :request_longitude, :request_latlng, :request_geolocation # , :any_other_helper_methods
+    method.helper_method :request_latitude, :request_longitude, :request_latlng, :override_request_geolocation # , :any_other_helper_methods
 
   end
 

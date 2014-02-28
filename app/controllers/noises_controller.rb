@@ -2,7 +2,7 @@ class NoisesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :nearby, :show]
   before_filter :save_current_user_last_trail, :only => [:index, :nearby]
   before_filter :verify_admin, :except => [:index, :nearby, :show]
-  before_filter :request_geolocation, :only => [:index]
+  before_filter :override_request_geolocation, :only => [:index]
 
   respond_to :html, :json
 
