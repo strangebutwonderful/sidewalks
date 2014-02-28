@@ -9,21 +9,21 @@ class LatLng
 
   def coordinates
     [
-      @latitude, 
-      @longitude
+      self.latitude, 
+      self.longitude
     ]
   end
 
   def expand_north_east(latlng)
-    latlng.latitude = latitude if latlng.latitude > latitude
-    latlng.longitude = longitude if latlng.longitude > longitude
+    self.latitude = latlng.latitude if latlng.latitude > self.latitude
+    self.longitude = latlng.longitude if latlng.longitude > self.longitude
 
     self
   end
 
   def expand_south_west(latlng)
-    latlng.latitude = latitude if latlng.latitude < latitude
-    latlng.longitude = longitude if latlng.longitude < longitude
+    self.latitude = latlng.latitude if latlng.latitude < self.latitude
+    self.longitude = latlng.longitude if latlng.longitude < self.longitude
 
     self
   end
@@ -38,9 +38,32 @@ class LatLng
 
   def to_a
     [
-      latitude, 
-      longitude
+      self.latitude,
+      self.longitude
     ]
+  end
+
+  def ==(another_latlng)
+    self.latitude == another_latlng.latitude && self.longitude == another_latlng.longitude
+  end
+
+  def self.center(latlngs)
+    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
+    
+    summed_latitude = BigDecimal.new(0)
+    summed_longitude = BigDecimal.new(0)
+
+    latlngs.each do |latlng|
+      summed_latitude += latlng.latitude
+      summed_longitude += latlng.longitude
+    end
+
+    latlngs_count = latlngs.count
+
+    LatLng.new(
+      summed_latitude / BigDecimal.new(latlngs_count), 
+      summed_longitude / BigDecimal.new(latlngs_count)
+    )
   end
 
   private 

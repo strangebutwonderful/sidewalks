@@ -1,75 +1,49 @@
 class Map
-  attr_accessor :latlngs, :north_east_boundary_latlng, :south_west_boundary_latlng
+  attr_accessor :latlngs
 
-  def initialize(latlngs, params = {})
-    self.add_latlngs(latlngs)
-    self.center = params[:center]
-    self.zoom = params[:zoom]
+  def initialize(initial_latlngs, params = {})
+    self.latlngs ||= []
+    self.add_latlngs(initial_latlngs)
+    self.center = params[:center] if params[:center].present?
+    self.zoom = params[:zoom] if params[:zoom].present?
   end
 
-  def add_latlng(latlng)
-    latlngs ||= []
-
-    unless latlng.blank?
-      raise TypeError.new("Attempted to add a non LatLng object to map:" + latlng.inspect) unless latlng.is_a? LatLng
-
-      latlngs << latlng
-
-      if self.north_east_boundary_latlng.present?
-        self.north_east_boundary_latlng.expand_north_east(latlng)
-      else
-        self.north_east_boundary_latlng = latlng
-      end
-
-      if self.south_west_boundary_latlng.present?
-        self.south_west_boundary_latlng.expand_south_west(latlng)
-      else
-        self.south_west_boundary_latlng = latlng
-      end
-    end
-
-    latlngs
+  def add_latlng(value)
+    self.latlngs << value
+    self
   end
 
-  def add_latlngs(latlngs)
-    if latlngs.is_a? Enumerable
-      latlngs.each do |latlng|
-        self.add_latlng(latlng)
-      end
-    else
-      self.add_latlng(latlngs)
+  def add_latlngs(value)
+    value = [value] unless value.is_a? Enumerable
+
+    value.each do |value|
+      self.add_latlng(value)
     end
 
-    self.latlngs
+    self
   end
 
   def boundaries
     [
-      south_west_boundary,
-      north_east_boundary
+      self.south_west_boundary,
+      self.north_east_boundary
     ]
   end
 
-  def south_west_boundary
-    [
-      self.south_west_boundary_latlng.latitude, 
-      self.south_west_boundary_latlng.longitude
-    ]
+  def north_east_boundary_latlng
+    @north_east_boundary_latlng ||= calculate_north_east
+  end
+
+  def south_west_boundary_latlng
+    @south_west_boundary_latlng ||= calculate_south_west
   end
 
   def north_east_boundary
-    [
-      self.north_east_boundary_latlng.latitude, 
-      self.north_east_boundary_latlng.longitude
-    ]
+    self.north_east_boundary_latlng.to_a
   end
 
-  def centered_latitude
-    @centered_latitude = (self.south_west_boundary_latlng.latitude + self.north_east_boundary_latlng.latitude) / 2 unless @centered_latitude
-  end
-
-  def centered_longitude    
-    @centered_longitude = (self.south_west_boundary_latlng.longitude + self.north_east_boundary_latlng.longitude) / 2 unless @centered_longitude
+  def south_west_boundary
+    self.south_west_boundary_latlng.to_a
   end
 
   def center=(value)
@@ -77,7 +51,7 @@ class Map
   end
 
   def center 
-    @center ||= [centered_latitude, centered_longitude]
+    @center ||= LatLng.center(latlngs).to_a
   end
 
   def zoom=(value)
@@ -86,6 +60,24 @@ class Map
 
   def zoom 
     @zoom ||= 16
+  end
+
+  private
+
+  def calculate_north_east
+    boundary_latlng = self.latlngs.first
+    self.latlngs.each do |latlng|
+      boundary_latlng.expand_north_east(latlng)
+    end
+    boundary_latlng
+  end
+
+  def calculate_south_west
+    boundary_latlng = self.latlngs.first
+    self.latlngs.each do |latlng|
+      boundary_latlng.expand_south_west(latlng)
+    end
+    boundary_latlng
   end
 
 end
