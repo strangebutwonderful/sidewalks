@@ -29,8 +29,8 @@ class TwitterImporter
     Rails.logger.debug "Completed importing from twitter"
   end
 
-  def self.import_followers
-    Twitter.followers.each do |user|
+  def self.import_connections
+    Twitter.friends.each do |user|
       begin
         User.first_or_import_from_twitter(user)
         user.create_original!(:dump => user.to_json)

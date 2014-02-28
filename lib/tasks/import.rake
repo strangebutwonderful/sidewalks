@@ -6,7 +6,7 @@ namespace :import do
   end
 
   task :twitter_accounts => :environment do
-    TwitterImporter.import_followers
+    TwitterImporter.import_connections
   end
 
 end
