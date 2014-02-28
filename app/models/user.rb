@@ -12,6 +12,7 @@
 #  provider_access_token_secret :string(255)
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
+#  following                    :boolean          default(FALSE), not null
 #
 
 class User < ActiveRecord::Base
@@ -64,16 +65,21 @@ class User < ActiveRecord::Base
     end
   end
 
-  def import_from_twitter(twitter_user)
+  def import_from_twitter(twitter_user, following: false)
     logger.info "Creating a user from twitter noise: [#{twitter_user.inspect}]" 
     self.name = twitter_user.name || ""
     self.email = ""
     self.provider = User::PROVIDER_TWITTER
     self.provider_id = twitter_user.id.to_s
     self.provider_screen_name = twitter_user.screen_name || ""
-    self.save!
+    self.following = following
 
-    self.create_original(:dump => twitter_user.to_json)
+    self
+  end
+
+  def import_from_twitter!(twitter_user, following: false)
+    self.import_from_twitter(twitter_user, following)
+    self.save!
   end
 
   def blank
@@ -88,9 +94,9 @@ class User < ActiveRecord::Base
     providers = [User::PROVIDER_TWITTER]
   end
 
-  def self.first_or_import_from_twitter(twitter_user) 
+  def self.first_or_import_from_twitter(twitter_user, following: true) 
     User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_user.id.to_s).first_or_create do |user|
-      user.import_from_twitter(twitter_user)
+      user.import_from_twitter(twitter_user, following: following)
     end
   end
 

@@ -12,6 +12,7 @@
 #  provider_access_token_secret :string(255)
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
+#  following                    :boolean          default(FALSE), not null
 #
 
 require 'test_helper'

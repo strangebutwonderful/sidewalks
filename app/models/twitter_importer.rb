@@ -10,7 +10,7 @@ class TwitterImporter
 
       self.latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
         begin
-          user = User.first_or_import_from_twitter(tweet.user)
+          user = User.first_or_import_from_twitter(tweet.user, following: true)
           user.create_original!(:dump => tweet.user.to_json)
           
           noise = Noise.first_or_import_from_tweet(tweet, user)
@@ -32,7 +32,7 @@ class TwitterImporter
   def self.import_connections
     Twitter.friends.each do |user|
       begin
-        User.first_or_import_from_twitter(user)
+        User.first_or_import_from_twitter(user, following: true)
         user.create_original!(:dump => user.to_json)
 
       rescue => exception

@@ -83,6 +83,11 @@ class Noise < ActiveRecord::Base
     self.provider_id = tweet.try(:id).to_s
     self.text = tweet.try(:full_text)
 
+    self
+  end
+
+  def import_from_tweet!(tweet, user)
+    self.import_from_tweet(tweet, user)
     save!
   end
 

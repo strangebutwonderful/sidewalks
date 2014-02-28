@@ -15,6 +15,7 @@
     <dd><b>Provider Id:</b> <%= user.provider_id %></dd>
     <dd><b>Provider Access Token:</b> <%= user.provider_access_token %></dd>
     <dd><b>Provider Access Token Secret:</b> <%= user.provider_access_token_secret %></dd>
+    <dd><b>Following:</b> <%= user.following? %></dd>
     <dd><b>Added:</b> <%= user.created_at %></dd>
     <dd>
       <b>Roles:</b> <%= user.roles.first.name.titleize unless user.roles.first.nil? %>
