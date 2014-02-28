@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @noises = @user.noises.where_latest
+    @noises = @user.noises.limit(10)
 
     respond_with(@user, @noises)
   end
