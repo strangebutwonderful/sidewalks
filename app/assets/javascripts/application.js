@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require uri/uri
 //= require bootstrap
+//= require leaflet
+//= require leaflet_awesome_markers/leaflet_awesome_markers
 //= require app/app
 //= require_tree .

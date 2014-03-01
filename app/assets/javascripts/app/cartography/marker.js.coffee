@@ -81,7 +81,7 @@ class App.Cartography.Marker
     if options['iconUrl']
       icon = new L.Icon(options)
     else
-      icon = new L.Icon.Default(options)
+      icon = new L.AwesomeMarkers.Icon(options)
 
     icon
 
