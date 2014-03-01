@@ -42,7 +42,7 @@ class App.Cartography.Marker
     'className'
   ]
 
-  @_mapMarkerIconOptionNames: [
+  @_awesomeIconOptionNames: [
     'icon' # see font-awesome
     'prefix' # 'fa' for font-awesome or 'glyphicon' for bootstrap 3
     'markerColor' #'red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'
@@ -86,6 +86,7 @@ class App.Cartography.Marker
   loadIcon: ->
     icon = null
     options = @loadIconOptions()
+    awesomeOptions = @load
 
     if options['iconUrl']
       icon = new L.Icon(options)
@@ -101,6 +102,14 @@ class App.Cartography.Marker
       options[option] = optionValue if optionValue?
 
     options
+
+  loadAwesomeIconOptions: ->
+    options = {}
+    for option in App.Cartography.Marker._awesomeIconOptionNames
+      optionValue = @_$marker.data("cartography-map-marker-awesome-" + option.toLowerCase())
+      options[option] = optionValue if optionValue?
+
+    options    
 
   markerClickHander: (event) ->
     target = event.target
