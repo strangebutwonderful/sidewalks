@@ -86,12 +86,13 @@ class App.Cartography.Marker
   loadIcon: ->
     icon = null
     options = @loadIconOptions()
-    awesomeOptions = @load
+    awesomeOptions = @loadAwesomeIconOptions()
 
+    # if an image is specified, use that, else use an AwesomeMarker
     if options['iconUrl']
       icon = new L.Icon(options)
     else
-      icon = new L.AwesomeMarkers.Icon(options)
+      icon = new L.AwesomeMarkers.Icon(awesomeOptions)
 
     icon
 
@@ -109,7 +110,7 @@ class App.Cartography.Marker
       optionValue = @_$marker.data("cartography-map-marker-awesome-" + option.toLowerCase())
       options[option] = optionValue if optionValue?
 
-    options    
+    options
 
   markerClickHander: (event) ->
     target = event.target
