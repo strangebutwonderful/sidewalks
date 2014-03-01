@@ -42,6 +42,15 @@ class App.Cartography.Marker
     'className'
   ]
 
+  @_mapMarkerIconOptionNames: [
+    'icon' # see font-awesome
+    'prefix' # 'fa' for font-awesome or 'glyphicon' for bootstrap 3
+    'markerColor' #'red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'
+    'iconColor' # 'white', 'black' or css code (hex, rgba etc)
+    'spin' # true or false.
+    'extraClasses' 
+  ]
+
   ###
   private variables
   ###
