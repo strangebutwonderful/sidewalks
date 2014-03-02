@@ -29,7 +29,7 @@ class root.App
   ###
 
   constructor: ->
-    root.App.env = $('meta[name=app-environment').attr('content')
+    root.App.env = $('meta[name=app-environment]').attr('content')
     root.App._config = @loadConfig()
     $(document).trigger('app.ready')
 
