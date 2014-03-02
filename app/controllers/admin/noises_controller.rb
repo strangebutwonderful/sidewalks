@@ -5,7 +5,7 @@ class Admin::NoisesController < Admin::AdminController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.where_latest.all
+    @noises = Noise.order("created_at DESC").limit(50).all
 
     respond_with(:admin, @noises)
   end
