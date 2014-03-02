@@ -66,23 +66,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def import_from_twitter(twitter_user, following: false)
-    logger.info "Creating a user from twitter noise: [#{twitter_user.inspect}]" 
-    self.name = twitter_user.name || ""
-    self.email = ""
-    self.provider = User::PROVIDER_TWITTER
-    self.provider_id = twitter_user.id.to_s
-    self.provider_screen_name = twitter_user.screen_name || ""
-    self.following = following
-
-    self
-  end
-
-  def import_from_twitter!(twitter_user, following: false)
-    self.import_from_twitter(twitter_user, following)
-    self.save!
-  end
-
   def blank
     [:email, :provider_screen_name, :provider_access_token, :provider_access_token_secret].each do |attribute|
       self[attribute] = nil if self[attribute].blank?
@@ -95,16 +78,15 @@ class User < ActiveRecord::Base
     providers = [User::PROVIDER_TWITTER]
   end
 
-  def self.first_or_import_from_twitter(twitter_user, following: true) 
-    User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_user.id.to_s).first_or_create do |user|
-      user.import_from_twitter(twitter_user, following: following)
-    end
-  end
+  def self.first_or_create_from_twitter!(twitter_user, following: true) 
+    User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_user.id.to_s).first || User.create_from_twitter!(twitter_user, following: following)
+  end  
 
-  def self.create_with_omniauth(auth)
+  def self.create_from_omniauth!(auth)
     # See https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
-    create! do |user|
-      logger.info "Creating a user using omniauth: [#{auth.inspect}]" 
+    logger.info "Creating a user using omniauth: [#{auth.inspect}]" 
+    
+    user = create! do |user|
       user.provider = auth['provider']
       user.provider_id = auth['uid']
       if auth['info']
@@ -113,6 +95,24 @@ class User < ActiveRecord::Base
          user.provider_screen_name = auth['info']['nickname']
       end
     end
+
+    user.create_original!(:dump => auth.to_json)
+    user
+  end
+
+  def self.create_from_twitter!(twitter_user, following: false)
+    logger.info "Creating a user from twitter noise: [#{twitter_user.inspect}]" 
+    
+    user = create! do |user|
+      user.name = twitter_user.name
+      user.provider = User::PROVIDER_TWITTER
+      user.provider_id = twitter_user.id.to_s
+      self.provider_screen_name = twitter_user.screen_name
+      self.following = following
+    end
+
+    user.create_original!(:dump => twitter_user.to_json)
+    user
   end
 
   def self.where_search(params)

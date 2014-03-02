@@ -71,24 +71,23 @@ class Noise < ActiveRecord::Base
     @map ||= Map.new(self.latlngs) if self.latlngs?
   end
 
-  def import_from_tweet(tweet, user)
-    logger.info "Creating a noise from twitter noise: [#{tweet.inspect}]" 
+  def self.create_from_tweet!(tweet, user)
     
-    self.user_id = user.id
+    noise = create! do |noise|
+      noise.user_id = user.id
+      noise.provider = Noise::PROVIDER_TWITTER
+      noise.avatar_image_url = tweet.try(:profile_image_url_https)
+      noise.created_at = tweet.try(:created_at)
+      noise.provider_id = tweet.try(:id).to_s
+      noise.text = tweet.try(:full_text)
+    end
 
-    self.provider = Noise::PROVIDER_TWITTER
+    noise.create_original!(:dump => tweet.to_json)
 
-    self.avatar_image_url = tweet.try(:profile_image_url_https)
-    self.created_at = tweet.try(:created_at)
-    self.provider_id = tweet.try(:id).to_s
-    self.text = tweet.try(:full_text)
+    noise.import_locations(user.locations)
+    noise.import_locations_from_mentions_of_existing_users(noise, tweet.user_mentions)
 
-    self
-  end
-
-  def import_from_tweet!(tweet, user)
-    self.import_from_tweet(tweet, user)
-    save!
+    noise
   end
 
   def import_locations(locations)
@@ -102,6 +101,15 @@ class Noise < ActiveRecord::Base
     end
 
     success_count
+  end
+
+  def import_locations_from_mentions_of_existing_users(tweet_user_mentions)
+    tweet_user_mentions.each do |user_mention|
+      mentioned_user = User.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => user_mention.id.to_s).first
+      if mentioned_user
+        import_locations(mentioned_user.locations)
+      end
+    end
   end
 
   def self.search(params)
@@ -213,10 +221,8 @@ class Noise < ActiveRecord::Base
       .merge(Origin.where_search(params))
   end
 
-  def self.first_or_import_from_tweet(tweet, user) 
-    where(:provider => Noise::PROVIDER_TWITTER, :provider_id => tweet.id.to_s).first_or_create do |noise|
-      noise.import_from_tweet(tweet, user)
-    end
-  end
+  def self.first_or_create_from_tweet!(tweet, user) 
+    Noise.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => tweet.id.to_s).first || Noise.create_from_tweet!(tweet, user)
+  end  
 
 end
