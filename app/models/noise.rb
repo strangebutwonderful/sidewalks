@@ -85,7 +85,7 @@ class Noise < ActiveRecord::Base
     noise.create_original!(:dump => tweet.to_json)
 
     noise.import_locations(user.locations)
-    noise.import_locations_from_mentions_of_existing_users(noise, tweet.user_mentions)
+    noise.import_locations_from_mentions_of_existing_users(tweet.user_mentions)
 
     noise
   end
@@ -95,21 +95,28 @@ class Noise < ActiveRecord::Base
 
     success_count = 0
 
-    locations.each do |location|
-      self.origins << location.to_origin
-      success_count = success_count + 1
+    if locations.present?
+      locations.each do |location|
+        self.origins << location.to_origin
+        success_count = success_count + 1
+      end
     end
 
     success_count
   end
 
   def import_locations_from_mentions_of_existing_users(tweet_user_mentions)
-    tweet_user_mentions.each do |user_mention|
-      mentioned_user = User.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => user_mention.id.to_s).first
-      if mentioned_user
-        import_locations(mentioned_user.locations)
+    success_count = 0
+    if tweet_user_mentions.present?
+      tweet_user_mentions.each do |user_mention|
+        mentioned_user = User.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => user_mention.id.to_s).first
+        if mentioned_user
+          success_count += import_locations(mentioned_user.locations)
+        end
       end
     end
+
+    success_count
   end
 
   def self.search(params)

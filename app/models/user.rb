@@ -107,8 +107,8 @@ class User < ActiveRecord::Base
       user.name = twitter_user.name
       user.provider = User::PROVIDER_TWITTER
       user.provider_id = twitter_user.id.to_s
-      self.provider_screen_name = twitter_user.screen_name
-      self.following = following
+      user.provider_screen_name = twitter_user.screen_name
+      user.following = following
     end
 
     user.create_original!(:dump => twitter_user.to_json)

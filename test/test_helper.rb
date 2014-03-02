@@ -26,7 +26,7 @@ class ActiveSupport::TestCase
     )
   end
 
-  def build_twitter_noise
+  def build_tweet
     twitter_user = build_twitter_user
 
     OpenStruct.new(

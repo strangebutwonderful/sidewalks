@@ -48,32 +48,30 @@ test "FactoryGirl noise_with_original works" do
   end
 
   test "imports raw twitter object" do
-    twitter_noise = build_twitter_noise
+    tweet = build_tweet
 
-    user = User.first_or_import_from_twitter(twitter_noise.user)
+    user = User.first_or_create_from_twitter!(tweet.user)
 
-    noise = Noise.new
-
-    assert noise.import_from_tweet(twitter_noise, user)
+    assert Noise.create_from_tweet!(tweet, user)
   end
 
   test "imports noise when new noise" do
-    twitter_noise = build_twitter_noise
+    tweet = build_tweet
 
-    user = User.first_or_import_from_twitter(twitter_noise.user)
+    user = User.first_or_create_from_twitter!(tweet.user)
 
-    assert Noise.first_or_import_from_tweet(twitter_noise, user)
+    assert Noise.first_or_create_from_tweet!(tweet, user)
   end
 
   test "no new noise when importing old tweet" do 
-    twitter_noise = build_twitter_noise
+    tweet = build_tweet
 
-    user = User.first_or_import_from_twitter(twitter_noise.user)
+    user = User.first_or_create_from_twitter!(tweet.user)
 
-    Noise.first_or_import_from_tweet(twitter_noise, user)
+    Noise.first_or_create_from_tweet!(tweet, user)
 
     assert_no_difference('Noise.count') do 
-      assert Noise.first_or_import_from_tweet(twitter_noise, user)
+      assert Noise.first_or_create_from_tweet!(tweet, user)
     end
   end
 
