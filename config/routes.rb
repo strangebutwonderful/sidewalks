@@ -11,9 +11,16 @@ Sidewalks::Application.routes.draw do
   resources :search, :only => [:index]
 
   namespace :admin do
-    resources :config, :errors, :locations, :users
+    resources :config
+    resources :errors
+    resources :locations
     resources :noises do
       resources :origins
+    end
+    resources :users do
+      collection do 
+        get 'triage'
+      end
     end
   end
 

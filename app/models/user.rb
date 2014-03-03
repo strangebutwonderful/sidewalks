@@ -115,6 +115,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.where_location_count_less_than(count)
+    where("#{table_name}.locations_count < ?", count)
+  end
+
+  def self.where_needs_triage(params)
+    where_location_count_less_than(1)
+  end
+
   def self.where_search(params)
     order = params[:order]
 

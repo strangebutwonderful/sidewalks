@@ -8,6 +8,12 @@ class Admin::UsersController < Admin::AdminController
     respond_with(:admin, @users)
   end
 
+  def triage
+    @users = User.where_needs_triage(params).includes(:locations, :roles).all
+
+    render :index
+  end
+
   def show
     @user = User.find(params[:id])
 
