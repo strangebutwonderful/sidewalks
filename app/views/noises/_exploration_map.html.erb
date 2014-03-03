@@ -1,5 +1,5 @@
-<div id="explore-map"
-  data-cartography-exploremap
+<div id="exploration-map"
+  data-cartography-explorationmap
   data-cartography-map-bounds="<%= JSON(@map.boundaries) %>"
   data-cartography-map-center="<%= JSON(request_latlng.to_a) %>"
   data-cartography-map-zoom="<%= @map.zoom %>"
@@ -21,7 +21,7 @@
     <%= render '/shared/geolocatable' %>
   </div>
 
-  <div data-cartography-map-panel id="explore-map-panel">
+  <div data-cartography-map-panel id="exploration-map-panel">
   </div>
 
 </div>

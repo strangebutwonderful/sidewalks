@@ -5,12 +5,12 @@ root.App.Cartography ?= {}
 $ = jQuery
 # L = Leaflet
 
-class App.Cartography.ExploreMap extends App.Cartography.Map
+class App.Cartography.ExplorationMap extends App.Cartography.Map
 
   ### 
   public static variables
   ###
-  @selector = "[data-cartography-exploremap]"
+  @selector = "[data-cartography-explorationmap]"
 
   mapMoveEndHandler:(event) =>
     center = @_map.getCenter()
@@ -35,5 +35,5 @@ Initialize map on document ready
 ###
 
 $ ->
-  $(App.Cartography.ExploreMap.selector).each (index, mapElement) ->
-    new App.Cartography.ExploreMap(mapElement)
+  $(App.Cartography.ExplorationMap.selector).each (index, mapElement) ->
+    new App.Cartography.ExplorationMap(mapElement)
