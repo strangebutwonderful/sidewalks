@@ -20,7 +20,7 @@ gem 'rolify'
 gem 'thin'
 gem 'pg_search'
 gem 'exception_notification'
-gem 'twitter', '~> 4.8'
+gem 'twitter', '~> 5'
 gem 'geocoder'
 gem 'newrelic_rpm'
 gem "leaflet-rails", "~> 0.7"
