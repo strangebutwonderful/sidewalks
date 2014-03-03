@@ -6,9 +6,11 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  helper_method :bugsnag_api_key
   helper_method :current_user_last_trail
   helper_method :google_universal_analytics_tracking_code
   helper_method :import_noises
+
   private
 
   def save_current_user_last_trail
@@ -28,6 +30,12 @@ class ApplicationController < ActionController::Base
 
   def import_noises
     TwitterImporter.import_latest_from_sidewalks_twitter
+  end
+
+  def bugsnag_api_key
+    if Rails.env.production?
+      ENV['BUGSNAG_API_KEY']
+    end
   end
 
   def google_universal_analytics_tracking_code
