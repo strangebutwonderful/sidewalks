@@ -76,7 +76,7 @@ class Noise < ActiveRecord::Base
     noise = create! do |noise|
       noise.user_id = user.id
       noise.provider = Noise::PROVIDER_TWITTER
-      noise.avatar_image_url = tweet.try(:profile_image_url_https)
+      noise.avatar_image_url = tweet.try(:user).try(:profile_image_url_https)
       noise.created_at = tweet.try(:created_at)
       noise.provider_id = tweet.try(:id).to_s
       noise.text = tweet.try(:full_text)
