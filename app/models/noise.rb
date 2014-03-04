@@ -39,6 +39,8 @@ class Noise < ActiveRecord::Base
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
+  validates_format_of :avatar_image_url, :with => URI.regexp(['http', 'https']), :allow_nil => true
+
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
@@ -76,7 +78,7 @@ class Noise < ActiveRecord::Base
     noise = create! do |noise|
       noise.user_id = user.id
       noise.provider = Noise::PROVIDER_TWITTER
-      noise.avatar_image_url = tweet.try(:user).try(:profile_image_url_https)
+      noise.avatar_image_url = tweet.user.profile_image_url_https
       noise.created_at = tweet.try(:created_at)
       noise.provider_id = tweet.try(:id).to_s
       noise.text = tweet.try(:full_text)
