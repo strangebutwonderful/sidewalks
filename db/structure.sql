@@ -58,6 +58,43 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: accounts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE accounts (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    provider character varying(255) NOT NULL,
+    provider_id character varying(255) NOT NULL,
+    provider_screen_name character varying(255) NOT NULL,
+    provider_access_token character varying(255),
+    provider_access_token_secret character varying(255),
+    following boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE accounts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE accounts_id_seq OWNED BY accounts.id;
+
+
+--
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -355,6 +392,13 @@ CREATE TABLE users_roles (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY accounts ALTER COLUMN id SET DEFAULT nextval('accounts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
 
 
@@ -405,6 +449,14 @@ ALTER TABLE ONLY trails ALTER COLUMN id SET DEFAULT nextval('trails_id_seq'::reg
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -469,6 +521,13 @@ ALTER TABLE ONLY trails
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_accounts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_accounts_on_user_id ON accounts USING btree (user_id);
 
 
 --
@@ -620,3 +679,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140226182708');
 INSERT INTO schema_migrations (version) VALUES ('20140228052601');
 
 INSERT INTO schema_migrations (version) VALUES ('20140228064013');
+
+INSERT INTO schema_migrations (version) VALUES ('20140303222016');
+
+INSERT INTO schema_migrations (version) VALUES ('20140303223845');

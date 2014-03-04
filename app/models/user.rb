@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
 
   def self.create_from_omniauth!(auth)
     # See https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
-    logger.info "Creating a user using omniauth: [#{auth.inspect}]" 
+    logger.info "Creating a user from omniauth: [#{auth.inspect}]" 
     
     user = create! do |user|
       user.provider = auth['provider']
@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_twitter!(twitter_user, following: false)
-    logger.info "Creating a user from twitter noise: [#{twitter_user.inspect}]" 
+    logger.info "Creating a user from tweet: [#{twitter_user.inspect}]" 
     
     user = create! do |user|
       user.name = twitter_user.name

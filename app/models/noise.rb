@@ -74,14 +74,15 @@ class Noise < ActiveRecord::Base
   end
 
   def self.create_from_tweet!(tweet, user)
+    logger.info "Creating a noise from tweet: [#{tweet.inspect}]" 
     
     noise = create! do |noise|
-      noise.user_id = user.id
+      noise.avatar_image_url = tweet.user.profile_image_uri_https.to_s
+      noise.created_at = tweet.created_at
       noise.provider = Noise::PROVIDER_TWITTER
-      noise.avatar_image_url = tweet.user.profile_image_url_https
-      noise.created_at = tweet.try(:created_at)
-      noise.provider_id = tweet.try(:id).to_s
-      noise.text = tweet.try(:full_text)
+      noise.provider_id = tweet.id.to_s
+      noise.text = tweet.full_text
+      noise.user_id = user.id
     end
 
     noise.create_original!(:dump => tweet.to_json)

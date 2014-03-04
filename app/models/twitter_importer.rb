@@ -17,14 +17,8 @@ class TwitterImporter
     Rails.logger.debug "Begin importing from twitter"
 
     self.latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
-      begin
-        user = User.first_or_create_from_twitter!(tweet.user, following: true)
-        
-        noise = Noise.first_or_create_from_tweet!(tweet, user)
-
-      rescue => exception
-        Rails.logger.error exception
-      end
+      user = User.first_or_create_from_twitter!(tweet.user, following: true)
+      noise = Noise.first_or_create_from_tweet!(tweet, user)
     end
 
     Rails.logger.debug "Completed importing from twitter"
@@ -32,12 +26,12 @@ class TwitterImporter
 
   def self.import_connections
     TwitterImporter.twitter_client.friends.each do |twitter_user|
-      begin
-        User.first_or_create_from_twitter!(twitter_user, following: true)
-      rescue => exception
-        Rails.logger.error exception
-      end
+      User.first_or_create_from_twitter!(twitter_user, following: true)
     end
+  end
+
+  def self.gimme_a_tweet
+    self.latest_tweets_from_sidewalks_twitter.first
   end
 
   private 
