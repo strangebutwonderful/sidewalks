@@ -22,10 +22,9 @@ class User < ActiveRecord::Base
   rolify
   
   has_one :original, :as => :importable
-  has_many :locations
-  has_many :noises
-  has_many :trails
-  has_many :users
+  has_many :locations, dependent: :destroy
+  has_many :noises, dependent: :destroy
+  has_many :trails, dependent: :destroy
   
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email

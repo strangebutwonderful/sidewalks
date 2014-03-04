@@ -28,8 +28,8 @@ class Noise < ActiveRecord::Base
   delegate :url_helpers, to: 'Rails.application.routes' 
 
   belongs_to :user
-  has_one :original, :as => :importable
-  has_many :origins, uniq: true
+  has_one :original, as: :importable, dependent: :destroy
+  has_many :origins, uniq: true, dependent: :destroy
 
   replicate_associations :origins # for replicate gem
   
