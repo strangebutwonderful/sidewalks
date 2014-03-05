@@ -30,7 +30,6 @@ gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'
 gem "rails_autolink", '~> 1.1.5'
 gem 'whenever', '0.9.0', :require => false
-gem "bugsnag"
 group :development do
   gem 'annotate'
   gem 'better_errors'
@@ -51,6 +50,7 @@ group :test do
   gem 'mocha', :require => false
 end
 group :production do 
+  gem "bugsnag"
 end
 
 # For backups
