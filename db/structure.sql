@@ -105,8 +105,8 @@ CREATE TABLE locations (
     city character varying(255) DEFAULT 'San Francisco'::character varying NOT NULL,
     state character varying(255) DEFAULT 'CA'::character varying NOT NULL,
     zip integer NOT NULL,
-    latitude numeric(11,8),
-    longitude numeric(11,8),
+    latitude numeric(11,8) NOT NULL,
+    longitude numeric(11,8) NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -683,3 +683,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140228064013');
 INSERT INTO schema_migrations (version) VALUES ('20140303222016');
 
 INSERT INTO schema_migrations (version) VALUES ('20140303223845');
+
+INSERT INTO schema_migrations (version) VALUES ('20140305000312');

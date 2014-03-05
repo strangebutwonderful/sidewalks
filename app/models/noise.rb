@@ -74,7 +74,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.create_from_tweet!(tweet, user)
-    logger.info "Creating a noise from tweet: [#{tweet.inspect}]" 
+    logger.info "Creating a noise from tweet: [#{tweet.to_yaml}]" 
     
     noise = create! do |noise|
       noise.avatar_image_url = tweet.user.profile_image_uri_https.to_s
@@ -100,8 +100,10 @@ class Noise < ActiveRecord::Base
 
     if locations.present?
       locations.each do |location|
-        self.origins << location.to_origin
-        success_count = success_count + 1
+        unless self.origins.exists?(:latitude => location.latitude, :longitude => location.longitude)
+          self.origins << location.to_origin
+          success_count = success_count + 1
+        end
       end
     end
 
