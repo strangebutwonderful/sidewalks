@@ -5,14 +5,21 @@ namespace :feature do
     puts Feature.on? args.flag.to_sym
   end
 
-  desc "Turn a feature flag on"  
+  desc "Enable a feature flag"  
   task :on, [:flag] => :environment do |t, args|
     puts Feature.on args.flag.to_sym
   end
 
-  desc "Turn a feature flag off"  
+  desc "Disable a feature flag"  
   task :off, [:flag] => :environment do |t, args|
     puts Feature.off args.flag.to_sym
+  end
+
+  desc "Show list of features, does not currently support defaults"
+  task :list => :environment do
+    Feature.all.each do |feature|
+      puts feature.key + ':' + feature.enabled
+    end
   end
 
 end
