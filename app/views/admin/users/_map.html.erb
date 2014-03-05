@@ -5,6 +5,7 @@
     data-cartography-map-bounds="<%= JSON(user.map.boundaries) %>"
     data-cartography-map-center="<%= JSON(user.map.center) %>"
     data-cartography-map-zoom="<%= user.map.zoom %>"
+    data-cartography-map-scrollWheelZoom=false
     >
     <% user.locations.each do |location| %>
       <div data-cartography-map-marker

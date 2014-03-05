@@ -3,6 +3,7 @@
   data-cartography-map-bounds="<%= JSON(@map.boundaries) %>"
   data-cartography-map-center="<%= JSON(request_latlng.to_a) %>"
   data-cartography-map-zoom="<%= @map.zoom %>"
+  data-cartography-map-scrollWheelZoom=false
   >
 
   <% @noises.each do |user_id, noises| %>
