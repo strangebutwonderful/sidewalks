@@ -61,7 +61,7 @@ class App.Cartography.Map
     # compose map options
 
     # Assign map panel div
-    @_map = L.map(@getMapPanelId(@_$map), @mapOptions())
+    @_map = L.map(@getMapPanelId(), @mapOptions())
     center = @_map.getCenter()
     zoom = @_map.getZoom()
 
