@@ -110,6 +110,9 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    flip (1.0.0)
+      activesupport (>= 3.0, < 5)
+      i18n
     font-awesome-sass (4.0.3.1)
       sass (~> 3.2)
     formatador (0.2.4)
@@ -299,6 +302,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
+  flip (~> 1)
   font-awesome-sass (~> 4)
   geocoder
   guard-bundler

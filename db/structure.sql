@@ -58,6 +58,38 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: features; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE features (
+    id integer NOT NULL,
+    key character varying(255) NOT NULL,
+    enabled boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: features_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE features_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: features_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE features_id_seq OWNED BY features.id;
+
+
+--
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -355,6 +387,13 @@ CREATE TABLE users_roles (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY features ALTER COLUMN id SET DEFAULT nextval('features_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
 
 
@@ -405,6 +444,14 @@ ALTER TABLE ONLY trails ALTER COLUMN id SET DEFAULT nextval('trails_id_seq'::reg
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: features_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY features
+    ADD CONSTRAINT features_pkey PRIMARY KEY (id);
 
 
 --
@@ -626,3 +673,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140303222016');
 INSERT INTO schema_migrations (version) VALUES ('20140303223845');
 
 INSERT INTO schema_migrations (version) VALUES ('20140305000312');
+
+INSERT INTO schema_migrations (version) VALUES ('20140305211224');
