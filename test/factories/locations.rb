@@ -8,8 +8,8 @@
 #  city       :string(255)      default("San Francisco"), not null
 #  state      :string(255)      default("CA"), not null
 #  zip        :integer          not null
-#  latitude   :decimal(11, 8)
-#  longitude  :decimal(11, 8)
+#  latitude   :decimal(11, 8)   not null
+#  longitude  :decimal(11, 8)   not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
