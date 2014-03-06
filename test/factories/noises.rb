@@ -10,6 +10,7 @@
 #  updated_at       :datetime         not null
 #  provider         :string(255)      not null
 #  avatar_image_url :string(255)
+#  actionable       :boolean
 #
 # Indexes
 #

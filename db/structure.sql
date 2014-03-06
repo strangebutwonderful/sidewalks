@@ -138,7 +138,8 @@ CREATE TABLE noises (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     provider character varying(255) NOT NULL,
-    avatar_image_url character varying(255)
+    avatar_image_url character varying(255),
+    actionable boolean
 );
 
 
@@ -675,3 +676,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140303223845');
 INSERT INTO schema_migrations (version) VALUES ('20140305000312');
 
 INSERT INTO schema_migrations (version) VALUES ('20140305211224');
+
+INSERT INTO schema_migrations (version) VALUES ('20140306172319');

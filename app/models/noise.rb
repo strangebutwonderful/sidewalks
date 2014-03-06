@@ -10,6 +10,7 @@
 #  updated_at       :datetime         not null
 #  provider         :string(255)      not null
 #  avatar_image_url :string(255)
+#  actionable       :boolean
 #
 # Indexes
 #
@@ -33,7 +34,7 @@ class Noise < ActiveRecord::Base
 
   replicate_associations :origins # for replicate gem
   
-  attr_accessible :text, :provider, :provider_id
+  attr_accessible :text, :provider, :provider_id, :actionable
 
   attr_reader :provider_url, :user_name, :user_provider_url, :map
 
@@ -71,6 +72,18 @@ class Noise < ActiveRecord::Base
 
   def map 
     @map ||= Map.new(self.latlngs) if self.latlngs?
+  end
+
+  def actionablity_upvotable?
+    actionable != true
+  end
+
+  def actionablity_downvotable?
+    actionable != false
+  end
+
+  def actionablity_resetable?
+    !actionable.nil?
   end
 
   def self.create_from_tweet!(tweet, user)
