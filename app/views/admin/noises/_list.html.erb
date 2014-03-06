@@ -1,33 +1,7 @@
-<% if @noises.each do |noise| %>
-  <dl class="noise card">
-    <dt>
-      <%= link_to noise.text, noise, target: "_blank" %>
-      <% if current_user_is_admin? %>
-        (<%= link_to 'admin', admin_noise_path(noise) %>)
-      <% end %>
-    </dt>
-    <dd>
-      by
-      <%= link_to noise.user_name, noise.user_provider_url, target: "_blank" %>
-      <% if current_user_is_admin? %>
-        (<%= link_to 'admin', admin_user_path(noise.user) %>)
-      <% end %>
-      at
-      <%= link_to noise.provider_url, class: "provider", target: "_blank" do %>
-        <%= time_ago_in_words(noise.created_at) %> ago
-        <i class="provider-<%= noise.provider.downcase %>"></i>
-      <% end %>
-    </dd>
-    
-    <dd>
-      <% if current_user_is_admin? %>
-        <%= link_to 'Edit', edit_admin_noise_path(noise) %>
-        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </dd>
-  </dl>
-<% end.empty? %>
-  <div class="docket">
-    <p>Couldn't find anything</p>
+<% @noises.each do |noise| %>
+  <div class="row">
+    <%= render '/noises/card', :noise => noise %>
+    <%= render :partial => '/admin/noises/card_addendum', :locals => {:noise => noise} %>
+    <%= render :partial => '/admin/origins/card_addendum', :locals => {:noise => noise} %>
   </div>
 <% end %>
