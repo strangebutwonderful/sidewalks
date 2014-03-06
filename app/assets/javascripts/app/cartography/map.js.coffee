@@ -71,11 +71,11 @@ class App.Cartography.Map
     }).addTo(@_map)
 
     # Set map boundaries
-    # @_map.fitBounds(getMapBounds(@_$map))
     @bindMapMarkers()
 
     @_map.panTo(center, { animate: true, duration: 3 })
     @_map.setZoom(zoom)
+    # @_map.fitBounds(@getMapBounds())    
     @bindMapEvents()
 
   getMapTiles: () ->
