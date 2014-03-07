@@ -5,6 +5,10 @@
 
 [data-cartography-map-panel] {
   height: 180px;
+
+  &.expanded {
+    height: 360px;
+  }
 }
 
 [data-cartography-map-attribution] {
