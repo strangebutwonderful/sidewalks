@@ -4,6 +4,10 @@
   <h1>All locations</h1>
 </div>
 
+<div class="row">
+  <%= render 'map', :locations => @locations, :map => @map %>
+</div>
+
 <% @locations.each do |location| %>
   <dl class="card">
     <dt><%= link_to location.user.name, admin_user_path(location.user) %></dt>

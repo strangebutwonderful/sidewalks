@@ -103,6 +103,16 @@ class Neighborhood
     end
   end
 
+  def self.city_latlng(key)
+    city = Neighborhood.city(key)
+    
+    if city.present?
+      LatLng.new(city.latitude, city.longitude)
+    else
+      nil
+    end
+  end
+
   def self.districts
     unless @districts
       @districts = []

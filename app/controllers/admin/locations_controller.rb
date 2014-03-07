@@ -6,6 +6,11 @@ class Admin::LocationsController < Admin::AdminController
   # GET /locations.json
   def index
     @locations = Location.all
+    @map = Map.new
+
+    @locations.each do |location|
+      @map.add_latlngs(location.latlng)
+    end
 
     respond_with(:admin, @locations)
   end

@@ -1,7 +1,7 @@
 class Map
   attr_accessor :latlngs
 
-  def initialize(initial_latlngs, params = {})
+  def initialize(initial_latlngs = nil, params = {})
     self.latlngs ||= []
     self.add_latlngs(initial_latlngs)
     self.center = params[:center] if params[:center].present?
@@ -9,7 +9,10 @@ class Map
   end
 
   def add_latlng(value)
-    self.latlngs << value
+    unless value.nil?
+      self.latlngs << value
+    end
+    
     self
   end
 
@@ -28,6 +31,10 @@ class Map
       self.south_west_boundary,
       self.north_east_boundary
     ]
+  end
+
+  def default_latlng
+    Neighborhood.city_latlng(:sanfrancisco)
   end
 
   def north_east_boundary_latlng

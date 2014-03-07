@@ -1,0 +1,17 @@
+<div id="map"
+  data-cartography-map 
+  data-cartography-map-bounds="<%= JSON(map.boundaries) %>"
+  data-cartography-map-center="<%= JSON(map.center) %>"
+  data-cartography-map-zoom="<%= map.zoom %>"
+  data-cartography-map-scrollWheelZoom=false
+  >
+  <% locations.each do |location| %>
+    <div data-cartography-map-marker
+      data-cartography-map-marker-latitude="<%= location.latitude %>" 
+      data-cartography-map-marker-longitude="<%= location.longitude %>"
+    >
+    </div>
+  <% end %>
+  <div data-cartography-map-panel id="map-panel">
+  </div>
+</div>
