@@ -10,6 +10,14 @@ class Admin::NoisesController < Admin::AdminController
     respond_with(:admin, @noises)
   end
 
+  # GET /noises/triage
+  # GET /noises/triage.json
+  def triage
+    @noises = Noise.where_needs_triage(params).limit(50).all
+
+    render :index
+  end
+
   # GET /noises/1
   # GET /noises/1.json
   def show

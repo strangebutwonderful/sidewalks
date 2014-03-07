@@ -15,6 +15,10 @@ Sidewalks::Application.routes.draw do
     resources :errors
     resources :locations
     resources :noises do
+      collection do 
+        get 'triage'
+      end
+      
       resources :origins
     end
     resources :users do

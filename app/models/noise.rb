@@ -180,6 +180,11 @@ class Noise < ActiveRecord::Base
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
+  def self.where_needs_triage(params)
+    where(:actionable => nil).order("#{table_name}.created_at DESC")
+  end
+
+
   def self.joins_origins
     joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
   end

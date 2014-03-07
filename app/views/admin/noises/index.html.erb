@@ -1,3 +1,13 @@
 <%= render '/layouts/admin_navigation' %>
 
+<div class="docket">
+  <h1>Noises</h1>
+  <ul class="nav nav-pills">
+    <li>
+      <%= link_to 'triage', triage_admin_noises_path %>
+    </li>
+  </ul>
+</div>
+
+
 <%= render 'list' %>
