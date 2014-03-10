@@ -13,11 +13,10 @@ module Tracking
     # cookies[:latlng] comes in the form "latitude,longitude"
     unless cookies[:latlng].blank?
       coordinates = cookies[:latlng].split(',')
-      if current_user_signed_in?
-        @current_user_last_latlng ||= Trail.update_recent(current_user, coordinates[0], coordinates[1]).latlng
-      else
-        @current_user_last_latlng ||= LatLng.new(coordinates[0], coordinates[1])
-      end
+      @current_user_last_latlng ||= LatLng.new(coordinates[0], coordinates[1])
+
+      # Side effect behavior of saving the latlng for later
+      Trail.update_recent(current_user, coordinates[0], coordinates[1]) if current_user_signed_in?
     else
       @current_user_last_latlng ||= LatLng.new(request_latitude, request_longitude)
     end
