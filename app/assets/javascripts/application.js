@@ -12,6 +12,7 @@
 //
 //= require jquery/jquery
 //= require jquery_ujs
+//= require jquery_cookie/jquery_cookie
 //= require uri/uri
 //= require bootstrap
 //= require leaflet

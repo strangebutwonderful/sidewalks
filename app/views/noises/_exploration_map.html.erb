@@ -6,6 +6,22 @@
   data-cartography-map-scrollWheelZoom=false
   >
 
+  <% if last_known_latlng %>
+    <div data-cartography-map-marker
+      <%# TODO: initial lat/lng should be last known location of user %>
+      data-cartography-map-marker-latitude="<%= last_known_latlng.latitude %>" 
+      data-cartography-map-marker-longitude="<%= last_known_latlng.longitude %>"
+      data-cartography-map-marker-track=true
+      data-cartography-map-marker-awesome-icon="user"
+      data-cartography-map-marker-awesome-markerColor="cadetblue"
+      data-cartography-map-marker-awesome-markerColor-extraClasses="hidden"
+    >
+      <p>
+        This is you!
+      </p>
+    </div>
+  <% end %>
+
   <% @noises.each do |user_id, noises| %>
     <% noises.first.origins.each do |origin| %>
       <div data-cartography-map-marker

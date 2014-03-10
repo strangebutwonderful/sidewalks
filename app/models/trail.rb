@@ -20,6 +20,10 @@ class Trail < ActiveRecord::Base
   belongs_to :user
   attr_accessible :latitude, :longitude
 
+  def latlng
+    @latlng ||= LatLng.new(latitude, longitude)
+  end
+
   def self.update_recent(user, latitude, longitude)
     # TODO: should account for close location drift 
     trail = user.trails.where(latitude: latitude, longitude: longitude)

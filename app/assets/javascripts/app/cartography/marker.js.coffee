@@ -15,6 +15,7 @@ class App.Cartography.Marker
   private static variables
   ### 
 
+  # Options tied to Leaflet Marker or custom ones for local 
   @_mapMarkerOptionNames: [
     'icon'
     'clickable'
@@ -27,8 +28,10 @@ class App.Cartography.Marker
     'riseOnHover'
     'riseOffset'
     'scrollTo'
+    'track'
   ]
 
+  # Options tied to Leaflet Icon
   @_mapMarkerIconOptionNames: [
     'iconUrl'
     'iconRetinaUrl'
@@ -42,6 +45,7 @@ class App.Cartography.Marker
     'className'
   ]
 
+  # Options tied to Leaflet Awesome Marker
   @_awesomeIconOptionNames: [
     'icon' # see font-awesome
     'prefix' # 'fa' for font-awesome or 'glyphicon' for bootstrap 3
@@ -55,6 +59,7 @@ class App.Cartography.Marker
   private variables
   ###
 
+  _options: null
   _map: null
   _marker: null
   _$marker: null
@@ -62,26 +67,34 @@ class App.Cartography.Marker
   constructor: (markerElement, leafletMap) ->
     @_map = leafletMap
     @_$marker = $(markerElement)
-    $markerHtml = @_$marker.html()
+    @_options = @loadOptions()
 
     latitude = @_$marker.data("cartography-map-marker-latitude")
     longitude = @_$marker.data("cartography-map-marker-longitude")
     
-    markerOptions = @loadOptions()
-    
-    @_marker = L.marker([latitude, longitude], markerOptions).addTo(@_map)
+    @attachMarker(latitude, longitude)
+    @bindMarkerEvents()
+
+  attachMarker: (latitude, longitude) ->
+    $markerHtml = @_$marker.html()
+
+    @_marker = L.marker([latitude, longitude], @_options).addTo(@_map)
     @_marker.bindPopup($markerHtml) unless $.trim($markerHtml).length == 0
+
+  bindMarkerEvents: ->
     @_marker.on('click', @markerClickHander)
+    if @_options['track']? && navigator && navigator.geolocation
+      navigator.geolocation.watchPosition @geolocationSuccessHandler, @geolocationErrorHandler
 
   loadOptions: ->
-    options = {}
+    @_options = {}
     for option in App.Cartography.Marker._mapMarkerOptionNames
       optionValue = @_$marker.data("cartography-map-marker-" + option.toLowerCase())
-      options[option] = optionValue if optionValue?
+      @_options[option] = optionValue if optionValue?
 
-    options['icon'] = @loadIcon()
+    @_options['icon'] = @loadIcon()
 
-    options
+    @_options
 
   loadIcon: ->
     icon = null
@@ -121,3 +134,15 @@ class App.Cartography.Marker
     # scroll to anchor if set
     if target.options.scrollTo
       App.Web.Window.scrollToAnchor(target.options.scrollTo)
+
+  geolocationSuccessHandler: (position) =>
+    # App.Logger.debug position.coords
+
+    latitude = position.coords.latitude
+    longitude = position.coords.longitude
+    
+    @_marker.setLatLng([latitude, longitude])
+
+  geolocationErrorHandler: (msg) =>
+    # App.Logger.debug 'geolocation failed ' + error
+    @_marker

@@ -1,36 +1,19 @@
 require "#{Rails.root}/lib/cartography/cartography"
+require "#{Rails.root}/lib/tracking/tracking"
 
 class ApplicationController < ActionController::Base
   include Authentication
   include Cartography
+  include Tracking
 
   protect_from_forgery
 
+  before_filter :update_last_known_latlng
+
   helper_method :bugsnag_api_key
-  helper_method :current_user_last_trail
   helper_method :google_universal_analytics_tracking_code
-  helper_method :import_noises
 
   private
-
-  def save_current_user_last_trail
-    begin 
-      Trail.update_recent(current_user, request_latitude, request_longitude) if current_user 
-    rescue Exception => exception
-      Rails.logger.error exception
-      nil
-    end
-  end
-
-  def current_user_last_trail
-    if current_user
-      @current_user_last_trail ||= current_user.trails.last
-    end
-  end
-
-  def import_noises
-    TwitterImporter.import_latest_from_sidewalks_twitter
-  end
 
   def bugsnag_api_key
     if Rails.env.production?
