@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   
   has_one :original, :as => :importable
   has_many :locations, dependent: :destroy
-  has_many :noises, dependent: :destroy
+  has_many :noises, dependent: :destroy, :order => 'created_at DESC'
   has_many :trails, dependent: :destroy
   
   attr_accessible :role_ids, :as => :admin
