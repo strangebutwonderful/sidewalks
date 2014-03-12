@@ -22,7 +22,6 @@ gem 'pg_search'
 gem 'exception_notification'
 gem 'twitter', '~> 5'
 gem 'geocoder'
-gem 'newrelic_rpm'
 gem "leaflet-rails", "~> 0.7"
 gem 'capistrano', '~> 3'
 gem 'capistrano-rvm'
@@ -52,8 +51,8 @@ group :test do
 end
 group :production do 
   gem "bugsnag"
+  gem 'newrelic_rpm'
 end
 
 # For backups
-# gem 'backup', '~> 4', :require => false
 gem "replicate", '~> 1.5.1'
