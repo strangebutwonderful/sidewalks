@@ -87,10 +87,7 @@ class App.Cartography.Marker
       navigator.geolocation.watchPosition @geolocationSuccessHandler, @geolocationErrorHandler
 
   loadOptions: ->
-    @_options = {}
-    for option in App.Cartography.Marker._mapMarkerOptionNames
-      optionValue = @_$marker.data("cartography-map-marker-" + option.toLowerCase())
-      @_options[option] = optionValue if optionValue?
+    @_options = Lib.Options.load(App.Cartography.Marker._mapMarkerOptionNames, @_marker, "cartography-map-marker-")
 
     @_options['icon'] = @loadIcon()
 
@@ -98,32 +95,15 @@ class App.Cartography.Marker
 
   loadIcon: ->
     icon = null
-    options = @loadIconOptions()
-    awesomeOptions = @loadAwesomeIconOptions()
+    iconOptions = Lib.Options.load(App.Cartography.Marker._mapMarkerIconOptionNames, @_$marker, "cartography-map-marker-icon-")
+    awesomeIconOptions = Lib.Options.load(App.Cartography.Marker._awesomeIconOptionNames, @_$marker, "cartography-map-marker-awesome-")
 
-    # if an image is specified, use that, else use an AwesomeMarker
-    if options['iconUrl']
-      icon = new L.Icon(options)
+    if iconOptions['iconUrl']
+      icon = new L.Icon(iconOptions)
     else
-      icon = new L.AwesomeMarkers.Icon(awesomeOptions)
+      icon = new L.AwesomeMarkers.Icon(awesomeIconOptions)
 
     icon
-
-  loadIconOptions: ->
-    options = {}
-    for option in App.Cartography.Marker._mapMarkerIconOptionNames
-      optionValue = @_$marker.data("cartography-map-marker-icon-" + option.toLowerCase())
-      options[option] = optionValue if optionValue?
-
-    options
-
-  loadAwesomeIconOptions: ->
-    options = {}
-    for option in App.Cartography.Marker._awesomeIconOptionNames
-      optionValue = @_$marker.data("cartography-map-marker-awesome-" + option.toLowerCase())
-      options[option] = optionValue if optionValue?
-
-    options
 
   markerClickHander: (event) ->
     target = event.target

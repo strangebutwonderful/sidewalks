@@ -59,9 +59,10 @@ class App.Cartography.Map
     # App.Logger.debug @_$map
     
     # compose map options
+    mapOptions = Lib.Options.load(App.Cartography.Map._mapOptionNames, @_$map, "cartography-map-")
 
     # Assign map panel div
-    @_map = L.map(@getMapPanelId(), @mapOptions())
+    @_map = L.map(@getMapPanelId(), mapOptions)
     center = @_map.getCenter()
     zoom = @_map.getZoom()
 
@@ -112,14 +113,6 @@ class App.Cartography.Map
     # load map markers
     for markerElement in @_$map.find(App.Cartography.Marker.selector)
       new App.Cartography.Marker(markerElement, @_map)
-
-  mapOptions: ->
-    mapOptions = {}
-    for option in App.Cartography.Map._mapOptionNames
-      optionValue = @_$map.data("cartography-map-" + option.toLowerCase())
-      mapOptions[option] = optionValue if optionValue?
-
-    mapOptions
 
 ### 
 Initialize atlases on application ready
