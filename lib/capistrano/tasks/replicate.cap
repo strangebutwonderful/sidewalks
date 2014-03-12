@@ -6,33 +6,33 @@ def bundler_loaded?
   Gem::Specification::find_all_by_name('capistrano-bundler').any?
 end
 
-namespace :db do
+namespace :replicate do
 
   desc <<-DESC
   Replicates data from production site database to the local database.
    
   By default all database objects are downloaded:
    
-    cap db:replicate
+    cap replicate
    
   Set the DATA variable to specify the objects to download:
    
-    cap db:replicate DATA='User.find(1); Page.find(1)'
+    cap replicate DATA='User.find(1); Page.find(1)'
    
   Dependant records are automatically downloaded by Replicate, e.g. this downloads
   both the Project records and the User record:
    
-    cap db:replicate DATA='User.find_by_name("dave").projects'
+    cap replicate DATA='User.find_by_name("dave").projects'
    
   To empty the local database first, set CLEAR=1:
    
-    cap db:replicate CLEAR=1
+    cap replicate CLEAR=1
    
-    cap db:replicate CLEAR=1 DATA='User.all'
+    cap replicate CLEAR=1 DATA='User.all'
    
   See https://github.com/rtomayko/replicate for more details about Replicate.
   DESC
-  task replicate: ['deploy:set_rails_env'] do
+  task replicate_models: ['deploy:set_rails_env'] do
     on roles(:app) do 
  
       # RVM support
@@ -58,7 +58,7 @@ namespace :db do
       data = capture(command)
    
       # Clear the local database 
-      system "rake db:schema:load" if ENV["CLEAR"] == "1"
+      system "rake schema:load" if ENV["CLEAR"] == "1"
    
       # Load the data into the local database
       require File.dirname(__FILE__) + '/../../../config/environment'
@@ -70,3 +70,6 @@ namespace :db do
    end
   end
 end
+
+# alias the default to replicate_models
+task :replicate => ['replicate:replicate_models']
