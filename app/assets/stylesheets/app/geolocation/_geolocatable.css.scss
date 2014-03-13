@@ -1,36 +1,11 @@
-[data-geolocatable] {
+// Stupidly long selector to override bootstrap navbar defaults
+.navbar .nav > li > a.geolocatable {
 
-  &.btn {
-    @extend .btn-large;
-    @extend .btn-block;
-    background-image: none;
-    border: none;
-    box-shadow: none; 
+  color: inherit;
+  font-size: 20px;
 
-    &[data-geolocatable-state="ready"] {
-      @extend .btn-info;
-      background-image: none;
-      border: none;
-      box-shadow: none; 
-    }
-
-    &[data-geolocatable-state="waiting"] {
-      @extend .hidden;
-    }  
-
-    &[data-geolocatable-state="error"] [data-geolocatable-state-label="ready"],
-    &[data-geolocatable-state="error"] [data-geolocatable-state-label="thinking"],
-    &[data-geolocatable-state="error"] [data-geolocatable-state-label="waiting"],
-    &[data-geolocatable-state="ready"] [data-geolocatable-state-label="error"],
-    &[data-geolocatable-state="ready"] [data-geolocatable-state-label="thinking"],
-    &[data-geolocatable-state="ready"] [data-geolocatable-state-label="waiting"],
-    &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="error"],
-    &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="ready"],
-    &[data-geolocatable-state="thinking"] [data-geolocatable-state-label="waiting"],
-    &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="error"],
-    &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="ready"],
-    &[data-geolocatable-state="waiting"] [data-geolocatable-state-label="thinking"] {
-      @extend .hidden;
-    }
+  &[data-geolocatable-state="moved"] {
+    color: $btnPrimaryBackground;
   }
 }
+

@@ -1,13 +1,16 @@
 root = exports ? this # root and window are same thing in browser
 root.App.Geolocation ?= {}
 $ = jQuery
-# L = Leaflet
 
 class App.Geolocation.Geolocatable
   ### 
   public static variables
   ###
   @selector = '[data-geolocatable]';
+
+  @ERRORSTATE = 'error'
+  @HERESTATE = 'here' # User at location
+  @MOVEDSTATE = 'moved' # User not at location
 
   ###
   private variables
@@ -35,23 +38,25 @@ class App.Geolocation.Geolocatable
   geolocatableSuccessHandler: (position) =>
     # App.Logger.debug position.coords
 
-    latitude = position.coords.latitude
-    longitude = position.coords.longitude
-    
-    nextState = 'ready'
+    latlngQuery = {
+      latitude: position.coords.latitude
+      longitude: position.coords.longitude
+      }
     
     href = @_$geolocatable.attr('href') || window.location.href
-    uri = App.URILocation.replaceQuery(href, {
-      latitude: latitude
-      longitude: longitude
-      })
+
+    nextState = App.Geolocation.Geolocatable.HERESTATE
+
+    unless App.URILocation.queryContains(href, latlngQuery)
+      nextState = App.Geolocation.Geolocatable.MOVEDSTATE # TODO: if new latlng is same, set state as    
+    
+    uri = App.URILocation.replaceQuery(href, latlngQuery)
     
     @_$geolocatable.attr('href', uri.toString())
     @setState(nextState)
 
   geolocatableErrorHandler: (msg) =>
-    # App.Logger.debug 'geolocation failed ' + error
-    @setState('error')
+    @setState(App.Geolocation.Geolocatable.ERRORSTATE)
 
 $ ->
   $(App.Geolocation.Geolocatable.selector).each (index, element) =>

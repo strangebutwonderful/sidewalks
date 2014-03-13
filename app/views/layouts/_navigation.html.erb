@@ -1,3 +1,9 @@
-<%= link_to root_path, :class => 'brand', :data => { :geolocatable => nil } do %>
+<%= link_to root_path, :class => 'brand', :data => { :geolocatable => nil, :"geolocatable-state" => "here" } do %>
   Sidewalks
 <% end %>
+
+<ul class="nav pull-right">
+  <li>
+    <%= render '/shared/geolocatable' %>
+  </li>
+</ul>
