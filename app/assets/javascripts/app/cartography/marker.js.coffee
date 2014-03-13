@@ -27,6 +27,8 @@ class App.Cartography.Marker
     'opacity'
     'riseOnHover'
     'riseOffset'
+    'latitude'
+    'longitude'
     'scrollTo'
     'track'
   ]
@@ -69,10 +71,7 @@ class App.Cartography.Marker
     @_$marker = $(markerElement)
     @_options = @loadOptions()
 
-    latitude = @_$marker.data("cartography-map-marker-latitude")
-    longitude = @_$marker.data("cartography-map-marker-longitude")
-    
-    @attachMarker(latitude, longitude)
+    @attachMarker(@_options['latitude'], @_options['longitude'])
     @bindMarkerEvents()
 
   attachMarker: (latitude, longitude) ->
@@ -87,11 +86,11 @@ class App.Cartography.Marker
       navigator.geolocation.watchPosition @geolocationSuccessHandler, @geolocationErrorHandler
 
   loadOptions: ->
-    @_options = Lib.Options.load(App.Cartography.Marker._mapMarkerOptionNames, @_marker, "cartography-map-marker-")
+    options = Lib.Options.load(App.Cartography.Marker._mapMarkerOptionNames, @_$marker, "cartography-map-marker-")
 
-    @_options['icon'] = @loadIcon()
+    options['icon'] = @loadIcon()
 
-    @_options
+    options
 
   loadIcon: ->
     icon = null
