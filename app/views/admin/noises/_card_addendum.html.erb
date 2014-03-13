@@ -12,7 +12,7 @@
         <%= link_to 'Edit', edit_admin_noise_path(noise) %> 
       <% end %>
       <% if can? :destroy, noise %>
-        <%= link_to 'Destroy', noise, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Destroy', admin_noise_path(noise), method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </p>
   </div>
