@@ -1,4 +1,10 @@
 <div class="docket">
+  <h1>
+    Noise
+  </h1>
+</div>
+
+<div class="docket">
   <p>
     <b>Twitter Id:</b>
     <%= @noise.provider_id %>
@@ -13,10 +19,12 @@
     <b>Text:</b>
     <%= @noise.text %>
   </p>
+
 </div>
 
 <% if current_user_is_admin? %>
   <div class="docket">
+    <%= link_to 'Origins', admin_noise_origins_path(@noise) %> |
     <%= link_to 'Edit', edit_admin_noise_path(@noise) %>
   </div>
 <% end %>
