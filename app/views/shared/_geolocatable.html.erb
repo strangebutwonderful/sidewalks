@@ -1,4 +1,4 @@
-<%= link_to noises_path, :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :disabled => :disabled do %>
+<%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :disabled => :disabled do %>
   <span>
     <i class="fa fa-map-marker"></i>
   </span>

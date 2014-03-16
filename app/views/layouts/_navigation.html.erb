@@ -1,4 +1,4 @@
-<%= link_to noises_path, :class => 'brand', :data => { :geolocatable => nil, :"geolocatable-state" => "here" } do %>
+<%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => 'brand', :data => { :geolocatable => nil, :"geolocatable-state" => "here" } do %>
   Sidewalks
 <% end %>
 
