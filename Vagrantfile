@@ -34,6 +34,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   # config.ssh.forward_agent = true
 
+  # custom fix for "stdin: is not a tty" error (https://github.com/mitchellh/vagrant/issues/1673)
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -54,6 +57,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+
+  config.vm.provision :shell, :path => "server/setup.sh"
+  # config.vm.provision :shell, :path => "server/install-rvm.sh",  :args => "stable"
+  # config.vm.provision :shell, :path => "server/install-rvm-ruby.sh", :args => "2.0.0-p195"  
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.

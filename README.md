@@ -30,6 +30,8 @@ This application uses PostgreSQL with ActiveRecord.
 
 ## Development Environment Installation
 
+1. Clone this repo to your computer
+
 ### Vagrant 
 
 1. Install VirtualBox from dmg
@@ -38,6 +40,13 @@ This application uses PostgreSQL with ActiveRecord.
 1. Run `vagrant up` to install and start the Vagrant box specified in the `Vagrantfile`, run this in the future to boot up the server
 1. Run `vagrant ssh` to connect to the VM box)
 1. Once connected, the files for the rails app can be found in the `/vagrant`
+
+### Rails Development Config
+
+1. Copy `config/application.example.yml` to `config/application.yml`
+1. Copy `config/database.example.yml` to `config/database.yml`
+1. Update your new `config/application.yml` to use your own settings
+1. Update your new `config/database.yml` to use your own settings
 
 ## Contributing
 
