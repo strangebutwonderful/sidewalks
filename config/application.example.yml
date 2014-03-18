@@ -11,13 +11,6 @@
 # run `rake secret` to generate
 SECRET_TOKEN: Your_Secret_Token 
 
-MANDRILL_USERNAME: Your_Username
-MANDRILL_API_KEY: Your_API_Key
-
-ADMIN_NAME: First User
-ADMIN_EMAIL: user@example.com
-ADMIN_PASSWORD: changeme
-
 ROLES: [admin, user, VIP]
 
 TWITTER_ACCOUNT_SCREEN_NAME: Your_Twitter_Screen_Name
@@ -28,15 +21,20 @@ TWITTER_COMSUMER_SECRET: Your_OmniAuth_Provider_Secret
 TWITTER_OAUTH_ACCESS_TOKEN: Your_Twitter_Access_Token
 TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret
 
-# Emails 
-NOTIFIER_EMAIL_SENDER_ADDRESS: '"Your_Notifier_Name" <My_Email_Address>'
-NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Recipients_Emails
+# Email notifications 
+NOTIFIER_EMAIL_SENDER_ADDRESS: '"Your_Notifiers_Name" <Your_Email_Address>'
+NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Notification_Recipients_Emails
 
-# Optional
-MAPBOX_ID: Your_MapBox_Id
+###
+# Optional (Features will be disabled if these are not set)
+###
+# MAPBOX_ID: Your_MapBox_Id
 
-NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
+# MANDRILL_USERNAME: Your_Username
+# MANDRILL_API_KEY: Your_API_Key
 
-BUGSNAG_API_KEY: Your_Bugsnag_Key
+# NEW_RELIC_LICENCE_KEY: Your_New_Relic_Key
 
-GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code
+# BUGSNAG_API_KEY: Your_Bugsnag_Key
+
+# GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code
