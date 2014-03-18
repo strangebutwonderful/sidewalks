@@ -10,7 +10,7 @@ end
 gem 'jquery-rails', '~> 2.1'
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2'
-gem "font-awesome-sass", "~> 4"
+gem 'font-awesome-sass', '~> 4'
 gem 'cancan'
 gem 'figaro'
 gem 'omniauth'
@@ -22,14 +22,14 @@ gem 'pg_search'
 gem 'exception_notification'
 gem 'twitter', '~> 5'
 gem 'geocoder'
-gem "leaflet-rails", "~> 0.7"
+gem 'leaflet-rails', '~> 0.7'
 gem 'capistrano', '~> 3'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'
-gem "rails_autolink", '~> 1.1.5'
+gem 'rails_autolink', '~> 1.1.5'
 gem 'whenever', '0.9.0', :require => false
-gem "flip", "~> 1"
+gem 'flip', '~> 1'
 group :development do
   gem 'annotate'
   gem 'better_errors'
@@ -50,9 +50,9 @@ group :test do
   gem 'mocha', :require => false
 end
 group :production do 
-  gem "bugsnag"
+  gem 'bugsnag'
   gem 'newrelic_rpm'
 end
 
 # For backups
-gem "replicate", '~> 1.5.1'
+gem 'replicate', '~> 1.5.1'
