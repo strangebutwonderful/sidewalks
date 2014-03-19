@@ -15,6 +15,9 @@
 /vendor/bundle/
 /vendor/ruby/
 
+# chef cookbooks
+/cookbooks
+
 # vagrant status
 /.vagrant
 
