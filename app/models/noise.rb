@@ -160,22 +160,24 @@ class Noise < ActiveRecord::Base
     Noise.where_search_nearest(params).all + Noise.where_search_latest(params).all
   end
 
-  def self.where_search_nearest(params)
+  def self.where_search_nearest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 7.days.ago
     search_params[:distance] = 0.025
 
     where_nearby(search_params)
+    .where_actionable_or_not_triaged
     .joins_origins
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
-  def self.where_search_latest(params)
+  def self.where_search_latest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 12.hours.ago
 
     where_nearby(search_params)
     .where_latest
+    .where_actionable_or_not_triaged
     .joins_origins
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
@@ -184,6 +186,9 @@ class Noise < ActiveRecord::Base
     where(:actionable => nil).order("#{table_name}.created_at DESC")
   end
 
+  def self.where_actionable_or_not_triaged
+    where("#{table_name}.actionable IS NOT false")
+  end
 
   def self.joins_origins
     joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
