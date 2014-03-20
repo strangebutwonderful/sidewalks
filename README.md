@@ -45,10 +45,10 @@ This application uses PostgreSQL with ActiveRecord.
 
 #### RVM
 
-1. Run`sudo bash /vagrant/server/install-rvm.sh stable`
-1. Run `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.0.0-p195`
-1. Run `cd /vagrant`
-1. Run `bundle install`
+1. `sudo bash /vagrant/server/install-rvm.sh stable`
+1. `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.0.0-p195`
+1. `cd /vagrant`
+1. `bundle install`
 
 #### App Setup
 
