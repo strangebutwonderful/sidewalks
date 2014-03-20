@@ -106,12 +106,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = { 
       "postgresql" => {
         "apt_distribution" => "precise", # Ubuntu 12.04
+        "databases" => [
+          {
+            "name" => "sidewalks_development",
+            "owner" => "vagrant",
+            "template" => "template0",
+            "encoding" => "utf8",
+            "locale" => "en_US.UTF8",
+            "extensions" => [
+              "fuzzystrmatch",
+              "pg_trgm",
+              "plpgsql"
+              ]
+            }
+          ],
         "users" => [
-          "username" => "vagrant",
-          "password" => "password", # yay, super secure!
-          "superuser" => true,
-          "createdb" => true,
-          "login" => true
+          {
+            "username" => "vagrant",
+            "password" => "password", # yay, super secure!
+            "superuser" => true,
+            "createdb" => true,
+            "login" => true
+            }
           ],
         "version" => "9.3"
         },
