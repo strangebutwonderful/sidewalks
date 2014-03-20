@@ -10,7 +10,7 @@
 echo "Updating apt-get"
 apt-get -qq update
 
-apt-get -qq install curl build-essential zlib1g-dev libyaml-dev git-core
+apt-get -qq install curl build-essential zlib1g-dev libyaml-dev git-core libpq-dev nodejs
 
 ### 
 # Install basic ruby for chef
