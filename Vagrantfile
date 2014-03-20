@@ -108,16 +108,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "apt_distribution" => "precise", # Ubuntu 12.04
         "databases" => [
           {
+            "encoding" => "utf8",
+            # "extensions" => [
+            #   "fuzzystrmatch",
+            #   "pg_trgm"
+            #   ],
+            # "languages" => "plpgsql",
+            "locale" => "en_US.UTF8",
             "name" => "sidewalks_development",
             "owner" => "vagrant",
-            "template" => "template0",
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "extensions" => [
-              "fuzzystrmatch",
-              "pg_trgm",
-              "plpgsql"
-              ]
+            "template" => "template0"
             }
           ],
         "users" => [
