@@ -97,8 +97,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "postgresql"
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
-    chef.add_recipe "rvm::vagrant"
-    chef.add_recipe "rvm::user"
+    # chef.add_recipe "rvm::vagrant"
+    # chef.add_recipe "rvm::user"
 
     # chef.add_role "web"
   

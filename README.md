@@ -34,8 +34,8 @@ This application uses PostgreSQL with ActiveRecord.
 
 ### Vagrant 
 
-1. Install VirtualBox from dmg
-1. Install Vagrant from pkg
+1. Install [VirtualBox](https://www.virtualbox.org/) from dmg
+1. Install [Vagrant](http://www.vagrantup.com/) from pkg
 1. Change directory to the `sidewalks` folder
 1. Run `vagrant up` to install and start the Vagrant box specified in the `Vagrantfile`, run this in the future to boot up the server
 1. Run `vagrant ssh` to connect to the VM box)
@@ -43,10 +43,20 @@ This application uses PostgreSQL with ActiveRecord.
 
 ### Rails Development Config
 
+#### RVM
+
+1  `sudo bash /vagrant/server/install-rvm.sh stable`
+1  `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.0.0-p195`
+1. `cd /vagrant`
+1. `bundle install`
+
+#### App Setup
+
 1. Copy `config/application.example.yml` to `config/application.yml`
 1. Copy `config/database.example.yml` to `config/database.yml`
 1. Update your new `config/application.yml` to use your own settings
 1. Update your new `config/database.yml` to use your own settings
+1. `rake db:migrate`
 
 ## Contributing
 
