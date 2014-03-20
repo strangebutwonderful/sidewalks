@@ -1,11 +1,13 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 
- source /usr/local/rvm/scripts/rvm
+# Takes ruby version and optionally starter gems (e.g. "2.0.0 rails haml")
 
- rvm use --install $1
+source /usr/local/rvm/scripts/rvm
 
- shift
+rvm use --install $1
 
- if (( $# ))
- then gem install $@
- fi
+shift
+
+if (( $# ))
+then gem install $@
+fi
