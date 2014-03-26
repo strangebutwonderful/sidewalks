@@ -1,0 +1,14 @@
+@import "compass/css3/animation";
+@import "compass/css3/transform";
+
+@include keyframes(fade-from-right) {
+  0% {
+    opacity: 0;
+    @include transform(translateX(100px));
+  }
+
+  100% {
+    opacity: 1;
+    @include transform(translateX(0));
+  }
+}
