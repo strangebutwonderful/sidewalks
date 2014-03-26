@@ -5,23 +5,41 @@
 ####
 
 ###
+# Set correct locale
+###
+echo "Setting locale"
+locale-gen en_US.UTF-8
+update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+###
 # Update apt-get
 ###
 echo "Updating apt-get"
 apt-get -qq update
 
-apt-get -qq install curl build-essential zlib1g-dev libyaml-dev git-core libpq-dev nodejs
+echo "Installing libraries from apt-get"
+apt-get -qq install curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev git-core libpq-dev
 
 ### 
 # Install basic ruby for chef
+# Releases can be found at http://ftp.ruby-lang.org/pub/ruby/2.0/
 ###
-echo "Installing ruby 1.9.3 for chef"
-apt-get -qq -y install ruby1.9.3 build-essential 
+RUBY_RELEASE=ruby-2.0.0-p451
+echo "Installing ${RUBY_RELEASE} for chef"
+
+cd /tmp
+wget http://ftp.ruby-lang.org/pub/ruby/2.0/${RUBY_RELEASE}.tar.gz
+tar -xvzf ${RUBY_RELEASE}.tar.gz
+cd ${RUBY_RELEASE}/
+./configure --prefix=/usr/local
+make
+make install
 
 ###
 # Install chef-solo
 ###
 echo "Installing chef & librarian"
+cd /vagrant
 gem install chef librarian-chef --no-rdoc --no-ri --conservative
 # chef is now installed as `chef-solo`
 

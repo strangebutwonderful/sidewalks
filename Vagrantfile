@@ -4,22 +4,27 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+# Use a custom name to allow simple app creation once the vagrant vm is up'ed
+APPLICATION_NAME = (File.basename(Dir.getwd).to_s || 'MyApplication').downcase
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "chef/ubuntu-12.04" # https://vagrantcloud.com/chef/ubuntu-12.04
+  config.vm.box = "precise64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box" 
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -42,6 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder ".", "/#{APPLICATION_NAME}"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -59,8 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # information on available options.
 
   config.vm.provision :shell, :path => "server/setup.sh"
-  # config.vm.provision :shell, :path => "server/install-rvm.sh",  :args => "stable"
-  # config.vm.provision :shell, :path => "server/install-rvm-ruby.sh", :args => "2.0.0-p195"  
+  config.vm.provision :shell, :path => "server/install-nodejs.sh"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
@@ -90,15 +95,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   #
   config.vm.provision "chef_solo" do |chef|
-    # chef.cookbooks_path = "cookbooks"
+    chef.cookbooks_path = "cookbooks"
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
 
-    chef.add_recipe "postgresql"
+    chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
-    # chef.add_recipe "rvm::vagrant"
-    # chef.add_recipe "rvm::user"
+    chef.add_recipe "rvm::system"
+    chef.add_recipe "rvm::vagrant"
 
     # chef.add_role "web"
   
@@ -108,14 +113,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "apt_distribution" => "precise", # Ubuntu 12.04
         "databases" => [
           {
+            # generic database to allow easy command line access to psql
             "encoding" => "utf8",
-            # "extensions" => [
-            #   "fuzzystrmatch",
-            #   "pg_trgm"
-            #   ],
-            # "languages" => "plpgsql",
             "locale" => "en_US.UTF8",
-            "name" => "sidewalks_development",
+            "name" => "vagrant",
+            "owner" => "vagrant",
+            "template" => "template0"
+            },
+          {
+            # rails-esque database so `rails new` will work out of the box
+            "encoding" => "utf8",
+            "locale" => "en_US.UTF8",
+            "name" => "#{APPLICATION_NAME}_development",
+            "owner" => "vagrant",
+            "template" => "template0"
+            },
+          {
+            # rails-esque database so `rake test` will work out of the box
+            "encoding" => "utf8",
+            "locale" => "en_US.UTF8",
+            "name" => "#{APPLICATION_NAME}_test",
             "owner" => "vagrant",
             "template" => "template0"
             }
@@ -132,6 +149,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "version" => "9.3"
         },
       "rvm" => {
+        "default_ruby" => "ruby-2.0.0-p451@#{APPLICATION_NAME}",
+        "rubies" => [
+          "ruby-2.1.1"
+          ],
+        "rvmrc" => {
+          'rvm_project_rvmrc' => 1,
+          'rvm_gemset_create_on_use_flag' => 1,
+          'rvm_trust_rvmrcs_flag' => 1
+          }
         }
       }
   end
