@@ -84,3 +84,6 @@ pickle-email-*.html
 
 # Ignore coveralls.io configuration
 .coveralls.yml
+
+# Ignore phantomjs installs 
+/server/phantomjs
