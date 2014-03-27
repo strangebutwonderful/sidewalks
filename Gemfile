@@ -45,6 +45,7 @@ group :development, :test do
   gem 'coveralls', require: false # code coverage
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'jasmine'
 end
 group :test do 
   gem 'rake' # for travis
