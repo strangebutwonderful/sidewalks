@@ -14,6 +14,7 @@
 #  updated_at                   :datetime         not null
 #  following                    :boolean          default(FALSE), not null
 #  locations_count              :integer          default(0), not null
+#  mobile_venues_count          :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -351,7 +351,8 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     following boolean DEFAULT false NOT NULL,
-    locations_count integer DEFAULT 0 NOT NULL
+    locations_count integer DEFAULT 0 NOT NULL,
+    mobile_venues_count integer
 );
 
 
@@ -464,14 +465,6 @@ ALTER TABLE ONLY locations
 
 
 --
--- Name: noises_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY noises
-    ADD CONSTRAINT noises_pkey PRIMARY KEY (id);
-
-
---
 -- Name: originals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -509,6 +502,14 @@ ALTER TABLE ONLY sessions
 
 ALTER TABLE ONLY trails
     ADD CONSTRAINT trails_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tweets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY noises
+    ADD CONSTRAINT tweets_pkey PRIMARY KEY (id);
 
 
 --
@@ -637,12 +638,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131003172454');
 
 INSERT INTO schema_migrations (version) VALUES ('20131003180751');
 
-INSERT INTO schema_migrations (version) VALUES ('20131008234823');
-
-INSERT INTO schema_migrations (version) VALUES ('20131009010015');
-
-INSERT INTO schema_migrations (version) VALUES ('20131009010117');
-
 INSERT INTO schema_migrations (version) VALUES ('20131016031929');
 
 INSERT INTO schema_migrations (version) VALUES ('20131022173005');
@@ -669,12 +664,10 @@ INSERT INTO schema_migrations (version) VALUES ('20140228052601');
 
 INSERT INTO schema_migrations (version) VALUES ('20140228064013');
 
-INSERT INTO schema_migrations (version) VALUES ('20140303222016');
-
-INSERT INTO schema_migrations (version) VALUES ('20140303223845');
-
 INSERT INTO schema_migrations (version) VALUES ('20140305000312');
 
 INSERT INTO schema_migrations (version) VALUES ('20140305211224');
 
 INSERT INTO schema_migrations (version) VALUES ('20140306172319');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404002329');
