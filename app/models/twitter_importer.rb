@@ -30,6 +30,8 @@ class TwitterImporter
     TwitterImporter.twitter_client.friends.each do |twitter_user|
       User.first_or_create_from_twitter!(twitter_user, following: true)
     end
+
+    Chatterbox.tell "Imported twitter connections"
   end
 
   def self.gimme_a_tweet
