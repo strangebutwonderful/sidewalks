@@ -37,4 +37,4 @@ set :deploy_to, '/apps/sidewalks'
 
 set :bundle_flags, "--deployment"
 
-before "deploy:assets:precompile", :establish_symlinks
+before "deploy:assets:precompile", :create_config_yml_symlinks
