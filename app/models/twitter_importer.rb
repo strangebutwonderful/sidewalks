@@ -16,11 +16,13 @@ class TwitterImporter
 
     Rails.logger.debug "Begin importing from twitter"
 
-    self.latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
+    latest_tweets = self.latest_tweets_from_sidewalks_twitter
+    latest_tweets.reverse!.each do |tweet|
       user = User.first_or_create_from_twitter!(tweet.user, following: true)
       noise = Noise.first_or_create_from_tweet!(tweet, user)
     end
 
+    Chatterbox.tell "Imported #{latest_tweets.size} tweets"
     Rails.logger.debug "Completed importing from twitter"
   end
 
