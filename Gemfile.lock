@@ -239,6 +239,7 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    slack-notifier (0.4.0)
     slop (3.5.0)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -328,6 +329,7 @@ DEPENDENCIES
   replicate (~> 1.5.1)
   rolify
   sass-rails
+  slack-notifier (~> 0.4.0)
   thin
   twitter (~> 5)
   uglifier (>= 1.0.3)
