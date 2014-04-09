@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
-  # config.ssh.forward_agent = true
+  config.ssh.forward_agent = true
 
   # custom fix for "stdin: is not a tty" error (https://github.com/mitchellh/vagrant/issues/1673)
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
