@@ -47,6 +47,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'jasmine'
+  gem 'webmock', require: false
+  gem 'pry'
 end
 group :test do 
   gem 'rake' # for travis
