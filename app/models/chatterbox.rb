@@ -10,7 +10,7 @@ class Chatterbox
  
   def tell(message)
     unless notifier.nil?
-      message = message + " [development]" if Rails.env.development?
+      message = message + " [#{Rails.env}]" unless Rails.env.production?
       notifier.ping message
     else
       Rails.logger.debug "Chatterbox notifier does not exist, message was not sent"
