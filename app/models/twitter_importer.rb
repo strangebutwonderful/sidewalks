@@ -22,7 +22,6 @@ class TwitterImporter
       noise = Noise.first_or_create_from_tweet!(tweet, user)
     end
 
-    Chatterbox.tell "Imported #{latest_tweets.size} tweets"
     Rails.logger.debug "Completed importing from twitter"
   end
 
