@@ -86,6 +86,33 @@ class Noise < ActiveRecord::Base
     !actionable.nil?
   end
 
+  ### 
+  # Pull media objects out of noise
+  # Media object format:
+  # id: string
+  # id_str: string
+  # indicies: [int, int]
+  # media_url: http://pbs.twimg.com/media/BlDRfNDCUAAKxLW.jpg
+  # media_url_https: https://pbs.twimg.com/media/BlDRfNDCUAAKxLW.jpg
+  # url: http://t.co/3QILJLen8A
+  # display_url: pic.twitter.com/3QILJLen8A
+  # expanded_url: http://twitter.com/humphryslocombe/status/455093899820691456/photo/1
+  # type: photo
+  # sizes: {"thumb"=>{"w"=>150, "h"=>150, "resize"=>"crop"}, "small"=>{"w"=>340, "h"=>453, "resize"=>"fit"}, "medium"=>{"w"=>600, "h"=>800, "resize"=>"fit"}, "large"=>{"w"=>768, "h"=>1024, "resize"=>"fit"}}
+  ###
+  def media
+    @media ||= parse_media
+  end
+
+  def media_urls
+    @media_urls ||= media.collect { |m| m.try(:[], 'media_url_https') ||  m.try(:[], 'media_url_http') }
+  end
+
+  def parse_media
+    parsed_media ||= self.original.parsed_dump.try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
+    parsed_media ||= {}
+  end
+
   def self.create_from_tweet!(tweet, user)
     logger.info "Creating a noise from tweet: [#{tweet.to_yaml}]" 
     

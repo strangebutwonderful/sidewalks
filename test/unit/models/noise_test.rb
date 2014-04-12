@@ -29,7 +29,7 @@ class NoiseTest < ActiveSupport::TestCase
     end
   end
 
-test "FactoryGirl noise_with_original works" do
+  test "FactoryGirl noise_with_original works" do
     assert_difference('Noise.count') do
       noise = FactoryGirl.create(:noise_with_original)
     end
@@ -90,5 +90,10 @@ test "FactoryGirl noise_with_original works" do
   test "noise with coordinates generates map" do
     noise = FactoryGirl.create(:noise_with_coordinates)
     assert_not_nil(noise.map)    
+  end
+
+  test "media_urls never returns nil" do
+    noise = FactoryGirl.create(:noise)
+    assert_not_nil noise.media_urls
   end
 end
