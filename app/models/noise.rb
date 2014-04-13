@@ -109,7 +109,7 @@ class Noise < ActiveRecord::Base
   end
 
   def parse_media
-    parsed_media ||= self.original.parsed_dump.try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
+    parsed_media ||= self.try(:original).parsed_dump.try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
     parsed_media ||= {}
   end
 
