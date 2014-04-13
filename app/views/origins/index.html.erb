@@ -8,7 +8,8 @@
 <% if @origins.each do |origin| %>
   <% unless origin.noise.nil? %>
     <%= render 'noises/card', :noise => origin.noise %>
-    <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => origin.noise} %>
+    <%= render 'admin/noises/card_addendum', :noise => origin.noise %>
+    <%= render 'admin/noises/actionable_card_addendum', :noise => origin.noise %>
   <% end %>
 <% end.empty? %>
   <p>Couldn't find anything</p>

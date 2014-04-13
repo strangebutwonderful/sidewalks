@@ -3,10 +3,12 @@
 <%= render 'map', :noise => @noise %>
 
 <%= render 'admin/noises/card_addendum', :noise => @noise %>
+<%= render 'admin/noises/actionable_card_addendum', :noise => @noise %>
 <%= render 'admin/origins/card_addendum', :noise => @noise %>  
 
 <% @noises.each do |noise| %>
   <%= render 'card', :noise => noise %>
   <%= render 'admin/noises/card_addendum', :noise => noise %>
+  <%= render 'admin/noises/actionable_card_addendum', :noise => noise %>
   <%= render 'admin/origins/card_addendum', :noise => noise %>  
 <% end %>
