@@ -1,3 +1,7 @@
+# Compatibilty fix for older gems not updated to use RbConfig instead of Config
+Object.send :remove_const, :Config
+Config = RbConfig
+
 require 'rubygems'
 
 # Set up gems listed in the Gemfile.
