@@ -8,7 +8,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.where_grouped_search(params)
+    @noises = Noise.explore_and_group(params)
     @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|

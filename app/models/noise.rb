@@ -173,8 +173,8 @@ class Noise < ActiveRecord::Base
     end
   end
 
-  def self.where_grouped_search(params)
-    @noises = Noise.where_search(params)
+  def self.explore_and_group(params)
+    @noises = Noise.explore(params)
 
     @noises = @noises.group_by do |noise|
       noise.user_id
@@ -183,11 +183,11 @@ class Noise < ActiveRecord::Base
     @noises
   end
 
-  def self.where_search(params)
-    Noise.where_search_nearest(params).all + Noise.where_search_latest(params).all
+  def self.explore(params)
+    Noise.explore_nearest(params).all + Noise.explore_latest(params).all
   end
 
-  def self.where_search_nearest(params = [])
+  def self.explore_nearest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 7.days.ago
     search_params[:distance] = 0.025
@@ -198,7 +198,7 @@ class Noise < ActiveRecord::Base
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
-  def self.where_search_latest(params = [])
+  def self.explore_latest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 12.hours.ago
 
@@ -243,7 +243,7 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      noise_ids = Origin.where_search(params).where_since(params[:created_at]).pluck(:noise_id)
+      noise_ids = Origin.explore(params).where_since(params[:created_at]).pluck(:noise_id)
       where_ids(noise_ids)
       .order_by_ids(noise_ids)
     else
@@ -274,7 +274,7 @@ class Noise < ActiveRecord::Base
   def self.with_nearby_origins(params)
     joins(:origins)
       .preload(:origins)
-      .merge(Origin.where_search(params))
+      .merge(Origin.explore(params))
   end
 
   def self.first_or_create_from_tweet!(tweet, user) 

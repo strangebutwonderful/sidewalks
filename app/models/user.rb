@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
     where_location_count_less_than(1)
   end
 
-  def self.where_search(params)
+  def self.explore(params)
     order = params[:order]
 
     if order && order.casecmp('name') == 0
