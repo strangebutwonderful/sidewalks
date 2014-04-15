@@ -4,6 +4,7 @@
 }
 
 [data-cartography-map-panel] {
+  @include transition-property(height);
   height: 180px;
 
   &.expanded {

@@ -5,6 +5,9 @@ $ = jQuery
 
 class App.Web.Window
 
+  @getFullScreenHeight: () ->
+    $(window).height()
+
   ### 
   Smoothly scroll the browser to the given element
   @example App.Web.Window.scrollTo("#myDiv")

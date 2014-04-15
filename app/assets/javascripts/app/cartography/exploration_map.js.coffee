@@ -12,6 +12,10 @@ class App.Cartography.ExplorationMap extends App.Cartography.Map
   ###
   @selector = "[data-cartography-explorationmap]"
 
+  mapClickHandler:(event) =>
+    App.Web.Window.scrollTo(@_$map)
+    @expandMap()
+
   mapMoveEndHandler:(event) =>
     center = @_map.getCenter()
     latitude = center.lat
@@ -29,6 +33,7 @@ class App.Cartography.ExplorationMap extends App.Cartography.Map
   bindMapEvents: () ->
     super
     @_map.on('dragend', @mapMoveEndHandler)
+    @_map.on('click', @mapClickHandler)
 
 ### 
 Initialize map on document ready

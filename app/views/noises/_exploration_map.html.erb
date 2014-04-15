@@ -5,6 +5,9 @@
   data-cartography-map-zoom="<%= @map.zoom %>"
   data-cartography-map-scrollWheelZoom=false
   >
+  
+  <div data-cartography-map-panel id="exploration-map-panel">
+  </div>
 
   <% if last_known_latlng.present? %>
     <div data-cartography-map-marker
@@ -35,9 +38,6 @@
 
   <div data-cartography-map-attribution>
     Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors
-  </div>
-
-  <div data-cartography-map-panel id="exploration-map-panel">
   </div>
 
 </div>

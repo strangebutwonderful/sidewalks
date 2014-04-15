@@ -53,6 +53,7 @@ class App.Cartography.Map
 
   _map: null
   _$map: null
+  _$mapPanel: null
 
   constructor: (mapElement) ->
     @_$map = $(mapElement)
@@ -79,6 +80,14 @@ class App.Cartography.Map
     # @_map.fitBounds(@getMapBounds())    
     @bindMapEvents()
 
+  contractMap: () ->
+    @getMapPanel().removeClass('expanded')
+    @getMapPanel().css('height', null)
+
+  expandMap: () ->
+    @getMapPanel().addClass('expanded')
+    @getMapPanel().css('height', App.Web.Window.getFullScreenHeight())
+
   getMapTiles: () ->
     if App.Env.isProduction() && App.config('MAPBOX_ID')?
       "https://{s}.tiles.mapbox.com/v3/" + App.config('MAPBOX_ID') +  "/{z}/{x}/{y}.png"
@@ -95,10 +104,16 @@ class App.Cartography.Map
 
     attribution
 
+  getMapPanel: () ->
+    unless @_$mapPanel
+      @getMapPanelId()
+
+    @_$mapPanel
+
   getMapPanelId: () ->
     # TODO: create an element if one doesn't exist
-    mapPanelElement = @_$map.find('[data-cartography-map-panel]').eq(0)
-    mapPanelElement.attr('id')
+    @_$mapPanel = @_$map.find('[data-cartography-map-panel]').eq(0)
+    @_$mapPanel.attr('id')
 
   getMapBounds: () ->
     @_$map.data("cartography-map-bounds")
