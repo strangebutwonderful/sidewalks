@@ -27,4 +27,11 @@ namespace :rails do
     exec %Q(ssh #{app_server.user}@#{app_server.hostname} -p #{app_server.port || 22} -t "cd #{current_path} && #{command}")
   end
 
+  desc "tail production log files" 
+  task logs: ['deploy:set_rails_env'] do 
+    on roles(:app) do
+      execute "tail -f #{current_path}/log/#{fetch(:rails_env)}.log"
+    end
+  end
+
 end
