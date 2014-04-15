@@ -83,10 +83,12 @@ class App.Cartography.Map
   contractMap: () ->
     @getMapPanel().removeClass('expanded')
     @getMapPanel().css('height', null)
+    @_map.invalidateSize();
 
   expandMap: () ->
     @getMapPanel().addClass('expanded')
     @getMapPanel().css('height', App.Web.Window.getFullScreenHeight())
+    @_map.invalidateSize();
 
   getMapTiles: () ->
     if App.Env.isProduction() && App.config('MAPBOX_ID')?
