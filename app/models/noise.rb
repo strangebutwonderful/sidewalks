@@ -100,17 +100,38 @@ class Noise < ActiveRecord::Base
   # type: photo
   # sizes: {"thumb"=>{"w"=>150, "h"=>150, "resize"=>"crop"}, "small"=>{"w"=>340, "h"=>453, "resize"=>"fit"}, "medium"=>{"w"=>600, "h"=>800, "resize"=>"fit"}, "large"=>{"w"=>768, "h"=>1024, "resize"=>"fit"}}
   ###
-  def media
-    @media ||= parse_media
+  def media_entities
+    @media_entities ||= begin 
+      parsed_media_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
+      parsed_media_entities ||= {}
+      parsed_media_entities
+    end
   end
+
+  def url_entities
+    @url_entities ||= begin
+      parsed_url_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
+      parsed_url_entities ||= {}         
+      parsed_url_entities  
+    end
+  end  
 
   def media_urls
-    @media_urls ||= media.collect { |m| m.try(:[], 'media_url_https') ||  m.try(:[], 'media_url_http') }
+    @media_urls ||= local_media_urls + external_media_urls
   end
 
-  def parse_media
-    parsed_media ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
-    parsed_media ||= {}
+  def local_media_urls
+    @local_media_urls ||= media_entities.collect { |m| m.try(:[], 'media_url_https') ||  m.try(:[], 'media_url_http') }
+  end
+
+  def external_media_urls
+    @external_media_urls ||= begin 
+      urls = url_entities.collect { |m| m.try(:[], 'expanded_url') }
+      media_urls ||= urls.collect { |url| url += 'media/?size=l' if url.start_with?('http://instagram.com/', 'https://instagram.com/') }
+      media_urls.compact!
+      media_urls
+    end
+
   end
 
   def self.create_from_tweet!(tweet, user)
