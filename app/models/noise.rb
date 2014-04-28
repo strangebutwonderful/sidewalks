@@ -195,6 +195,7 @@ class Noise < ActiveRecord::Base
     where_nearby(search_params)
     .where_actionable_or_not_triaged
     .joins_origins
+    .joins(:original).preload(:original) # cuz nearby overrides includes
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
@@ -206,6 +207,7 @@ class Noise < ActiveRecord::Base
     .where_latest
     .where_actionable_or_not_triaged
     .joins_origins
+    .joins(:original).preload(:original) # cuz nearby overrides includes
     .joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
