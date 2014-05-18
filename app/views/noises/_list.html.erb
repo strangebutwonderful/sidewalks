@@ -1,9 +1,6 @@
 <% if @noises.each do |user_id, noises| %>
   <div class="row">
-    <%= render 'card', :noise => noises.first %>
-    <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noises.first} %>
-    <%= render :partial => 'admin/noises/actionable_card_addendum', :locals => {:noise => noises.first} %>
-    <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noises.first} %>
+    <%= render 'card_stack', :noise => noises.first %>
   </div>
 <% end.empty? %>
   <div class="card">
