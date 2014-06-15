@@ -3,6 +3,8 @@ body {
 }
 
 .header-navbar {
+  z-index: 100;
+
   &.headroom {
     position: fixed;
     top: 0;
