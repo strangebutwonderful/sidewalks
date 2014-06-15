@@ -4,7 +4,7 @@ rvm:
 before_script:
   - cp config/database.example.yml config/database.yml
   - psql -c 'create database sidewalks_test;' -U postgres
-  - rake db:migrate
+  - bundle exec rake db:test:prepare
 bundler_args: --without development
 
 addons:
@@ -13,5 +13,5 @@ addons:
 notifications:
   hipchat:
     secure: "G925WnKtN4yeDqmdNOFy7g6ieTPgj//sS1Os79gImXOCs2NxcWQu1sQCDqMvYczft4Xy1aPILtUk5cVpa1VhZx5HPZ8CYb7TC7hsrB5LyhbM5Q2u9c1UvUs9tPChkBSfu/yr5rBX0OrA9xv0t5W1wFhOUzGnVc7iHogq9wVLZW0="
-  slack: 
+  slack:
     secure: "XUZ+wDTNSifI0D/LBjqTSAjZ3Ic6Wh04z0qk3kFGf6C0BNMNQwjQWmOUpGFuxUJx1cLnfyfN1bCD0TUROymdAxkmlxK95jlQuyEuR4l6Gpsy0K7yuaWuAXgel82DAsF6IRxY9ZMDDScbfa9e2y4potJmDwcAWp3L7k8o9FujuXk="
