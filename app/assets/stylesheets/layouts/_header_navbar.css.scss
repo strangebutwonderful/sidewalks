@@ -14,7 +14,7 @@ body {
   }
 
   &.headroom--not-top {
-    background-color: darken($bodyBackground, 5%);
+    background-color: rgba(darken($bodyBackground, 5%), .75)
   }
 
   &.headroom--unpinned {
