@@ -10,7 +10,7 @@ group :assets do
   gem "compass", '~> 0.13.alpha.0'
   gem 'compass-rails', '>= 1.1.7'
   gem 'bootstrap-sass', '~> 2'
-  gem 'font-awesome-sass', '~> 4'  
+  gem 'font-awesome-sass', '~> 4'
 end
 gem 'cancan'
 gem 'figaro'
@@ -25,7 +25,7 @@ gem 'slack-notifier', '~> 0.4.0'
 gem 'twitter', '~> 5'
 gem 'geocoder'
 gem 'leaflet-rails', '~> 0.7'
-gem 'capistrano', '~> 3'
+gem 'capistrano', '~> 3.1'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1'
@@ -50,11 +50,11 @@ group :development, :test do
   gem 'webmock', require: false
   gem 'pry'
 end
-group :test do 
+group :test do
   gem 'rake' # for travis
   gem 'mocha', :require => false
 end
-group :production do 
+group :production do
   gem 'bugsnag'
   gem 'newrelic_rpm'
 end
