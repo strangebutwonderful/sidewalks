@@ -6,6 +6,8 @@ Sidewalks::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   match '/welcome' => 'home#welcome'
 
+  match '/explore' => 'noises#explore'
+
   resources :noises, :only => [:index, :show]
   resources :users, :only => [:show, :edit, :update]
   resources :search, :only => [:index]
@@ -15,14 +17,14 @@ Sidewalks::Application.routes.draw do
     resources :errors
     resources :locations
     resources :noises do
-      collection do 
+      collection do
         get 'triage'
       end
-      
+
       resources :origins
     end
     resources :users do
-      collection do 
+      collection do
         get 'triage'
       end
     end

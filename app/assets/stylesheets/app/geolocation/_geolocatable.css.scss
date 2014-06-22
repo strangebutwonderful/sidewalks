@@ -1,11 +1,4 @@
 // Stupidly long selector to override bootstrap navbar defaults
 .navbar .nav > li > a.geolocatable {
-
-  color: inherit;
-  font-size: 20px;
-
-  &[data-geolocatable-state="moved"] {
-    color: $btnPrimaryBackground;
-  }
+  color: $gray;
 }
-

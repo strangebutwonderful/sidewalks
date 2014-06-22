@@ -4,14 +4,15 @@
   data-cartography-map-center="<%= JSON(request_latlng.to_a) %>"
   data-cartography-map-zoom="<%= @map.zoom %>"
   data-cartography-map-scrollWheelZoom=false
+  data-cartography-map-zoomControl=false
   >
-  
-  <div data-cartography-map-panel id="exploration-map-panel">
+
+  <div data-cartography-map-panel id="exploration-map-panel" class="expanded fixed">
   </div>
 
   <% if last_known_latlng.present? %>
     <div data-cartography-map-marker
-      data-cartography-map-marker-latitude="<%= last_known_latlng.latitude %>" 
+      data-cartography-map-marker-latitude="<%= last_known_latlng.latitude %>"
       data-cartography-map-marker-longitude="<%= last_known_latlng.longitude %>"
       data-cartography-map-marker-track=true
       data-cartography-map-marker-awesome-icon="user"
@@ -26,7 +27,7 @@
   <% @noises.each do |user_id, noises| %>
     <% noises.first.origins.each do |origin| %>
       <div data-cartography-map-marker
-        data-cartography-map-marker-latitude="<%= origin.latitude %>" 
+        data-cartography-map-marker-latitude="<%= origin.latitude %>"
         data-cartography-map-marker-longitude="<%= origin.longitude %>"
         data-cartography-map-marker-scrollto="noise-<%= noises.first.id %>"
         data-cartography-map-marker-awesome-icon="circle"

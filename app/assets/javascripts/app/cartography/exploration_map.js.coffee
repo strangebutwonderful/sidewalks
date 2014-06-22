@@ -7,10 +7,15 @@ $ = jQuery
 
 class App.Cartography.ExplorationMap extends App.Cartography.Map
 
-  ### 
+  ###
   public static variables
   ###
   @selector = "[data-cartography-explorationmap]"
+
+  constructor: (mapElement) ->
+    super mapElement
+
+    @_map.addControl( L.control.zoom({position: 'bottomright'}) )
 
   mapClickHandler:(event) =>
     App.Web.Window.scrollTo(@_$map)
@@ -35,7 +40,7 @@ class App.Cartography.ExplorationMap extends App.Cartography.Map
     @_map.on('dragend', @mapMoveEndHandler)
     @_map.on('click', @mapClickHandler)
 
-### 
+###
 Initialize map on document ready
 ###
 

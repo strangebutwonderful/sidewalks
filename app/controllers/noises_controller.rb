@@ -1,7 +1,7 @@
 class NoisesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :nearby, :show]
+  before_filter :authenticate_user!, :except => [:index, :explore, :show]
   before_filter :override_request_geolocation, :only => [:index]
-  before_filter :verify_admin, :except => [:index, :nearby, :show]
+  before_filter :verify_admin, :except => [:index, :explore, :show]
 
   respond_to :html, :json
 
@@ -19,6 +19,23 @@ class NoisesController < ApplicationController
 
     respond_with @noises
   end
+
+  # GET /explore
+  # GET /explore.json
+  def explore
+    @noises = Noise.explore_and_group(params)
+    @map = Map.new(request_latlng, params)
+
+    @noises.each do |user_id, noises|
+      noises.each do |noise|
+        @map.add_latlngs(noise.latlngs)
+      end
+    end
+
+    respond_with @noises
+  end
+
+
 
   # GET /noises/1
   # GET /noises/1.json

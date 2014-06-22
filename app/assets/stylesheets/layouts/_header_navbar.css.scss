@@ -1,9 +1,10 @@
 body {
-  padding-top: 44px;
+  padding-top: $header-navbar-height;
 }
 
 .header-navbar {
-  z-index: 100;
+  height: $header-navbar-height;
+  z-index: 1000;
 
   &.headroom {
     position: fixed;
