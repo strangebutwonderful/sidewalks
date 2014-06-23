@@ -3,6 +3,7 @@ body {
 }
 
 .header-navbar {
+  background-color: rgba(darken($bodyBackground, 5%), .75);
   height: $header-navbar-height;
   z-index: 1000;
 
@@ -12,10 +13,6 @@ body {
     left: 0;
     right: 0;
     transition: all .2s ease-in-out;
-  }
-
-  &.headroom--not-top {
-    background-color: rgba(darken($bodyBackground, 5%), .75)
   }
 
   &.headroom--unpinned {
