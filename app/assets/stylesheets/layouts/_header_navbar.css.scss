@@ -2,10 +2,18 @@ body {
   padding-top: $header-navbar-height;
 }
 
+
+// application nav bar
+
 .header-navbar {
   background-color: rgba(darken($bodyBackground, 5%), .75);
   height: $header-navbar-height;
   z-index: 1000;
+
+  .navbar-inner {
+    background: transparent;
+    border: none;
+  }
 
   &.headroom {
     position: fixed;
