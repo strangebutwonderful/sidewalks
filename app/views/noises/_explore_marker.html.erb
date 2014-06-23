@@ -1,0 +1,20 @@
+<div class="noise card media" id="noise-<%= noise.id %>" data-blocklink data-blocklink-href="<%= noise_url noise %>">
+
+  <div class="media-body">
+
+    <h1 class="media-heading">
+      <%= auto_link noise.text, html: { target: '_blank' } %>
+    </h1>
+
+    <p class="muted">
+      <%= link_to noise.user_name, noise.user, class: "muted" %>
+      |
+      <%= link_to noise.provider_url, class: "muted provider", target: "_blank" do %>
+        <%= time_ago_in_words(noise.created_at) %> ago
+        <i class="provider-<%= noise.provider.downcase %>"></i>
+      <% end %>
+    </p>
+
+  </div>
+
+</div>
