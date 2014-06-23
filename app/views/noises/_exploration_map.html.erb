@@ -29,10 +29,10 @@
       <div data-cartography-map-marker
         data-cartography-map-marker-latitude="<%= origin.latitude %>"
         data-cartography-map-marker-longitude="<%= origin.longitude %>"
-        data-cartography-map-marker-scrollto="noise-<%= noises.first.id %>"
         data-cartography-map-marker-awesome-icon="circle"
         data-cartography-map-marker-awesome-markerColor="blue"
       >
+        <%= render 'card_stack', :noise => noises.first %>
       </div>
     <% end %>
   <% end %>

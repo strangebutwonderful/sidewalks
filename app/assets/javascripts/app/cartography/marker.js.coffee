@@ -109,6 +109,7 @@ class App.Cartography.Marker
 
     # center map to marker
     @_map.panTo(target.getLatLng(), { animate: true, duration: 2 })
+    @_map.panBy([0, @_map.getSize().y * -0.45])
 
     # scroll to anchor if set
     if target.options.scrollTo
