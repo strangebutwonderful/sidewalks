@@ -4,13 +4,13 @@
 
 <ul class="nav pull-right">
   <li>
+    <%= render '/shared/geolocatable' %>
+  </li>
+  <li>
     <%= link_to explore_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
       <span>
         Explore
       </span>
     <% end %>
-  </li>
-  <li>
-    <%= render '/shared/geolocatable' %>
   </li>
 </ul>
