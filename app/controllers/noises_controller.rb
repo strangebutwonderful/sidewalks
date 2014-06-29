@@ -35,8 +35,6 @@ class NoisesController < ApplicationController
     respond_with @noises
   end
 
-
-
   # GET /noises/1
   # GET /noises/1.json
   def show

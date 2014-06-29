@@ -6,6 +6,18 @@
 <%= render 'admin/noises/actionable_card_addendum', :noise => @noise %>
 <%= render 'admin/origins/card_addendum', :noise => @noise %>
 
-<% @noises.each do |noise| %>
-  <%= render 'card_stack', :noise => noise %>
+<% unless @noises.empty? %>
+
+  <div class="row">
+    <div class="page-heading">
+      <h2>
+        Previously by <%= @noise.user_name %>
+      </h2>
+    </div>
+  </div>
+
+  <% @noises.each do |noise| %>
+    <%= render 'card_stack', :noise => noise %>
+  <% end %>
+
 <% end %>
