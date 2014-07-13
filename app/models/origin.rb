@@ -17,7 +17,7 @@
 class Origin < ActiveRecord::Base
   belongs_to :noise
   has_one :user, :through => :noise
-  
+
   attr_accessible :latitude, :longitude
 
   reverse_geocoded_by :latitude, :longitude
@@ -30,7 +30,7 @@ class Origin < ActiveRecord::Base
     @latlng ||= LatLng.new(self.latitude, self.longitude) if latlng?
   end
 
-  def map 
+  def map
     @map ||= Map.new(self.latlngs) if self.latlngs?
   end
 
@@ -50,7 +50,7 @@ class Origin < ActiveRecord::Base
     end
   end
 
-  def self.where_ids(ids) 
+  def self.where_ids(ids)
     unless ids.nil?
       where(:id => ids)
     else
@@ -87,5 +87,5 @@ class Origin < ActiveRecord::Base
 
   def self.explore(params)
     Origin.where_nearby(params)
-  end  
+  end
 end
