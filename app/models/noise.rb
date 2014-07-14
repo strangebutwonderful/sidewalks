@@ -24,13 +24,12 @@ class Noise < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
 
-  scope :none, -> { where '1 = 0' }
-
   delegate :url_helpers, to: 'Rails.application.routes'
 
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
-  has_many :origins, uniq: true, dependent: :destroy
+  has_many :origins, ->{ uniq true },
+    dependent: :destroy
 
   replicate_associations :origins # for replicate gem
 
@@ -102,7 +101,7 @@ class Noise < ActiveRecord::Base
   ###
   def media_entities
     @media_entities ||= begin
-      parsed_media_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
+      parsed_media_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
       parsed_media_entities ||= {}
       parsed_media_entities
     end
@@ -110,7 +109,7 @@ class Noise < ActiveRecord::Base
 
   def url_entities
     @url_entities ||= begin
-      parsed_url_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
+      parsed_url_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
       parsed_url_entities ||= {}
       parsed_url_entities
     end
@@ -266,9 +265,8 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      noise_ids = Origin.explore(params).where_since(params[:created_at]).pluck(:noise_id)
-      where_ids(noise_ids)
-      .order_by_ids(noise_ids)
+      noise_ids = Origin.explore( params ).where_since( params[:created_at] ).map &:noise_id
+      where_ids( noise_ids ).order_by_ids( noise_ids )
     else
       scoped
     end
@@ -285,19 +283,13 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_latest
-    where_since(12.hours.ago)
+    where_since 12.hours.ago
   end
 
   def self.where_authored_by_user_before(user_id, time)
     where(:user_id => user_id)
       .where("#{table_name}.created_at < ?", time)
       .order("#{table_name}.created_at DESC")
-  end
-
-  def self.with_nearby_origins(params)
-    joins(:origins)
-      .preload(:origins)
-      .merge(Origin.explore(params))
   end
 
   def self.first_or_create_from_tweet!(tweet, user)

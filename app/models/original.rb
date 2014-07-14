@@ -11,33 +11,17 @@
 #
 
 class Original < ActiveRecord::Base
-  
+
   belongs_to :importable, :polymorphic => true
-  
+
   attr_accessible :dump
 
   validates :importable_id, presence: true
   validates :importable_type, presence: true
   validates :dump, presence: true
-  
-  validate :dump_is_json_format
-
-  def parsed_dump
-    @dump_json ||= JSON.parse(dump) 
-  end
 
   def pretty_dump
-    JSON.pretty_generate parsed_dump
-  end
-
-  protected
-
-  def dump_is_json_format
-    begin
-      !!JSON.parse(dump)
-    rescue
-      errors[:base] << "not in json format"
-    end
+    JSON.pretty_generate dump
   end
 
 end

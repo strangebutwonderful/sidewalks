@@ -15,6 +15,7 @@
 #
 
 class Origin < ActiveRecord::Base
+
   belongs_to :noise
   has_one :user, :through => :noise
 
@@ -67,10 +68,10 @@ class Origin < ActiveRecord::Base
   end
 
   def self.where_nearby(params)
-    latitude = params[:latitude]
+    latitude  = params[:latitude]
     longitude = params[:longitude]
-    location = params[:location]
-    distance = params[:distance] || 1.5
+    location  = params[:location]
+    distance  = params[:distance] || 1.5
 
     if latitude && longitude
       search_location = [latitude, longitude]

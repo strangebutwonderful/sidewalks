@@ -16,7 +16,7 @@ ROLES: [admin, user, VIP]
 TWITTER_ACCOUNT_SCREEN_NAME: Your_Twitter_Screen_Name
 
 TWITTER_CONSUMER_KEY: Your_OmniAuth_Provider_Key
-TWITTER_COMSUMER_SECRET: Your_OmniAuth_Provider_Secret
+TWITTER_CONSUMER_SECRET: Your_OmniAuth_Provider_Secret
 
 TWITTER_OAUTH_ACCESS_TOKEN: Your_Twitter_Access_Token
 TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret

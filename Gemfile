@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
+
 gem 'rails', '~> 4.0'
 
+# assets
+
 # css
-gem 'sass-rails'
+gem 'sass-rails', '4.0.2'
 gem "compass", '~> 0.13.alpha.0'
 gem 'compass-rails', '>= 1.1.7'
 gem 'bootstrap-sass', '~> 2'
