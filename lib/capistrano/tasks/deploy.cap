@@ -20,9 +20,10 @@ namespace :deploy do
   end
 
   task :establish_symlinks do
-    on roles(:all) do 
+    on roles(:all) do
       execute "cp #{shared_path}/config/application.yml #{release_path}/config/application.yml"
       execute "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+      execute "cp #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
     end
   end
 
