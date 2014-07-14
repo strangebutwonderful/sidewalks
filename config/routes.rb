@@ -1,16 +1,16 @@
 Sidewalks::Application.routes.draw do
 
-  match '/auth/:provider/callback' => 'sessions#create'
-  match '/signin' => 'sessions#new', :as => :signin
-  match '/signout' => 'sessions#destroy', :as => :signout
-  match '/auth/failure' => 'sessions#failure'
-  match '/welcome' => 'home#welcome'
+  match '/auth/:provider/callback' => 'sessions#create', via: [ :get, :post ]
+  match '/signin' => 'sessions#new', :as => :signin, via: [ :get, :post ]
+  match '/signout' => 'sessions#destroy', :as => :signout, via: [ :get, :post ]
+  match '/auth/failure' => 'sessions#failure', via: :get
+  match '/welcome' => 'home#welcome', via: :get
 
-  match '/explore' => 'noises#explore'
+  match '/explore' => 'noises#explore', via: [ :get, :post ]
 
-  resources :noises, :only => [:index, :show]
-  resources :users, :only => [:show, :edit, :update]
-  resources :search, :only => [:index]
+  resources :noises, :only => [ :index, :show ]
+  resources :users, :only => [ :show, :edit, :update ]
+  resources :search, :only => [ :index ]
 
   namespace :admin do
     resources :config

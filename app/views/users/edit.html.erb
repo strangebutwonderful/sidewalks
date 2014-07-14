@@ -1,12 +1,14 @@
-<%= form_for(@user) do |f| %>
-  
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
+<div class="docket">
+  <%= form_for(@user) do |f| %>
 
-  <div class="actions">
-    <%= f.submit "Save email", :class => "btn" %>
-  </div>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Save email", :class => "btn" %>
+    </div>
+
+  <% end %>
+<div>

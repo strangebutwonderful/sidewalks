@@ -18,15 +18,16 @@
 #
 
 class User < ActiveRecord::Base
-  delegate :url_helpers, to: 'Rails.application.routes' 
+  delegate :url_helpers, to: 'Rails.application.routes'
 
   rolify
-  
+
   has_one :original, :as => :importable
   has_many :locations, dependent: :destroy
-  has_many :noises, dependent: :destroy, :order => 'created_at DESC'
+  has_many :noises, -> { order( created_at: :desc ) },
+    dependent: :destroy
   has_many :trails, dependent: :destroy
-  
+
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :provider_id, :name, :email
 
@@ -53,10 +54,10 @@ class User < ActiveRecord::Base
   def latlngs
     @latlngs ||= self.locations.map { |location| location.latlng }
   end
-  
-  def map 
+
+  def map
     @map ||= Map.new(self.latlngs) if self.latlngs?
-  end  
+  end
 
   def update_credentials(auth)
     if auth['credentials']
@@ -78,14 +79,14 @@ class User < ActiveRecord::Base
     providers = [User::PROVIDER_TWITTER]
   end
 
-  def self.first_or_create_from_twitter!(twitter_user, following: true) 
+  def self.first_or_create_from_twitter!(twitter_user, following: true)
     User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_user.id.to_s).first || User.create_from_twitter!(twitter_user, following: following)
-  end  
+  end
 
   def self.create_from_omniauth!(auth)
     # See https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
-    logger.info "Creating a user from omniauth: [#{auth.inspect}]" 
-    
+    logger.info "Creating a user from omniauth: [#{auth.inspect}]"
+
     user = create! do |user|
       user.provider = auth['provider']
       user.provider_id = auth['uid']
@@ -101,8 +102,8 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_twitter!(twitter_user, following: false)
-    logger.info "Creating a user from tweet: [#{twitter_user.inspect}]" 
-    
+    logger.info "Creating a user from tweet: [#{twitter_user.inspect}]"
+
     user = create! do |user|
       user.name = twitter_user.name
       user.provider = User::PROVIDER_TWITTER

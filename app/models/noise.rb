@@ -24,16 +24,15 @@ class Noise < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
 
-  scope :none, where('1 = 0')
-
-  delegate :url_helpers, to: 'Rails.application.routes' 
+  delegate :url_helpers, to: 'Rails.application.routes'
 
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
-  has_many :origins, uniq: true, dependent: :destroy
+  has_many :origins, ->{ uniq true },
+    dependent: :destroy
 
   replicate_associations :origins # for replicate gem
-  
+
   attr_accessible :text, :provider, :provider_id, :actionable
 
   attr_reader :provider_url, :user_name, :user_provider_url, :map
@@ -70,7 +69,7 @@ class Noise < ActiveRecord::Base
     @latlngs ||= self.origins.map { |origin| origin.latlng }
   end
 
-  def map 
+  def map
     @map ||= Map.new(self.latlngs) if self.latlngs?
   end
 
@@ -86,7 +85,7 @@ class Noise < ActiveRecord::Base
     !actionable.nil?
   end
 
-  ### 
+  ###
   # Pull media objects out of noise
   # Media object format:
   # id: string
@@ -101,8 +100,8 @@ class Noise < ActiveRecord::Base
   # sizes: {"thumb"=>{"w"=>150, "h"=>150, "resize"=>"crop"}, "small"=>{"w"=>340, "h"=>453, "resize"=>"fit"}, "medium"=>{"w"=>600, "h"=>800, "resize"=>"fit"}, "large"=>{"w"=>768, "h"=>1024, "resize"=>"fit"}}
   ###
   def media_entities
-    @media_entities ||= begin 
-      parsed_media_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
+    @media_entities ||= begin
+      parsed_media_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
       parsed_media_entities ||= {}
       parsed_media_entities
     end
@@ -110,11 +109,11 @@ class Noise < ActiveRecord::Base
 
   def url_entities
     @url_entities ||= begin
-      parsed_url_entities ||= self.try(:original).try(:parsed_dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
-      parsed_url_entities ||= {}         
-      parsed_url_entities  
+      parsed_url_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
+      parsed_url_entities ||= {}
+      parsed_url_entities
     end
-  end  
+  end
 
   def media_urls
     @media_urls ||= local_media_urls + external_media_urls
@@ -125,7 +124,7 @@ class Noise < ActiveRecord::Base
   end
 
   def external_media_urls
-    @external_media_urls ||= begin 
+    @external_media_urls ||= begin
       urls = url_entities.collect { |m| m.try(:[], 'expanded_url') }
       media_urls ||= urls.collect { |url| url += 'media/?size=l' if url.start_with?('http://instagram.com/', 'https://instagram.com/') }
       media_urls.compact!
@@ -135,8 +134,8 @@ class Noise < ActiveRecord::Base
   end
 
   def self.create_from_tweet!(tweet, user)
-    logger.info "Creating a noise from tweet: [#{tweet.to_yaml}]" 
-    
+    logger.info "Creating a noise from tweet: [#{tweet.to_yaml}]"
+
     noise = create! do |noise|
       noise.avatar_image_url = tweet.user.profile_image_uri_https.to_s
       noise.created_at = tweet.created_at
@@ -244,7 +243,7 @@ class Noise < ActiveRecord::Base
     joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
   end
 
-  def self.where_ids(ids) 
+  def self.where_ids(ids)
     unless ids.nil?
       where(:id => ids)
     else
@@ -266,15 +265,14 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      noise_ids = Origin.explore(params).where_since(params[:created_at]).pluck(:noise_id)
-      where_ids(noise_ids)
-      .order_by_ids(noise_ids)
+      noise_ids = Origin.explore( params ).where_since( params[:created_at] ).map &:noise_id
+      where_ids( noise_ids ).order_by_ids( noise_ids )
     else
       scoped
     end
   end
 
-  def self.order_by_ids(ids) 
+  def self.order_by_ids(ids)
     order_by = ids.map { |id| "#{table_name}.id = #{id} DESC" }
     order_by = order_by.join(", ")
     order(order_by)
@@ -285,7 +283,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_latest
-    where_since(12.hours.ago)
+    where_since 12.hours.ago
   end
 
   def self.where_authored_by_user_before(user_id, time)
@@ -294,14 +292,8 @@ class Noise < ActiveRecord::Base
       .order("#{table_name}.created_at DESC")
   end
 
-  def self.with_nearby_origins(params)
-    joins(:origins)
-      .preload(:origins)
-      .merge(Origin.explore(params))
-  end
-
-  def self.first_or_create_from_tweet!(tweet, user) 
+  def self.first_or_create_from_tweet!(tweet, user)
     Noise.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => tweet.id.to_s).first || Noise.create_from_tweet!(tweet, user)
-  end  
+  end
 
 end

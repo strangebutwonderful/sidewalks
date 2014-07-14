@@ -8,20 +8,20 @@
 # Add application configuration variables here, as shown below.
 #
 
-# run `rake secret` to generate
-SECRET_TOKEN: Your_Secret_Token 
+# Generate with `rake secret`
+SECRET_KEY_BASE: Your_Secret_Key_Base
 
 ROLES: [admin, user, VIP]
 
 TWITTER_ACCOUNT_SCREEN_NAME: Your_Twitter_Screen_Name
 
 TWITTER_CONSUMER_KEY: Your_OmniAuth_Provider_Key
-TWITTER_COMSUMER_SECRET: Your_OmniAuth_Provider_Secret
+TWITTER_CONSUMER_SECRET: Your_OmniAuth_Provider_Secret
 
 TWITTER_OAUTH_ACCESS_TOKEN: Your_Twitter_Access_Token
 TWITTER_OAUTH_ACCESS_TOKEN_SECRET: Your_Twitter_Access_Token_Secret
 
-# Email notifications 
+# Email notifications
 NOTIFIER_EMAIL_SENDER_ADDRESS: '"Your_Notifiers_Name" <Your_Email_Address>'
 NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Notification_Recipients_Emails
 

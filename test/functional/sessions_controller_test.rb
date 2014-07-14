@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
 
-  setup do 
+  setup do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       :provider => 'twitter',
@@ -31,15 +31,15 @@ class SessionsControllerTest < ActionController::TestCase
 
     get :create, :provider => :twitter
     assert_redirected_to :root
-    assert_present session[:user_id]
+    assert_not_nil session[:user_id]
   end
 
   test "destroy clears session user" do
     sign_in(FactoryGirl.create(:user))
-    
+
     get :destroy
     assert_redirected_to :root
-    assert_blank session[:user_id]
+    assert_nil session[:user_id]
   end
 
   test "failure redirects to root" do

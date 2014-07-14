@@ -4,17 +4,20 @@ require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
+
+  # Require the gems listed in Gemfile, including any gems
+  # you've limited to :test, :development, or :production.
+  Bundler.require(:default, Rails.env)
 end
 
 module Sidewalks
   class Application < Rails::Application
 
     config.generators do |g|
-      
-      
+
+
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -64,6 +67,11 @@ module Sidewalks
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Include vendor files in path
+    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "images" )
+    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "javascripts" )
+    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "stylesheets" )
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
