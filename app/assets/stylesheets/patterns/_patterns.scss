@@ -2,9 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "anchor";
 @import "avatar";
 @import "background-photo";
 @import "browsing-list";
+@import "btn";
 @import "docket";
 @import "card";
 @import "card-addendum";
