@@ -77,7 +77,7 @@ module Sidewalks
     config.assets.version = '1.0'
 
     config.assets.precompile << Proc.new { |path|
-      if path =~ /\.(otf|eot|svg|ttf|woff)\z/
+      if path =~ /\.(otf|eot|svg|ttf|woff|png)\z/
         true
       end
     }
