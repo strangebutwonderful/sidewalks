@@ -1,15 +1,17 @@
 <% if @noises.each do |user_id, noises| %>
-  <div class="row">
+  <div class="row cradle">
     <%= render '/noises/card_stack', :noise => noises.first %>
   </div>
 <% end.empty? %>
-  <div class="card">
-    <h2>It's quiet. Too quiet.</h2>
-    <p>
-      Sorry about this, looks like there's nothing going on in the vicinity.
-      Why not try see if anything going on in one of these areas?
-    </p>
+<div class="row">
+    <div class="card">
+      <h2>It's quiet. Too quiet.</h2>
+      <p>
+        Sorry about this, looks like there's nothing going on in the vicinity.
+        Why not try see if anything going on in one of these areas?
+      </p>
 
-    <%= render '/neighborhoods/list' %>
-  </div>
-<% end %>
+      <%= render '/neighborhoods/list' %>
+    </div>
+  <% end %>
+</div>

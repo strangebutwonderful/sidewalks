@@ -1,6 +1,8 @@
 <%= render 'map', :noise => @noise %>
 
-<%= render 'card_stack', :noise => @noise %>
+<div class="row cradle">
+  <%= render 'card_stack', :noise => @noise %>
+</div>
 
 <% unless @noises.empty? %>
 
@@ -13,7 +15,9 @@
   </div>
 
   <% @noises.each do |noise| %>
-    <%= render 'card_stack', :noise => noise %>
+    <div class="row cradle">
+      <%= render 'card_stack', :noise => noise %>
+    </div>
   <% end %>
 
 <% end %>

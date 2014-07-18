@@ -9,8 +9,7 @@
 </div>
 
 <% @noises.each do |noise| %>
-  <%= render 'noises/card', :noise => noise %>
-  <%= render 'admin/noises/card_addendum', :noise => noise %>
-  <%= render 'admin/noises/actionable_card_addendum', :noise => noise %>
-  <%= render 'admin/origins/card_addendum', :noise => noise %>  
+  <div class="row cradle">
+    <%= render '/noises/card_stack', :noise => noise %>
+  </div>
 <% end %>

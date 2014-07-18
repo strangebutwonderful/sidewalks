@@ -1,8 +1,3 @@
-//
-// Wells
-// --------------------------------------------------
-
-
 // Variables
 $card-border-color: darken($navbarBackground, 12%) !default;
 
@@ -14,6 +9,10 @@ $card-border-color: darken($navbarBackground, 12%) !default;
   padding: $base-block-spacing;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   h1 {
     @extend h5;

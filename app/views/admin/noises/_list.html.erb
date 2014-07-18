@@ -1,5 +1,5 @@
 <% @noises.each do |noise| %>
-  <div class="row">
+  <div class="row cradle">
     <%= render '/noises/card', :noise => noise %>
     <%= render :partial => '/admin/noises/card_addendum', :locals => {:noise => noise} %>
     <%= render :partial => '/admin/noises/actionable_card_addendum', :locals => {:noise => noise} %>
