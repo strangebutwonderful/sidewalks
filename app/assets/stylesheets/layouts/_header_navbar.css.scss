@@ -5,14 +5,9 @@ body {
 // application nav bar
 
 .header-navbar {
-  background-color: rgba(darken($bodyBackground, 5%), .95);
+  background-color: darken($bodyBackground, 50%);
   height: $header-navbar-height;
   z-index: 1000;
-
-  .navbar-inner {
-    background: transparent;
-    border: none;
-  }
 
   &.headroom {
     position: fixed;
@@ -28,5 +23,18 @@ body {
 
   &.headroom--pinned {
     top: 0;
+  }
+
+  .navbar-inner {
+    background: transparent;
+    border: none;
+  }
+
+  .nav {
+    li {
+      a {
+        color: $bodyBackground;
+      }
+    }
   }
 }
