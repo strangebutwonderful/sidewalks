@@ -17,12 +17,15 @@
         <i class="provider-<%= noise.provider.downcase %>"></i>
       <% end %>
     </p>
-    <% noise.media_urls.each do |media_url| %>
-      <p>
-        <%= link_to media_url do %>
-          <%= image_tag media_url %>
-        <% end %>
-      </p>
-    <% end %>
   </div>
 </div>
+
+<% noise.media_urls.each do |media_url| %>
+  <div class="card docket">
+    <p>
+      <%= link_to media_url do %>
+        <%= image_tag media_url %>
+      <% end %>
+    </p>
+  </div>
+<% end %>
