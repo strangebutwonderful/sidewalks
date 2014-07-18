@@ -1,13 +1,19 @@
-<%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => 'brand', :data => { :geolocatable => nil, :"geolocatable-state" => "here" } do %>
-  Sidewalks
-<% end %>
+<ul class="nav pull-left">
+  <li>
+    <%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => 'geolocatable', :data => { :geolocatable => true, :"geolocatable-state" => "here" } do %>
+      <span>
+        Sidewalks
+      </span>
+    <% end %>
+  </li>
+</ul>
 
 <ul class="nav pull-right">
   <li>
     <%= render '/shared/geolocatable' %>
   </li>
   <li>
-    <%= link_to explore_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+    <%= link_to explore_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
       <span>
         Explore
       </span>
