@@ -1,12 +1,12 @@
 <% if @noises.each do |user_id, noises| %>
   <div class="row">
-    <%= render 'card_stack', :noise => noises.first %>
+    <%= render '/noises/card_stack', :noise => noises.first %>
   </div>
 <% end.empty? %>
   <div class="card">
     <h2>It's quiet. Too quiet.</h2>
     <p>
-      Sorry about this, looks like there's nothing going on in the vicinity.  
+      Sorry about this, looks like there's nothing going on in the vicinity.
       Why not try see if anything going on in one of these areas?
     </p>
 

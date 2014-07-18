@@ -5,7 +5,9 @@ class SearchController < ApplicationController
   # GET /search
   # GET /search.json
   def index
-    @noises = Noise.search(params)
+    @noises = Noise.search(params).group_by do |noise|
+      noise.user_id
+    end
 
     respond_with @noises
   end

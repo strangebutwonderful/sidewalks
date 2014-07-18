@@ -12,7 +12,8 @@ $card-border-color: darken($navbarBackground, 12%) !default;
   background-color: $white;
   border: 1px solid $inputBorder;
   padding: $base-block-spacing;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
 
   h1 {
     @extend h5;
