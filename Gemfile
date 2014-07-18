@@ -51,7 +51,7 @@ gem 'capistrano-rails', '~> 1.1'
 
 gem 'rails_autolink', '~> 1.1.5'
 
-gem 'whenever', '0.9.0', :require => false
+gem 'whenever', '0.9.0', require: false
 
 gem 'flip', '~> 1'
 
@@ -60,12 +60,12 @@ gem 'protected_attributes'
 group :development do
   gem 'annotate'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'binding_of_caller', platforms: [:mri_19, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
 end
 
 group :development, :test do
@@ -79,7 +79,7 @@ end
 
 group :test do
   gem 'rake' # for travis
-  gem 'mocha', :require => false
+  gem 'mocha', require: false
 end
 
 group :production do
