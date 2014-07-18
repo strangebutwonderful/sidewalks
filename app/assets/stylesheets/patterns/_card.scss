@@ -29,6 +29,12 @@ $card-border-color: darken($navbarBackground, 12%) !default;
   }
 }
 
+.leaflet-popup-content {
+  .card {
+    border: none;
+  }
+}
+
 .provider-twitter {
   @extend .fa;
   @extend .fa-twitter;
