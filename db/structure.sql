@@ -65,8 +65,8 @@ CREATE TABLE features (
     id integer NOT NULL,
     key character varying(255) NOT NULL,
     enabled boolean DEFAULT false NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -102,8 +102,8 @@ CREATE TABLE locations (
     zip integer NOT NULL,
     latitude numeric(11,8) NOT NULL,
     longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -135,8 +135,8 @@ CREATE TABLE noises (
     provider_id character varying(255) NOT NULL,
     user_id integer NOT NULL,
     text text NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     provider character varying(255) NOT NULL,
     avatar_image_url character varying(255),
     actionable boolean
@@ -171,8 +171,8 @@ CREATE TABLE originals (
     importable_id integer NOT NULL,
     importable_type character varying(255) NOT NULL,
     dump json NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -204,8 +204,8 @@ CREATE TABLE origins (
     noise_id integer NOT NULL,
     latitude numeric(11,8) NOT NULL,
     longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -237,8 +237,8 @@ CREATE TABLE roles (
     name character varying(255) NOT NULL,
     resource_id integer,
     resource_type character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -278,8 +278,8 @@ CREATE TABLE sessions (
     id integer NOT NULL,
     session_id character varying(255) NOT NULL,
     data text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -311,8 +311,8 @@ CREATE TABLE trails (
     user_id integer NOT NULL,
     latitude numeric(11,8) NOT NULL,
     longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -348,8 +348,8 @@ CREATE TABLE users (
     provider_screen_name character varying(255),
     provider_access_token character varying(255),
     provider_access_token_secret character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     following boolean DEFAULT false NOT NULL,
     locations_count integer DEFAULT 0 NOT NULL,
     mobile_venues_count integer
@@ -549,6 +549,13 @@ CREATE UNIQUE INDEX index_origin_on_latitude_and_longitude ON origins USING btre
 
 
 --
+-- Name: index_originals_on_importable_id_and_importable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_originals_on_importable_id_and_importable_type ON originals USING btree (importable_id, importable_type);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -671,3 +678,4 @@ INSERT INTO schema_migrations (version) VALUES ('20140305211224');
 INSERT INTO schema_migrations (version) VALUES ('20140306172319');
 
 INSERT INTO schema_migrations (version) VALUES ('20140404002329');
+
