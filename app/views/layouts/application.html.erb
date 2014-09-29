@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Sidewalks" %>">
+
+    <%= csrf_meta_tags %>
+    <%= application_meta_tags %>
+
+    <!-- android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+    <meta name="apple-mobile-web-app-title" content="Sidewalks">
+
     <title>
       <%= yield(:title) + ' - ' if title? %>Sidewalks
     </title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Sidewalks" %>">
+
     <%= render 'bugsnag/notifier' %>
+
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-    <%= application_meta_tags %>
+
     <% if Rails.env.development? %>
       <%= favicon_link_tag '/favicon-development.ico' %>
       <%= favicon_link_tag '/favicon-development.png', rel: 'apple-touch-icon', type: 'image/png' %>
@@ -19,7 +32,9 @@
       <%= favicon_link_tag '/favicon.ico' %>
       <%= favicon_link_tag '/favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <% end %>
+
     <%= yield(:head) %>
+
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'google/analytics' %>
