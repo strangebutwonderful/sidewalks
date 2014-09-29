@@ -1,0 +1,39 @@
+<% if Rails.env.development? %>
+  <%# basic favicon %>
+  <%= favicon_link_tag '/favicon-development.ico' %>
+
+  <%# iOS iphone homescreen %>
+  <%= favicon_link_tag '/favicon-development.png', rel: 'apple-touch-icon', type: 'image/png' %>
+
+  <%# iOS ipad homescreen %>
+  <%= favicon_link_tag '/favicon-development-76x76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "76x76" %>
+
+  <%# iOS iphone retina homescreen %>
+  <%= favicon_link_tag '/favicon-development-120x120.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "120x120" %>
+
+  <%# iOS ipad retina homescreen %>
+  <%= favicon_link_tag '/favicon-development-152x152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "152x152" %>
+
+  <%# android homescreen icon %>
+  <%= favicon_link_tag '/favicon-development-196x196.png', rel: 'shortcut-icon', type: 'image/png', sizes: "196x196"  %>
+
+<% else %>
+  <%# basic favicon %>
+  <%= favicon_link_tag '/favicon.ico' %>
+
+  <%# iOS iphone homescreen %>
+  <%= favicon_link_tag '/favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+
+  <%# iOS ipad homescreen %>
+  <%= favicon_link_tag '/favicon-76x76.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "76x76" %>
+
+  <%# iOS iphone retina homescreen %>
+  <%= favicon_link_tag '/favicon-120x120.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "120x120" %>
+
+  <%# iOS ipad retina homescreen %>
+  <%= favicon_link_tag '/favicon-152x152.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "152x152" %>
+
+  <%# android homescreen icon %>
+  <%= favicon_link_tag '/favicon-196x196.png', rel: 'shortcut-icon', type: 'image/png', sizes: "196x196"  %>
+
+<% end %>
