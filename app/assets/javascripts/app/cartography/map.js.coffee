@@ -57,7 +57,6 @@ class App.Cartography.Map
 
   constructor: (mapElement) ->
     @_$map = $(mapElement)
-    App.Logger.debug @
 
     # compose map options
     mapOptions = Lib.Options.load(App.Cartography.Map._mapOptionNames, @_$map, "cartography-map-")
