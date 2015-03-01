@@ -113,14 +113,14 @@ class App.Cartography.Map
 
   getMapPanelId: () ->
     # TODO: create an element if one doesn't exist
-    @_$mapPanel = @_$map.find('[data-cartography-map-panel]').eq(0) or throw "Map panel not found"
+    @_$mapPanel = @_$map.find('[data-cartography-map-panel]').eq(0) or throw new Error("Map panel not found")
     @_$mapPanel.attr('id')
 
   getMapBounds: () ->
-    @_$map.data("cartography-map-bounds") or throw "Map bounds not found"
+    @_$map.data("cartography-map-bounds") or throw new Error("Map bounds not found")
 
   getMapCenter:() ->
-    @_$map.data("cartography-map-center") or throw "Map center not found"
+    @_$map.data("cartography-map-center") or throw new Error("Map center not found")
 
   bindMapEvents: () ->
     # 'Abstract' function for children classes
