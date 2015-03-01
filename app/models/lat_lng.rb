@@ -9,8 +9,8 @@ class LatLng
 
   def coordinates
     [
-      self.latitude,
-      self.longitude
+      latitude,
+      longitude
     ]
   end
 
@@ -38,13 +38,13 @@ class LatLng
 
   def to_a
     [
-      self.latitude,
-      self.longitude
+      latitude,
+      longitude
     ]
   end
 
   def ==(another_latlng)
-    self.latitude == another_latlng.latitude && self.longitude == another_latlng.longitude
+    (latitude == another_latlng.latitude) && (longitude == another_latlng.longitude)
   end
 
   def self.center(latlngs)
