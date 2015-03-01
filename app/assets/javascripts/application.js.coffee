@@ -17,8 +17,9 @@
 #= require bootstrap
 #= require leaflet
 #= require leaflet_awesome_markers/leaflet_awesome_markers
+#= require headroom/headroom
+#= require headroom/jquery_headroom
+#= require nanobar/nanobar
 #= require_tree ./lib
 #= require app/app
 #= require_tree .
-#= require headroom/headroom
-#= require headroom/jquery_headroom
