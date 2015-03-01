@@ -30,8 +30,6 @@ class TwitterImporter
     self.latest_tweets_from_sidewalks_twitter.first
   end
 
-  private
-
   def self.latest_tweets_from_sidewalks_twitter
     last_noise = Noise.where(provider: Noise::PROVIDER_TWITTER).last
 
