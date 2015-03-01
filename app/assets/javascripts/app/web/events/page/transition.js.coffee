@@ -4,4 +4,4 @@ root.App.Web.Events ?= {}
 root.App.Web.Events.Page ?= {}
 $ = jQuery
 
-class App.Web.Events.Page
+class App.Web.Events.Page.Transition

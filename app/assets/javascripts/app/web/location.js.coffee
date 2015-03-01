@@ -7,7 +7,7 @@ class App.Web.Location
 
   ###
   Change the browser's location to the new url
-  @example App.Web.Window.scrollTo("example.com")
+  @example App.Web.Location.redirect("example.com")
   @param target url to change to
   ###
   @redirect: (target) ->

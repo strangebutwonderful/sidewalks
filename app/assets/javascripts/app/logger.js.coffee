@@ -3,13 +3,13 @@ root.App ?= {}
 $ = jQuery
 
 class App.Logger
-  ### 
+  ###
   public static variables
   ###
 
   ###
   private static variables
-  ### 
+  ###
   @Severity: class Severity
     @DEBUG: 0
     @INFO: 1
@@ -22,7 +22,7 @@ class App.Logger
 
   @add: (severity, message = nil) ->
     severity ||= App.Logger.Severity.UNKNOWN
-    unless severity < App.Logger.level 
+    unless severity < App.Logger.level
       if root.console?
         root.console.log message
 

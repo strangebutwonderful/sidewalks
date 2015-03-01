@@ -1,18 +1,18 @@
-# ajaxLoadingClass = "ajax-loading"
+AJAX_LOADING_CLASS = "ajax-loading"
 
-# $(document).ajaxStart ->
-#   $("body").addClass ajaxLoadingClass
-#   console.log "ajaxStart"
-#   return
+$(document).ajaxStart ->
+  $("body").addClass AJAX_LOADING_CLASS
+  App.Logger.debug.log "ajaxStart"
+  return true
 
-# $(document).ajaxStop ->
-#   $("body").removeClass ajaxLoadingClass
-#   console.log "ajaxStop"
-#   return
+$(document).ajaxStop ->
+  $("body").removeClass AJAX_LOADING_CLASS
+  console.log "ajaxStop"
+  return true
 
 $ ->
   bar = new Nanobar({
-    bg: "#4fb53c",
+    bg: "#00354F",
     target: $(".nanobar")[0]
   })
 
