@@ -14,13 +14,13 @@
 
 FactoryGirl.define do
 
-  factory :noise_original, :class => Original do
+  factory :noise_original, class: Original do
     association :importable, factory: :noise
 
     dump { OpenStruct.new().to_json }
   end
 
-  factory :user_original, :class => Original do
+  factory :user_original, class: Original do
     association :importable, factory: :user
 
     dump { OpenStruct.new().to_json }

@@ -5,7 +5,7 @@ class RemoveLatitudeAndLongitudeFromNoise < ActiveRecord::Migration
   end
 
   def down
-    add_column :noises, :latitude, :decimal, :precision => 11, :scale => 8, :null => false
-    add_column :noises, :longitude, :decimal, :precision => 11, :scale => 8, :null => false
+    add_column :noises, :latitude, :decimal, precision: 11, scale: 8, null: false
+    add_column :noises, :longitude, :decimal, precision: 11, scale: 8, null: false
   end
 end

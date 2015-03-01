@@ -39,7 +39,7 @@ class Noise < ActiveRecord::Base
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
 
-  validates_format_of :avatar_image_url, :with => URI.regexp(['http', 'https']), :allow_nil => true
+  validates_format_of :avatar_image_url, with: URI.regexp(['http', 'https']), allow_nil: true
 
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
@@ -145,7 +145,7 @@ class Noise < ActiveRecord::Base
       noise.user_id = user.id
     end
 
-    noise.create_original!(:dump => tweet.to_json)
+    noise.create_original!(dump: tweet.to_json)
 
     noise.import_locations(user.locations)
     noise.import_locations_from_mentions_of_existing_users(tweet.user_mentions)
@@ -160,7 +160,7 @@ class Noise < ActiveRecord::Base
 
     if locations.present?
       locations.each do |location|
-        unless self.origins.exists?(:latitude => location.latitude, :longitude => location.longitude)
+        unless self.origins.exists?(latitude: location.latitude, longitude: location.longitude)
           self.origins << location.to_origin
           success_count = success_count + 1
         end
@@ -174,7 +174,7 @@ class Noise < ActiveRecord::Base
     success_count = 0
     if tweet_user_mentions.present?
       tweet_user_mentions.each do |user_mention|
-        mentioned_user = User.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => user_mention.id.to_s).first
+        mentioned_user = User.where(provider: Noise::PROVIDER_TWITTER, provider_id: user_mention.id.to_s).first
         if mentioned_user
           success_count += import_locations(mentioned_user.locations)
         end
@@ -232,7 +232,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_needs_triage(params)
-    where(:actionable => nil).order("#{table_name}.created_at DESC")
+    where(actionable: nil).order("#{table_name}.created_at DESC")
   end
 
   def self.where_actionable_or_not_triaged
@@ -245,7 +245,7 @@ class Noise < ActiveRecord::Base
 
   def self.where_ids(ids)
     unless ids.nil?
-      where(:id => ids)
+      where(id: ids)
     else
       scoped
     end
@@ -287,13 +287,13 @@ class Noise < ActiveRecord::Base
   end
 
   def self.where_authored_by_user_before(user_id, time)
-    where(:user_id => user_id)
+    where(user_id: user_id)
       .where("#{table_name}.created_at < ?", time)
       .order("#{table_name}.created_at DESC")
   end
 
   def self.first_or_create_from_tweet!(tweet, user)
-    Noise.where(:provider => Noise::PROVIDER_TWITTER, :provider_id => tweet.id.to_s).first || Noise.create_from_tweet!(tweet, user)
+    Noise.where(provider: Noise::PROVIDER_TWITTER, provider_id: tweet.id.to_s).first || Noise.create_from_tweet!(tweet, user)
   end
 
 end

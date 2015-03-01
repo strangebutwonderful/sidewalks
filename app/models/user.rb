@@ -22,13 +22,13 @@ class User < ActiveRecord::Base
 
   rolify
 
-  has_one :original, :as => :importable
+  has_one :original, as: :importable
   has_many :locations, dependent: :destroy
   has_many :noises, -> { order( created_at: :desc ) },
     dependent: :destroy
   has_many :trails, dependent: :destroy
 
-  attr_accessible :role_ids, :as => :admin
+  attr_accessible :role_ids, as: :admin
   attr_accessible :provider, :provider_id, :name, :email
 
   attr_reader :provider_url
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def self.first_or_create_from_twitter!(twitter_user, following: true)
-    User.where(:provider => User::PROVIDER_TWITTER, :provider_id => twitter_user.id.to_s).first || User.create_from_twitter!(twitter_user, following: following)
+    User.where(provider: User::PROVIDER_TWITTER, provider_id: twitter_user.id.to_s).first || User.create_from_twitter!(twitter_user, following: following)
   end
 
   def self.create_from_omniauth!(auth)
@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    user.create_original!(:dump => auth.to_json)
+    user.create_original!(dump: auth.to_json)
     user
   end
 
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
       user.following = following
     end
 
-    user.create_original!(:dump => twitter_user.to_json)
+    user.create_original!(dump: twitter_user.to_json)
     user
   end
 

@@ -5,12 +5,12 @@ class SessionsControllerTest < ActionController::TestCase
   setup do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
-      :provider => 'twitter',
-      :uid => Faker::Number.number(10),
-      :info => {
-        :name => Faker::Name.name,
-        :email => Faker::Internet.email,
-        :nickname => Faker::Internet.user_name
+      provider: 'twitter',
+      uid: Faker::Number.number(10),
+      info: {
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        nickname: Faker::Internet.user_name
       }
     })
   end
@@ -29,7 +29,7 @@ class SessionsControllerTest < ActionController::TestCase
   test "create should redirect to root" do
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
 
-    get :create, :provider => :twitter
+    get :create, provider: :twitter
     assert_redirected_to :root
     assert_not_nil session[:user_id]
   end
