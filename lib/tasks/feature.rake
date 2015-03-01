@@ -1,16 +1,16 @@
 namespace :feature do
 
-  desc "Check if a feature flag is enabled"  
+  desc "Check if a feature flag is enabled"
   task :on?, [:flag] => :environment do |t, args|
     puts Feature.on? args.flag.to_sym
   end
 
-  desc "Enable a feature flag"  
+  desc "Enable a feature flag"
   task :on, [:flag] => :environment do |t, args|
     puts Feature.on args.flag.to_sym
   end
 
-  desc "Disable a feature flag"  
+  desc "Disable a feature flag"
   task :off, [:flag] => :environment do |t, args|
     puts Feature.off args.flag.to_sym
   end

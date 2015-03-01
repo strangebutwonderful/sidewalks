@@ -13,7 +13,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "admin should get index" do    
+  test "admin should get index" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :index

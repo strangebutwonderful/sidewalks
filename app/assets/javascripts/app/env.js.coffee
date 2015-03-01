@@ -3,15 +3,15 @@ root.App ?= {}
 $ = jQuery
 
 class App.Env
-  ### 
+  ###
   public static variables
   ###
 
   ###
   private static variables
-  ### 
+  ###
 
-  ### 
+  ###
   public static methods
   ###
 

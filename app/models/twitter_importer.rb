@@ -30,12 +30,12 @@ class TwitterImporter
     self.latest_tweets_from_sidewalks_twitter.first
   end
 
-  private 
+  private
 
   def self.latest_tweets_from_sidewalks_twitter
     last_noise = Noise.where(provider: Noise::PROVIDER_TWITTER).last
 
-    begin 
+    begin
       if last_noise && last_noise.provider_id
         TwitterService.client.home_timeline({since_id: last_noise.provider_id})
       else
@@ -45,6 +45,6 @@ class TwitterImporter
       Rails.logger.error exception
       return []
     end
-  end  
+  end
 
 end

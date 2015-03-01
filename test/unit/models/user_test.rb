@@ -58,7 +58,7 @@ class UserTest < ActiveSupport::TestCase
 
     User.first_or_create_from_twitter!(twitter_user)
 
-    assert_no_difference('User.count') do 
+    assert_no_difference('User.count') do
       assert User.first_or_create_from_twitter!(twitter_user)
     end
   end

@@ -6,7 +6,7 @@ class TwitterImporterTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "should be able to import tweets on an empty db" do 
+  test "should be able to import tweets on an empty db" do
     TwitterService.client.expects(:home_timeline).returns([])
     Noise.delete_all
 
@@ -15,7 +15,7 @@ class TwitterImporterTest < ActiveSupport::TestCase
 
   test "should import on non-empty table" do
     TwitterService.client.expects(:home_timeline).returns([])
-    FactoryGirl.build(:noise) # ensure there's at least one noise 
+    FactoryGirl.build(:noise) # ensure there's at least one noise
 
     TwitterImporter.import_latest_from_sidewalks_twitter
   end

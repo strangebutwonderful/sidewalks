@@ -1,14 +1,14 @@
 <% if can? :rank, noise %>
-  <div class="card-addendum"> 
+  <div class="card-addendum">
     <%= form_for [:admin, noise], :html => {:method => :put}, :remote => true do |f| %>
-    
+
       <div class="btn-group" data-toggle="buttons-radio">
-        
+
         <%= label_tag nil, :class => 'btn ' + (noise.actionablity_downvotable? ? '' : 'active') do  %>
           <%= f.radio_button :actionable, false, :class => 'hidden', :data => { "form-trigger" => nil } %>
           <i class="fa fa-thumbs-down" ></i> Downvote
         <% end %>
-        
+
         <%= label_tag nil, :class => 'btn ' + (noise.actionablity_upvotable? ? '' : 'active') do  %>
           <%= f.radio_button :actionable, true, :class => 'hidden', :data => { "form-trigger" => nil }  %>
           <i class="fa fa-thumbs-up"></i> Upvote

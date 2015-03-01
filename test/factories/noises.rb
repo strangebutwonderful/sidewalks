@@ -34,7 +34,7 @@ FactoryGirl.define do
   end
 
   factory :noise_with_original, parent: :noise do
-    after(:create) do |noise| 
+    after(:create) do |noise|
       noise.create_original(:dump => noise.to_json)
     end
   end

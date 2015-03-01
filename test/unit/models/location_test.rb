@@ -27,5 +27,5 @@ class LocationTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  
+
 end

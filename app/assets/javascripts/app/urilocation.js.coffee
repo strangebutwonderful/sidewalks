@@ -21,21 +21,21 @@ class App.URILocation
       # compare as strings to avoid string to float compare hijinx
       unless queryParams[key]? && (queryParams[key].toString() == params[key].toString())
         equal = false
-    
+
     equal
 
-  ### 
-  Helper function that takes a uri and replaces the query parameters, any existing query 
+  ###
+  Helper function that takes a uri and replaces the query parameters, any existing query
   parameters that exist and not mentioned in the params hash will be left alone
   @param URI|string of url to update
-  @param hash of query parameters that will be replaced 
+  @param hash of query parameters that will be replaced
   @returns URI updated uri object
   ###
   @replaceQuery: (uri, params) ->
     uri = new URI(uri)
-    
+
     for key, value of params
       if uri.hasQuery(key)
         uri.removeQuery(key)
-    
+
     uri.addQuery(params)

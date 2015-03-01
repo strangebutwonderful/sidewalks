@@ -15,7 +15,7 @@
 <% @users.each do |user| %>
   <dl class="card">
     <dt>
-      <%= link_to user.name, admin_user_path(user) %> 
+      <%= link_to user.name, admin_user_path(user) %>
       <%= link_to user.provider_url, class: 'muted', target: '_blank' do %>
         <%= user.provider_screen_name %>
         <i class="provider-<%= user.provider.downcase %>"></i>

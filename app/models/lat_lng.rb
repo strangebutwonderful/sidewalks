@@ -9,7 +9,7 @@ class LatLng
 
   def coordinates
     [
-      self.latitude, 
+      self.latitude,
       self.longitude
     ]
   end
@@ -49,7 +49,7 @@ class LatLng
 
   def self.center(latlngs)
     raise "Cannot center an empty list of LatLngs" if latlngs.empty?
-    
+
     summed_latitude = BigDecimal.new(0)
     summed_longitude = BigDecimal.new(0)
 
@@ -61,12 +61,12 @@ class LatLng
     latlngs_count = latlngs.count
 
     LatLng.new(
-      summed_latitude / BigDecimal.new(latlngs_count), 
+      summed_latitude / BigDecimal.new(latlngs_count),
       summed_longitude / BigDecimal.new(latlngs_count)
     )
   end
 
-  private 
+  private
 
   def value_to_coordinate(value)
     raise "Setting a blank coordinate is not allowed" if value.blank?

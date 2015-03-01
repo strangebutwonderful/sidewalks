@@ -32,7 +32,7 @@ This application uses PostgreSQL with ActiveRecord.
 
 1. Clone this repo to your computer
 
-### Vagrant 
+### Vagrant
 
 1. Install [VirtualBox](https://www.virtualbox.org/) from dmg
 1. Install [Vagrant](http://www.vagrantup.com/) from pkg

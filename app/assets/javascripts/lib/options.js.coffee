@@ -4,11 +4,11 @@ class Lib.Options
 
   ###
   # Load options from an element
-  # @param 
+  # @param
   ###
   @load: (optionNames, element, prefix = "") =>
     $element = $(element)
-    
+
     options = {}
 
     for optionName in optionNames

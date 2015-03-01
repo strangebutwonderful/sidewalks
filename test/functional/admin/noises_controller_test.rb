@@ -22,7 +22,7 @@ class Admin::NoisesControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "admin should get index" do    
+  test "admin should get index" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :index
@@ -42,7 +42,7 @@ class Admin::NoisesControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "admin should see noise" do    
+  test "admin should see noise" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :show, id: @noise

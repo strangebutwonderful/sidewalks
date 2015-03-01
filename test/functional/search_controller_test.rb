@@ -22,5 +22,5 @@ class SearchControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:noises)
   end
-    
+
 end

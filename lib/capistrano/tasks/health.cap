@@ -1,6 +1,6 @@
 namespace :health do
 
-  desc "Run all health checks"  
+  desc "Run all health checks"
   task :all do
     invoke 'health:check_write_permissions'
   end

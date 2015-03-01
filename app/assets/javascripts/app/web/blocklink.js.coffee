@@ -4,7 +4,7 @@ root.App.Web ?= {}
 $ = jQuery
 
 class App.Web.BlockLink
-  ### 
+  ###
   public static variables
   ###
   @selector = '[data-blocklink]'

@@ -1,5 +1,5 @@
 <% if current_user_is_admin? %>
-  <div class="card-addendum"> 
+  <div class="card-addendum">
     <p>
       <b>
         Admin:
@@ -9,7 +9,7 @@
       <% end %>
       <%= link_to 'Noise', admin_noise_path(noise) %>
       <% if can? :update, noise %>
-        <%= link_to 'Edit', edit_admin_noise_path(noise) %> 
+        <%= link_to 'Edit', edit_admin_noise_path(noise) %>
       <% end %>
       <% if can? :destroy, noise %>
         <%= link_to 'Destroy', admin_noise_path(noise), method: :delete, data: { confirm: 'Are you sure?' } %>

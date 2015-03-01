@@ -25,7 +25,7 @@ class NoiseTest < ActiveSupport::TestCase
 
   test "FactoryGirl works" do
     assert_difference('Noise.count') do
-      noise = FactoryGirl.create(:noise)  
+      noise = FactoryGirl.create(:noise)
     end
   end
 
@@ -63,14 +63,14 @@ class NoiseTest < ActiveSupport::TestCase
     assert Noise.first_or_create_from_tweet!(tweet, user)
   end
 
-  test "no new noise when importing old tweet" do 
+  test "no new noise when importing old tweet" do
     tweet = build_tweet
 
     user = User.first_or_create_from_twitter!(tweet.user)
 
     Noise.first_or_create_from_tweet!(tweet, user)
 
-    assert_no_difference('Noise.count') do 
+    assert_no_difference('Noise.count') do
       assert Noise.first_or_create_from_tweet!(tweet, user)
     end
   end
@@ -89,7 +89,7 @@ class NoiseTest < ActiveSupport::TestCase
 
   test "noise with coordinates generates map" do
     noise = FactoryGirl.create(:noise_with_coordinates)
-    assert_not_nil(noise.map)    
+    assert_not_nil(noise.map)
   end
 
   test "media_urls never returns nil" do

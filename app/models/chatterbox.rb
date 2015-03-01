@@ -1,4 +1,4 @@
-### 
+###
 # Chatterbox is an interface for talking to external chat services
 ###
 class Chatterbox
@@ -7,7 +7,7 @@ class Chatterbox
     @chatterbox = Chatterbox.new
     @chatterbox.tell message
   end
- 
+
   def tell(message)
     unless notifier.nil?
       message = message + " [#{Rails.env}]" unless Rails.env.production?

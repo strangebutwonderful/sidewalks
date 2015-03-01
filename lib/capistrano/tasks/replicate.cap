@@ -10,31 +10,31 @@ namespace :replicate do
 
   desc <<-DESC
   Replicates data from production site database to the local database.
-   
+
   By default all database objects are downloaded:
-   
+
     cap replicate
-   
+
   Set the DATA variable to specify the objects to download:
-   
+
     cap replicate DATA='User.find(1); Page.find(1)'
-   
+
   Dependant records are automatically downloaded by Replicate, e.g. this downloads
   both the Project records and the User record:
-   
+
     cap replicate DATA='User.find_by_name("dave").projects'
-   
+
   To empty the local database first, set CLEAR=1:
-   
+
     cap replicate CLEAR=1
-   
+
     cap replicate CLEAR=1 DATA='User.all'
-   
+
   See https://github.com/rtomayko/replicate for more details about Replicate.
   DESC
   task replicate_models: ['deploy:set_rails_env'] do
-    on roles(:app) do 
- 
+    on roles(:app) do
+
       # RVM support
       if rvm_loaded?
         Rake::Task['rvm:hook'].invoke
@@ -45,7 +45,7 @@ namespace :replicate do
       # NOTE: YOU NEED TO ALTER THE LINE BELOW TO LIST ALL THE OBJECTS YOU WANT TO DUMP BY DEFAULT
       replicate_dump_options = ENV["DATA"] || "Noise.where_latest.all"
       replicate_dump_options = replicate_dump_options.split(";").map{ |c| c.strip.shellescape }.join(" ")
-      
+
       # Compose command to run
       command = []
       command << "cd #{current_path} && "
@@ -56,10 +56,10 @@ namespace :replicate do
       command = command.join(' ')
 
       data = capture(command)
-   
-      # Clear the local database 
+
+      # Clear the local database
       system "rake schema:load" if ENV["CLEAR"] == "1"
-   
+
       # Load the data into the local database
       require File.dirname(__FILE__) + '/../../../config/environment'
       require 'replicate'
