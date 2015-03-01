@@ -39,5 +39,5 @@ class App.Web.LoadingIndicator
 $ ->
   $document = $(document)
 
-  $(App.Web.LoadingIndicator.selector).each (index, element) =>
+  $(App.Web.LoadingIndicator.selector).each (index, element) ->
     new App.Web.LoadingIndicator($document, element)
