@@ -7,7 +7,7 @@ body {
 .header-navbar {
   background-color: #08c;
   height: $header-navbar-height;
-  z-index: 1000;
+  z-index: $header-navbar-z-index;
 
   &.headroom {
     position: fixed;
