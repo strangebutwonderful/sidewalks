@@ -12,7 +12,7 @@ class Map
     unless value.nil?
       self.latlngs << value
     end
-    
+
     self
   end
 
@@ -57,7 +57,7 @@ class Map
     @center = value
   end
 
-  def center 
+  def center
     @center ||= LatLng.center(latlngs).to_a
   end
 
@@ -65,7 +65,7 @@ class Map
     @zoom = value
   end
 
-  def zoom 
+  def zoom
     @zoom ||= 16
   end
 

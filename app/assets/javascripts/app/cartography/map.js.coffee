@@ -4,14 +4,14 @@ $ = jQuery
 # L = Leaflet
 
 class App.Cartography.Map
-  ### 
+  ###
   public static variables
   ###
   @selector = "[data-cartography-map]"
 
   ###
   private static variables
-  ### 
+  ###
 
   @_mapOptionNames: [
     'center'
@@ -57,8 +57,7 @@ class App.Cartography.Map
 
   constructor: (mapElement) ->
     @_$map = $(mapElement)
-    # App.Logger.debug @_$map
-    
+
     # compose map options
     mapOptions = Lib.Options.load(App.Cartography.Map._mapOptionNames, @_$map, "cartography-map-")
 
@@ -77,7 +76,7 @@ class App.Cartography.Map
 
     @_map.panTo(center, { animate: true, duration: 3 })
     @_map.setZoom(zoom)
-    # @_map.fitBounds(@getMapBounds())    
+    # @_map.fitBounds(@getMapBounds())
     @bindMapEvents()
 
   contractMap: () ->
@@ -98,7 +97,7 @@ class App.Cartography.Map
 
   getMapAttribution: () ->
     attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    
+
     mapAttributionElement = @_$map.find('[data-cartography-map-attribution]').eq(0)
     attributionHtml = $(mapAttributionElement).html()
     unless $.trim(attributionHtml).length <= 0
@@ -114,14 +113,14 @@ class App.Cartography.Map
 
   getMapPanelId: () ->
     # TODO: create an element if one doesn't exist
-    @_$mapPanel = @_$map.find('[data-cartography-map-panel]').eq(0)
+    @_$mapPanel = @_$map.find('[data-cartography-map-panel]').eq(0) or throw new Error("Map panel not found")
     @_$mapPanel.attr('id')
 
   getMapBounds: () ->
-    @_$map.data("cartography-map-bounds")
+    @_$map.data("cartography-map-bounds") or throw new Error("Map bounds not found")
 
   getMapCenter:() ->
-    @_$map.data("cartography-map-center")
+    @_$map.data("cartography-map-center") or throw new Error("Map center not found")
 
   bindMapEvents: () ->
     # 'Abstract' function for children classes
@@ -131,10 +130,10 @@ class App.Cartography.Map
     for markerElement in @_$map.find(App.Cartography.Marker.selector)
       new App.Cartography.Marker(markerElement, @_map)
 
-### 
+###
 Initialize atlases on application ready
 ###
 
-$(document).on 'app.ready', ->
+$ ->
   $(App.Cartography.Map.selector).each (index, mapElement) ->
     new App.Cartography.Map(mapElement)
