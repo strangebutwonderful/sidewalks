@@ -25,7 +25,7 @@ class App.Cartography.ExplorationMap extends App.Cartography.Map
     center = @_map.getCenter()
     latitude = center.lat
     longitude = center.lng
-
+      
     uri = App.URILocation.replaceQuery(window.location, {
       latitude: latitude
       longitude: longitude
