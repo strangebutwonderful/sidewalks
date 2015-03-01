@@ -12,7 +12,7 @@
 
 class Original < ActiveRecord::Base
 
-  belongs_to :importable, :polymorphic => true
+  belongs_to :importable, polymorphic: true
 
   attr_accessible :dump
 

@@ -17,7 +17,7 @@
 class Origin < ActiveRecord::Base
 
   belongs_to :noise
-  has_one :user, :through => :noise
+  has_one :user, through: :noise
 
   attr_accessible :latitude, :longitude
 
@@ -53,7 +53,7 @@ class Origin < ActiveRecord::Base
 
   def self.where_ids(ids)
     unless ids.nil?
-      where(:id => ids)
+      where(id: ids)
     else
       scoped
     end

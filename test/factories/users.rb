@@ -37,7 +37,7 @@ FactoryGirl.define do
 
   factory :user_with_original, parent: :user do
     after(:create) do |user|
-      user.create_original(:dump => user.to_json)
+      user.create_original(dump: user.to_json)
     end
   end
 

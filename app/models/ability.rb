@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     end
 
-    can :update, User, :id => user.id
+    can :update, User, id: user.id
 
     # Define abilities for the passed in user here. For example:
     #
@@ -28,7 +28,7 @@ class Ability
     # The third argument is an optional hash of conditions to further filter the objects.
     # For example, here the user can only update published articles.
     #
-    #   can :update, Article, :published => true
+    #   can :update, Article, published: true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end

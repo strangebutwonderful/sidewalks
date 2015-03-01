@@ -14,14 +14,14 @@ module Authentication
 
   def authenticate_user!
     if !current_user
-      redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+      redirect_to root_url, alert: 'You need to sign in for access to this page.'
     end
   end
 
   def current_user
     begin
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    rescue Exception => exception
+    rescue => exception
       Rails.logger.error exception
       nil
     end
