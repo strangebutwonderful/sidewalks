@@ -37,5 +37,5 @@ class OriginTest < ActiveSupport::TestCase
     assert_no_difference('Origin.where_latest.count') do
       FactoryGirl.create(:week_old_origin)
     end
-  end  
+  end
 end

@@ -4,7 +4,7 @@ root.App.Web.Form ?= {}
 $ = jQuery
 
 class App.Web.Form.Trigger
-  ### 
+  ###
   public static variables
   ###
   @selector = '[data-form-trigger]'

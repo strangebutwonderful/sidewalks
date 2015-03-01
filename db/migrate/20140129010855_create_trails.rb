@@ -7,7 +7,7 @@ class CreateTrails < ActiveRecord::Migration
 
       t.timestamps
     end
-    
+
     add_index :trails, :user_id
     add_index :trails, :latitude
     add_index :trails, :longitude

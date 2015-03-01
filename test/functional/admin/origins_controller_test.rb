@@ -55,7 +55,7 @@ class Admin::OriginsControllerTest < ActionController::TestCase
 
   test "should destroy origin" do
     sign_in(FactoryGirl.create(:admin_user))
-    
+
     assert_difference('Origin.count', -1) do
       delete :destroy, noise_id: @origin.noise_id, id: @origin
     end

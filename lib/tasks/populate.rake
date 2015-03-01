@@ -1,6 +1,6 @@
-# Simple scripts 
+# Simple scripts
 namespace :populate do
-  
+
   task :noises => :environment do
     unless Rails.env.production?
       FactoryGirl.create_list(:noise, 10)

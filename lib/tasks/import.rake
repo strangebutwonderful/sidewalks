@@ -1,10 +1,10 @@
 # Importer
 namespace :import do
-  
+
   task :twitter => :environment do
     if Feature.on? :rake_import_twitter
       TwitterImporter.import_latest_from_sidewalks_twitter
-    else 
+    else
       Rails.logger.debug "Import disabled, use `rake_import_tweets` "
     end
   end
@@ -12,7 +12,7 @@ namespace :import do
   task :twitter_accounts => :environment do
     if Feature.on? :rake_import_twitter_accounts
       TwitterImporter.import_connections
-    else 
+    else
       Rails.logger.debug "Import disabled, use `rake_import_twitter_accounts` "
     end
   end

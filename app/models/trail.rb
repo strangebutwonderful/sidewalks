@@ -25,7 +25,7 @@ class Trail < ActiveRecord::Base
   end
 
   def self.update_recent(user, latitude, longitude)
-    # TODO: should account for close location drift 
+    # TODO: should account for close location drift
     trail = user.trails.where(latitude: latitude, longitude: longitude)
       .where_created_less_than(5.minutes.ago)
       .where_latest

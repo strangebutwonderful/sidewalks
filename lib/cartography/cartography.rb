@@ -9,14 +9,14 @@ module Cartography
 
     if @request_latitude.blank?
       @request_latitude = Neighborhood::city(:sanfrancisco).latitude
-    end    
+    end
 
     @request_latitude
   end
 
   def request_longitude
     @request_longitude ||= params[:longitude]
-    
+
     if @request_longitude.blank? && request.location.present?
       @request_longitude ||= request.location.longitude.to_s
     end
@@ -37,7 +37,7 @@ module Cartography
     params[:longitude] = request_longitude
   end
 
-  def self.included method 
+  def self.included method
     return unless method < ActionController::Base
     method.helper_method :request_latitude, :request_longitude, :request_latlng, :override_request_geolocation # , :any_other_helper_methods
 

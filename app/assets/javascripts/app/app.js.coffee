@@ -3,7 +3,7 @@ root.App ?= {}
 
 class root.App
 
-  ### 
+  ###
   public static variables
   ###
   @env: 'production'
@@ -19,9 +19,9 @@ class root.App
   ###
 
   @config: (key = null) ->
-    if key? 
+    if key?
       root.App._config[key]
-    else 
+    else
       root.App._config
 
   ###
@@ -43,7 +43,7 @@ class root.App
       key = key.toUpperCase()
 
       value = $metaElement.attr('content')
-      
+
       config[key] = value
 
     config

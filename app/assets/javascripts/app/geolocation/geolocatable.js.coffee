@@ -3,7 +3,7 @@ root.App.Geolocation ?= {}
 $ = jQuery
 
 class App.Geolocation.Geolocatable
-  ### 
+  ###
   public static variables
   ###
   @selector = '[data-geolocatable]';
@@ -42,16 +42,16 @@ class App.Geolocation.Geolocatable
       latitude: position.coords.latitude
       longitude: position.coords.longitude
       }
-    
+
     href = @_$geolocatable.attr('href') || window.location.href
 
     nextState = App.Geolocation.Geolocatable.HERESTATE
 
     unless App.URILocation.queryContains(href, latlngQuery)
-      nextState = App.Geolocation.Geolocatable.MOVEDSTATE # TODO: if new latlng is same, set state as    
-    
+      nextState = App.Geolocation.Geolocatable.MOVEDSTATE # TODO: if new latlng is same, set state as
+
     uri = App.URILocation.replaceQuery(href, latlngQuery)
-    
+
     @_$geolocatable.attr('href', uri.toString())
     @setState(nextState)
 

@@ -15,7 +15,7 @@ class MapTest < ActiveSupport::TestCase
     assert_not_nil Map.new(latlng).boundaries
   end
 
-  test "LatLngs set on constructor" do 
+  test "LatLngs set on constructor" do
     latlngs = []
     5.times do
       latlngs << LatLng.new(Faker::Address.latitude, Faker::Address.longitude)

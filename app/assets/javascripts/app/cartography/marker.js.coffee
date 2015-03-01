@@ -6,16 +6,16 @@ $ = jQuery
 # L = Leaflet
 
 class App.Cartography.Marker
-  ### 
+  ###
   public static variables
   ###
   @selector = "[data-cartography-map-marker]"
 
   ###
   private static variables
-  ### 
+  ###
 
-  # Options tied to Leaflet Marker or custom ones for local 
+  # Options tied to Leaflet Marker or custom ones for local
   @_mapMarkerOptionNames: [
     'icon'
     'clickable'
@@ -54,7 +54,7 @@ class App.Cartography.Marker
     'markerColor' #'red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpuple', 'cadetblue'
     'iconColor' # 'white', 'black' or css code (hex, rgba etc)
     'spin' # true or false.
-    'extraClasses' 
+    'extraClasses'
   ]
 
   ###
@@ -120,7 +120,7 @@ class App.Cartography.Marker
 
     latitude = position.coords.latitude
     longitude = position.coords.longitude
-    
+
     @_marker.setLatLng([latitude, longitude])
 
   geolocationErrorHandler: (msg) =>

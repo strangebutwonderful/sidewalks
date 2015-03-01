@@ -16,7 +16,7 @@ class App.Tracking.Track
 
     latitude = position.coords.latitude
     longitude = position.coords.longitude
-    
+
     # Set cookie
     $.cookie('latlng', "#{latitude},#{longitude}")
 

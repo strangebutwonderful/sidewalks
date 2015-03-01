@@ -33,7 +33,7 @@ class LatLngTest < ActiveSupport::TestCase
     latlng = LatLng.new(0,0)
     assert latlng.latitude.is_a? BigDecimal
     assert latlng.longitude.is_a? BigDecimal
-  end  
+  end
 
   test "LatLng equals tests against latitude and longitude" do
     assert_equal LatLng.new(0,0), LatLng.new(0,0)
@@ -66,7 +66,7 @@ class LatLngTest < ActiveSupport::TestCase
 
     assert_equal BigDecimal(0), latlng.latitude
     assert_equal BigDecimal(1), latlng.longitude
-  end  
+  end
 
   test "Center should generate the same value latlng for a single entry list" do
     centered_latlng = LatLng.center([LatLng.new(10, 15)])

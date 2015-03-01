@@ -31,7 +31,7 @@ em      { font-style: italic; }
 cite    { font-style: normal; }
 
 // Utility classes
-.muted { 
+.muted {
   color: $grayLight;
 }
 a.muted:hover,
@@ -141,7 +141,7 @@ ol.inline {
   }
 
   // ensure left alignment with text
-  > li:first-child { 
+  > li:first-child {
     padding-left: 0;
   }
 }

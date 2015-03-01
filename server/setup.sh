@@ -20,7 +20,7 @@ apt-get -qq update
 echo "Installing libraries from apt-get"
 apt-get -qq install curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev git-core libpq-dev
 
-### 
+###
 # Install basic ruby for chef
 # Releases can be found at http://ftp.ruby-lang.org/pub/ruby/2.0/
 ###
