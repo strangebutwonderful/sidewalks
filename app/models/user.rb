@@ -10,8 +10,8 @@
 #  provider_screen_name         :string(255)
 #  provider_access_token        :string(255)
 #  provider_access_token_secret :string(255)
-#  created_at                   :datetime         not null
-#  updated_at                   :datetime         not null
+#  created_at                   :datetime
+#  updated_at                   :datetime
 #  following                    :boolean          default(FALSE), not null
 #  locations_count              :integer          default(0), not null
 #  mobile_venues_count          :integer

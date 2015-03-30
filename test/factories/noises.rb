@@ -6,8 +6,8 @@
 #  provider_id      :string(255)      not null
 #  user_id          :integer          not null
 #  text             :text             not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #  provider         :string(255)      not null
 #  avatar_image_url :string(255)
 #  actionable       :boolean

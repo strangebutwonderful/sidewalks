@@ -10,8 +10,8 @@
 #  zip        :integer          not null
 #  latitude   :decimal(11, 8)   not null
 #  longitude  :decimal(11, 8)   not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 # Indexes
 #
