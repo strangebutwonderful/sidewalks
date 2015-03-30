@@ -76,6 +76,8 @@ group :development, :test do
   gem 'faker'
   gem 'jasmine'
   gem 'pry'
+  gem 'rails-perftest'
+  gem 'ruby-prof'
   gem 'web-console', '~> 2.0'
   gem 'webmock', require: false
 end

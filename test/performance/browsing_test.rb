@@ -7,7 +7,7 @@ class BrowsingTest < ActionDispatch::PerformanceTest
   #                          output: 'tmp/performance', formats: [:flat] }
 
   def setup
-    FactoryGirl.create(:noise, 500)
+    FactoryGirl.create_list(:noise, 500)
   end
 
   def test_homepage

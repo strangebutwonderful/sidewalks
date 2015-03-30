@@ -231,6 +231,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails-perftest (0.0.5)
     rails_autolink (1.1.6)
       rails (> 3.1)
     railties (4.2.1)
@@ -251,6 +252,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rolify (3.4.0)
+    ruby-prof (0.15.6)
     safe_yaml (1.0.3)
     sass (3.2.19)
     sass-rails (4.0.2)
@@ -358,6 +360,7 @@ DEPENDENCIES
   protected_attributes
   pry
   rails (~> 4.2)
+  rails-perftest
   rails_autolink (~> 1.1.5)
   rake
   rb-fchange
@@ -366,6 +369,7 @@ DEPENDENCIES
   replicate (~> 1.5.1)
   responders (~> 2.0)
   rolify
+  ruby-prof
   sass-rails (= 4.0.2)
   slack-notifier (~> 0.4.0)
   thin

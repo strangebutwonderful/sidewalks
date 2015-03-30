@@ -32,6 +32,9 @@ Sidewalks::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  # In Rails 5, the default value of this option will change from `:sorted` to `:random`.
+  config.active_support.test_order = :random
+
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'example.com' }
 
