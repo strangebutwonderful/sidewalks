@@ -22,6 +22,11 @@ FactoryGirl.define do
 
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
+
+    trait :in_san_francisco do
+      latitude { 37.7749300 }
+      longitude { -122.4194200 }
+    end
   end
 
   factory :week_old_origin, parent: :noise do
