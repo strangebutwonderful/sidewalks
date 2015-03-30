@@ -1,6 +1,7 @@
 # Importer
 namespace :import do
 
+  desc "Imports noises from Twitter tweets"
   task :twitter => :environment do
     if Feature.on? :rake_import_twitter
       TwitterImporter.import_latest_from_sidewalks_twitter
@@ -9,6 +10,7 @@ namespace :import do
     end
   end
 
+  desc "Imports accounts from Twitter connections"
   task :twitter_accounts => :environment do
     if Feature.on? :rake_import_twitter_accounts
       TwitterImporter.import_connections
