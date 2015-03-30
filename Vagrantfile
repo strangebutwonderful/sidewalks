@@ -40,6 +40,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   config.ssh.forward_agent = true
 
+  # X11 forwarding over SSH connections is enabled. Defaults to false.
+  config.ssh.forward_x11 = true
+
   # custom fix for "stdin: is not a tty" error (https://github.com/mitchellh/vagrant/issues/1673)
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
