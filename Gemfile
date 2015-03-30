@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.2'
 
 # assets
 
@@ -55,7 +55,9 @@ gem 'whenever', '0.9.0', require: false
 
 gem 'flip', '~> 1'
 
+# deprecated controller actions
 gem 'protected_attributes'
+gem 'responders', '~> 2.0'
 
 group :development do
   gem 'annotate'
@@ -73,8 +75,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'jasmine'
-  gem 'webmock', require: false
   gem 'pry'
+  gem 'web-console', '~> 2.0'
+  gem 'webmock', require: false
 end
 
 group :test do
