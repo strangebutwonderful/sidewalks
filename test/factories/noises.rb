@@ -45,6 +45,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :noise_in_san_francisco, parent: :noise do
+    after(:create) do |noise|
+      FactoryGirl.create_list(:origin, 1, :in_san_francisco, noise: noise)
+    end
+  end
+
   factory :week_old_noise, parent: :noise do
     created_at 1.week.ago
   end
