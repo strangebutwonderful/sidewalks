@@ -21,6 +21,11 @@
 </div>
 
 <div class="row">
+
+  <div class="docket">
+    <%= pluralize @user.mobile_venues_count, User.human_attribute_name( :mobile_venues_count ) %>
+  </div>
+
   <% @user.locations.each do |location| %>
     <div class="docket">
       <p>

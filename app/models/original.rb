@@ -18,8 +18,6 @@ class Original < ActiveRecord::Base
 
   belongs_to :importable, polymorphic: true
 
-  attr_accessible :dump
-
   validates :importable_id, presence: true
   validates :importable_type, presence: true
   validates :dump, presence: true

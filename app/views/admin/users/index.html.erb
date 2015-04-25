@@ -21,6 +21,9 @@
         <i class="provider-<%= user.provider.downcase %>"></i>
       <% end %>
     </dt>
+    <dd>
+      <%= link_to 'edit', edit_admin_user_path(:id => user) %>
+    </dd>
     <dd><b>Provider Id:</b> <%= user.provider_id %></dd>
     <dd><b>Provider Access Token:</b> <%= user.provider_access_token %></dd>
     <dd><b>Provider Access Token Secret:</b> <%= user.provider_access_token_secret %></dd>
@@ -39,6 +42,12 @@
       <% else %>
         <%= link_to 'add new location', new_admin_location_path(:user_id => user) %>
       <% end %>
+    </dd>
+    <dd>
+      <b>
+        <%= User.human_attribute_name( :mobile_venues_count ) %>
+      </b>
+      <%= user.mobile_venues_count %>
     </dd>
   </dl>
 <% end %>
