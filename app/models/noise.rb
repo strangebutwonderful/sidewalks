@@ -33,8 +33,6 @@ class Noise < ActiveRecord::Base
 
   replicate_associations :origins # for replicate gem
 
-  attr_accessible :text, :provider, :provider_id, :actionable
-
   attr_reader :provider_url, :user_name, :user_provider_url, :map
 
   validates_presence_of :provider, :provider_id, :text, :created_at, :user_id

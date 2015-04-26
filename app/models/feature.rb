@@ -12,8 +12,6 @@
 class Feature < ActiveRecord::Base
   extend Flip::Declarable
 
-  attr_accessible :key, :enabled
-
   # strategy Flip::CookieStrategy
   strategy Flip::DatabaseStrategy
   strategy Flip::DeclarationStrategy

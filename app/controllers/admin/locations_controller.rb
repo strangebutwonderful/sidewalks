@@ -40,7 +40,7 @@ class Admin::LocationsController < Admin::AdminController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(params[:location])
+    @location = Location.new(location_params)
 
     if @location.save
       flash[:notice] = "Location was successfully created"
@@ -54,7 +54,7 @@ class Admin::LocationsController < Admin::AdminController
   def update
     @location = Location.find(params[:id])
 
-    if @location.update_attributes(params[:location])
+    if @location.update_attributes(location_params)
       flash[:notice] = 'Location was successfully updated.'
     end
 
@@ -71,4 +71,11 @@ class Admin::LocationsController < Admin::AdminController
 
     respond_with(:admin, @location)
   end
+
+  private
+
+  def location_params
+    params.require(:location).permit(:user_id, :address, :city, :latitude, :longitude, :state, :zip)
+  end
+
 end

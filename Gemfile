@@ -56,7 +56,6 @@ gem 'whenever', '0.9.0', require: false
 gem 'flip', '~> 1'
 
 # deprecated controller actions
-gem 'protected_attributes'
 gem 'responders', '~> 2.0'
 
 group :development do

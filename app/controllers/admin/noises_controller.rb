@@ -36,7 +36,7 @@ class Admin::NoisesController < Admin::AdminController
   def update
     @noise = Noise.find(params[:id])
 
-    if @noise.update_attributes(params[:noise])
+    if @noise.update_attributes(noise_params)
       flash[:notice] = 'Noise was successfully updated.'
     end
 
@@ -53,4 +53,11 @@ class Admin::NoisesController < Admin::AdminController
 
     respond_with(:admin, @noise)
   end
+
+  private
+
+  def noise_params
+    params.require(:noise).permit(:role_ids, :provider_id)
+  end
+
 end

@@ -47,11 +47,17 @@ class Admin::UsersController < Admin::AdminController
   def update
     @user = User.find(params[:id])
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = 'User was successfully updated.'
     end
 
     respond_with(:admin, @user)
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :mobile_venues_count)
   end
 
 end

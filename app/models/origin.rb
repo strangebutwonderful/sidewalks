@@ -19,8 +19,6 @@ class Origin < ActiveRecord::Base
   belongs_to :noise
   has_one :user, through: :noise
 
-  attr_accessible :latitude, :longitude
-
   reverse_geocoded_by :latitude, :longitude
 
   def latlng?

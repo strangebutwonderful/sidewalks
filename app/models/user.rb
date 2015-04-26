@@ -28,15 +28,21 @@ class User < ActiveRecord::Base
     dependent: :destroy
   has_many :trails, dependent: :destroy
 
-  attr_accessible :role_ids, as: :admin
-  attr_accessible :provider, :provider_id, :name, :email
-
   attr_reader :provider_url
 
   validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
+
+  scope :where_needs_triage, -> (params = {}) do
+    where(
+      arel_table[:locations_count].lt(1).
+      or(
+        arel_table[:mobile_venues_count].lt(1)
+      )
+    )
+  end
 
   def provider_url
     case provider
@@ -114,14 +120,6 @@ class User < ActiveRecord::Base
 
     user.create_original!(dump: twitter_user.to_json)
     user
-  end
-
-  def self.where_location_count_less_than(count)
-    where("#{table_name}.locations_count < ?", count)
-  end
-
-  def self.where_needs_triage(params)
-    where_location_count_less_than(1)
   end
 
   def self.explore(params)

@@ -1,5 +1,19 @@
-<%= form_for([:admin, @user]) do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.submit "Sign in" %>
-<% end %>
+<% title @user.name %>
+
+<div class="row">
+  <div class="page-heading">
+    <h1>
+      <%= yield :title %>
+    </h1>
+  </div>
+</div>
+
+<div class="docket">
+  <%= form_for([:admin, @user]) do |f| %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.label :mobile_venues_count %>
+    <%= f.number_field :mobile_venues_count %>
+    <%= f.submit %>
+  <% end %>
+</div>

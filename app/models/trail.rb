@@ -18,7 +18,6 @@
 
 class Trail < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :latitude, :longitude
 
   def latlng
     @latlng ||= LatLng.new(latitude, longitude)

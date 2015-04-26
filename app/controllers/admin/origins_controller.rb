@@ -39,7 +39,7 @@ class Admin::OriginsController < Admin::AdminController
   # POST /origins.json
   def create
     @noise = Noise.find(params[:noise_id])
-    @origin = @noise.origins.build(params[:origin])
+    @origin = @noise.origins.build(origin_params)
 
     if @origin.save
       flash[:notice] = 'Location was successfully created.'
@@ -54,7 +54,7 @@ class Admin::OriginsController < Admin::AdminController
     @noise = Noise.find(params[:noise_id])
     @origin = @noise.origins.find(params[:id])
 
-    if @origin.update_attributes(params[:origin])
+    if @origin.update_attributes(origin_params)
       flash[:notice] = 'Noise location was successfully updated.'
     end
 
@@ -72,4 +72,11 @@ class Admin::OriginsController < Admin::AdminController
 
     respond_with(:admin, @noise, @origin)
   end
+
+  private
+
+  def origin_params
+    params.require(:origin).permit(:latitude, :longitude)
+  end
+
 end
