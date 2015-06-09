@@ -154,9 +154,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "version" => "9.3"
         },
       "rvm" => {
-        "default_ruby" => "ruby-2.0.0-p451@#{APPLICATION_NAME}",
+        "default_ruby" => "ruby-2.2.2@#{APPLICATION_NAME}",
         "rubies" => [
-          "ruby-2.1.1"
+          "ruby-2.2.2"
           ],
         "rvmrc" => {
           'rvm_project_rvmrc' => 1,

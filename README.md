@@ -9,10 +9,8 @@
 
 This application requires:
 
-* Ruby version 2.0.0
-* Rails version 3.2.13
-
-Learn more about "Installing Rails":http://railsapps.github.io/installing-rails.html.
+* Ruby
+* Rails
 
 ## Database
 
@@ -46,7 +44,7 @@ This application uses PostgreSQL with ActiveRecord.
 #### RVM
 
 1. `sudo bash /vagrant/server/install-rvm.sh stable`
-1. `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.0.0-p195`
+1. `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.2.2`
 1. `cd /vagrant`
 1. `bundle install`
 
