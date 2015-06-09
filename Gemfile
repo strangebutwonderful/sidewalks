@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.2.2'
 
 gem 'rails', '~> 4.2'
 
@@ -64,9 +64,6 @@ group :development do
   gem 'binding_of_caller', platforms: [:mri_19, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
-  gem 'rb-fchange', require: false
-  gem 'rb-fsevent', require: false
-  gem 'rb-inotify', require: false
 end
 
 group :development, :test do
