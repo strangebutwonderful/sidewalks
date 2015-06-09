@@ -41,9 +41,6 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (6.0.0)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.2.2)
@@ -100,9 +97,6 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.7)
-    exception_notification (4.0.1)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
     execjs (2.2.1)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -262,7 +256,6 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    slack-notifier (0.4.1)
     slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -322,8 +315,6 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  better_errors
-  binding_of_caller
   bootstrap-sass (~> 2)
   bugsnag
   cancan
@@ -335,7 +326,6 @@ DEPENDENCIES
   compass (~> 0.13.alpha.0)
   compass-rails (>= 1.1.7)
   coveralls
-  exception_notification
   factory_girl_rails
   faker
   figaro
@@ -363,7 +353,6 @@ DEPENDENCIES
   rolify
   ruby-prof
   sass-rails (= 4.0.2)
-  slack-notifier (~> 0.4.0)
   thin
   twitter (~> 5)
   uglifier (>= 1.0.3)
