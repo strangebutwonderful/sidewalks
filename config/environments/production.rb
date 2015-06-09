@@ -86,11 +86,3 @@ Sidewalks::Application.configure do
   config.eager_load = false
 
 end
-
-Sidewalks::Application.config.middleware.use ExceptionNotification::Rack,
-  email: {
-    email_prefix: "[Sidewalks] ",
-    sender_address: %{ENV["NOTIFIER_EMAIL_SENDER_ADDRESS"]},
-    exception_recipients: %w{ENV["NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS"]}
-  }
-

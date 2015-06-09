@@ -32,9 +32,6 @@ gem 'figaro'
 # server
 gem 'pg'
 gem 'thin'
-gem 'exception_notification'
-
-gem 'slack-notifier', '~> 0.4.0'
 
 gem 'pg_search'
 
