@@ -32,9 +32,6 @@ gem 'figaro'
 # server
 gem 'pg'
 gem 'thin'
-gem 'exception_notification'
-
-gem 'slack-notifier', '~> 0.4.0'
 
 gem 'pg_search'
 
@@ -60,8 +57,6 @@ gem 'responders', '~> 2.0'
 
 group :development do
   gem 'annotate'
-  gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_19, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
 end

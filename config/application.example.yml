@@ -13,8 +13,6 @@ SECRET_KEY_BASE: Your_Secret_Key_Base
 
 ROLES: [admin, user, VIP]
 
-TWITTER_ACCOUNT_SCREEN_NAME: Your_Twitter_Screen_Name
-
 TWITTER_CONSUMER_KEY: Your_OmniAuth_Provider_Key
 TWITTER_CONSUMER_SECRET: Your_OmniAuth_Provider_Secret
 
@@ -38,6 +36,3 @@ NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Notification_Recipients_Emails
 # BUGSNAG_API_KEY: Your_Bugsnag_Key
 
 # GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code
-
-# SLACK_TEAM_NAME: Your_Slack_Team_Name
-# SLACK_WEBHOOK_TOKEN = Your_Slack_Webhook_Token

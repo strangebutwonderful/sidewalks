@@ -23,7 +23,7 @@ class TwitterImporter
       User.first_or_create_from_twitter!(twitter_user, following: true)
     end
 
-    Chatterbox.tell "Imported twitter connections"
+    Rails.logger.debug "Imported twitter connections"
   end
 
   def self.gimme_a_tweet
