@@ -41,7 +41,7 @@ gem "geocoder"
 
 gem "leaflet-rails", "~> 0.7"
 
-gem "capistrano", "~> 3.2"
+gem "capistrano", "~> 3.4"
 gem "capistrano-rvm"
 gem "capistrano-bundler"
 gem "capistrano-rails", "~> 1.1"
