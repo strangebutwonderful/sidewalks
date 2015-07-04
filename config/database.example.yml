@@ -18,7 +18,7 @@ development:
   database: sidewalks_development
   pool: 5
   username: vagrant
-  password: password
+  # password: password
   template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
