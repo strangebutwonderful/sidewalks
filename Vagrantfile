@@ -68,9 +68,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.vm.provision :shell, :path => "server/setup.sh"
-  config.vm.provision :shell, :path => "server/install-nodejs.sh"
-  config.vm.provision :shell, :path => "server/install-phantomjs.sh"
+  config.vm.provision :shell, :path => "vagrant/ubuntu.sh"
+  config.vm.provision :shell, :path => "vagrant/ruby.sh"
+  config.vm.provision :shell, :path => "vagrant/nodejs.sh"
+  config.vm.provision :shell, :path => "vagrant/phantomjs.sh"
+  config.vm.provision :shell, :path => "vagrant/postgresql.sh"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
@@ -99,73 +101,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "cookbooks"
+  # config.vm.provision "chef_solo" do |chef|
+    # chef.cookbooks_path = "cookbooks"
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
-
-    chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
-    chef.add_recipe "postgresql::server"
-    chef.add_recipe "postgresql::client"
-    chef.add_recipe "rvm::system"
-    chef.add_recipe "rvm::vagrant"
-
-    # chef.add_role "web"
-
-    # You may also specify custom JSON attributes:
-    chef.json = {
-      "postgresql" => {
-        "apt_distribution" => "trusty", # Ubuntu 14.04
-        "databases" => [
-          {
-            # generic database to allow easy command line access to psql
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "vagrant",
-            "owner" => "vagrant",
-            "template" => "template0"
-            },
-          {
-            # rails-esque database so `rails new` will work out of the box
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "#{APPLICATION_NAME}_development",
-            "owner" => "vagrant",
-            "template" => "template0"
-            },
-          {
-            # rails-esque database so `rake test` will work out of the box
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "#{APPLICATION_NAME}_test",
-            "owner" => "vagrant",
-            "template" => "template0"
-            }
-          ],
-        "users" => [
-          {
-            "username" => "vagrant",
-            "password" => "password", # yay, super secure!
-            "superuser" => true,
-            "createdb" => true,
-            "login" => true
-            }
-          ],
-        "version" => "9.3"
-        },
-      "rvm" => {
-        "default_ruby" => "ruby-2.2.2@#{APPLICATION_NAME}",
-        "rubies" => [
-          "ruby-2.2.2"
-          ],
-        "rvmrc" => {
-          'rvm_project_rvmrc' => 1,
-          'rvm_gemset_create_on_use_flag' => 1,
-          'rvm_trust_rvmrcs_flag' => 1
-          }
-        }
-      }
-  end
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
