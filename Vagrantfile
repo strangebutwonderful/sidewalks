@@ -13,12 +13,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "precise64"
+  config.vm.box = "ubuntu/trusty64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # config.vm.box_url = "http://files.vagrantup.com/trusty64.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -57,136 +57,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
+  config.vm.provider "virtualbox" do |vb|
+    host = RbConfig::CONFIG['host_os']
+
+    # Give VM 1/4 system memory & access to all cpu cores on the host
+    if host =~ /darwin/
+      cpus = `sysctl -n hw.ncpu`.to_i
+      # sysctl returns Bytes and we need to convert to MB
+      mem = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 4
+    elsif host =~ /linux/
+      cpus = `nproc`.to_i
+      # meminfo shows KB and we need to convert to MB
+      mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 4
+    else # sorry Windows folks, I can't help you
+      cpus = 2
+      mem = 1024
+    end
+
+    vb.customize ["modifyvm", :id, "--memory", mem]
+    vb.customize ["modifyvm", :id, "--cpus", cpus]
+
+    vb.customize ["guestproperty", "set", :id, "--timesync-threshold", 5000]
+  end
+
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.vm.provision :shell, :path => "server/setup.sh"
-  config.vm.provision :shell, :path => "server/install-nodejs.sh"
-  config.vm.provision :shell, :path => "server/install-phantomjs.sh"
-
-  # Enable provisioning with Puppet stand alone.  Puppet manifests
-  # are contained in a directory path relative to this Vagrantfile.
-  # You will need to create the manifests directory and a manifest in
-  # the file chef/ubuntu-12.04.pp in the manifests_path directory.
-  #
-  # An example Puppet manifest to provision the message of the day:
-  #
-  # # group { "puppet":
-  # #   ensure => "present",
-  # # }
-  # #
-  # # File { owner => 0, group => 0, mode => 0644 }
-  # #
-  # # file { '/etc/motd':
-  # #   content => "Welcome to your Vagrant-built virtual machine!
-  # #               Managed by Puppet.\n"
-  # # }
-  #
-  # config.vm.provision "puppet" do |puppet|
-  #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "site.pp"
-  # end
-
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding
-  # some recipes and/or roles.
-  #
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "cookbooks"
-    # chef.roles_path = "chef/roles"
-    # chef.data_bags_path = "chef/data_bags"
-
-    chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
-    chef.add_recipe "postgresql::server"
-    chef.add_recipe "postgresql::client"
-    chef.add_recipe "rvm::system"
-    chef.add_recipe "rvm::vagrant"
-
-    # chef.add_role "web"
-
-    # You may also specify custom JSON attributes:
-    chef.json = {
-      "postgresql" => {
-        "apt_distribution" => "precise", # Ubuntu 12.04
-        "databases" => [
-          {
-            # generic database to allow easy command line access to psql
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "vagrant",
-            "owner" => "vagrant",
-            "template" => "template0"
-            },
-          {
-            # rails-esque database so `rails new` will work out of the box
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "#{APPLICATION_NAME}_development",
-            "owner" => "vagrant",
-            "template" => "template0"
-            },
-          {
-            # rails-esque database so `rake test` will work out of the box
-            "encoding" => "utf8",
-            "locale" => "en_US.UTF8",
-            "name" => "#{APPLICATION_NAME}_test",
-            "owner" => "vagrant",
-            "template" => "template0"
-            }
-          ],
-        "users" => [
-          {
-            "username" => "vagrant",
-            "password" => "password", # yay, super secure!
-            "superuser" => true,
-            "createdb" => true,
-            "login" => true
-            }
-          ],
-        "version" => "9.3"
-        },
-      "rvm" => {
-        "default_ruby" => "ruby-2.2.2@#{APPLICATION_NAME}",
-        "rubies" => [
-          "ruby-2.2.2"
-          ],
-        "rvmrc" => {
-          'rvm_project_rvmrc' => 1,
-          'rvm_gemset_create_on_use_flag' => 1,
-          'rvm_trust_rvmrcs_flag' => 1
-          }
-        }
-      }
-  end
-
-  # Enable provisioning with chef server, specifying the chef server URL,
-  # and the path to the validation key (relative to this Vagrantfile).
-  #
-  # The Opscode Platform uses HTTPS. Substitute your organization for
-  # ORGNAME in the URL and validation key.
-  #
-  # If you have your own Chef Server, use the appropriate URL, which may be
-  # HTTP instead of HTTPS depending on your configuration. Also change the
-  # validation key to validation.pem.
-  #
-  # config.vm.provision "chef_client" do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
-  #   chef.validation_key_path = "ORGNAME-validator.pem"
-  # end
-  #
-  # If you're using the Opscode platform, your validator client is
-  # ORGNAME-validator, replacing ORGNAME with your organization name.
-  #
-  # If you have your own Chef Server, the default validation client name is
-  # chef-validator, unless you changed the configuration.
-  #
-  #   chef.validation_client_name = "ORGNAME-validator"
+  config.vm.provision :shell, :path => "vagrant/ubuntu.sh"
+  config.vm.provision :shell, :path => "vagrant/ruby.sh"
+  config.vm.provision :shell, :path => "vagrant/nodejs.sh"
+  config.vm.provision :shell, :path => "vagrant/phantomjs.sh"
+  config.vm.provision :shell, :path => "vagrant/postgresql.sh"
 end

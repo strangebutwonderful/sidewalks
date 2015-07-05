@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Installing phantomjs"
-apt-get -qq install build-essential chrpath git-core libssl-dev libfontconfig1-dev libicu48
+apt-get -qq install build-essential chrpath git-core libssl-dev libfontconfig1-dev libicu-dev
 
 # cd /tmp
 # PHANTOMJS_VERSION=1.9.7

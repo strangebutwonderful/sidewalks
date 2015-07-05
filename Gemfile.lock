@@ -58,12 +58,14 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-passenger (0.1.1)
+      capistrano (~> 3.0)
     capistrano-rails (1.1.3)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-rvm (0.1.2)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
+    capistrano-rbenv (2.0.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chronic (0.10.2)
@@ -320,8 +322,9 @@ DEPENDENCIES
   cancan
   capistrano (~> 3.4)
   capistrano-bundler
+  capistrano-passenger
   capistrano-rails (~> 1.1)
-  capistrano-rvm
+  capistrano-rbenv
   coffee-rails
   compass (~> 0.13.alpha.0)
   compass-rails (>= 1.1.7)

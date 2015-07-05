@@ -41,13 +41,6 @@ This application uses PostgreSQL with ActiveRecord.
 
 ### Rails Development Config
 
-#### RVM
-
-1. `sudo bash /vagrant/server/install-rvm.sh stable`
-1. `sudo bash /vagrant/server/install-rvm-ruby.sh ruby-2.2.2`
-1. `cd /vagrant`
-1. `bundle install`
-
 #### App Setup
 
 1. Copy `config/application.example.yml` to `config/application.yml`

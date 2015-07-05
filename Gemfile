@@ -42,9 +42,10 @@ gem "geocoder"
 gem "leaflet-rails", "~> 0.7"
 
 gem "capistrano", "~> 3.4"
-gem "capistrano-rvm"
 gem "capistrano-bundler"
+gem "capistrano-passenger"
 gem "capistrano-rails", "~> 1.1"
+gem "capistrano-rbenv"
 
 gem "rails_autolink", "~> 1.1.5"
 
