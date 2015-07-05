@@ -16,7 +16,7 @@ gem "font-awesome-sass", "~> 4"
 gem "coffee-rails"
 gem "uglifier", ">= 1.0.3"
 gem "yui-compressor"
-gem "jquery-rails", "~> 2.1"
+gem "jquery-rails", "~> 4.0"
 
 # authentication
 gem "cancan"
