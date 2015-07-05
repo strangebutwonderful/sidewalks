@@ -7,8 +7,7 @@ gem "rails", "~> 4.2"
 
 # css
 gem "sass-rails", "4.0.2"
-gem "compass", "~> 0.13.alpha.0"
-gem "compass-rails", ">= 1.1.7"
+gem "compass-rails", "~> 2"
 gem "bootstrap-sass", "~> 3"
 gem "font-awesome-sass", "~> 4"
 
