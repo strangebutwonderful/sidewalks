@@ -6,7 +6,7 @@ gem "rails", "~> 4.2"
 # assets
 
 # css
-gem "sass-rails", "4.0.2"
+gem "sass-rails", "~> 5"
 gem "compass-rails", "~> 2"
 gem "bootstrap-sass", "~> 3"
 gem "font-awesome-sass", "~> 4"
