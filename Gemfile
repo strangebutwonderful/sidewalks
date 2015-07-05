@@ -7,16 +7,15 @@ gem "rails", "~> 4.2"
 
 # css
 gem "sass-rails", "4.0.2"
-gem "compass", "~> 0.13.alpha.0"
-gem "compass-rails", ">= 1.1.7"
-gem "bootstrap-sass", "~> 2"
+gem "compass-rails", "~> 2"
+gem "bootstrap-sass", "~> 3"
 gem "font-awesome-sass", "~> 4"
 
 # javascript
 gem "coffee-rails"
 gem "uglifier", ">= 1.0.3"
 gem "yui-compressor"
-gem "jquery-rails", "~> 2.1"
+gem "jquery-rails", "~> 4.0"
 
 # authentication
 gem "cancan"
