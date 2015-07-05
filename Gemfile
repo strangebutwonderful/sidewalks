@@ -60,6 +60,7 @@ group :development do
   gem "annotate"
   gem "guard-bundler"
   gem "guard-rails"
+  gem "spring"
 end
 
 group :development, :test do
