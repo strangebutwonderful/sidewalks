@@ -6,16 +6,21 @@ gem "rails", "~> 4.2"
 # assets
 
 # css
-gem "sass-rails", "~> 5"
-gem "compass-rails", "~> 2"
 gem "bootstrap-sass", "~> 3"
+gem "compass-rails", "~> 2.0.4"
 gem "font-awesome-sass", "~> 4"
+gem "sass", "~> 3.4"
+gem "sass-rails", "~> 5"
 
 # javascript
 gem "coffee-rails"
 gem "uglifier", ">= 1.0.3"
 gem "yui-compressor"
 gem "jquery-rails", "~> 4.0"
+
+# view helpers
+gem "leaflet-rails", "~> 0.7"
+gem "rails_autolink", "~> 1.1.5"
 
 # authentication
 gem "cancan"
@@ -38,19 +43,15 @@ gem "twitter", "~> 5"
 
 gem "geocoder"
 
-gem "leaflet-rails", "~> 0.7"
+gem "whenever", "0.9.0", require: false
+
+gem "flip", "~> 1"
 
 gem "capistrano", "~> 3.4"
 gem "capistrano-bundler"
 gem "capistrano-passenger"
 gem "capistrano-rails", "~> 1.1"
 gem "capistrano-rbenv"
-
-gem "rails_autolink", "~> 1.1.5"
-
-gem "whenever", "0.9.0", require: false
-
-gem "flip", "~> 1"
 
 # deprecated controller actions
 gem "responders", "~> 2.0"
