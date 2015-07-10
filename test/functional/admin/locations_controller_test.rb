@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::LocationsControllerTest < ActionController::TestCase
   setup do
-    @location = FactoryGirl.create(:location)
+    @location = FactoryGirl.create(:location, :san_francisco_city_hall)
     @user = FactoryGirl.create(:user)
   end
 
@@ -31,7 +31,18 @@ class Admin::LocationsControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:admin_user))
 
     assert_difference('Location.count') do
-      post :create, location: { user_id: @user.id, address: @location.address, city: @location.city, latitude: @location.latitude, longitude: @location.longitude, state: @location.state, zip: @location.zip }
+      VCR.use_cassette("functional/admin/locations_controller_test/create") do
+        post(
+          :create,
+          location: {
+            user_id: @user.id,
+            address: @location.address,
+            city: @location.city,
+            state: @location.state,
+            zip: @location.zip
+          }
+        )
+      end
     end
 
     assert_redirected_to admin_location_path(assigns(:location))

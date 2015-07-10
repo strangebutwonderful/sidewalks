@@ -1,0 +1,120 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=1%20Dr%20Carlton%20B%20Goodlett%20Pl,%20San%20Francisco,%20CA%2094102&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 10 Jul 2015 03:51:20 GMT
+      Expires:
+      - Sat, 11 Jul 2015 03:51:20 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic,p=0
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "exclude_from_slo" : true,
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "1",
+                       "short_name" : "1",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Doctor Carlton B Goodlett Place",
+                       "short_name" : "Dr Carlton B Goodlett Pl",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Civic Center",
+                       "short_name" : "Civic Center",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "San Francisco",
+                       "short_name" : "SF",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "San Francisco County",
+                       "short_name" : "San Francisco County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "California",
+                       "short_name" : "CA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "94102",
+                       "short_name" : "94102",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "1 Doctor Carlton B Goodlett Place, San Francisco, CA 94102, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 37.7792719,
+                       "lng" : -122.4192288
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 37.78062088029149,
+                          "lng" : -122.4178798197085
+                       },
+                       "southwest" : {
+                          "lat" : 37.77792291970849,
+                          "lng" : -122.4205777802915
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJiVnbd5mAhYAR4Wq6WJriESk",
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Fri, 10 Jul 2015 03:51:21 GMT
+recorded_with: VCR 2.9.3
