@@ -25,8 +25,6 @@ class Location < ActiveRecord::Base
 
   validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
-  before_validation :geocode # geocoder
-
   geocoded_by :full_street_address do |location, results|
     if geocode = results.first
       location.latitude ||= geocode.latitude
@@ -53,6 +51,13 @@ class Location < ActiveRecord::Base
 
   def full_street_address
     address + ', ' + city + ', ' + state + ' ' + zip.to_s
+  end
+
+  def geography_changed?
+    address_changed? ||
+      city_changed? ||
+      state_changed? ||
+      zip_changed?
   end
 
   def to_origin

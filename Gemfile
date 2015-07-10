@@ -78,6 +78,7 @@ end
 group :test do
   gem "rake" # for travis
   gem "mocha", require: false
+  gem "vcr"
 end
 
 group :production do

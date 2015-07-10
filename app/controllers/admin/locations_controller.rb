@@ -42,6 +42,8 @@ class Admin::LocationsController < Admin::AdminController
   def create
     @location = Location.new(location_params)
 
+    @location.geocode
+
     if @location.save
       flash[:notice] = "Location was successfully created"
     end
@@ -53,6 +55,12 @@ class Admin::LocationsController < Admin::AdminController
   # PUT /locations/1.json
   def update
     @location = Location.find(params[:id])
+
+    @location.attributes = location_params
+
+    if @location.geography_changed?
+      @location.geocode
+    end
 
     if @location.update_attributes(location_params)
       flash[:notice] = 'Location was successfully updated.'
