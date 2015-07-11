@@ -43,7 +43,7 @@ gem "twitter", "~> 5"
 
 gem "geocoder"
 
-gem "whenever", "0.9.0", require: false
+gem "whenever", "~> 0.9", require: false
 
 gem "flip", "~> 1"
 
