@@ -1,23 +1,44 @@
 Geocoder.configure(
   # geocoding options
-  # :timeout      => 3,           # geocoding service timeout (secs)
-  # :lookup       => :google,     # name of geocoding service (symbol)
-  # :language     => :en,         # ISO-639 language code
-  # :use_https    => false,       # use HTTPS for lookup requests? (if supported)
-  # :http_proxy   => nil,         # HTTP proxy server (user:pass@host:port)
-  # :https_proxy  => nil,         # HTTPS proxy server (user:pass@host:port)
-  # :api_key      => nil,         # API key for geocoding service
-  # :cache        => nil,         # cache object (must respond to #[], #[]=, and #keys)
-  # :cache_prefix => "geocoder:", # prefix (string) to use for all cache keys
+
+  # geocoding service timeout (secs)
+  # timeout: 3,
+
+  # name of geocoding service (symbol)
+  # lookup: :google,
+
+  # ISO-639 language code
+  # language: :en,
+
+  # use HTTPS for lookup requests? (if supported)
+  # use_https: false,
+
+  # HTTP proxy server (user:pass@host:port)
+  # http_proxy: nil,
+
+  # HTTPS proxy server (user:pass@host:port)
+  # https_proxy: nil,
+
+  # API key for geocoding service
+  # api_key: nil,
+
+  # cache object (must respond to #[], #[]=, and #keys)
+  # cache: nil,
+
+  # prefix (string) to use for all cache keys
+  # cache_prefix: "geocoder:",
 
   # exceptions that should not be rescued by default
   # (if you want to implement custom error handling);
   # supports SocketError and TimeoutError
-  # :always_raise => [],
+  # always_raise: [],
 
   # calculation options
-  # :units     => :mi,       # :km for kilometers or :mi for miles
-  # :distances => :linear    # :spherical or :linear
+  # :km for kilometers or :mi for miles
+  # units: :mi,
+
+  # :spherical or :linear
+  # distances: :linear,
 
   # logger
   logger: Rails.logger
