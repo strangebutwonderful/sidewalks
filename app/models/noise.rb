@@ -24,12 +24,74 @@ class Noise < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
 
-  delegate :url_helpers, to: 'Rails.application.routes'
-
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
   has_many :origins, ->{ uniq true },
     dependent: :destroy
+
+  scope :where_nearby, ->(params) do
+    location = params[:location]
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+
+    if latitude && longitude
+      search_location = [latitude, longitude]
+    elsif location
+      search_location = location
+    end
+
+    if search_location
+      Rails.logger.debug "Location detected " + search_location.to_s
+
+      noise_ids = Origin.explore(params).
+        where_since(params[:created_at]).
+        map &:noise_id
+
+      where_ids(noise_ids).order_by_ids(noise_ids)
+    else
+      all
+    end
+  end
+
+  scope :where_needs_triage, ->(params) do
+    where(actionable: nil).order("#{table_name}.created_at DESC")
+  end
+
+  scope :where_actionable_or_not_triaged, -> do
+    where.not(actionable: false)
+  end
+
+  scope :joins_origins, -> do
+    joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
+  end
+
+  scope :where_ids, ->(ids) do
+    if ids.any?
+      where(id: ids)
+    else
+      all
+    end
+  end
+
+  scope :order_by_ids, ->(ids) do
+    order_by = ids.map { |id| "#{table_name}.id = #{id} DESC" }
+    order_by = order_by.join(", ")
+    order(order_by)
+  end
+
+  scope :where_since, ->(time) do
+    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
+  end
+
+  scope :where_latest, -> do
+    where_since 12.hours.ago
+  end
+
+  scope :where_authored_by_user_before, ->(user_id, time) do
+    where(user_id: user_id).
+      where("#{table_name}.created_at < ?", time).
+      order("#{table_name}.created_at DESC")
+  end
 
   replicate_associations :origins # for replicate gem
 
@@ -42,6 +104,9 @@ class Noise < ActiveRecord::Base
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
+  delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
+  delegate :url_helpers, to: "Rails.application.routes"
+
   def provider_url
     case provider
     when PROVIDER_TWITTER
@@ -49,14 +114,6 @@ class Noise < ActiveRecord::Base
     else
       url_helpers.noise_path(self)
     end
-  end
-
-  def user_name
-    self.user && self.user.name
-  end
-
-  def user_provider_url
-    self.user && self.user.provider_url
   end
 
   def latlngs?
@@ -210,84 +267,23 @@ class Noise < ActiveRecord::Base
     search_params[:created_at] ||= 7.days.ago
     search_params[:distance] = 0.025
 
-    where_nearby(search_params)
-    .where_actionable_or_not_triaged
-    .joins_origins
-    .joins(:original).preload(:original) # cuz nearby overrides includes
-    .joins(:user).preload(:user) # cuz nearby overrides includes
+    where_nearby(search_params).
+      where_actionable_or_not_triaged.
+      joins_origins.
+      joins(:original).preload(:original). # cuz nearby overrides includes
+      joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.explore_latest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 12.hours.ago
 
-    where_nearby(search_params)
-    .where_latest
-    .where_actionable_or_not_triaged
-    .joins_origins
-    .joins(:original).preload(:original) # cuz nearby overrides includes
-    .joins(:user).preload(:user) # cuz nearby overrides includes
-  end
-
-  def self.where_needs_triage(params)
-    where(actionable: nil).order("#{table_name}.created_at DESC")
-  end
-
-  def self.where_actionable_or_not_triaged
-    where("#{table_name}.actionable IS NOT false")
-  end
-
-  def self.joins_origins
-    joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
-  end
-
-  def self.where_ids(ids)
-    unless ids.nil?
-      where(id: ids)
-    else
-      scoped
-    end
-  end
-
-  def self.where_nearby(params)
-    location = params[:location]
-    latitude = params[:latitude]
-    longitude = params[:longitude]
-
-    if latitude && longitude
-      search_location = [latitude, longitude]
-    elsif location
-      search_location = location
-    end
-
-    if search_location
-      Rails.logger.debug "Location detected " + search_location.to_s
-
-      noise_ids = Origin.explore( params ).where_since( params[:created_at] ).map &:noise_id
-      where_ids( noise_ids ).order_by_ids( noise_ids )
-    else
-      scoped
-    end
-  end
-
-  def self.order_by_ids(ids)
-    order_by = ids.map { |id| "#{table_name}.id = #{id} DESC" }
-    order_by = order_by.join(", ")
-    order(order_by)
-  end
-
-  def self.where_since(time)
-    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
-  end
-
-  def self.where_latest
-    where_since 12.hours.ago
-  end
-
-  def self.where_authored_by_user_before(user_id, time)
-    where(user_id: user_id)
-      .where("#{table_name}.created_at < ?", time)
-      .order("#{table_name}.created_at DESC")
+    where_nearby(search_params).
+      where_latest.
+      where_actionable_or_not_triaged.
+      joins_origins.
+      joins(:original).preload(:original). # cuz nearby overrides includes
+      joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.first_or_create_from_tweet!(tweet, user)
