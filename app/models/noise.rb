@@ -24,8 +24,6 @@ class Noise < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
 
-  delegate :url_helpers, to: 'Rails.application.routes'
-
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
   has_many :origins, ->{ uniq true },
@@ -42,6 +40,9 @@ class Noise < ActiveRecord::Base
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
+  delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
+  delegate :url_helpers, to: 'Rails.application.routes'
+
   def provider_url
     case provider
     when PROVIDER_TWITTER
@@ -49,14 +50,6 @@ class Noise < ActiveRecord::Base
     else
       url_helpers.noise_path(self)
     end
-  end
-
-  def user_name
-    self.user && self.user.name
-  end
-
-  def user_provider_url
-    self.user && self.user.provider_url
   end
 
   def latlngs?
