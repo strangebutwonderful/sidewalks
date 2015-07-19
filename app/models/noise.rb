@@ -43,9 +43,9 @@ class Noise < ActiveRecord::Base
     if search_location
       Rails.logger.debug "Location detected " + search_location.to_s
 
-      noise_ids = Origin.explore(params)
-        .where_since(params[:created_at])
-        .map &:noise_id
+      noise_ids = Origin.explore(params).
+        where_since(params[:created_at]).
+        map &:noise_id
 
       where_ids(noise_ids).order_by_ids(noise_ids)
     else
@@ -54,12 +54,11 @@ class Noise < ActiveRecord::Base
   end
 
   scope :where_needs_triage, ->(params) do
-    where(actionable: nil)
-      .order("#{table_name}.created_at DESC")
+    where(actionable: nil).order("#{table_name}.created_at DESC")
   end
 
   scope :where_actionable_or_not_triaged, -> do
-    where("#{table_name}.actionable IS NOT false")
+    where.not(actionable: false)
   end
 
   scope :joins_origins, -> do
@@ -89,9 +88,9 @@ class Noise < ActiveRecord::Base
   end
 
   scope :where_authored_by_user_before, ->(user_id, time) do
-    where(user_id: user_id)
-      .where("#{table_name}.created_at < ?", time)
-      .order("#{table_name}.created_at DESC")
+    where(user_id: user_id).
+      where("#{table_name}.created_at < ?", time).
+      order("#{table_name}.created_at DESC")
   end
 
   replicate_associations :origins # for replicate gem
