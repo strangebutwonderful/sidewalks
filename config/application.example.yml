@@ -11,8 +11,6 @@
 # Generate with `rake secret`
 SECRET_KEY_BASE: Your_Secret_Key_Base
 
-ROLES: [admin, user, VIP]
-
 TWITTER_CONSUMER_KEY: Your_OmniAuth_Provider_Key
 TWITTER_CONSUMER_SECRET: Your_OmniAuth_Provider_Secret
 
