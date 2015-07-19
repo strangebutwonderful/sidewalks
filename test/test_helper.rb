@@ -6,6 +6,18 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "pry"
+require "mocha/setup"
+require "vcr"
+
+VCR.configure do |config|
+  config.allow_http_connections_when_no_cassette = false
+  config.cassette_library_dir = "test/vcr_cassettes"
+  config.default_cassette_options = {
+    match_requests_on: [ :method, :query, :uri ]
+  }
+  config.hook_into :webmock # or :fakeweb
+
+end
 
 class ActiveSupport::TestCase
   include Authentication
@@ -40,13 +52,4 @@ class ActiveSupport::TestCase
       user: twitter_user
     )
   end
-end
-
-require "mocha/setup"
-
-require "vcr"
-
-VCR.configure do |config|
-  config.cassette_library_dir = "test/vcr_cassettes"
-  config.hook_into :webmock # or :fakeweb
 end
