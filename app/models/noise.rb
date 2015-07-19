@@ -49,7 +49,7 @@ class Noise < ActiveRecord::Base
 
       where_ids(noise_ids).order_by_ids(noise_ids)
     else
-      scoped
+      all
     end
   end
 
@@ -69,7 +69,7 @@ class Noise < ActiveRecord::Base
     if ids.any?
       where(id: ids)
     else
-      scoped
+      all
     end
   end
 
@@ -267,23 +267,23 @@ class Noise < ActiveRecord::Base
     search_params[:created_at] ||= 7.days.ago
     search_params[:distance] = 0.025
 
-    where_nearby(search_params)
-      .where_actionable_or_not_triaged
-      .joins_origins
-      .joins(:original).preload(:original) # cuz nearby overrides includes
-      .joins(:user).preload(:user) # cuz nearby overrides includes
+    where_nearby(search_params).
+      where_actionable_or_not_triaged.
+      joins_origins.
+      joins(:original).preload(:original). # cuz nearby overrides includes
+      joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.explore_latest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 12.hours.ago
 
-    where_nearby(search_params)
-      .where_latest
-      .where_actionable_or_not_triaged
-      .joins_origins
-      .joins(:original).preload(:original) # cuz nearby overrides includes
-      .joins(:user).preload(:user) # cuz nearby overrides includes
+    where_nearby(search_params).
+      where_latest.
+      where_actionable_or_not_triaged.
+      joins_origins.
+      joins(:original).preload(:original). # cuz nearby overrides includes
+      joins(:user).preload(:user) # cuz nearby overrides includes
   end
 
   def self.first_or_create_from_tweet!(tweet, user)
