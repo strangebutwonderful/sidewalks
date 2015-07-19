@@ -105,7 +105,7 @@ class Noise < ActiveRecord::Base
   PROVIDER_TWITTER = 'twitter'
 
   delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
-  delegate :url_helpers, to: 'Rails.application.routes'
+  delegate :url_helpers, to: "Rails.application.routes"
 
   def provider_url
     case provider
