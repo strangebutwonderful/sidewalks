@@ -66,7 +66,7 @@ class Noise < ActiveRecord::Base
   end
 
   scope :where_ids, ->(ids) do
-    unless ids.nil?
+    if ids.any?
       where(id: ids)
     else
       scoped
