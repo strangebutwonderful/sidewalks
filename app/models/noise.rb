@@ -243,7 +243,6 @@ class Noise < ActiveRecord::Base
   def self.explore_nearest(params = [])
     search_params = params.clone
     search_params[:created_at] ||= 7.days.ago
-    search_params[:distance] = 0.025
 
     where_nearby(search_params).
       where_actionable_or_not_triaged.
