@@ -8,7 +8,7 @@ module Cartography
     end
 
     if @request_latitude.blank?
-      @request_latitude = Neighborhood::city(:sanfrancisco).latitude
+      @request_latitude = Neighborhood::districts(:civic_center).latitude
     end
 
     @request_latitude
@@ -22,7 +22,7 @@ module Cartography
     end
 
     if @request_longitude.blank?
-      @request_longitude = Neighborhood::city(:sanfrancisco).longitude
+      @request_longitude = Neighborhood::districts(:civic_center).longitude
     end
 
     @request_longitude

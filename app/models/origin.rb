@@ -58,7 +58,8 @@ class Origin < ActiveRecord::Base
   end
 
   def self.where_since(time)
-    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
+    where("#{table_name}.created_at >= ?", time)
+      .order("#{table_name}.created_at DESC")
   end
 
   def self.where_latest
@@ -71,17 +72,15 @@ class Origin < ActiveRecord::Base
     location  = params[:location]
     distance  = params[:distance] || 1.5
 
-    if latitude && longitude
-      search_location = [latitude, longitude]
+    search_location = if latitude && longitude
+      [latitude.to_f, longitude.to_f]
     elsif location
-      search_location = location
+      location
     end
 
-    if search_location
-      near(search_location, distance)
-    else
-      scoped
-    end
+    Rails.logger.debug "Location detected " + search_location.to_s
+
+    near(search_location, distance)
   end
 
   def self.explore(params)

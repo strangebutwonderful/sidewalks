@@ -28,9 +28,17 @@ FactoryGirl.define do
 
     association :user, factory: :user
 
-    provider "MyProvider"
+    provider { "MyProvider" }
     text { Faker::Lorem.sentences.join(' ') }
-    created_at Time.now
+    created_at { Time.now }
+
+    Neighborhood::DISTRICTS.each do |key, district|
+      trait key do
+        after(:create) do |noise|
+          FactoryGirl.create_list(:origin, 1, key, noise: noise)
+        end
+      end
+    end
   end
 
   factory :noise_with_original, parent: :noise do
@@ -45,13 +53,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :noise_in_san_francisco, parent: :noise do
-    after(:create) do |noise|
-      FactoryGirl.create_list(:origin, 1, :in_san_francisco, noise: noise)
-    end
-  end
-
   factory :week_old_noise, parent: :noise do
-    created_at 1.week.ago
+    created_at { 1.week.ago }
   end
 end

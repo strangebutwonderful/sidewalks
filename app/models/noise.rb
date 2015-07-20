@@ -30,27 +30,13 @@ class Noise < ActiveRecord::Base
     dependent: :destroy
 
   scope :where_nearby, ->(params) do
-    location = params[:location]
-    latitude = params[:latitude]
-    longitude = params[:longitude]
+    noise_ids = Origin.explore(params).
+      where_since(params[:created_at]).
+      map &:noise_id
 
-    if latitude && longitude
-      search_location = [latitude, longitude]
-    elsif location
-      search_location = location
-    end
+    Rails.logger.debug "#{noise_ids.count} noises found from exploring origins"
 
-    if search_location
-      Rails.logger.debug "Location detected " + search_location.to_s
-
-      noise_ids = Origin.explore(params).
-        where_since(params[:created_at]).
-        map &:noise_id
-
-      where_ids(noise_ids).order_by_ids(noise_ids)
-    else
-      all
-    end
+    where(id: noise_ids).order_by_ids(noise_ids)
   end
 
   scope :where_needs_triage, ->(params) do
@@ -58,19 +44,11 @@ class Noise < ActiveRecord::Base
   end
 
   scope :where_actionable_or_not_triaged, -> do
-    where.not(actionable: false)
+    where(actionable: [true, nil])
   end
 
   scope :joins_origins, -> do
     joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
-  end
-
-  scope :where_ids, ->(ids) do
-    if ids.any?
-      where(id: ids)
-    else
-      all
-    end
   end
 
   scope :order_by_ids, ->(ids) do
@@ -259,7 +237,7 @@ class Noise < ActiveRecord::Base
   end
 
   def self.explore(params)
-    Noise.explore_nearest(params).all + Noise.explore_latest(params).all
+    Noise.explore_nearest(params).all
   end
 
   def self.explore_nearest(params = [])
@@ -269,21 +247,9 @@ class Noise < ActiveRecord::Base
 
     where_nearby(search_params).
       where_actionable_or_not_triaged.
-      joins_origins.
-      joins(:original).preload(:original). # cuz nearby overrides includes
-      joins(:user).preload(:user) # cuz nearby overrides includes
-  end
-
-  def self.explore_latest(params = [])
-    search_params = params.clone
-    search_params[:created_at] ||= 12.hours.ago
-
-    where_nearby(search_params).
-      where_latest.
-      where_actionable_or_not_triaged.
-      joins_origins.
-      joins(:original).preload(:original). # cuz nearby overrides includes
-      joins(:user).preload(:user) # cuz nearby overrides includes
+      includes(:origins).
+      includes(:original).
+      includes(:user)
   end
 
   def self.first_or_create_from_tweet!(tweet, user)
