@@ -5,10 +5,8 @@ $card-border-color: darken($navbarBackground, 12%) !default;
 .card {
   @extend .docket;
   background-color: $white;
-  border: 1px solid $inputBorder;
   padding: $base-block-spacing;
-  margin-top: 10px;
-  margin-bottom: 10px;
+
 
   &:last-child {
     margin-bottom: 0;
