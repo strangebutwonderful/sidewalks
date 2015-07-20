@@ -96,4 +96,19 @@ class NoiseTest < ActiveSupport::TestCase
     noise = FactoryGirl.create(:noise)
     assert_not_nil noise.media_urls
   end
+
+  test "#explore" do
+    civic_center_noise = FactoryGirl.create(:noise, :civic_center)
+    marina_noise = FactoryGirl.create(:noise, :marina)
+
+    civic_center_origin = civic_center_noise.origins.first
+
+    found_noises = Noise.explore_nearest(
+      latitude: civic_center_origin.latitude,
+      longitude: civic_center_origin.longitude,
+    )
+
+    assert_includes( found_noises, civic_center_noise )
+    refute_includes( found_noises, marina_noise )
+  end
 end
