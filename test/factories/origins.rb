@@ -23,13 +23,15 @@ FactoryGirl.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
 
-    trait :in_san_francisco do
-      latitude { 37.7749300 }
-      longitude { -122.4194200 }
+    Neighborhood::DISTRICTS.each do |key, district|
+      trait key do
+        latitude district[:latitude]
+        longitude district[:longitude]
+      end
     end
   end
 
   factory :week_old_origin, parent: :noise do
-    created_at 1.week.ago
+    created_at { 1.week.ago }
   end
 end

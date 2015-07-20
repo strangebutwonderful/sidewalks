@@ -34,7 +34,7 @@ class Map
   end
 
   def default_latlng
-    Neighborhood.city_latlng(:sanfrancisco)
+    Neighborhood.districts(:civic_center)
   end
 
   def north_east_boundary_latlng
