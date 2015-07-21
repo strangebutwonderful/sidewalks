@@ -23,6 +23,7 @@ class App.Web.Form.Trigger
     @bindEventListeners()
 
   changeHandler: (event) =>
+    App.Logger.debug "App.Web.Form.Trigger changeHandler"
     @_form.submit()
 
   bindEventListeners: ->
