@@ -35,21 +35,23 @@
 
     <%= render 'layouts/loading_indicator' %>
 
-    <div class="header-navbar navbar navbar-static-top" data-headroom >
-      <nav class="navbar-inner">
-        <div class="container-fluid">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </div>
+    <nav class="navbar navbar-default navbar-static-top" data-headroom >
+      <div class="container-fluid">
+        <%= render 'layouts/navigation' %>
+      </div>
+    </nav>
 
-    <div class="content">
+    <div class="content container-fluid">
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
 
-    <footer class="footer">
-      <%= render 'layouts/secondary_navigation' %>
-    </footer>
+    <% if footer? %>
+      <footer class="footer">
+        <div class="container-fluid">
+          <%= render 'layouts/secondary_navigation' %>
+        </div>
+      </footer>
+    <% end %>
   </body>
 </html>

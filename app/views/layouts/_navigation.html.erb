@@ -1,27 +1,36 @@
-<ul class="nav pull-left">
-  <li>
-    <%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => 'geolocatable', :data => { :geolocatable => true, :"geolocatable-state" => "here" } do %>
-      <span>
-        Sidewalks
-      </span>
-    <% end %>
-  </li>
-</ul>
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => 'navbar-brand geolocatable', :data => { :geolocatable => true, :"geolocatable-state" => "here" } do %>
+    <span>
+      Sidewalks
+    </span>
+  <% end %>
+</div>
 
-<ul class="nav pull-right">
-  <li>
-    <%= render '/shared/geolocatable' %>
-  </li>
-  <li>
-    <%= link_to explore_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
-      <span>
-        Explore
-      </span>
-    <% end %>
-  </li>
-  <li>
-    <%= link_to search_index_path do %>
-      <%= icon('search') %>
-    <% end %>
-  </li>
-</ul>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+      <%= render '/shared/geolocatable' %>
+    </li>
+    <li>
+      <%= link_to explore_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+        <span>
+          Explore
+        </span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to search_index_path do %>
+        <%= icon('search') %>
+      <% end %>
+    </li>
+  </ul>
+</div><!-- /.navbar-collapse -->
+

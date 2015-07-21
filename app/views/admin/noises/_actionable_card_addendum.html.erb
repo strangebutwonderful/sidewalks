@@ -2,7 +2,7 @@
   <div class="card-addendum">
     <%= form_for [:admin, noise], :html => {:method => :put}, :namespace => noise.id, :remote => true do |f| %>
 
-      <div class="btn-group" data-toggle="buttons-radio">
+      <div class="btn-group" data-toggle="buttons">
 
         <%= f.label :actionable, :class => ['btn', 'btn-default', (noise.actionablity_downvotable? ? '' : 'active')], value: false do %>
           <%= f.radio_button :actionable, false, :class => 'hidden', :data => { "form-trigger" => nil } %>

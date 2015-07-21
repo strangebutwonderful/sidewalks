@@ -14,7 +14,7 @@
 #= require jquery_ujs
 #= require jquery_cookie/jquery_cookie
 #= require uri/uri
-#= require bootstrap
+#= require bootstrap-sprockets
 #= require leaflet
 #= require leaflet_awesome_markers/leaflet_awesome_markers
 #= require headroom/headroom
