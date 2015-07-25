@@ -23,7 +23,7 @@
 <% noise.media_urls.each do |media_url| %>
   <div class="card docket">
     <p>
-      <%= link_to media_url do %>
+      <%= link_to media_url, class: "thumbnail" do %>
         <%= image_tag media_url %>
       <% end %>
     </p>
