@@ -1,5 +1,6 @@
 class NoisesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :explore, :show]
+  before_filter :disable_footer, only: [:explore]
   before_filter :override_request_geolocation, only: [:index]
   before_filter :verify_admin, except: [:index, :explore, :show]
 

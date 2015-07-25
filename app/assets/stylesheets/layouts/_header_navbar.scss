@@ -1,13 +1,103 @@
+$bg-default      : #0088cc;
+$bg-highlight    : #23527c;
+$col-default     : #eeeeee;
+$col-highlight   : #ffffff;
+$dropdown       : false;
+
 body {
-  padding-top: $header-navbar-height;
+  padding-top: $navbar-height;
 }
 
-// application nav bar
+.navbar-default {
+  background-color: $bg-default;
+  border-color: transparent;
 
-.header-navbar {
-  background-color: #08c;
-  height: $header-navbar-height;
-  z-index: $header-navbar-z-index;
+  .navbar-brand {
+    color: $col-default;
+
+    &:hover,
+    &:focus {
+      color: $col-highlight;
+    }
+  }
+
+  .navbar-text {
+    color: $col-default;
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: $col-default;
+
+        &:hover,
+        &:focus {
+          color: $col-highlight;
+        }
+      }
+
+      @if $dropdown {
+        > .dropdown-menu {
+          background-color: $bg-default;
+          > li > a {
+            color: $col-default;
+
+            &:hover,
+            &:focus {
+              color: $col-highlight;
+              background-color: $bg-highlight;
+            }
+          }
+          .divider {
+            background-color: $bg-highlight;
+          }
+        }
+      }
+    }
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $col-highlight;
+        background-color: $bg-highlight;
+      }
+    }
+    > .open {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $col-highlight;
+        background-color: $bg-highlight;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: transparent;
+
+    &:hover,
+    &:focus {
+      background-color: $bg-highlight;
+    }
+    .icon-bar {
+      background-color: $col-default;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: transparent;
+  }
+
+  .navbar-link {
+    color: $col-default;
+
+    &:hover {
+      color: $col-highlight;
+    }
+  }
+
+  // Headroom js sticky header
 
   &.headroom {
     position: fixed;
@@ -24,16 +114,24 @@ body {
   &.headroom--pinned {
     top: 0;
   }
+}
 
-  .navbar-inner {
-    background: transparent;
-    border: none;
-  }
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $col-default;
 
-  .nav {
-    li {
-      a {
-        color: $bodyBackground;
+      &:hover,
+      &:focus {
+        color: $col-highlight;
+      }
+    }
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $col-highlight;
+        background-color: $bg-highlight;
       }
     }
   }

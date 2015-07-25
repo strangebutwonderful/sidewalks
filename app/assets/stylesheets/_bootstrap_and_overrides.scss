@@ -1,24 +1,9 @@
 // variables
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,400italic,700italic,100,400,700);
-$sansFontFamily: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$bodyBackground: #eee !default; // $grayLighter
-
-$baseBorderRadius: 0;
-$borderRadiusLarge: 0;
+$body-bg: #eee !default; // $grayLighter
 
 // imports
-@import "bootstrap/bootstrap";
-@import "bootstrap/responsive";
-
-//
-.inside {
-  padding: $paddingLarge;
-}
-
-.navbar .brand {
-  color: $textColor;
-  font-size: 24px;
-  line-height: 1;
-  overflow: hidden;
-}
+@import "bootstrap-sprockets";
+@import "bootstrap";
