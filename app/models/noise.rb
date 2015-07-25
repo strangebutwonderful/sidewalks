@@ -30,13 +30,9 @@ class Noise < ActiveRecord::Base
     dependent: :destroy
 
   scope :where_nearby, ->(params) do
-    noise_ids = Origin.explore(params).
-      where_since(params[:created_at]).
-      map &:noise_id
-
-    Rails.logger.debug "#{noise_ids.count} noises found from exploring origins"
-
-    where(id: noise_ids).order_by_ids(noise_ids)
+    joins(:origins).
+      merge(Origin.explore(params)).
+      where_since(params[:created_at])
   end
 
   scope :where_needs_triage, ->(params) do
