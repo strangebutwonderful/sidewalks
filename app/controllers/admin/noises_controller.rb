@@ -57,7 +57,7 @@ class Admin::NoisesController < Admin::AdminController
   private
 
   def noise_params
-    params.require(:noise).permit(:role_ids, :provider_id)
+    params.require(:noise).permit(:role_ids, :provider_id, :actionable)
   end
 
 end
