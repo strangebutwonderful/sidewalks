@@ -20,12 +20,6 @@ class TwitterImporterTest < ActiveSupport::TestCase
     TwitterImporter.import_latest_from_sidewalks_twitter
   end
 
-  test "should return empty list on exception" do
-    TwitterService.client.expects(:home_timeline).raises
-
-    TwitterImporter.import_latest_from_sidewalks_twitter
-  end
-
   test "should be able to import connections on an empty db" do
     TwitterService.client.expects(:friends).returns([])
     User.delete_all
