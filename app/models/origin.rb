@@ -49,17 +49,9 @@ class Origin < ActiveRecord::Base
     end
   end
 
-  def self.where_ids(ids)
-    unless ids.nil?
-      where(id: ids)
-    else
-      scoped
-    end
-  end
-
   def self.where_since(time)
     where("#{table_name}.created_at >= ?", time)
-      .order("#{table_name}.created_at DESC")
+      .order(created_at: :desc)
   end
 
   def self.where_latest
