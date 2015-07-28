@@ -83,7 +83,4 @@ class Origin < ActiveRecord::Base
     near(search_location, distance)
   end
 
-  def self.explore(params)
-    Origin.where_nearby(params)
-  end
 end

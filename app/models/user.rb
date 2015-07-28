@@ -74,7 +74,12 @@ class User < ActiveRecord::Base
   end
 
   def blank
-    [:email, :provider_screen_name, :provider_access_token, :provider_access_token_secret].each do |attribute|
+    [
+      :email,
+      :provider_access_token,
+      :provider_access_token_secret,
+      :provider_screen_name,
+    ].each do |attribute|
       self[attribute] = nil if self[attribute].blank?
     end
 
@@ -86,7 +91,10 @@ class User < ActiveRecord::Base
   end
 
   def self.first_or_create_from_twitter!(twitter_user, following: true)
-    User.where(provider: User::PROVIDER_TWITTER, provider_id: twitter_user.id.to_s).first || User.create_from_twitter!(twitter_user, following: following)
+    User.where(
+      provider: User::PROVIDER_TWITTER,
+      provider_id: twitter_user.id.to_s
+    ).first || User.create_from_twitter!(twitter_user, following: following)
   end
 
   def self.create_from_omniauth!(auth)

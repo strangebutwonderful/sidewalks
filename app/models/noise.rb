@@ -31,30 +31,20 @@ class Noise < ActiveRecord::Base
 
   scope :where_nearby, ->(params) do
     joins(:origins).
-      merge(Origin.explore(params)).
+      merge(Origin.where_nearby(params)).
       where_since(params[:created_at])
   end
 
   scope :where_needs_triage, ->(params) do
-    where(actionable: nil).order("#{table_name}.created_at DESC")
+    where(actionable: nil).order(created_at: :desc)
   end
 
   scope :where_actionable_or_not_triaged, -> do
     where(actionable: [true, nil])
   end
 
-  scope :joins_origins, -> do
-    joins("LEFT OUTER JOIN #{Origin.table_name} ON #{table_name}.id = #{Origin.table_name}.noise_id").preload(:origins) # cuz nearby overrides includes
-  end
-
-  scope :order_by_ids, ->(ids) do
-    order_by = ids.map { |id| "#{table_name}.id = #{id} DESC" }
-    order_by = order_by.join(", ")
-    order(order_by)
-  end
-
   scope :where_since, ->(time) do
-    where("#{table_name}.created_at >= ?", time).order("#{table_name}.created_at DESC")
+    where("#{table_name}.created_at >= ?", time).order(created_at: :desc)
   end
 
   scope :where_latest, -> do
@@ -64,19 +54,31 @@ class Noise < ActiveRecord::Base
   scope :where_authored_by_user_before, ->(user_id, time) do
     where(user_id: user_id).
       where("#{table_name}.created_at < ?", time).
-      order("#{table_name}.created_at DESC")
+      order(created_at: :desc)
   end
 
   replicate_associations :origins # for replicate gem
 
   attr_reader :provider_url, :user_name, :user_provider_url, :map
 
-  validates_presence_of :provider, :provider_id, :text, :created_at, :user_id
+  validates(
+    :created_at,
+    :provider,
+    :text,
+    :user,
+    presence: true
+  )
 
-  validates_format_of :avatar_image_url, with: URI.regexp(['http', 'https']), allow_nil: true
+  validates(
+    :avatar_image_url,
+    format: {
+      with: URI.regexp(["http", "https"]),
+      allow_nil: true
+    }
+  )
 
-  PROVIDER_SIDEWALKS = 'sidewalks'
-  PROVIDER_TWITTER = 'twitter'
+  PROVIDER_SIDEWALKS = "sidewalks"
+  PROVIDER_TWITTER = "twitter"
 
   delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
   delegate :url_helpers, to: "Rails.application.routes"
@@ -130,17 +132,27 @@ class Noise < ActiveRecord::Base
   ###
   def media_entities
     @media_entities ||= begin
-      parsed_media_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'media') if Noise::PROVIDER_TWITTER == provider
-      parsed_media_entities ||= {}
-      parsed_media_entities
+      if Noise::PROVIDER_TWITTER == provider
+        try(:original).
+        try(:dump).
+        try(:[], "entities").
+        try(:[], "media")
+      else
+        {}
+      end
     end
   end
 
   def url_entities
     @url_entities ||= begin
-      parsed_url_entities ||= self.try(:original).try(:dump).try(:[], 'entities').try(:[], 'urls') if Noise::PROVIDER_TWITTER == provider
-      parsed_url_entities ||= {}
-      parsed_url_entities
+      if Noise::PROVIDER_TWITTER == provider
+        try(:original).
+        try(:dump).
+        try(:[], "entities").
+        try(:[], "urls")
+      else
+        {}
+      end
     end
   end
 
@@ -149,13 +161,20 @@ class Noise < ActiveRecord::Base
   end
 
   def local_media_urls
-    @local_media_urls ||= media_entities.collect { |m| m.try(:[], 'media_url_https') ||  m.try(:[], 'media_url_http') }
+    @local_media_urls ||= media_entities.map do |m|
+      m.try(:[], "media_url_https") || m.try(:[], "media_url_http")
+    end
   end
 
   def external_media_urls
     @external_media_urls ||= begin
-      urls = url_entities.collect { |m| m.try(:[], 'expanded_url') }
-      media_urls ||= urls.collect { |url| url += 'media/?size=l' if url.start_with?('http://instagram.com/', 'https://instagram.com/') }
+      urls = url_entities.map { |m| m.try(:[], "expanded_url") }
+      media_urls = urls.map do |url|
+        if url.start_with?("http://instagram.com/", "https://instagram.com/")
+          url += "media/?size=l"
+        end
+        url
+      end
       media_urls.compact!
       media_urls
     end
@@ -183,7 +202,7 @@ class Noise < ActiveRecord::Base
   end
 
   def import_locations(locations)
-    # TODO: get tweet's embedded coordinates
+    # TODO: get tweet"s embedded coordinates
 
     success_count = 0
 
@@ -248,7 +267,10 @@ class Noise < ActiveRecord::Base
   end
 
   def self.first_or_create_from_tweet!(tweet, user)
-    Noise.where(provider: Noise::PROVIDER_TWITTER, provider_id: tweet.id.to_s).first || Noise.create_from_tweet!(tweet, user)
+    Noise.where(
+      provider: Noise::PROVIDER_TWITTER,
+      provider_id: tweet.id.to_s
+    ).first || Noise.create_from_tweet!(tweet, user)
   end
 
 end
