@@ -52,6 +52,7 @@ gem "capistrano-bundler"
 gem "capistrano-passenger"
 gem "capistrano-rails", "~> 1.1"
 gem "capistrano-rbenv"
+gem 'capistrano-rails-console'
 
 # deprecated controller actions
 gem "responders", "~> 2.0"
