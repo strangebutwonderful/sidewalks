@@ -132,27 +132,27 @@ class Noise < ActiveRecord::Base
   ###
   def media_entities
     @media_entities ||= begin
-      if Noise::PROVIDER_TWITTER == provider
+      me = if Noise::PROVIDER_TWITTER == provider
         try(:original).
         try(:dump).
         try(:[], "entities").
         try(:[], "media")
-      else
-        {}
       end
+      me ||= {}
+      me
     end
   end
 
   def url_entities
     @url_entities ||= begin
-      if Noise::PROVIDER_TWITTER == provider
+      me = if Noise::PROVIDER_TWITTER == provider
         try(:original).
         try(:dump).
         try(:[], "entities").
         try(:[], "urls")
-      else
-        {}
       end
+      me ||= {}
+      me
     end
   end
 
