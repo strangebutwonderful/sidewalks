@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class AbilityTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test "admin can manage noise" do
     user = FactoryGirl.create(:admin_user)
