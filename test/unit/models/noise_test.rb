@@ -43,25 +43,25 @@ class NoiseTest < ActiveSupport::TestCase
   end
 
   test "FactoryGirl works" do
-    assert_difference('Noise.count') do
+    assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise)
     end
   end
 
   test "FactoryGirl noise_with_original works" do
-    assert_difference('Noise.count') do
+    assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise_with_original)
     end
   end
 
   test "FactoryGirl noise_with_coordinates works" do
-    assert_difference('Noise.count') do
+    assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise_with_coordinates)
     end
   end
 
   test "FactoryGirl week_old_noise works" do
-    assert_difference('Noise.count') do
+    assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:week_old_noise)
     end
   end
@@ -95,13 +95,13 @@ class NoiseTest < ActiveSupport::TestCase
   end
 
   test "latest scope includes recent tweets" do
-    assert_difference('Noise.where_latest.count') do
+    assert_difference -> { Noise.where_latest.count } do
       FactoryGirl.create(:noise)
     end
   end
 
   test "latest scope does not include old tweets" do
-    assert_no_difference('Noise.where_latest.count') do
+    assert_no_difference -> { Noise.where_latest.count } do
       FactoryGirl.create(:week_old_noise)
     end
   end

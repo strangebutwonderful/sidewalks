@@ -23,7 +23,7 @@ class Admin::OriginsControllerTest < ActionController::TestCase
   test "should create origin" do
     sign_in(FactoryGirl.create(:admin_user))
 
-    assert_difference('Origin.count') do
+    assert_difference -> { Origin.count } do
       post :create, noise_id: @origin.noise_id, origin: { latitude: Faker::Address.latitude, longitude: Faker::Address.longitude }
       assert_not_nil assigns(:origin)
       assert_empty assigns(:origin).errors
@@ -56,7 +56,7 @@ class Admin::OriginsControllerTest < ActionController::TestCase
   test "should destroy origin" do
     sign_in(FactoryGirl.create(:admin_user))
 
-    assert_difference('Origin.count', -1) do
+    assert_difference -> { Origin.count }, -1 do
       delete :destroy, noise_id: @origin.noise_id, id: @origin
     end
 
