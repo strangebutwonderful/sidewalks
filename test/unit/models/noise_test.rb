@@ -19,7 +19,6 @@
 require 'test_helper'
 
 class NoiseTest < ActiveSupport::TestCase
-
   def build_twitter_user
     OpenStruct.new(
       id: "my_twitter_user_id",
