@@ -17,10 +17,6 @@
 require 'test_helper'
 
 class OriginalTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "FactoryGirl works for noise's original" do
     assert_difference('Original.count') do
       FactoryGirl.create(:noise_original)

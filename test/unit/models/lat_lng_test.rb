@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class LatLngTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "Blank constructor fails" do
     assert_raises RuntimeError do
       LatLng.new(nil, nil)

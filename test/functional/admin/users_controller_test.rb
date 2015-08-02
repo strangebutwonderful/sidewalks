@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::UsersControllerTest < ActionController::TestCase
-
   setup do
     @user = FactoryGirl.create(:user)
   end
@@ -72,5 +71,4 @@ class Admin::UsersControllerTest < ActionController::TestCase
     put :update, id: @user, user: { provider: @user.provider, provider_id: @user.provider_id }
     assert_redirected_to admin_user_path(assigns(:user))
   end
-
 end

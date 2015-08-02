@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class ApplicationControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "current_user is nil if no user" do
     assert_nil current_user
   end
@@ -15,7 +11,4 @@ class ApplicationControllerTest < ActionController::TestCase
 
     assert_equal user, current_user
   end
-
-
-
 end
