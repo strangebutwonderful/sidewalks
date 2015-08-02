@@ -32,19 +32,19 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "FactoryGirl works" do
-    assert_difference('User.count') do
+    assert_difference -> { User.count } do
       FactoryGirl.create(:user)
     end
   end
 
   test "FactoryGirl admin_user works" do
-    assert_difference('User.count') do
+    assert_difference -> { User.count } do
       FactoryGirl.create(:admin_user)
     end
   end
 
   test "FactoryGirl user_with_original works" do
-    assert_difference('User.count') do
+    assert_difference -> { User.count } do
       FactoryGirl.create(:user_with_original)
     end
   end

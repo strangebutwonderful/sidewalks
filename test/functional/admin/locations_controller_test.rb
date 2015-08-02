@@ -7,7 +7,7 @@ class Admin::LocationsControllerTest < ActionController::TestCase
   end
 
   test "FactoryGirl works" do
-    assert_difference('Location.count') do
+    assert_difference -> { Location.count } do
       FactoryGirl.create(:location)
     end
   end
@@ -30,7 +30,7 @@ class Admin::LocationsControllerTest < ActionController::TestCase
   test "should create location" do
     sign_in(FactoryGirl.create(:admin_user))
 
-    assert_difference('Location.count') do
+    assert_difference -> { Location.count } do
       VCR.use_cassette("functional/admin/locations_controller_test/create") do
         post(
           :create,
@@ -72,7 +72,7 @@ class Admin::LocationsControllerTest < ActionController::TestCase
   test "should destroy location" do
     sign_in(FactoryGirl.create(:admin_user))
 
-    assert_difference('Location.count', -1) do
+    assert_difference -> { Location.count }, -1 do
       delete :destroy, id: @location
     end
 
