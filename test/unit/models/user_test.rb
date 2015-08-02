@@ -19,9 +19,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test "FactoryGirl works" do
     assert_difference('User.count') do
@@ -53,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
     assert User.first_or_create_from_twitter!(twitter_user)
   end
 
-  test "no new user when createing an old user" do
+  test "no new user when creating an old user" do
     twitter_user = build_twitter_user
 
     User.first_or_create_from_twitter!(twitter_user)
