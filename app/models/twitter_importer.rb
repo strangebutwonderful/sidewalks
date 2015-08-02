@@ -1,5 +1,3 @@
-require_relative '../services/twitter_service'
-
 class TwitterImporter
 
   def self.import_latest_from_sidewalks_twitter
@@ -17,7 +15,7 @@ class TwitterImporter
   end
 
   def self.import_connections
-    TwitterService.client.friends.each do |twitter_user|
+    Sidewalks::Informants::Twitter.client.friends.each do |twitter_user|
       User.first_or_create_from_twitter!(twitter_user, following: true)
     end
 
@@ -28,9 +26,9 @@ class TwitterImporter
     last_noise = Noise.where(provider: Noise::PROVIDER_TWITTER).last
 
     if last_noise && last_noise.provider_id
-      TwitterService.client.home_timeline(since_id: last_noise.provider_id)
+      Sidewalks::Informants::Twitter.client.home_timeline(since_id: last_noise.provider_id)
     else
-      TwitterService.client.home_timeline
+      Sidewalks::Informants::Twitter.client.home_timeline
     end
   end
 

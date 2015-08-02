@@ -35,7 +35,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   end
 
   test "should follow account" do
-    TwitterService.client.expects(:follow).returns(true)
+    Sidewalks::Informants::Twitter.client.expects(:follow).returns(true)
 
     sign_in(FactoryGirl.create(:admin_user))
 
