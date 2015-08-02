@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class SearchControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test "anyone should get index" do
     get :index
