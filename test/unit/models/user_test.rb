@@ -20,6 +20,17 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
+  def build_twitter_user
+    OpenStruct.new(
+      id: "my_twitter_user_id",
+      name: "my_twitter_user_name",
+      email: "my_twitter_user_email@example.org",
+      screen_name: "my_twitter_screen_name",
+      profile_image_uri_https: Faker::Internet.url,
+      created_at: 1.hour.ago
+    )
+  end
+
   test "FactoryGirl works" do
     assert_difference('User.count') do
       FactoryGirl.create(:user)
