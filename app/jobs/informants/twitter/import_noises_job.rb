@@ -5,7 +5,9 @@ module Informants::Twitter
     def perform
       # Import the latest noises from twitter and saves to db
       Rails.logger.debug "Begin importing from twitter"
-      TwitterTranslator.translate latest_tweets_from_sidewalks_twitter.reverse!
+      TwitterTranslators::TweetTranslator.translate(
+        latest_tweets_from_sidewalks_twitter
+      )
       Rails.logger.debug "Completed importing from twitter"
     end
 
@@ -18,7 +20,7 @@ module Informants::Twitter
         )
       else
         Sidewalks::Informants::Twitter.client.home_timeline
-      end
+      end.reverse!
     end
 
     def last_imported_noise

@@ -48,26 +48,4 @@ class UserTest < ActiveSupport::TestCase
       FactoryGirl.create(:user_with_original)
     end
   end
-
-  test "creates raw twitter object" do
-    twitter_user = build_twitter_user
-
-    assert User.create_from_twitter!(twitter_user)
-  end
-
-  test "creates user when new user" do
-    twitter_user = build_twitter_user
-
-    assert User.first_or_create_from_twitter!(twitter_user)
-  end
-
-  test "no new user when creating an old user" do
-    twitter_user = build_twitter_user
-
-    User.first_or_create_from_twitter!(twitter_user)
-
-    assert_no_difference('User.count') do
-      assert User.first_or_create_from_twitter!(twitter_user)
-    end
-  end
 end

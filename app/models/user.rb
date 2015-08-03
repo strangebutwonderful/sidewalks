@@ -90,13 +90,6 @@ class User < ActiveRecord::Base
     providers = [User::PROVIDER_TWITTER]
   end
 
-  def self.first_or_create_from_twitter!(twitter_user, following: true)
-    User.where(
-      provider: User::PROVIDER_TWITTER,
-      provider_id: twitter_user.id.to_s
-    ).first || User.create_from_twitter!(twitter_user, following: following)
-  end
-
   def self.create_from_omniauth!(auth)
     # See https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
     logger.info "Creating a user from omniauth: [#{auth.inspect}]"
@@ -112,21 +105,6 @@ class User < ActiveRecord::Base
     end
 
     user.create_original!(dump: auth.to_json)
-    user
-  end
-
-  def self.create_from_twitter!(twitter_user, following: false)
-    logger.info "Creating a user from tweet: [#{twitter_user.inspect}]"
-
-    user = create! do |user|
-      user.name = twitter_user.name
-      user.provider = User::PROVIDER_TWITTER
-      user.provider_id = twitter_user.id.to_s
-      user.provider_screen_name = twitter_user.screen_name
-      user.following = following
-    end
-
-    user.create_original!(dump: twitter_user.to_json)
     user
   end
 
