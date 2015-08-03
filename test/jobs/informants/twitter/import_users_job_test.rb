@@ -1,7 +1,6 @@
-require 'test_helper'
+require "test_helper"
 
 class Informants::Twitter::ImportUsersJobTest < ActiveJob::TestCase
-
   test "should be able to import connections on an empty db" do
     Sidewalks::Informants::Twitter.client.expects(:friends).returns([])
     User.delete_all
@@ -15,5 +14,4 @@ class Informants::Twitter::ImportUsersJobTest < ActiveJob::TestCase
 
     Informants::Twitter::ImportUsersJob.perform_now
   end
-
 end

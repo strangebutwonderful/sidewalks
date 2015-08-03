@@ -1,7 +1,6 @@
 module Sidewalks
   module Informants
     class Twitter
-
       attr_accessor(
         :client,
         :consumer_key,
@@ -15,10 +14,22 @@ module Sidewalks
       end
 
       def initialize(config: {})
-        @consumer_key = config[:consumer_key] || ENV['TWITTER_CONSUMER_KEY']
-        @consumer_secret = config[:consumer_secret] || ENV['TWITTER_CONSUMER_SECRET']
-        @access_token = config[:access_token] || ENV['TWITTER_OAUTH_ACCESS_TOKEN']
-        @access_token_secret = config[:access_token_secret] || ENV['TWITTER_OAUTH_ACCESS_TOKEN_SECRET']
+        @consumer_key = config.fetch(
+          :consumer_key,
+          ENV["TWITTER_CONSUMER_KEY"]
+        )
+        @consumer_secret = config.fetch(
+          :consumer_secret,
+          ENV["TWITTER_CONSUMER_SECRET"]
+        )
+        @access_token = config.fetch(
+          :access_token,
+          ENV["TWITTER_OAUTH_ACCESS_TOKEN"]
+        )
+        @access_token_secret = config.fetch(
+          :access_token_secret,
+          ENV["TWITTER_OAUTH_ACCESS_TOKEN_SECRET"]
+        )
       end
 
       def client

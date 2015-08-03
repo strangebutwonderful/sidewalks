@@ -14,7 +14,7 @@
 #  index_origin_on_latitude_and_longitude  (noise_id,latitude,longitude) UNIQUE
 #
 
-require 'test_helper'
+require "test_helper"
 
 class OriginTest < ActiveSupport::TestCase
   test "FactoryGirl works" do

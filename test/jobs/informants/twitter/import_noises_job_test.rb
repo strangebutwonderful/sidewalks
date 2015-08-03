@@ -1,7 +1,6 @@
-require 'test_helper'
+require "test_helper"
 
 class Informants::Twitter::ImportNoisesJobTest < ActiveJob::TestCase
-
   setup do
     Rails.cache.clear
   end
@@ -19,5 +18,4 @@ class Informants::Twitter::ImportNoisesJobTest < ActiveJob::TestCase
 
     Informants::Twitter::ImportNoisesJob.perform_now
   end
-
 end
