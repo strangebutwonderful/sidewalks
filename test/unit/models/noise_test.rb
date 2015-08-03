@@ -16,7 +16,7 @@
 #  index_noises_on_user_id  (user_id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class NoiseTest < ActiveSupport::TestCase
   def build_twitter_user

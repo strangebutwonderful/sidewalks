@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ApplicationControllerTest < ActionController::TestCase
   test "current_user is nil if no user" do

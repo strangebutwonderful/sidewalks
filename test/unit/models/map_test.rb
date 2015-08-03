@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class MapTest < ActiveSupport::TestCase
   test "Constructor works with latitude and longitude" do

@@ -37,7 +37,9 @@ class Admin::UsersController < Admin::AdminController
   # POST /admin/users
   # POST /admin/users.json
   def create
-    if TwitterService.client.follow(params[:user][:provider_screen_name])
+    if Sidewalks::Informants::Twitter.client.
+      follow(params[:user][:provider_screen_name])
+
       flash[:notice] = 'User was followed.'
     end
 

@@ -20,7 +20,7 @@
 #  unique_user_and_locations                  (user_id,address,city,state,zip) UNIQUE
 #
 
-require 'test_helper'
+require "test_helper"
 
 class LocationTest < ActiveSupport::TestCase
 end

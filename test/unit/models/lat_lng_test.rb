@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class LatLngTest < ActiveSupport::TestCase
   test "Blank constructor fails" do
