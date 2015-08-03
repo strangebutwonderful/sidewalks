@@ -20,7 +20,7 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
     end
   end
 
-  test "no new user when creating an old user" do
+  test "no new user created after translating an existing user" do
     twitter_user = build_twitter_user
 
     TwitterTranslators::UserTranslator.translate(twitter_user)

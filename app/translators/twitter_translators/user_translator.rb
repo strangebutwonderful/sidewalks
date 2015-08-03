@@ -22,7 +22,6 @@ module TwitterTranslators
 
       twitter_users.each do |twitter_user|
         user = find_or_create_user_from_twitter_user(twitter_user)
-        user.create_original!(dump: twitter_user.to_json)
         users << user
       end
 
@@ -39,10 +38,10 @@ module TwitterTranslators
       User.find_by(
         provider: User::PROVIDER_TWITTER,
         provider_id: twitter_user.id.to_s
-      ) || create_from_twitter_user(twitter_user)
+      ) || create_user_from_twitter_user(twitter_user)
     end
 
-    def create_from_twitter_user(twitter_user, following: true)
+    def create_user_from_twitter_user(twitter_user, following: true)
       Rails.logger.info "Creating a user from tweet: [#{twitter_user.inspect}]"
 
       user = User.create!(
@@ -52,6 +51,7 @@ module TwitterTranslators
         provider_screen_name: twitter_user.screen_name,
         following: following,
       )
+      user.create_original!(dump: twitter_user.to_json)
       user
     end
   end

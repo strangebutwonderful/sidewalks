@@ -1,4 +1,13 @@
 module Cartography
+  extend ActiveSupport::Concern
+  included do
+    helper_method(
+      :override_request_geolocation,
+      :request_latitude,
+      :request_latlng,
+      :request_longitude,
+    )
+  end
 
   def request_latitude
     @request_latitude ||= params[:latitude]
@@ -35,12 +44,6 @@ module Cartography
   def override_request_geolocation
     params[:latitude] = request_latitude
     params[:longitude] = request_longitude
-  end
-
-  def self.included method
-    return unless method < ActionController::Base
-    method.helper_method :request_latitude, :request_longitude, :request_latlng, :override_request_geolocation # , :any_other_helper_methods
-
   end
 
 end

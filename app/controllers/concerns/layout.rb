@@ -2,6 +2,11 @@
 # Layout helpers and variables
 ###
 module Layout
+  extend ActiveSupport::Concern
+  included do
+    helper_method :footer?
+  end
+
   def footer?
     return @footer unless @footer.nil?
 
@@ -10,10 +15,5 @@ module Layout
 
   def disable_footer
     @footer = false
-  end
-
-  def self.included(method)
-    return unless method < ActionController::Base
-    method.helper_method :footer?
   end
 end
