@@ -24,25 +24,40 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
     )
   end
 
-  test "imports raw twitter object" do
+  test "creates a new noise when translating" do
     assert_difference -> { Noise.count } do
-      TwitterTranslator.translate(build_tweet)
+      TwitterTranslators::TweetTranslator.translate(build_tweet)
     end
   end
 
-  test "imports noise when new noise" do
-    assert_difference -> { Noise.count } do
-      TwitterTranslator.translate(build_tweet)
+  test "returns a list of noises when translating" do
+    assert_equal(
+      TwitterTranslators::TweetTranslator.translate(build_tweet).length,
+      1
+    )
+  end
+
+  test "sets values of noises" do
+    tweet = build_tweet
+
+    TwitterTranslators::TweetTranslator.translate(tweet).first.tap do |t|
+      assert_equal(tweet.id, t.provider_id)
+      assert_equal(tweet.text, t.text)
+      assert_equal(tweet.created_at, t.created_at)
+      assert_equal(
+        tweet.user.profile_image_uri_https.to_s,
+        t.avatar_image_url
+      )
     end
   end
 
   test "no new noise when importing old tweet" do
     tweet = build_tweet
 
-    TwitterTranslator.translate(tweet)
+    TwitterTranslators::TweetTranslator.translate(tweet)
 
     assert_no_difference -> { Noise.count } do
-      TwitterTranslator.translate(tweet)
+      TwitterTranslators::TweetTranslator.translate(tweet)
     end
   end
 end
