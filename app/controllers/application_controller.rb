@@ -1,7 +1,3 @@
-require "#{Rails.root}/lib/cartography/cartography"
-require "#{Rails.root}/lib/layout/layout"
-require "#{Rails.root}/lib/tracking/tracking"
-
 class ApplicationController < ActionController::Base
   include Authentication
   include Cartography

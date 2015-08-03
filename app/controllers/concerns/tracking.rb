@@ -2,6 +2,10 @@
 # Tracking is the backend support for the user's last know position
 ###
 module Tracking
+  extend ActiveSupport::Concern
+  included do
+    helper_method :last_known_latlng, :update_last_known_latlng
+  end
 
   def last_known_latlng
     @current_user_last_latlng ||= update_last_known_latlng
@@ -23,10 +27,4 @@ module Tracking
 
     @current_user_last_latlng
   end
-
-  def self.included method
-    return unless method < ActionController::Base
-    method.helper_method :last_known_latlng, :update_last_known_latlng
-  end
-
 end
