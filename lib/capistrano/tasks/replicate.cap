@@ -2,6 +2,10 @@ def rvm_loaded?
   Gem::Specification::find_all_by_name('capistrano-rvm').any?
 end
 
+def rbenv_loaded?
+  Gem::Specification::find_all_by_name('capistrano-rbenv').any?
+end
+
 def bundler_loaded?
   Gem::Specification::find_all_by_name('capistrano-bundler').any?
 end
@@ -48,11 +52,12 @@ namespace :replicate do
 
       # Compose command to run
       command = []
-      command << "cd #{current_path} && "
+      command << "cd #{current_path} &&"
       command << "RAILS_ENV=#{fetch(:rails_env)}"
       command << "#{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" if rvm_loaded?
+      command << "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec" if rbenv_loaded?
       command << "bundle exec" if bundler_loaded?
-      command << "replicate --quiet --require '#{release_path}/config/environment' --dump '#{replicate_dump_options}'"
+      command << "replicate --verbose --require '#{release_path}/config/environment' --dump '#{replicate_dump_options}'"
       command = command.join(' ')
 
       data = capture(command)
