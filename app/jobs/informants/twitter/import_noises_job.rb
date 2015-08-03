@@ -5,12 +5,7 @@ module Informants::Twitter
     def perform
       # Import the latest noises from twitter and saves to db
       Rails.logger.debug "Begin importing from twitter"
-
-      latest_tweets_from_sidewalks_twitter.reverse!.each do |tweet|
-        user = User.first_or_create_from_twitter!(tweet.user, following: true)
-        Noise.first_or_create_from_tweet!(tweet, user)
-      end
-
+      TwitterTranslator.translate latest_tweets_from_sidewalks_twitter.reverse!
       Rails.logger.debug "Completed importing from twitter"
     end
 

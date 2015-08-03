@@ -178,58 +178,6 @@ class Noise < ActiveRecord::Base
       media_urls.compact!
       media_urls
     end
-
-  end
-
-  def self.create_from_tweet!(tweet, user)
-    logger.info "Creating a noise from tweet: [#{tweet.to_yaml}]"
-
-    noise = create! do |noise|
-      noise.avatar_image_url = tweet.user.profile_image_uri_https.to_s
-      noise.created_at = tweet.created_at
-      noise.provider = Noise::PROVIDER_TWITTER
-      noise.provider_id = tweet.id.to_s
-      noise.text = tweet.full_text
-      noise.user_id = user.id
-    end
-
-    noise.create_original!(dump: tweet.to_json)
-
-    noise.import_locations(user.locations)
-    noise.import_locations_from_mentions_of_existing_users(tweet.user_mentions)
-
-    noise
-  end
-
-  def import_locations(locations)
-    # TODO: get tweet"s embedded coordinates
-
-    success_count = 0
-
-    if locations.present?
-      locations.each do |location|
-        unless self.origins.exists?(latitude: location.latitude, longitude: location.longitude)
-          self.origins << location.to_origin
-          success_count = success_count + 1
-        end
-      end
-    end
-
-    success_count
-  end
-
-  def import_locations_from_mentions_of_existing_users(tweet_user_mentions)
-    success_count = 0
-    if tweet_user_mentions.present?
-      tweet_user_mentions.each do |user_mention|
-        mentioned_user = User.where(provider: Noise::PROVIDER_TWITTER, provider_id: user_mention.id.to_s).first
-        if mentioned_user
-          success_count += import_locations(mentioned_user.locations)
-        end
-      end
-    end
-
-    success_count
   end
 
   def self.search(params)
@@ -264,13 +212,6 @@ class Noise < ActiveRecord::Base
       includes(:origins).
       includes(:original).
       includes(:user)
-  end
-
-  def self.first_or_create_from_tweet!(tweet, user)
-    Noise.where(
-      provider: Noise::PROVIDER_TWITTER,
-      provider_id: tweet.id.to_s
-    ).first || Noise.create_from_tweet!(tweet, user)
   end
 
 end
