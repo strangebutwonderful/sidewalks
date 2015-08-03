@@ -19,29 +19,6 @@
 require "test_helper"
 
 class NoiseTest < ActiveSupport::TestCase
-  def build_twitter_user
-    OpenStruct.new(
-      id: "my_twitter_user_id",
-      name: "my_twitter_user_name",
-      email: "my_twitter_user_email@example.org",
-      screen_name: "my_twitter_screen_name",
-      profile_image_uri_https: Faker::Internet.url,
-      created_at: 1.hour.ago
-    )
-  end
-
-  def build_tweet
-    twitter_user = build_twitter_user
-
-    OpenStruct.new(
-      id: "my_twitter_noise_id",
-      text: "my_twitter_noise_text",
-      full_text: "my_twitter_noise_text",
-      created_at: Time.now,
-      user: twitter_user
-    )
-  end
-
   test "FactoryGirl works" do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise)
@@ -63,34 +40,6 @@ class NoiseTest < ActiveSupport::TestCase
   test "FactoryGirl week_old_noise works" do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:week_old_noise)
-    end
-  end
-
-  test "imports raw twitter object" do
-    tweet = build_tweet
-
-    user = User.first_or_create_from_twitter!(tweet.user)
-
-    assert Noise.create_from_tweet!(tweet, user)
-  end
-
-  test "imports noise when new noise" do
-    tweet = build_tweet
-
-    user = User.first_or_create_from_twitter!(tweet.user)
-
-    assert Noise.first_or_create_from_tweet!(tweet, user)
-  end
-
-  test "no new noise when importing old tweet" do
-    tweet = build_tweet
-
-    user = User.first_or_create_from_twitter!(tweet.user)
-
-    Noise.first_or_create_from_tweet!(tweet, user)
-
-    assert_no_difference('Noise.count') do
-      assert Noise.first_or_create_from_tweet!(tweet, user)
     end
   end
 
