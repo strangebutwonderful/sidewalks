@@ -29,9 +29,9 @@
 
     <%= yield(:head) %>
 
+    <%= render 'google/analytics' %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <%= render 'google/analytics' %>
 
     <%= render 'layouts/loading_indicator' %>
 
