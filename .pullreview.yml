@@ -1,0 +1,6 @@
+languages:
+  - ruby
+  - javascript
+notifications:
+  pullrequest:
+    comment: verbose
