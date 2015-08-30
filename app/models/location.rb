@@ -26,7 +26,7 @@ class Location < ActiveRecord::Base
   validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip
 
   geocoded_by :full_street_address do |location, results|
-    if geocode = results.first
+    results.first.tap do |geocode|
       location.latitude ||= geocode.latitude
       location.longitude ||= geocode.longitude
       location.zip ||= geocode.postal_code
