@@ -1,9 +1,10 @@
 ## Sidewalks
 
-[![Code Climate](https://codeclimate.com/github/strangebutwonderful/sidewalks.png)](https://codeclimate.com/github/strangebutwonderful/sidewalks)
+[![Build Status](https://travis-ci.org/strangebutwonderful/sidewalks.png?branch=master)](https://travis-ci.org/strangebutwonderful/sidewalks)
 [![Coverage Status](https://coveralls.io/repos/strangebutwonderful/sidewalks/badge.png?branch=master)](https://coveralls.io/r/strangebutwonderful/sidewalks?branch=master)
 [![Dependency Status](https://gemnasium.com/strangebutwonderful/sidewalks.png)](https://gemnasium.com/strangebutwonderful/sidewalks)
-[![Build Status](https://travis-ci.org/strangebutwonderful/sidewalks.png?branch=master)](https://travis-ci.org/strangebutwonderful/sidewalks)
+[![Code Climate](https://codeclimate.com/github/strangebutwonderful/sidewalks.png)](https://codeclimate.com/github/strangebutwonderful/sidewalks)
+[![PullReview stats](https://www.pullreview.com/github/strangebutwonderful/sidewalks/badges/master.svg?)](https://www.pullreview.com/github/strangebutwonderful/sidewalks/reviews/master)
 
 ## Ruby on Rails
 
