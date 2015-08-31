@@ -26,7 +26,7 @@ class Noise < ActiveRecord::Base
 
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
-  has_many :origins, ->{ uniq true },
+  has_many :origins, -> { uniq true },
     dependent: :destroy
 
   scope :where_nearby, ->(params) do

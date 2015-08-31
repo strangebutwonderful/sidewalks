@@ -18,13 +18,13 @@ require "test_helper"
 
 class OriginalTest < ActiveSupport::TestCase
   test "FactoryGirl works for noise's original" do
-    assert_difference ->{ Original.count } do
+    assert_difference -> { Original.count } do
       FactoryGirl.create(:noise_original)
     end
   end
 
   test "FactoryGirl works for user's original" do
-    assert_difference ->{ Original.count } do
+    assert_difference -> { Original.count } do
       FactoryGirl.create(:user_original)
     end
   end
