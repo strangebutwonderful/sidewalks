@@ -33,15 +33,15 @@ class Feature < ActiveRecord::Base
 
   # Helper functions, mapping to Flip gem
 
-  def self.on? (feature_key)
+  def self.on?(feature_key)
     Flip.on? feature_key
   end
 
-  def self.on! (feature_key)
+  def self.on!(feature_key)
     Feature.switch!(feature_key, true)
   end
 
-  def self.off! (feature_key)
+  def self.off!(feature_key)
     Feature.switch!(feature_key, false)
   end
 
