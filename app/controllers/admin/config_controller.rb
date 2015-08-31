@@ -5,7 +5,6 @@ class Admin::ConfigController < Admin::AdminController
   # GET /admin
   # GET /admin.json
   def index
-
   end
 
 end
