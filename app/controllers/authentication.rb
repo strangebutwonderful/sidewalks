@@ -39,7 +39,7 @@ module Authentication
     redirect_to root_url unless current_user.has_role? :admin
   end
 
-  def self.included method
+  def self.included(method)
     return unless method < ActionController::Base
     method.helper_method :correct_user?, :current_user, :current_user, :current_user_is_admin?, :current_user_signed_in?, :sign_in # , :any_other_helper_methods
 
