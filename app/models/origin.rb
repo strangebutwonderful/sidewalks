@@ -45,7 +45,7 @@ class Origin < ActiveRecord::Base
       first_one = duplicates.shift # or pop for last one
       # if there are any more left, they are duplicates
       # so delete all of them
-      duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+      duplicates.each{ |double| double.destroy} # duplicates can now be destroyed
     end
   end
 
