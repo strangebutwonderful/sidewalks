@@ -67,9 +67,9 @@ module Sidewalks
     config.assets.enabled = true
 
     # Include vendor files in path
-    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "images" )
-    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "javascripts" )
-    config.assets.paths << Rails.root.join( "app", "vendor", "assets", "stylesheets" )
+    config.assets.paths << Rails.root.join("app", "vendor", "assets", "images")
+    config.assets.paths << Rails.root.join("app", "vendor", "assets", "javascripts")
+    config.assets.paths << Rails.root.join("app", "vendor", "assets", "stylesheets")
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

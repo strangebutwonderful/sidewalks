@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   has_one :original, as: :importable
   has_many :locations, dependent: :destroy
-  has_many :noises, -> { order( created_at: :desc ) },
+  has_many :noises, -> { order(created_at: :desc) },
     dependent: :destroy
   has_many :trails, dependent: :destroy
 

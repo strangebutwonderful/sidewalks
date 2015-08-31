@@ -76,7 +76,7 @@ class NoiseTest < ActiveSupport::TestCase
       longitude: civic_center_origin.longitude,
     )
 
-    assert_includes( found_noises, civic_center_noise )
-    refute_includes( found_noises, marina_noise )
+    assert_includes(found_noises, civic_center_noise)
+    refute_includes(found_noises, marina_noise)
   end
 end
