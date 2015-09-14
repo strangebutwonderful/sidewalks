@@ -29,6 +29,11 @@ FactoryGirl.define do
     name { Faker::Name.name }
     provider "MyString"
     provider_screen_name { Faker::Internet.user_name }
+
+    trait :needs_triage do
+      locations_count 0
+      mobile_venues_count 0
+    end
   end
 
   factory :admin_user, parent: :user do

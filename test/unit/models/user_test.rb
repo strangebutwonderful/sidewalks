@@ -37,4 +37,9 @@ class UserTest < ActiveSupport::TestCase
       FactoryGirl.create(:user_with_original)
     end
   end
+
+  test "Scope where_needs_triage includes triaged" do
+    user = FactoryGirl.create :user, :needs_triage
+    assert_includes User.where_needs_triage, user
+  end
 end
