@@ -35,13 +35,10 @@ class User < ActiveRecord::Base
   PROVIDER_SIDEWALKS = 'sidewalks'
   PROVIDER_TWITTER = 'twitter'
 
+  scope :where_has_no_locations, -> { where(locations_count: [nil, 0]) }
+  scope :where_has_no_mobile_venues, ->{ where( mobile_venues_count: [nil, 0]) }
   scope :where_needs_triage, -> (params = {}) do
-    where(
-      arel_table[:locations_count].lt(1).
-      and(
-        arel_table[:mobile_venues_count].lt(1)
-      )
-    )
+    where_has_no_locations.where_has_no_mobile_venues
   end
 
   def provider_url
