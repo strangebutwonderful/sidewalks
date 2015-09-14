@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   scope :where_needs_triage, -> (params = {}) do
     where(
       arel_table[:locations_count].lt(1).
-      or(
+      and(
         arel_table[:mobile_venues_count].lt(1)
       )
     )
