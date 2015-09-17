@@ -65,7 +65,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "coveralls", require: false # code coverage
+  gem 'codecov', require: false # code coverage
   gem "factory_girl_rails"
   gem "faker"
   gem "jasmine"
