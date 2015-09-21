@@ -17,3 +17,12 @@ require "vcr"
 require "config/vcr"
 require "config/initializers/action_controller/test_case"
 require "config/initializers/active_support/test_case"
+
+# Include capybara
+# See https://github.com/jnicklas/capybara#using-capybara-with-testunit
+require "capybara/rails"
+
+class ActionDispatch::IntegrationTest
+  # Make the Capybara DSL available in all integration tests
+  include Capybara::DSL
+end

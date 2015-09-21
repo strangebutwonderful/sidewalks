@@ -9,20 +9,26 @@ class ApplicationController < ActionController::Base
   before_filter :update_last_known_latlng
 
   helper_method :bugsnag_api_key
+  helper_method :bugsnag_api_key?
   helper_method :google_universal_analytics_tracking_code
+  helper_method :google_universal_analytics_tracking_code?
 
   private
 
   def bugsnag_api_key
-    if Rails.env.production?
-      ENV['BUGSNAG_API_KEY']
-    end
+    ENV["BUGSNAG_API_KEY"]
+  end
+
+  def bugsnag_api_key?
+    bugsnag_api_key.present?
   end
 
   def google_universal_analytics_tracking_code
-    if Rails.env.production?
-      ENV['GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE']
-    end
+    ENV["GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE"]
+  end
+
+  def google_universal_analytics_tracking_code?
+    google_universal_analytics_tracking_code.present?
   end
 
   rescue_from CanCan::AccessDenied do |exception|

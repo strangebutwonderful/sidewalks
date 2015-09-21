@@ -52,7 +52,7 @@ gem "capistrano-bundler"
 gem "capistrano-passenger"
 gem "capistrano-rails", "~> 1.1"
 gem "capistrano-rbenv"
-gem 'capistrano-rails-console'
+gem "capistrano-rails-console"
 
 # deprecated controller actions
 gem "responders", "~> 2.0"
@@ -65,7 +65,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'codecov', require: false # code coverage
+  gem "codecov", require: false # code coverage
   gem "factory_girl_rails"
   gem "faker"
   gem "jasmine"
@@ -75,8 +75,10 @@ group :development, :test do
 end
 
 group :test do
-  gem "rake" # for travis
+  gem "capybara"
+  gem "climate_control"
   gem "mocha", require: false
+  gem "rake" # for travis
   gem "vcr"
 end
 

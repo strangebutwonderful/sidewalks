@@ -34,3 +34,5 @@ NOTIFIER_EMAIL_EXCEPTION_RECIPIENTS: Notification_Recipients_Emails
 # BUGSNAG_API_KEY: Your_Bugsnag_Key
 
 # GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE: Your_Google_Universal_Analytics_Tracking_Code
+
+# FAVICON_FILE_NAME_SUFFIX: -development
