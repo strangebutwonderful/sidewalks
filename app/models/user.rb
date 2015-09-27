@@ -70,6 +70,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_recent_trail(latitude, longitude, time)
+    # TODO: should account for close location drift
+    trails.
+      where(latitude: latitude, longitude: longitude).
+      where_created_after(time).
+      order(created_at: :desc).
+      first_or_create!
+  end
+
   def blank
     [
       :email,

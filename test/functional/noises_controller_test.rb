@@ -12,7 +12,7 @@ class NoisesControllerTest < ActionController::TestCase
 
   test "anyone should get index" do
     get :index
-    assert_response :success
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
@@ -20,7 +20,24 @@ class NoisesControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:user))
 
     get :index
-    assert_response :success
+    assert_response(:success)
+    assert_not_nil assigns(:noises)
+  end
+
+  test "user should generate a trail" do
+    user = FactoryGirl.create(:user)
+    sign_in(user)
+
+    @request.cookies[:latlng] = [
+      Neighborhood::DISTRICTS[:civic_center][:latitude],
+      Neighborhood::DISTRICTS[:civic_center][:longitude],
+    ].join ","
+
+    assert_difference -> { user.trails.count } do
+      get :index
+    end
+
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
@@ -28,13 +45,13 @@ class NoisesControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:admin_user))
 
     get :index
-    assert_response :success
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
   test "anyone should get explore" do
     get :explore
-    assert_response :success
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
@@ -42,7 +59,7 @@ class NoisesControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:user))
 
     get :explore
-    assert_response :success
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
@@ -50,13 +67,13 @@ class NoisesControllerTest < ActionController::TestCase
     sign_in(FactoryGirl.create(:admin_user))
 
     get :explore
-    assert_response :success
+    assert_response(:success)
     assert_not_nil assigns(:noises)
   end
 
   test "should show noise" do
     get :show, id: @noises.first
-    assert_response :success
+    assert_response(:success)
   end
 
 end
