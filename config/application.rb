@@ -82,5 +82,9 @@ module Sidewalks
 
     # Cache in memory by default
     config.cache_store = :memory_store
+
+    # Enable Rack Attack, see https://github.com/kickstarter/rack-attack
+    # Configuration in initializers
+    config.middleware.use Rack::Attack
   end
 end

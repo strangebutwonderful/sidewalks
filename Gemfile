@@ -37,6 +37,8 @@ gem "figaro"
 gem "pg"
 gem "thin"
 
+gem 'rack-attack'
+
 gem "pg_search"
 
 gem "twitter", "~> 5"
