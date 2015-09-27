@@ -2,7 +2,7 @@ require "test_helper"
 
 class NoisesControllerTest < ActionController::TestCase
   setup do
-    @noise = FactoryGirl.create(:noise)
+    @noises = FactoryGirl.create_list :noise, 5
   end
 
   teardown do
@@ -32,8 +32,30 @@ class NoisesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:noises)
   end
 
+  test "anyone should get explore" do
+    get :explore
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
+  test "user should get explore" do
+    sign_in(FactoryGirl.create(:user))
+
+    get :explore
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
+  test "admin should get explore" do
+    sign_in(FactoryGirl.create(:admin_user))
+
+    get :explore
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
   test "should show noise" do
-    get :show, id: @noise
+    get :show, id: @noises.first
     assert_response :success
   end
 
