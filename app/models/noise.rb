@@ -57,7 +57,7 @@ class Noise < ActiveRecord::Base
       order(created_at: :desc)
   end
 
-  replicate_associations :origins, :original # for replicate gem
+  replicate_associations :origins # for replicate gem
 
   attr_reader :provider_url, :user_name, :user_provider_url, :map
 
