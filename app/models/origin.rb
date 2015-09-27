@@ -21,32 +21,12 @@ class Origin < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
-  def latlng?
-    self.latitude.present? && self.longitude.present?
-  end
-
-  def latlng
-    @latlng ||= LatLng.new(self.latitude, self.longitude) if latlng?
-  end
-
-  def map
-    @map ||= Map.new(self.latlngs) if self.latlngs?
-  end
-
-  def directions_url
-    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
-  end
-
-  def self.where_since(time)
+  scope :where_since, ->(time) do
     where("#{table_name}.created_at >= ?", time)
       .order(created_at: :desc)
   end
 
-  def self.where_latest
-    where_since(12.hours.ago)
-  end
-
-  def self.where_nearby(params)
+  scope :where_nearby, ->(params) do
     latitude  = params[:latitude]
     longitude = params[:longitude]
     location  = params[:location]
@@ -63,4 +43,19 @@ class Origin < ActiveRecord::Base
     near(search_location, distance)
   end
 
+  def latlng?
+    latitude.present? && longitude.present?
+  end
+
+  def latlng
+    @latlng ||= LatLng.new(latitude, longitude) if latlng?
+  end
+
+  def map
+    @map ||= Map.new(latlngs) if latlngs?
+  end
+
+  def directions_url
+    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
+  end
 end

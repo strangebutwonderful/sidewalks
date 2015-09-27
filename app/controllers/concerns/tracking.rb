@@ -4,27 +4,47 @@
 module Tracking
   extend ActiveSupport::Concern
   included do
-    helper_method :last_known_latlng, :update_last_known_latlng
+    helper_method :last_known_latlng
+    helper_method :update_last_known_latlng
   end
 
   def last_known_latlng
-    @current_user_last_latlng ||= update_last_known_latlng
+    @last_known_latlng ||= latlng_from_cookie || latlng_from_request
   end
 
   def update_last_known_latlng
     Rails.logger.debug "latlng cookie: #{cookies[:latlng]}"
 
     # cookies[:latlng] comes in the form "latitude,longitude"
-    unless cookies[:latlng].blank?
-      coordinates = cookies[:latlng].split(',')
-      @current_user_last_latlng ||= LatLng.new(coordinates[0], coordinates[1])
-
-      # Side effect behavior of saving the latlng for later
-      Trail.update_recent(current_user, coordinates[0], coordinates[1]) if current_user_signed_in?
-    else
-      @current_user_last_latlng ||= LatLng.new(request_latitude, request_longitude)
+    if latlng_from_cookie? && current_user_signed_in?
+      current_user.update_recent_trail(
+        latlng_from_cookie.latitude,
+        latlng_from_cookie.longitude,
+        5.minutes.ago
+      )
     end
+  end
 
-    @current_user_last_latlng
+  private
+
+  def latlng_from_cookie
+    return nil unless cookies[:latlng].present?
+
+    @latlng_from_cookie ||= begin
+      # cookies[:latlng] comes in the form "latitude,longitude"
+      coordinates = cookies[:latlng].split(",")
+      LatLng.new(coordinates[0], coordinates[1])
+    end
+  end
+
+  def latlng_from_cookie?
+    latlng_from_cookie.present?
+  end
+
+  def latlng_from_request
+    @latlng_from_request ||= LatLng.new(
+      request_latitude,
+      request_longitude
+    )
   end
 end

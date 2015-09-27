@@ -9,7 +9,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = Noise.explore_and_group(params)
+    @noises = NoiseExplorer.explore_and_group(params)
     @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|
@@ -24,7 +24,7 @@ class NoisesController < ApplicationController
   # GET /explore
   # GET /explore.json
   def explore
-    @noises = Noise.explore_and_group(params)
+    @noises = NoiseExplorer.explore_and_group(params)
     @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|

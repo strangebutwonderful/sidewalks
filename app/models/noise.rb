@@ -20,14 +20,16 @@
 class Noise < ActiveRecord::Base
   include PgSearch
 
-  pg_search_scope :search_text, against: [:text],
+  pg_search_scope(
+    :search_text,
+    against: [:text],
     using: {tsearch: {dictionary: "english"}},
     associated_against: { user: :name }
+  )
 
   belongs_to :user
   has_one :original, as: :importable, dependent: :destroy
-  has_many :origins, -> { uniq true },
-    dependent: :destroy
+  has_many :origins, -> { uniq true }, dependent: :destroy
 
   scope :where_nearby, ->(params) do
     joins(:origins).
@@ -47,14 +49,30 @@ class Noise < ActiveRecord::Base
     where("#{table_name}.created_at >= ?", time).order(created_at: :desc)
   end
 
-  scope :where_latest, -> do
-    where_since 12.hours.ago
-  end
-
   scope :where_authored_by_user_before, ->(user_id, time) do
     where(user_id: user_id).
       where("#{table_name}.created_at < ?", time).
       order(created_at: :desc)
+  end
+
+  scope :search, ->(params) do
+    query = params[:q]
+    if query.blank?
+      none
+    else
+      search_text(params[:q]).where_since(1.week.ago)
+    end
+  end
+
+  scope :explore_nearest, ->(params = []) do
+    search_params = params.clone
+    search_params[:created_at] ||= 7.days.ago
+
+    where_nearby(search_params).
+      where_actionable_or_not_triaged.
+      includes(:origins).
+      includes(:original).
+      includes(:user)
   end
 
   replicate_associations :origins # for replicate gem
@@ -179,39 +197,4 @@ class Noise < ActiveRecord::Base
       media_urls
     end
   end
-
-  def self.search(params)
-    query = params[:q]
-    unless query.blank?
-      self.search_text(params[:q]).where_since(1.week.ago)
-    else
-      self.none # Needs to be updated in rails 4 to use none query and avoid db altogether
-    end
-  end
-
-  def self.explore_and_group(params)
-    @noises = Noise.explore(params)
-
-    @noises = @noises.group_by do |noise|
-      noise.user_id
-    end
-
-    @noises
-  end
-
-  def self.explore(params)
-    Noise.explore_nearest(params).all
-  end
-
-  def self.explore_nearest(params = [])
-    search_params = params.clone
-    search_params[:created_at] ||= 7.days.ago
-
-    where_nearby(search_params).
-      where_actionable_or_not_triaged.
-      includes(:origins).
-      includes(:original).
-      includes(:user)
-  end
-
 end

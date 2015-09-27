@@ -19,23 +19,12 @@
 class Trail < ActiveRecord::Base
   belongs_to :user
 
+  scope :where_created_after, ->(time) do
+    where("#{table_name}.created_at >= ?", time)
+  end
+
   def latlng
     @latlng ||= LatLng.new(latitude, longitude)
   end
 
-  def self.update_recent(user, latitude, longitude)
-    # TODO: should account for close location drift
-    user.trails.where(latitude: latitude, longitude: longitude)
-      .where_created_less_than(5.minutes.ago)
-      .where_latest
-      .first_or_create!
-  end
-
-  def self.where_latest
-    order("#{table_name}.created_at DESC")
-  end
-
-  def self.where_created_less_than(time)
-    where("#{table_name}.created_at >= ?", time)
-  end
 end

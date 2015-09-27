@@ -44,13 +44,13 @@ class NoiseTest < ActiveSupport::TestCase
   end
 
   test "latest scope includes recent tweets" do
-    assert_difference -> { Noise.where_latest.count } do
+    assert_difference -> { Noise.where_since(12.hours.ago).count } do
       FactoryGirl.create(:noise)
     end
   end
 
   test "latest scope does not include old tweets" do
-    assert_no_difference -> { Noise.where_latest.count } do
+    assert_no_difference -> { Noise.where_since(12.hours.ago).count } do
       FactoryGirl.create(:week_old_noise)
     end
   end
