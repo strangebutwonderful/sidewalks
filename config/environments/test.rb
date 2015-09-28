@@ -38,6 +38,6 @@ Sidewalks::Application.configure do
   # when true, eager loads all registered config.eager_load_namespaces.
   # This includes your application, engines, Rails frameworks and
   # any other registered namespace.
-  config.eager_load = false
+  config.eager_load = true
 
 end
