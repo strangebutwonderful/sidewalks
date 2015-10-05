@@ -31,10 +31,12 @@ class Noise < ActiveRecord::Base
   has_one :original, as: :importable, dependent: :destroy
   has_many :origins, -> { uniq true }, dependent: :destroy
 
-  scope :where_nearby, ->(params) do
+  scope :where_nearby, ->(latitude, longitude, distance, created_at) do
     joins(:origins).
-      merge(Origin.where_nearby(params)).
-      where_since(params[:created_at])
+      merge(
+        Origin.where_nearby(latitude, longitude, distance)
+      ).
+      where_since(created_at)
   end
 
   scope :where_needs_triage, ->(params) do
@@ -64,11 +66,8 @@ class Noise < ActiveRecord::Base
     end
   end
 
-  scope :explore_nearest, ->(params = []) do
-    search_params = params.clone
-    search_params[:created_at] ||= 7.days.ago
-
-    where_nearby(search_params).
+  scope :explore_nearest, ->(latitude, longitude, distance, created_at) do
+    where_nearby(latitude, longitude, distance, created_at).
       where_actionable_or_not_triaged.
       includes(:origins).
       includes(:original).

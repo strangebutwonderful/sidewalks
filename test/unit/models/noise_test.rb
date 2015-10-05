@@ -72,8 +72,10 @@ class NoiseTest < ActiveSupport::TestCase
     civic_center_origin = civic_center_noise.origins.first
 
     found_noises = Noise.explore_nearest(
-      latitude: civic_center_origin.latitude,
-      longitude: civic_center_origin.longitude,
+      civic_center_origin.latitude,
+      civic_center_origin.longitude,
+      1.5,
+      7.days.ago
     )
 
     assert_includes(found_noises, civic_center_noise)
