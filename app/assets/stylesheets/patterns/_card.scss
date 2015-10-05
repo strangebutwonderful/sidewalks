@@ -3,9 +3,10 @@
 // Base class
 .card {
   @extend .docket;
+  @include word-wrap;
   background-color: $white;
   padding: $base-block-spacing;
-
+  position: relative;
 
   &:last-child {
     margin-bottom: 0;
@@ -13,11 +14,11 @@
 
   h1 {
     @extend h5;
-    font-size: 24px;
-    font-weight: normal;
-    line-height: 30px;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 0.95em;
     margin: 0;
-    margin-top: -5px;
 
     a {
       // color: inherit;

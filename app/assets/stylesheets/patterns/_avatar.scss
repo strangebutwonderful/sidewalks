@@ -9,3 +9,17 @@ $avatar-border-radius: $avatar-width / 2;
     width: $avatar-width;
   }
 }
+
+.avatar-recessed {
+  left: -10px;
+  opacity: 0.1;
+  position: absolute;
+  top: -10px;
+  z-index: 0;
+
+  .avatar-image {
+    @include border-radius($avatar-border-radius * 2);
+    height: $avatar-height * 2;
+    width: $avatar-width * 2;
+  }
+}
