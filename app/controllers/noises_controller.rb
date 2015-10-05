@@ -1,7 +1,6 @@
 class NoisesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :explore, :show]
   before_filter :disable_footer, only: [:explore]
-  before_filter :override_request_geolocation, only: [:index]
   before_filter :verify_admin, except: [:index, :explore, :show]
 
   respond_to :html, :json
@@ -9,7 +8,7 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = NoiseExplorer.explore_and_group(params)
+    @noises = NoiseExplorer.explore_and_group(*explore_params)
     @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|
@@ -24,7 +23,7 @@ class NoisesController < ApplicationController
   # GET /explore
   # GET /explore.json
   def explore
-    @noises = NoiseExplorer.explore_and_group(params)
+    @noises = NoiseExplorer.explore_and_group(*explore_params)
     @map = Map.new(request_latlng, params)
 
     @noises.each do |user_id, noises|
@@ -46,5 +45,16 @@ class NoisesController < ApplicationController
       .all
 
     respond_with @noise
+  end
+
+  private
+
+  def explore_params
+    [
+      request_latitude,
+      request_longitude,
+      params[:distance] || 1.5,
+      7.days.ago
+    ]
   end
 end

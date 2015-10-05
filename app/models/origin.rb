@@ -26,21 +26,8 @@ class Origin < ActiveRecord::Base
       .order(created_at: :desc)
   end
 
-  scope :where_nearby, ->(params) do
-    latitude  = params[:latitude]
-    longitude = params[:longitude]
-    location  = params[:location]
-    distance  = params[:distance] || 1.5
-
-    search_location = if latitude && longitude
-      [latitude.to_f, longitude.to_f]
-    elsif location
-      location
-    end
-
-    Rails.logger.debug "Location detected " + search_location.to_s
-
-    near(search_location, distance)
+  scope :where_nearby, ->(latitude, longitude, distance) do
+    near([latitude.to_f, longitude.to_f], distance)
   end
 
   def latlng?
