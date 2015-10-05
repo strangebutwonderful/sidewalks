@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def latlngs?
-    self.locations.any?
+    locations.count > 0
   end
 
   def latlngs

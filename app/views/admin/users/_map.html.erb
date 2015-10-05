@@ -1,5 +1,4 @@
 <% if user.latlngs? %>
-  <%# TODO: set location for map %>
   <div id="map-user-<%= user.id %>"
     data-cartography-map
     data-cartography-map-bounds="<%= JSON(user.map.boundaries) %>"
