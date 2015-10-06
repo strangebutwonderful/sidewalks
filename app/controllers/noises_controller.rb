@@ -8,30 +8,28 @@ class NoisesController < ApplicationController
   # GET /noises
   # GET /noises.json
   def index
-    @noises = NoiseExplorer.explore_and_group(*explore_params)
+    @noise_funnel = NoiseFunnel.new(*explore_params)
     @map = Map.new(request_latlng, params)
 
-    @noises.each do |user_id, noises|
-      noises.each do |noise|
-        @map.add_latlngs(noise.latlngs)
-      end
+    @noise_funnel.noises.each do |noise|
+      @map.add_latlngs(noise.latlngs)
     end
 
+    @noises = @noise_funnel.noise_grouped_by_user_id
     respond_with @noises
   end
 
   # GET /explore
   # GET /explore.json
   def explore
-    @noises = NoiseExplorer.explore_and_group(*explore_params)
+    @noise_funnel = NoiseFunnel.new(*explore_params)
     @map = Map.new(request_latlng, params)
 
-    @noises.each do |user_id, noises|
-      noises.each do |noise|
-        @map.add_latlngs(noise.latlngs)
-      end
+    @noise_funnel.noises.each do |noise|
+      @map.add_latlngs(noise.latlngs)
     end
 
+    @noises = @noise_funnel.noise_grouped_by_user_id
     respond_with @noises
   end
 
@@ -54,6 +52,8 @@ class NoisesController < ApplicationController
       request_latitude,
       request_longitude,
       params[:distance] || 1.5,
+      0.025,
+      1.day.ago,
       7.days.ago
     ]
   end
