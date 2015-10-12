@@ -47,7 +47,7 @@ namespace :replicate do
 
       # Download data from the production database
       # NOTE: YOU NEED TO ALTER THE LINE BELOW TO LIST ALL THE OBJECTS YOU WANT TO DUMP BY DEFAULT
-      replicate_dump_options = ENV["DATA"] || "Noise.where_latest.all"
+      replicate_dump_options = ENV["DATA"] || "Noise.where_since(2.weeks.ago).all"
       replicate_dump_options = replicate_dump_options.split(";").map{ |c| c.strip.shellescape }.join(" ")
 
       # Compose command to run
