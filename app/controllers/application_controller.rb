@@ -2,10 +2,12 @@ class ApplicationController < ActionController::Base
   include Authentication
   include Cartography
   include Layout
+  include Profiling
   include Tracking
 
   protect_from_forgery
 
+  before_filter :rack_profile_if_admin
   before_filter :update_last_known_latlng
 
   helper_method :bugsnag_api_key

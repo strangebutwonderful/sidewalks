@@ -49,6 +49,9 @@ gem "whenever", "~> 0.9", require: false
 
 gem "flip", "~> 1"
 
+# DevOps tools
+gem "rack-mini-profiler"
+
 gem "capistrano", "~> 3.4"
 gem "capistrano-bundler"
 gem "capistrano-passenger"
