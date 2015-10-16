@@ -40,7 +40,7 @@ module Authentication
   end
 
   def current_user_signed_in?
-    return true if current_user
+    current_user.present?
   end
 
   def authenticate_user_or_redirect_to_root!
