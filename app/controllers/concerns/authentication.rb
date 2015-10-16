@@ -34,7 +34,9 @@ module Authentication
   end
 
   def current_user_is_admin?
-    @current_user_is_admin ||= current_user_signed_in? && current_user.has_role?(:admin)
+    @current_user_is_admin ||= (
+      current_user_signed_in? && current_user.has_role?(:admin)
+    )
   end
 
   def current_user_signed_in?
@@ -43,7 +45,10 @@ module Authentication
 
   def authenticate_user_or_redirect_to_root!
     if !current_user
-      redirect_to root_url, alert: 'You need to sign in for access to this page.'
+      redirect_to(
+        root_url,
+        alert: 'You need to sign in for access to this page.'
+      )
     end
   end
 
