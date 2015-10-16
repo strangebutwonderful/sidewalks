@@ -6,6 +6,10 @@
 [![Code Climate](https://codeclimate.com/github/strangebutwonderful/sidewalks.png)](https://codeclimate.com/github/strangebutwonderful/sidewalks)
 [![PullReview stats](https://www.pullreview.com/github/strangebutwonderful/sidewalks/badges/master.svg?)](https://www.pullreview.com/github/strangebutwonderful/sidewalks/reviews/master)
 
+### Coverage
+
+![codecov.io](https://codecov.io/github/strangebutwonderful/sidewalks/branch.svg?branch=master)
+
 ## Ruby on Rails
 
 This application requires:
