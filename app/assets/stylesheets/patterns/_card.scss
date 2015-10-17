@@ -3,9 +3,10 @@
 // Base class
 .card {
   @extend .docket;
+  @include word-wrap;
   background-color: $white;
   padding: $base-block-spacing;
-
+  position: relative;
 
   &:last-child {
     margin-bottom: 0;
