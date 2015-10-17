@@ -48,14 +48,20 @@ namespace :replicate do
       # Download data from the production database
       # NOTE: YOU NEED TO ALTER THE LINE BELOW TO LIST ALL THE OBJECTS YOU WANT TO DUMP BY DEFAULT
       replicate_dump_options = ENV["DATA"] || "Noise.where_since(2.weeks.ago).all"
-      replicate_dump_options = replicate_dump_options.split(";").map{ |c| c.strip.shellescape }.join(" ")
+      replicate_dump_options = replicate_dump_options.split(";").join(" ")
 
       # Compose command to run
       command = []
       command << "cd #{current_path} &&"
       command << "RAILS_ENV=#{fetch(:rails_env)}"
-      command << "#{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" if rvm_loaded?
-      command << "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec" if rbenv_loaded?
+
+      if rvm_loaded?
+        command << "#{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do"
+      elsif rbenv_loaded?
+        command << "RBENV_ROOT=#{fetch(:rbenv_path)}"
+        command << "RBENV_VERSION=#{fetch(:rbenv_ruby)}"
+        command << "#{fetch(:rbenv_path)}/bin/rbenv exec"
+      end
       command << "bundle exec" if bundler_loaded?
       command << "replicate --verbose --require '#{release_path}/config/environment' --dump '#{replicate_dump_options}'"
       command = command.join(' ')
