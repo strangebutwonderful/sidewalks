@@ -16,7 +16,7 @@ module Cartography
     end
 
     if @request_latitude.blank?
-      @request_latitude = Neighborhood::DISTRICTS[:civic_center][:latitude]
+      @request_latitude = Neighborhood::districts[:civic_center].latitude
     end
 
     @request_latitude
@@ -30,7 +30,7 @@ module Cartography
     end
 
     if @request_longitude.blank?
-      @request_longitude = Neighborhood::DISTRICTS[:civic_center][:longitude]
+      @request_longitude = Neighborhood::districts[:civic_center].longitude
     end
 
     @request_longitude
