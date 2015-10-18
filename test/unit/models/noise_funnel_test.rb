@@ -16,7 +16,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     noise = FactoryGirl.create(
       :noise,
       :potrero_hill,
-      created_at: Time.now
+      created_at: Time.current
     )
 
     assert_includes(@potrero_hill_funnel.noises, noise)
@@ -46,7 +46,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     noise = FactoryGirl.create(
       :noise,
       :richmond,
-      created_at: Time.now
+      created_at: Time.current
     )
 
     assert_not_includes(@potrero_hill_funnel.noises, noise)
