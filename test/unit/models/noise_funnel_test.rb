@@ -12,7 +12,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     )
   end
 
-  test '#noises includes nearby noises that were just created' do
+  test "#noises includes nearby noises that were just created" do
     noise = FactoryGirl.create(
       :noise,
       :potrero_hill,
@@ -22,17 +22,17 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     assert_includes(@potrero_hill_funnel.noises, noise)
   end
 
-  test '#noises includes nearby noises that were recently created' do
+  test "#noises includes nearby noises that were recently created" do
     noise = FactoryGirl.create(
       :noise,
       :potrero_hill,
-      created_at: 1.day.ago
+      created_at: 6.hours.ago
     )
 
     assert_includes(@potrero_hill_funnel.noises, noise)
   end
 
-  test '#noises does not includes nearby noises that were created too long ago' do
+  test "#noises does not includes nearby noises that were created too long ago" do
     noise = FactoryGirl.create(
       :noise,
       :potrero_hill,
@@ -42,7 +42,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     assert_not_includes(@potrero_hill_funnel.noises, noise)
   end
 
-  test '#noises does not include far away noises that were just created' do
+  test "#noises does not include far away noises that were just created" do
     noise = FactoryGirl.create(
       :noise,
       :richmond,
@@ -52,7 +52,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     assert_not_includes(@potrero_hill_funnel.noises, noise)
   end
 
-  test '#noises does not include far away noises that were recently created' do
+  test "#noises does not include far away noises that were recently created" do
     noise = FactoryGirl.create(
       :noise,
       :richmond,
@@ -62,7 +62,7 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     assert_not_includes(@potrero_hill_funnel.noises, noise)
   end
 
-  test '#noises does not include far away noises that were created too long ago' do
+  test "#noises does not include far away noises that were created too long ago" do
     noise = FactoryGirl.create(
       :noise,
       :richmond,
