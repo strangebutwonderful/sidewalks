@@ -1,7 +1,6 @@
 require "test_helper"
 
 class NoiseFunnelTest < ActiveSupport::TestCase
-
   setup do
     @potrero_hill_funnel = NoiseFunnel.new(
       Neighborhood.districts[:potrero_hill].latitude,
@@ -43,5 +42,33 @@ class NoiseFunnelTest < ActiveSupport::TestCase
     assert_not_includes(@potrero_hill_funnel.noises, noise)
   end
 
+  test '#noises does not include far away noises that were just created' do
+    noise = FactoryGirl.create(
+      :noise,
+      :richmond,
+      created_at: Time.now
+    )
 
+    assert_not_includes(@potrero_hill_funnel.noises, noise)
+  end
+
+  test '#noises does not include far away noises that were recently created' do
+    noise = FactoryGirl.create(
+      :noise,
+      :richmond,
+      created_at: 1.day.ago
+    )
+
+    assert_not_includes(@potrero_hill_funnel.noises, noise)
+  end
+
+  test '#noises does not include far away noises that were created too long ago' do
+    noise = FactoryGirl.create(
+      :noise,
+      :richmond,
+      created_at: 2.weeks.ago
+    )
+
+    assert_not_includes(@potrero_hill_funnel.noises, noise)
+  end
 end
