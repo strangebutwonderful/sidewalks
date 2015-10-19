@@ -29,8 +29,8 @@ class NoisesControllerTest < ActionController::TestCase
     sign_in(user)
 
     @request.cookies[:latlng] = [
-      Neighborhood::DISTRICTS[:civic_center][:latitude],
-      Neighborhood::DISTRICTS[:civic_center][:longitude],
+      Neighborhood.districts[:civic_center].latitude,
+      Neighborhood.districts[:civic_center].longitude,
     ].join ","
 
     assert_difference -> { user.trails.count } do

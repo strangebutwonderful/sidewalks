@@ -51,7 +51,7 @@ class NoisesController < ApplicationController
       request_longitude,
       params[:distance] || 1.5,
       0.025,
-      1.day.ago,
+      Time.current,
       7.days.ago
     ]
   end
