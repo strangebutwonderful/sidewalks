@@ -32,10 +32,10 @@ FactoryGirl.define do
     text { Faker::Lorem.sentences.join(' ') }
     created_at { Time.now }
 
-    Neighborhood.districts.each do |key, district|
-      trait key do
+    Neighborhood.districts.keys.each do |neighborhood_symbol|
+      trait neighborhood_symbol do
         after(:create) do |noise|
-          FactoryGirl.create_list(:origin, 1, key, noise: noise)
+          FactoryGirl.create_list(:origin, 1, neighborhood_symbol, noise: noise)
         end
       end
     end
