@@ -23,7 +23,7 @@ FactoryGirl.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
 
-    Neighborhood::districts.each do |key, district|
+    Neighborhood.districts.each do |key, district|
       trait key do
         latitude district.latitude
         longitude district.longitude
