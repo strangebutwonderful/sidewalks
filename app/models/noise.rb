@@ -74,7 +74,7 @@ class Noise < ActiveRecord::Base
       includes(:user)
   end
 
-  replicate_associations :original, :origins # for replicate gem
+  replicate_associations :origins # for replicate gem
 
   attr_reader :provider_url, :user_name, :user_provider_url, :map
 
