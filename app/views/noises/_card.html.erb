@@ -20,11 +20,11 @@
   </div>
 </div>
 
-<% noise.media_urls.each do |media_url| %>
+<% noise.image_urls.each do |image_url| %>
   <div class="card docket">
     <p>
-      <%= link_to media_url, class: "thumbnail" do %>
-        <%= image_tag media_url %>
+      <%= link_to image_url, class: "thumbnail" do %>
+        <%= image_tag image_url %>
       <% end %>
     </p>
   </div>

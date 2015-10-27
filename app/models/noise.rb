@@ -20,6 +20,17 @@
 class Noise < ActiveRecord::Base
   include PgSearch
 
+  IMAGE_EXTENSIONS = [
+    ".bmp",
+    ".gif",
+    ".jfif",
+    ".jpeg",
+    ".jpg",
+    ".png",
+    ".tiff",
+    ".webp",
+  ]
+
   pg_search_scope(
     :search_text,
     against: [:text],
@@ -170,6 +181,12 @@ class Noise < ActiveRecord::Base
       end
       me ||= {}
       me
+    end
+  end
+
+  def image_urls
+    @image_urls ||= media_urls.select do |media_url|
+      IMAGE_EXTENSIONS.include? File.extname(URI.parse(media_url).path).downcase
     end
   end
 
