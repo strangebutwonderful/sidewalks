@@ -289,6 +289,8 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    skylight (0.10.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.4.0)
     sprockets (2.12.4)
@@ -393,6 +395,7 @@ DEPENDENCIES
   rolify
   sass (~> 3.4)
   sass-rails (~> 5)
+  skylight
   spring
   thin
   twitter (~> 5)
