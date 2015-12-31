@@ -130,9 +130,14 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    fast_stack (0.1.0)
+      rake
+      rake-compiler
     ffi (1.9.10)
     figaro (1.1.1)
       thor (~> 0.14)
+    flamegraph (0.1.0)
+      fast_stack
     flip (1.0.1)
       activesupport (>= 3.0, < 5)
       i18n
@@ -267,6 +272,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    rake-compiler (0.9.5)
+      rake
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -370,6 +377,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
+  flamegraph
   flip (~> 1)
   font-awesome-sass (~> 4)
   geocoder
