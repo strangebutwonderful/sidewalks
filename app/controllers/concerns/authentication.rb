@@ -34,6 +34,8 @@ module Authentication
   end
 
   def current_user_is_admin?
+    return @current_user_is_admin if defined? @current_user_is_admin
+
     @current_user_is_admin ||= (
       current_user_signed_in? && current_user.has_role?(:admin)
     )
@@ -53,6 +55,6 @@ module Authentication
   end
 
   def verify_admin_or_redirect_to_root!
-    redirect_to root_url unless current_user.has_role? :admin
+    redirect_to root_url unless current_user_is_admin?
   end
 end
