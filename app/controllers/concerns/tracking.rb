@@ -12,19 +12,6 @@ module Tracking
     @last_known_latlng ||= latlng_from_cookie || latlng_from_request
   end
 
-  def update_last_known_latlng
-    Rails.logger.debug "latlng cookie: #{cookies[:latlng]}"
-
-    # cookies[:latlng] comes in the form "latitude,longitude"
-    if latlng_from_cookie? && current_user_signed_in?
-      current_user.update_recent_trail(
-        latlng_from_cookie.latitude,
-        latlng_from_cookie.longitude,
-        5.minutes.ago
-      )
-    end
-  end
-
   private
 
   def latlng_from_cookie

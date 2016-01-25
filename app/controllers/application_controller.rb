@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :rack_profile_if_admin
-  before_filter :update_last_known_latlng
 
   helper_method :bugsnag_api_key
   helper_method :bugsnag_api_key?
