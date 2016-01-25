@@ -52,6 +52,7 @@ gem "flip", "~> 1"
 # DevOps tools
 gem "rack-mini-profiler"
 gem "flamegraph"
+gem "stackprof"
 
 gem "capistrano", "~> 3.4"
 gem "capistrano-bundler"
