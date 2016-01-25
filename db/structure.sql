@@ -501,6 +501,13 @@ CREATE UNIQUE INDEX index_origin_on_latitude_and_longitude ON origins USING btre
 
 
 --
+-- Name: index_originals_on_importable_id_and_importable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_originals_on_importable_id_and_importable_type ON originals USING btree (importable_id, importable_type);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -606,4 +613,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140404002329');
 INSERT INTO schema_migrations (version) VALUES ('20151231212940');
 
 INSERT INTO schema_migrations (version) VALUES ('20160125000102');
+
+INSERT INTO schema_migrations (version) VALUES ('20160125012435');
 
