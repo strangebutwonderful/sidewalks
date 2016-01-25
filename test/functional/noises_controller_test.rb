@@ -24,23 +24,6 @@ class NoisesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:noises)
   end
 
-  test "user should generate a trail" do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
-
-    @request.cookies[:latlng] = [
-      Neighborhood.districts[:civic_center].latitude,
-      Neighborhood.districts[:civic_center].longitude,
-    ].join ","
-
-    assert_difference -> { user.trails.count } do
-      get :index
-    end
-
-    assert_response(:success)
-    assert_not_nil assigns(:noises)
-  end
-
   test "admin should get index" do
     sign_in(FactoryGirl.create(:admin_user))
 

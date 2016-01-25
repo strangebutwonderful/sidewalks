@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
   has_many :locations, dependent: :destroy
   has_many :noises, -> { order(created_at: :desc) },
     dependent: :destroy
-  has_many :trails, dependent: :destroy
 
   attr_reader :provider_url
 
@@ -68,15 +67,6 @@ class User < ActiveRecord::Base
       self.provider_access_token_secret = auth['credentials']['secret']
       self.save!
     end
-  end
-
-  def update_recent_trail(latitude, longitude, time)
-    # TODO: should account for close location drift
-    trails.
-      where(latitude: latitude, longitude: longitude).
-      where_created_after(time).
-      order(created_at: :desc).
-      first_or_create!
   end
 
   def blank

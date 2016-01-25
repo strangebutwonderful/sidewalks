@@ -303,39 +303,6 @@ ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 
 --
--- Name: trails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE trails (
-    id integer NOT NULL,
-    user_id integer NOT NULL,
-    latitude numeric(11,8) NOT NULL,
-    longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: trails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE trails_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: trails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE trails_id_seq OWNED BY trails.id;
-
-
---
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -438,13 +405,6 @@ ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY trails ALTER COLUMN id SET DEFAULT nextval('trails_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -494,14 +454,6 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
-
-
---
--- Name: trails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY trails
-    ADD CONSTRAINT trails_pkey PRIMARY KEY (id);
 
 
 --
@@ -574,34 +526,6 @@ CREATE INDEX index_sessions_on_session_id ON sessions USING btree (session_id);
 --
 
 CREATE INDEX index_sessions_on_updated_at ON sessions USING btree (updated_at);
-
-
---
--- Name: index_trails_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_trails_on_created_at ON trails USING btree (created_at);
-
-
---
--- Name: index_trails_on_latitude; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_trails_on_latitude ON trails USING btree (latitude);
-
-
---
--- Name: index_trails_on_longitude; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_trails_on_longitude ON trails USING btree (longitude);
-
-
---
--- Name: index_trails_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_trails_on_user_id ON trails USING btree (user_id);
 
 
 --
@@ -680,4 +604,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140306172319');
 INSERT INTO schema_migrations (version) VALUES ('20140404002329');
 
 INSERT INTO schema_migrations (version) VALUES ('20151231212940');
+
+INSERT INTO schema_migrations (version) VALUES ('20160125000102');
 
