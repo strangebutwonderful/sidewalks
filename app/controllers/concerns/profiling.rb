@@ -7,8 +7,6 @@ module Profiling
   end
 
   def rack_profile_if_admin
-    if current_user_is_admin?
-      Rack::MiniProfiler.authorize_request
-    end
+    Rack::MiniProfiler.authorize_request if current_user_is_admin?
   end
 end

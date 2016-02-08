@@ -24,7 +24,7 @@ require 'capistrano/rails'
 
 require 'capistrano/passenger'
 
-require "whenever/capistrano"
+require 'whenever/capistrano'
 
 require 'capistrano/rails/console'
 

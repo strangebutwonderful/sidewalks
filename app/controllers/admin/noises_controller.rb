@@ -1,5 +1,4 @@
 class Admin::NoisesController < Admin::AdminController
-
   respond_to :html, :json
 
   # GET /noises
@@ -59,5 +58,4 @@ class Admin::NoisesController < Admin::AdminController
   def noise_params
     params.require(:noise).permit(:role_ids, :provider_id, :actionable)
   end
-
 end

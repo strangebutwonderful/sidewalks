@@ -3,15 +3,13 @@ class Map
 
   def initialize(initial_latlngs = nil, params = {})
     self.latlngs ||= []
-    self.add_latlngs(initial_latlngs)
+    add_latlngs(initial_latlngs)
     self.center = params[:center] if params[:center].present?
     self.zoom = params[:zoom] if params[:zoom].present?
   end
 
   def add_latlng(value)
-    unless value.nil?
-      self.latlngs << value
-    end
+    self.latlngs << value unless value.nil?
 
     self
   end
@@ -20,7 +18,7 @@ class Map
     value = [value] unless value.is_a? Enumerable
 
     value.each do |value|
-      self.add_latlng(value)
+      add_latlng(value)
     end
 
     self
@@ -28,8 +26,8 @@ class Map
 
   def boundaries
     [
-      self.south_west_boundary,
-      self.north_east_boundary
+      south_west_boundary,
+      north_east_boundary
     ]
   end
 
@@ -46,24 +44,20 @@ class Map
   end
 
   def north_east_boundary
-    self.north_east_boundary_latlng.to_a
+    north_east_boundary_latlng.to_a
   end
 
   def south_west_boundary
-    self.south_west_boundary_latlng.to_a
+    south_west_boundary_latlng.to_a
   end
 
-  def center=(value)
-    @center = value
-  end
+  attr_writer :center
 
   def center
     @center ||= LatLng.center(latlngs).to_a
   end
 
-  def zoom=(value)
-    @zoom = value
-  end
+  attr_writer :zoom
 
   def zoom
     @zoom ||= 16
@@ -86,5 +80,4 @@ class Map
     end
     boundary_latlng
   end
-
 end

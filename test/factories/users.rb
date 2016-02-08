@@ -20,14 +20,13 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-
   factory :user do
     sequence :provider_id do |n|
       "MyProviderUserId#{n}"
     end
 
     name { Faker::Name.name }
-    provider "MyString"
+    provider 'MyString'
     provider_screen_name { Faker::Internet.user_name }
 
     trait :needs_triage do
@@ -45,5 +44,4 @@ FactoryGirl.define do
       user.create_original(dump: user.to_json)
     end
   end
-
 end

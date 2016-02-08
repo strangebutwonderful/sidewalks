@@ -14,7 +14,7 @@
 #  index_originals_on_importable_id_and_importable_type  (importable_id,importable_type)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class OriginalTest < ActiveSupport::TestCase
   test "FactoryGirl works for noise's original" do

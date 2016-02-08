@@ -17,7 +17,6 @@ application_config = YAML.load_file(File.dirname(__FILE__) + '/../config/applica
 # http://meskyanichi.github.io/backup
 #
 Backup::Model.new(:carboncopy, 'Create a backup of database') do
-
   ##
   # PostgreSQL [Database]
   #
@@ -51,7 +50,7 @@ Backup::Model.new(:carboncopy, 'Create a backup of database') do
     # s3.bucket            = 'bucket-name'
     s3.bucket            = application_config['S3_BUCKET_NAME']
     s3.path              = 'path/to/backups'
-  end unless (defined?(application_config['S3_ACCESS_KEY_ID'])).nil?
+  end unless defined?(application_config['S3_ACCESS_KEY_ID']).nil?
 
   ##
   # Local (Copy) [Storage]
@@ -86,7 +85,7 @@ Backup::Model.new(:carboncopy, 'Create a backup of database') do
     mail.password             = 'my_password'
     mail.authentication       = 'plain'
     mail.encryption           = :starttls
-  end unless (defined?(application_config['BACKUP_MAIL_FROM'])).nil?
+  end unless defined?(application_config['BACKUP_MAIL_FROM']).nil?
 
   ##
   # Hipchat [Notifier]
@@ -102,6 +101,5 @@ Backup::Model.new(:carboncopy, 'Create a backup of database') do
     hipchat.success_color  = 'green'
     hipchat.warning_color  = 'yellow'
     hipchat.failure_color  = 'red'
-  end unless (defined?(application_config['HIPCHAT_TOKEN'])).nil?
-
+  end unless defined?(application_config['HIPCHAT_TOKEN']).nil?
 end

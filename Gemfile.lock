@@ -41,6 +41,7 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (6.0.3)
+    ast (2.2.0)
     autoprefixer-rails (6.3.1)
       execjs
       json
@@ -227,12 +228,15 @@ GEM
     omniauth-twitter (1.2.1)
       json (~> 1.3)
       omniauth-oauth (~> 1.1)
+    parser (2.3.0.3)
+      ast (~> 2.2)
     pg (0.18.4)
     pg_search (1.0.5)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
     phantomjs (1.9.8.0)
+    powerpack (0.1.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -270,6 +274,7 @@ GEM
       activesupport (= 4.2.5)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.1.0)
     rake (10.5.0)
     rake-compiler (0.9.5)
       rake
@@ -280,6 +285,13 @@ GEM
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
     rolify (5.0.0)
+    rubocop (0.37.0)
+      parser (>= 2.3.0.2, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 0.3)
+    ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -338,6 +350,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    unicode-display_width (0.3.1)
     url (0.3.2)
     vcr (2.9.3)
     web-console (2.2.1)
@@ -400,6 +413,7 @@ DEPENDENCIES
   replicate (~> 1.5.1)
   responders (~> 2.0)
   rolify
+  rubocop
   sass (~> 3.4)
   sass-rails (~> 5)
   skylight

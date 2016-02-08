@@ -16,56 +16,56 @@
 #  index_noises_on_user_id  (user_id)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class NoiseTest < ActiveSupport::TestCase
-  test "FactoryGirl works" do
+  test 'FactoryGirl works' do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise)
     end
   end
 
-  test "FactoryGirl noise_with_original works" do
+  test 'FactoryGirl noise_with_original works' do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise_with_original)
     end
   end
 
-  test "FactoryGirl noise_with_coordinates works" do
+  test 'FactoryGirl noise_with_coordinates works' do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:noise_with_coordinates)
     end
   end
 
-  test "FactoryGirl week_old_noise works" do
+  test 'FactoryGirl week_old_noise works' do
     assert_difference -> { Noise.count } do
       noise = FactoryGirl.create(:week_old_noise)
     end
   end
 
-  test "latest scope includes recent tweets" do
+  test 'latest scope includes recent tweets' do
     assert_difference -> { Noise.where_since(12.hours.ago).count } do
       FactoryGirl.create(:noise)
     end
   end
 
-  test "latest scope does not include old tweets" do
+  test 'latest scope does not include old tweets' do
     assert_no_difference -> { Noise.where_since(12.hours.ago).count } do
       FactoryGirl.create(:week_old_noise)
     end
   end
 
-  test "noise with coordinates generates map" do
+  test 'noise with coordinates generates map' do
     noise = FactoryGirl.create(:noise_with_coordinates)
     assert_not_nil(noise.map)
   end
 
-  test "media_urls never returns nil" do
+  test 'media_urls never returns nil' do
     noise = FactoryGirl.create(:noise)
     assert_not_nil noise.media_urls
   end
 
-  test "#explore" do
+  test '#explore' do
     civic_center_noise = FactoryGirl.create(:noise, :civic_center)
     marina_noise = FactoryGirl.create(:noise, :marina)
 

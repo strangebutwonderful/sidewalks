@@ -1,5 +1,4 @@
 class Admin::UsersController < Admin::AdminController
-
   respond_to :html, :json
 
   def index
@@ -37,8 +36,8 @@ class Admin::UsersController < Admin::AdminController
   # POST /admin/users
   # POST /admin/users.json
   def create
-    if Sidewalks::Informants::Twitter.client.
-      follow(params[:user][:provider_screen_name])
+    if Sidewalks::Informants::Twitter.client
+                                     .follow(params[:user][:provider_screen_name])
 
       flash[:notice] = 'User was followed.'
     end
@@ -61,5 +60,4 @@ class Admin::UsersController < Admin::AdminController
   def user_params
     params.require(:user).permit(:email, :mobile_venues_count)
   end
-
 end

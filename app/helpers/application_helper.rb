@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def title?
     content_for?(:title)
   end
@@ -10,12 +9,12 @@ module ApplicationHelper
 
   def application_meta_tags
     [
-      tag("meta", name: "app-environment", content: Rails.env),
-      tag("meta", name: "app-config-mapbox-id", content: ENV["MAPBOX_ID"])
+      tag('meta', name: 'app-environment', content: Rails.env),
+      tag('meta', name: 'app-config-mapbox-id', content: ENV['MAPBOX_ID'])
     ].join("\n").html_safe
   end
 
   def favicon_file_name_suffix
-    ENV["FAVICON_FILE_NAME_SUFFIX"]
+    ENV['FAVICON_FILE_NAME_SUFFIX']
   end
 end

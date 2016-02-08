@@ -19,7 +19,7 @@ module Tracking
 
     @latlng_from_cookie ||= begin
       # cookies[:latlng] comes in the form "latitude,longitude"
-      coordinates = cookies[:latlng].split(",")
+      coordinates = cookies[:latlng].split(',')
       LatLng.new(coordinates[0], coordinates[1])
     end
   end

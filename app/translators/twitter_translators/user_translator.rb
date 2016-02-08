@@ -49,7 +49,7 @@ module TwitterTranslators
         provider: User::PROVIDER_TWITTER,
         provider_id: twitter_user.id.to_s,
         provider_screen_name: twitter_user.screen_name,
-        following: following,
+        following: following
       )
       user.create_original!(dump: twitter_user.to_json)
       user

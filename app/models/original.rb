@@ -15,7 +15,6 @@
 #
 
 class Original < ActiveRecord::Base
-
   belongs_to :importable, polymorphic: true
 
   validates :importable_id, presence: true
@@ -25,5 +24,4 @@ class Original < ActiveRecord::Base
   def pretty_dump
     JSON.pretty_generate dump
   end
-
 end

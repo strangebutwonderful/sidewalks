@@ -15,7 +15,6 @@
 #
 
 class Origin < ActiveRecord::Base
-
   belongs_to :noise
   has_one :user, through: :noise
 
@@ -43,6 +42,6 @@ class Origin < ActiveRecord::Base
   end
 
   def directions_url
-    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
+    'http://maps.google.com/maps?daddr=' + latitude.to_s + ',' + longitude.to_s
   end
 end

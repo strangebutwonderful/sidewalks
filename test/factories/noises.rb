@@ -20,7 +20,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-
   factory :noise do
     sequence :provider_id do |n|
       "MyProviderNoiseId#{n}"
@@ -28,7 +27,7 @@ FactoryGirl.define do
 
     association :user, factory: :user
 
-    provider { "MyProvider" }
+    provider { 'MyProvider' }
     text { Faker::Lorem.sentences.join(' ') }
     created_at { Time.now }
 

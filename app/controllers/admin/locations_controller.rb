@@ -1,5 +1,4 @@
 class Admin::LocationsController < Admin::AdminController
-
   respond_to :html, :json
 
   # GET /locations
@@ -44,9 +43,7 @@ class Admin::LocationsController < Admin::AdminController
 
     @location.geocode
 
-    if @location.save
-      flash[:notice] = "Location was successfully created"
-    end
+    flash[:notice] = 'Location was successfully created' if @location.save
 
     respond_with(:admin, @location)
   end
@@ -58,9 +55,7 @@ class Admin::LocationsController < Admin::AdminController
 
     @location.attributes = location_params
 
-    if @location.geography_changed?
-      @location.geocode
-    end
+    @location.geocode if @location.geography_changed?
 
     if @location.update_attributes(location_params)
       flash[:notice] = 'Location was successfully updated.'
@@ -85,5 +80,4 @@ class Admin::LocationsController < Admin::AdminController
   def location_params
     params.require(:location).permit(:user_id, :address, :city, :latitude, :longitude, :state, :zip)
   end
-
 end

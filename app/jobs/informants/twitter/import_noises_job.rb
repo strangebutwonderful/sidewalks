@@ -4,11 +4,11 @@ module Informants::Twitter
 
     def perform
       # Import the latest noises from twitter and saves to db
-      Rails.logger.debug "Begin importing from twitter"
+      Rails.logger.debug 'Begin importing from twitter'
       TwitterTranslators::TweetTranslator.translate(
         latest_tweets_from_sidewalks_twitter
       )
-      Rails.logger.debug "Completed importing from twitter"
+      Rails.logger.debug 'Completed importing from twitter'
     end
 
     private

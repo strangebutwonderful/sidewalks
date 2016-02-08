@@ -21,20 +21,20 @@ class Noise < ActiveRecord::Base
   include PgSearch
 
   IMAGE_EXTENSIONS = [
-    ".bmp",
-    ".gif",
-    ".jfif",
-    ".jpeg",
-    ".jpg",
-    ".png",
-    ".tiff",
-    ".webp",
-  ]
+    '.bmp',
+    '.gif',
+    '.jfif',
+    '.jpeg',
+    '.jpg',
+    '.png',
+    '.tiff',
+    '.webp'
+  ].freeze
 
   pg_search_scope(
     :search_text,
     against: [:text],
-    using: {tsearch: {dictionary: "english"}},
+    using: { tsearch: { dictionary: 'english' } },
     associated_against: { user: :name }
   )
 
@@ -43,14 +43,14 @@ class Noise < ActiveRecord::Base
   has_many :origins, -> { uniq true }, dependent: :destroy
 
   scope :where_nearby, ->(latitude, longitude, distance, created_at) do
-    joins(:origins).
-      merge(
+    joins(:origins)
+      .merge(
         Origin.where_nearby(latitude, longitude, distance)
-      ).
-      where_since(created_at)
+      )
+      .where_since(created_at)
   end
 
-  scope :where_needs_triage, ->(params) do
+  scope :where_needs_triage, ->(_params) do
     where(actionable: nil).order(created_at: :desc)
   end
 
@@ -63,9 +63,9 @@ class Noise < ActiveRecord::Base
   end
 
   scope :where_authored_by_user_before, ->(user_id, time) do
-    where(user_id: user_id).
-      where("#{table_name}.created_at < ?", time).
-      order(created_at: :desc)
+    where(user_id: user_id)
+      .where("#{table_name}.created_at < ?", time)
+      .order(created_at: :desc)
   end
 
   scope :search, ->(params) do
@@ -78,11 +78,11 @@ class Noise < ActiveRecord::Base
   end
 
   scope :explore_nearest, ->(latitude, longitude, distance, created_at) do
-    where_nearby(latitude, longitude, distance, created_at).
-      where_actionable_or_not_triaged.
-      includes(:origins).
-      includes(:original).
-      includes(:user)
+    where_nearby(latitude, longitude, distance, created_at)
+      .where_actionable_or_not_triaged
+      .includes(:origins)
+      .includes(:original)
+      .includes(:user)
   end
 
   replicate_associations :origins # for replicate gem
@@ -100,36 +100,36 @@ class Noise < ActiveRecord::Base
   validates(
     :avatar_image_url,
     format: {
-      with: URI.regexp(["http", "https"]),
+      with: URI.regexp(%w(http https)),
       allow_nil: true
     }
   )
 
-  PROVIDER_SIDEWALKS = "sidewalks"
-  PROVIDER_TWITTER = "twitter"
+  PROVIDER_SIDEWALKS = 'sidewalks'.freeze
+  PROVIDER_TWITTER = 'twitter'.freeze
 
   delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
-  delegate :url_helpers, to: "Rails.application.routes"
+  delegate :url_helpers, to: 'Rails.application.routes'
 
   def provider_url
     case provider
     when PROVIDER_TWITTER
-      self.user && self.user.provider_url + "/status/" + provider_id
+      user && user.provider_url + '/status/' + provider_id
     else
       url_helpers.noise_path(self)
     end
   end
 
   def latlngs?
-    self.origins.any?
+    origins.any?
   end
 
   def latlngs
-    @latlngs ||= self.origins.map { |origin| origin.latlng }
+    @latlngs ||= origins.map(&:latlng)
   end
 
   def map
-    @map ||= Map.new(self.latlngs) if self.latlngs?
+    @map ||= Map.new(latlngs) if latlngs?
   end
 
   def actionablity_upvotable?
@@ -161,10 +161,10 @@ class Noise < ActiveRecord::Base
   def media_entities
     @media_entities ||= begin
       me = if Noise::PROVIDER_TWITTER == provider
-        try(:original).
-        try(:dump).
-        try(:[], "entities").
-        try(:[], "media")
+             try(:original)
+               .try(:dump)
+               .try(:[], 'entities')
+               .try(:[], 'media')
       end
       me ||= {}
       me
@@ -174,10 +174,10 @@ class Noise < ActiveRecord::Base
   def url_entities
     @url_entities ||= begin
       me = if Noise::PROVIDER_TWITTER == provider
-        try(:original).
-        try(:dump).
-        try(:[], "entities").
-        try(:[], "urls")
+             try(:original)
+               .try(:dump)
+               .try(:[], 'entities')
+               .try(:[], 'urls')
       end
       me ||= {}
       me
@@ -196,16 +196,16 @@ class Noise < ActiveRecord::Base
 
   def local_media_urls
     @local_media_urls ||= media_entities.map do |m|
-      m.try(:[], "media_url_https") || m.try(:[], "media_url_http")
+      m.try(:[], 'media_url_https') || m.try(:[], 'media_url_http')
     end
   end
 
   def external_media_urls
     @external_media_urls ||= begin
-      urls = url_entities.map { |m| m.try(:[], "expanded_url") }
+      urls = url_entities.map { |m| m.try(:[], 'expanded_url') }
       media_urls = urls.map do |url|
-        if url.start_with?("http://instagram.com/", "https://instagram.com/")
-          url += "media/?size=l"
+        if url.start_with?('http://instagram.com/', 'https://instagram.com/')
+          url += 'media/?size=l'
         end
         url
       end
