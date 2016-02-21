@@ -12,7 +12,7 @@ class Admin::NoisesController < Admin::AdminController
   # GET /noises/triage
   # GET /noises/triage.json
   def triage
-    @noises = Noise.where_needs_triage(params).limit(50).all
+    @noises = Noise.where_needs_triage.limit(50).all
 
     render :index
   end

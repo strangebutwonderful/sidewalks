@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   scope :where_has_no_locations, -> { where(locations_count: [nil, 0]) }
   scope :where_has_no_mobile_venues, -> { where(mobile_venues_count: [nil, 0]) }
-  scope :where_needs_triage, -> (_params = {}) do
+  scope :where_needs_triage, -> do
     where_has_no_locations.where_has_no_mobile_venues
   end
 

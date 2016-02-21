@@ -50,7 +50,7 @@ class Noise < ActiveRecord::Base
       where_since(created_at)
   end
 
-  scope :where_needs_triage, ->(_params) do
+  scope :where_needs_triage, -> do
     where(actionable: nil).order(created_at: :desc)
   end
 

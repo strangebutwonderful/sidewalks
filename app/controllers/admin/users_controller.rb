@@ -8,7 +8,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def triage
-    @users = User.where_needs_triage(params).includes(:locations, :roles).all
+    @users = User.where_needs_triage.includes(:locations, :roles).all
 
     render :index
   end
