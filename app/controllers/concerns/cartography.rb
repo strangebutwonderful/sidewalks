@@ -4,7 +4,7 @@ module Cartography
     helper_method(
       :request_latitude,
       :request_latlng,
-      :request_longitude,
+      :request_longitude
     )
   end
 
@@ -39,5 +39,4 @@ module Cartography
   def request_latlng
     LatLng.new(request_latitude, request_longitude)
   end
-
 end

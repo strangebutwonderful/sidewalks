@@ -1,0 +1,16 @@
+inherit_from:
+  - vendor/hound/config/style_guides/ruby.yml
+  # - .rubocop_todo.yml
+
+# Files you want to exclude
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - Gemfile
+    - Rakefile
+
+# Rails cops (so we don't need to run with -R option)
+Rails:
+  Enabled: true
+
+# Put custom overrides here:

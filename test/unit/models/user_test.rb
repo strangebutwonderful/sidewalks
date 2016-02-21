@@ -19,7 +19,6 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-
   test "FactoryGirl works" do
     assert_difference -> { User.count } do
       FactoryGirl.create(:user)

@@ -19,12 +19,12 @@
 
 # Learn more: http://github.com/javan/whenever
 
-env :PATH, ENV['PATH']
+env :PATH, ENV["PATH"]
 
 every 5.minutes do
   rake "import"
 end
 
-every 1.day, at: '3:30 am' do
+every 1.day, at: "3:30 am" do
   rake "import:twitter_accounts"
 end

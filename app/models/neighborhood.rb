@@ -1,5 +1,4 @@
 class Neighborhood
-
   DISTRICTS = {
     castro: OpenStruct.new(
       latitude: "37.7617",
@@ -85,11 +84,10 @@ class Neighborhood
       latitude: "37.7881",
       longitude: "-122.4075",
       name: "Union Square"
-    ),
-  }
+    )
+  }.freeze
 
   def self.districts
     DISTRICTS
   end
-
 end

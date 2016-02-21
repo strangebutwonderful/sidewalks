@@ -1,6 +1,6 @@
 class AddNullConstraintsToTables < ActiveRecord::Migration
   def change
-    #change_column :table_name, :column_name, :column_type, :null => false
+    # change_column :table_name, :column_name, :column_type, :null => false
     change_column :noises, :provider, :string, null: false
     change_column :noises, :provider_id, :string, null: false
     change_column :noises, :text, :text, null: false

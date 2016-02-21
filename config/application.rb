@@ -1,6 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 
-require 'rails/all'
+require "rails/all"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -14,10 +14,7 @@ end
 
 module Sidewalks
   class Application < Rails::Application
-
     config.generators do |g|
-
-
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -27,7 +24,6 @@ module Sidewalks
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
-
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -72,13 +68,11 @@ module Sidewalks
     config.assets.paths << Rails.root.join("app", "vendor", "assets", "stylesheets")
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = "1.0"
 
-    config.assets.precompile << Proc.new { |path|
-      if path =~ /\.(otf|eot|svg|ttf|woff|png)\z/
-        true
-      end
-    }
+    config.assets.precompile << proc do |path|
+      true if path =~ /\.(otf|eot|svg|ttf|woff|png)\z/
+    end
 
     # Cache in memory by default
     config.cache_store = :memory_store

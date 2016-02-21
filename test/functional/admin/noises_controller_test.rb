@@ -80,7 +80,7 @@ class Admin::NoisesControllerTest < ActionController::TestCase
   test "user should not destroy noise" do
     sign_in(FactoryGirl.create(:user))
 
-    assert_no_difference('Noise.count') do
+    assert_no_difference("Noise.count") do
       delete :destroy, id: @noise
     end
 

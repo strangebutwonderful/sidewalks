@@ -57,7 +57,7 @@ module TwitterTranslators
         provider: Noise::PROVIDER_TWITTER,
         provider_id: tweet.id.to_s,
         text: tweet.full_text,
-        user_id: user.id,
+        user_id: user.id
       )
     end
 
@@ -72,13 +72,12 @@ module TwitterTranslators
 
       if locations.respond_to?(:each)
         locations.each do |location|
-          unless noise.origins.exists?(
+          next if noise.origins.exists?(
             latitude: location.latitude,
             longitude: location.longitude
           )
-            noise.origins << location.to_origin
-            success_count += 1
-          end
+          noise.origins << location.to_origin
+          success_count += 1
         end
       end
 
@@ -94,12 +93,11 @@ module TwitterTranslators
             provider_id: user_mention.id.to_s
           )
 
-          if mentioned_user
-            success_count += translate_locations(
-              noise,
-              mentioned_user.locations
-            )
-          end
+          next unless mentioned_user
+          success_count += translate_locations(
+            noise,
+            mentioned_user.locations
+          )
         end
       end
 

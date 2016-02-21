@@ -1,7 +1,6 @@
 require "test_helper"
 
 class UsersControllerTest < ActionController::TestCase
-
   test "anyone should get user" do
     user = FactoryGirl.create(:user)
 
@@ -87,5 +86,4 @@ class UsersControllerTest < ActionController::TestCase
     put :update, id: FactoryGirl.create(:user), user: { email: Faker::Internet.email }
     assert_redirected_to :root
   end
-
 end

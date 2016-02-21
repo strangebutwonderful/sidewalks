@@ -1,5 +1,4 @@
 class LatLng
-
   attr_reader :latitude, :longitude
 
   def initialize(latitude, longitude)
@@ -15,15 +14,15 @@ class LatLng
   end
 
   def expand_north_east(latlng)
-    self.latitude = latlng.latitude if latlng.latitude > self.latitude
-    self.longitude = latlng.longitude if latlng.longitude > self.longitude
+    self.latitude = latlng.latitude if latlng.latitude > latitude
+    self.longitude = latlng.longitude if latlng.longitude > longitude
 
     self
   end
 
   def expand_south_west(latlng)
-    self.latitude = latlng.latitude if latlng.latitude < self.latitude
-    self.longitude = latlng.longitude if latlng.longitude < self.longitude
+    self.latitude = latlng.latitude if latlng.latitude < latitude
+    self.longitude = latlng.longitude if latlng.longitude < longitude
 
     self
   end
@@ -72,5 +71,4 @@ class LatLng
     raise "Setting a blank coordinate is not allowed" if value.blank?
     BigDecimal.new(value)
   end
-
 end

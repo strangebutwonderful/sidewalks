@@ -50,5 +50,4 @@ class MapTest < ActiveSupport::TestCase
 
     assert_equal expected_center, Map.new(latlngs).center
   end
-
 end

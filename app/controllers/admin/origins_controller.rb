@@ -1,5 +1,4 @@
 class Admin::OriginsController < Admin::AdminController
-
   respond_to :html, :json
 
   # GET /origins
@@ -41,9 +40,7 @@ class Admin::OriginsController < Admin::AdminController
     @noise = Noise.find(params[:noise_id])
     @origin = @noise.origins.build(origin_params)
 
-    if @origin.save
-      flash[:notice] = 'Location was successfully created.'
-    end
+    flash[:notice] = "Location was successfully created." if @origin.save
 
     respond_with(:admin, @noise, @origin)
   end
@@ -55,7 +52,7 @@ class Admin::OriginsController < Admin::AdminController
     @origin = @noise.origins.find(params[:id])
 
     if @origin.update_attributes(origin_params)
-      flash[:notice] = 'Noise location was successfully updated.'
+      flash[:notice] = "Noise location was successfully updated."
     end
 
     respond_with(:admin, @noise, @origin)
@@ -68,7 +65,7 @@ class Admin::OriginsController < Admin::AdminController
     @origin = @noise.origins.find(params[:id])
     @origin.destroy
 
-    flash[:notice] = 'Noise Location was successfully deleted.'
+    flash[:notice] = "Noise Location was successfully deleted."
 
     respond_with(:admin, @noise, @origin)
   end
@@ -78,5 +75,4 @@ class Admin::OriginsController < Admin::AdminController
   def origin_params
     params.require(:origin).permit(:latitude, :longitude)
   end
-
 end

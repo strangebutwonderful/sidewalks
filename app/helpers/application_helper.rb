@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def title?
     content_for?(:title)
   end

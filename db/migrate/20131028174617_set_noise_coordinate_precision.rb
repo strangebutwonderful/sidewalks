@@ -6,7 +6,7 @@ class SetNoiseCoordinatePrecision < ActiveRecord::Migration
     rename_column :noises, :coordinates_latitude, :latitude
     rename_column :noises, :coordinates_longitude, :longitude
 
-    add_index "noises", ["latitude", "longitude"], name: "index_noises_on_latitude_and_longitude"
+    add_index "noises", %w(latitude longitude), name: "index_noises_on_latitude_and_longitude"
   end
 
   def down

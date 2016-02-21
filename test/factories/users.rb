@@ -20,7 +20,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-
   factory :user do
     sequence :provider_id do |n|
       "MyProviderUserId#{n}"
@@ -45,5 +44,4 @@ FactoryGirl.define do
       user.create_original(dump: user.to_json)
     end
   end
-
 end

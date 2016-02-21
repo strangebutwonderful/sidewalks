@@ -36,7 +36,7 @@ FactoryGirl.define do
       address "1 Dr Carlton B Goodlett Pl"
       city "San Francisco"
       state "CA"
-      zip 94102
+      zip 94_102
     end
   end
 end

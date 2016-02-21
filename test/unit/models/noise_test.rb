@@ -65,7 +65,7 @@ class NoiseTest < ActiveSupport::TestCase
     assert_not_nil noise.media_urls
   end
 
-  test "#explore" do
+  test '#explore' do
     civic_center_noise = FactoryGirl.create(:noise, :civic_center)
     marina_noise = FactoryGirl.create(:noise, :marina)
 

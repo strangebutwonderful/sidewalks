@@ -58,5 +58,4 @@ class NoisesControllerTest < ActionController::TestCase
     get :show, id: @noises.first
     assert_response(:success)
   end
-
 end

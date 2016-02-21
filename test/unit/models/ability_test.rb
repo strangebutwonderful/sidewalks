@@ -1,7 +1,6 @@
 require "test_helper"
 
 class AbilityTest < ActiveSupport::TestCase
-
   test "admin can manage noise" do
     user = FactoryGirl.create(:admin_user)
     ability = Ability.new(user)
@@ -22,5 +21,4 @@ class AbilityTest < ActiveSupport::TestCase
 
     assert ability.cannot?(:destroy, FactoryGirl.create(:noise))
   end
-
 end

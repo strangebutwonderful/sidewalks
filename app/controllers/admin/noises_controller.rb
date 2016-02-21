@@ -1,5 +1,4 @@
 class Admin::NoisesController < Admin::AdminController
-
   respond_to :html, :json
 
   # GET /noises
@@ -13,7 +12,7 @@ class Admin::NoisesController < Admin::AdminController
   # GET /noises/triage
   # GET /noises/triage.json
   def triage
-    @noises = Noise.where_needs_triage(params).limit(50).all
+    @noises = Noise.where_needs_triage.limit(50).all
 
     render :index
   end
@@ -37,7 +36,7 @@ class Admin::NoisesController < Admin::AdminController
     @noise = Noise.find(params[:id])
 
     if @noise.update_attributes(noise_params)
-      flash[:notice] = 'Noise was successfully updated.'
+      flash[:notice] = "Noise was successfully updated."
     end
 
     respond_with(:admin, @noise)
@@ -49,7 +48,7 @@ class Admin::NoisesController < Admin::AdminController
     @noise = Noise.find(params[:id])
     @noise.destroy
 
-    flash[:notice] = 'Noise was successfully deleted.'
+    flash[:notice] = "Noise was successfully deleted."
 
     respond_with(:admin, @noise)
   end
@@ -59,5 +58,4 @@ class Admin::NoisesController < Admin::AdminController
   def noise_params
     params.require(:noise).permit(:role_ids, :provider_id, :actionable)
   end
-
 end

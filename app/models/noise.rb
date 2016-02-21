@@ -28,13 +28,13 @@ class Noise < ActiveRecord::Base
     ".jpg",
     ".png",
     ".tiff",
-    ".webp",
-  ]
+    ".webp"
+  ].freeze
 
   pg_search_scope(
     :search_text,
     against: [:text],
-    using: {tsearch: {dictionary: "english"}},
+    using: { tsearch: { dictionary: "english" } },
     associated_against: { user: :name }
   )
 
@@ -50,7 +50,7 @@ class Noise < ActiveRecord::Base
       where_since(created_at)
   end
 
-  scope :where_needs_triage, ->(params) do
+  scope :where_needs_triage, -> do
     where(actionable: nil).order(created_at: :desc)
   end
 
@@ -100,13 +100,13 @@ class Noise < ActiveRecord::Base
   validates(
     :avatar_image_url,
     format: {
-      with: URI.regexp(["http", "https"]),
+      with: URI.regexp(%w(http https)),
       allow_nil: true
     }
   )
 
-  PROVIDER_SIDEWALKS = "sidewalks"
-  PROVIDER_TWITTER = "twitter"
+  PROVIDER_SIDEWALKS = "sidewalks".freeze
+  PROVIDER_TWITTER = "twitter".freeze
 
   delegate :name, :provider_url, to: :user, prefix: true, allow_nil: true
   delegate :url_helpers, to: "Rails.application.routes"
@@ -114,22 +114,22 @@ class Noise < ActiveRecord::Base
   def provider_url
     case provider
     when PROVIDER_TWITTER
-      self.user && self.user.provider_url + "/status/" + provider_id
+      user && user.provider_url + "/status/" + provider_id
     else
       url_helpers.noise_path(self)
     end
   end
 
   def latlngs?
-    self.origins.any?
+    origins.any?
   end
 
   def latlngs
-    @latlngs ||= self.origins.map { |origin| origin.latlng }
+    @latlngs ||= origins.map(&:latlng)
   end
 
   def map
-    @map ||= Map.new(self.latlngs) if self.latlngs?
+    @map ||= Map.new(latlngs) if latlngs?
   end
 
   def actionablity_upvotable?
@@ -161,10 +161,10 @@ class Noise < ActiveRecord::Base
   def media_entities
     @media_entities ||= begin
       me = if Noise::PROVIDER_TWITTER == provider
-        try(:original).
-        try(:dump).
-        try(:[], "entities").
-        try(:[], "media")
+             try(:original).
+               try(:dump).
+               try(:[], "entities").
+               try(:[], "media")
       end
       me ||= {}
       me
@@ -174,10 +174,10 @@ class Noise < ActiveRecord::Base
   def url_entities
     @url_entities ||= begin
       me = if Noise::PROVIDER_TWITTER == provider
-        try(:original).
-        try(:dump).
-        try(:[], "entities").
-        try(:[], "urls")
+             try(:original).
+               try(:dump).
+               try(:[], "entities").
+               try(:[], "urls")
       end
       me ||= {}
       me

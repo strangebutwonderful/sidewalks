@@ -24,12 +24,12 @@ class Feature < ActiveRecord::Base
   #   description: "Take over the world."
 
   feature :rake_import_twitter,
-    default: true,
-    description: "Import tweets via a rake task"
+          default: true,
+          description: "Import tweets via a rake task"
 
   feature :rake_import_twitter_accounts,
-    default: true,
-    description: "Import twitter users via a rake task"
+          default: true,
+          description: "Import twitter users via a rake task"
 
   # Helper functions, mapping to Flip gem
 
@@ -46,7 +46,6 @@ class Feature < ActiveRecord::Base
   end
 
   def self.switch!(feature_key, enable)
-    Flip::FeatureSet.instance.strategy('database').switch!(feature_key, enable)
+    Flip::FeatureSet.instance.strategy("database").switch!(feature_key, enable)
   end
-
 end

@@ -38,19 +38,19 @@ class Location < ActiveRecord::Base
   end
 
   def latlng?
-    self.latitude.present? && self.longitude.present?
+    latitude.present? && longitude.present?
   end
 
   def latlng
-    @latlng ||= LatLng.new(self.latitude, self.longitude) if latlng?
+    @latlng ||= LatLng.new(latitude, longitude) if latlng?
   end
 
   def map
-    @map ||= Map.new(self.latlngs) if self.latlngs?
+    @map ||= Map.new(latlngs) if latlngs?
   end
 
   def full_street_address
-    address + ', ' + city + ', ' + state + ' ' + zip.to_s
+    address + ", " + city + ", " + state + " " + zip.to_s
   end
 
   def geography_changed?
@@ -61,17 +61,16 @@ class Location < ActiveRecord::Base
   end
 
   def to_origin
-    Origin.new(latitude: self.latitude, longitude: self.longitude)
+    Origin.new(latitude: latitude, longitude: longitude)
   end
 
   def backtrack_user_noises
     success_count = 0
 
-    self.user.noises.each do |noise|
+    user.noises.each do |noise|
       success_count += noise.import_locations(user.locations)
     end
 
     success_count
   end
-
 end

@@ -2,10 +2,10 @@
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
+VAGRANTFILE_API_VERSION = "2".freeze
 
 # Use a custom name to allow simple app creation once the vagrant vm is up'ed
-APPLICATION_NAME = (File.basename(Dir.getwd).to_s || 'MyApplication').downcase
+APPLICATION_NAME = (File.basename(Dir.getwd).to_s || "MyApplication").downcase
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -58,7 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-    host = RbConfig::CONFIG['host_os']
+    host = RbConfig::CONFIG["host_os"]
 
     # Give VM 1/4 system memory & access to all cpu cores on the host
     if host =~ /darwin/
@@ -83,9 +83,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.vm.provision :shell, :path => "vagrant/ubuntu.sh"
-  config.vm.provision :shell, :path => "vagrant/ruby.sh"
-  config.vm.provision :shell, :path => "vagrant/nodejs.sh"
-  config.vm.provision :shell, :path => "vagrant/phantomjs.sh"
-  config.vm.provision :shell, :path => "vagrant/postgresql.sh"
+  config.vm.provision :shell, path: "vagrant/ubuntu.sh"
+  config.vm.provision :shell, path: "vagrant/ruby.sh"
+  config.vm.provision :shell, path: "vagrant/nodejs.sh"
+  config.vm.provision :shell, path: "vagrant/phantomjs.sh"
+  config.vm.provision :shell, path: "vagrant/postgresql.sh"
 end

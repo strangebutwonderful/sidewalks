@@ -17,16 +17,15 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-
   factory :noise_original, class: Original do
     association :importable, factory: :noise
 
-    dump { OpenStruct.new().to_json }
+    dump { OpenStruct.new.to_json }
   end
 
   factory :user_original, class: Original do
     association :importable, factory: :user
 
-    dump { OpenStruct.new().to_json }
+    dump { OpenStruct.new.to_json }
   end
 end

@@ -18,32 +18,32 @@
 #
 
 class User < ActiveRecord::Base
-  delegate :url_helpers, to: 'Rails.application.routes'
+  delegate :url_helpers, to: "Rails.application.routes"
 
   rolify
 
   has_one :original, as: :importable
   has_many :locations, dependent: :destroy
   has_many :noises, -> { order(created_at: :desc) },
-    dependent: :destroy
+           dependent: :destroy
 
   attr_reader :provider_url
 
   validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
-  PROVIDER_SIDEWALKS = 'sidewalks'
-  PROVIDER_TWITTER = 'twitter'
+  PROVIDER_SIDEWALKS = "sidewalks".freeze
+  PROVIDER_TWITTER = "twitter".freeze
 
   scope :where_has_no_locations, -> { where(locations_count: [nil, 0]) }
-  scope :where_has_no_mobile_venues, ->{ where( mobile_venues_count: [nil, 0]) }
-  scope :where_needs_triage, -> (params = {}) do
+  scope :where_has_no_mobile_venues, -> { where(mobile_venues_count: [nil, 0]) }
+  scope :where_needs_triage, -> do
     where_has_no_locations.where_has_no_mobile_venues
   end
 
   def provider_url
     case provider
     when PROVIDER_TWITTER
-      "https://twitter.com/" + self.provider_screen_name
+      "https://twitter.com/" + provider_screen_name
     else
       url_helpers.user_path(self)
     end
@@ -54,18 +54,18 @@ class User < ActiveRecord::Base
   end
 
   def latlngs
-    @latlngs ||= self.locations.map { |location| location.latlng }
+    @latlngs ||= locations.map(&:latlng)
   end
 
   def map
-    @map ||= Map.new(self.latlngs) if self.latlngs?
+    @map ||= Map.new(latlngs) if latlngs?
   end
 
   def update_credentials(auth)
-    if auth['credentials']
-      self.provider_access_token = auth['credentials']['token']
-      self.provider_access_token_secret = auth['credentials']['secret']
-      self.save!
+    if auth["credentials"]
+      self.provider_access_token = auth["credentials"]["token"]
+      self.provider_access_token_secret = auth["credentials"]["secret"]
+      save!
     end
   end
 
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
       :email,
       :provider_access_token,
       :provider_access_token_secret,
-      :provider_screen_name,
+      :provider_screen_name
     ].each do |attribute|
       self[attribute] = nil if self[attribute].blank?
     end
@@ -91,12 +91,12 @@ class User < ActiveRecord::Base
     logger.info "Creating a user from omniauth: [#{auth.inspect}]"
 
     user = create! do |user|
-      user.provider = auth['provider']
-      user.provider_id = auth['uid']
-      if auth['info']
-         user.name = auth['info']['name']
-         user.email = auth['info']['email']
-         user.provider_screen_name = auth['info']['nickname']
+      user.provider = auth["provider"]
+      user.provider_id = auth["uid"]
+      if auth["info"]
+        user.name = auth["info"]["name"]
+        user.email = auth["info"]["email"]
+        user.provider_screen_name = auth["info"]["nickname"]
       end
     end
 
@@ -107,17 +107,16 @@ class User < ActiveRecord::Base
   def self.explore(params)
     order = params[:order]
 
-    if order && order.casecmp('name') == 0
-      self.order_by_name_ignore_case
+    if order && order.casecmp("name") == 0
+      order_by_name_ignore_case
     elsif order
       self.order(order)
     else
-      self.order('id')
+      self.order("id")
     end
   end
 
   def self.order_by_name_ignore_case
-    self.order('lower(name)')
+    order("lower(name)")
   end
-
 end

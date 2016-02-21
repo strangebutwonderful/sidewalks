@@ -15,15 +15,14 @@
 #
 
 class Origin < ActiveRecord::Base
-
   belongs_to :noise
   has_one :user, through: :noise
 
   reverse_geocoded_by :latitude, :longitude
 
   scope :where_since, ->(time) do
-    where("#{table_name}.created_at >= ?", time)
-      .order(created_at: :desc)
+    where("#{table_name}.created_at >= ?", time).
+      order(created_at: :desc)
   end
 
   scope :where_nearby, ->(latitude, longitude, distance) do

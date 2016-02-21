@@ -1,99 +1,100 @@
-source "https://rubygems.org"
-ruby "2.2.2"
+source 'https://rubygems.org'
+ruby '2.2.2'
 
-gem "rails", "~> 4.2"
+gem 'rails', '~> 4.2'
 
 # assets
 
 # css
-gem "bootstrap-sass", "~> 3"
-gem "compass-rails", "~> 2.0.4"
-gem "font-awesome-sass", "~> 4"
-gem "sass", "~> 3.4"
-gem "sass-rails", "~> 5"
+gem 'bootstrap-sass', '~> 3'
+gem 'compass-rails', '~> 2.0.4'
+gem 'font-awesome-sass', '~> 4'
+gem 'sass', '~> 3.4'
+gem 'sass-rails', '~> 5'
 
 # javascript
-gem "coffee-rails"
-gem "uglifier", ">= 1.0.3"
-gem "yui-compressor"
-gem "jquery-rails", "~> 4.0"
+gem 'coffee-rails'
+gem 'uglifier', '>= 1.0.3'
+gem 'yui-compressor'
+gem 'jquery-rails', '~> 4.0'
 
 # view helpers
-gem "leaflet-rails", "~> 0.7"
-gem "rails_autolink", "~> 1.1.5"
+gem 'leaflet-rails', '~> 0.7'
+gem 'rails_autolink', '~> 1.1.5'
 
 # authentication
-gem "cancan"
-gem "omniauth"
-gem "omniauth-twitter"
+gem 'cancan'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # authorization
-gem "rolify"
+gem 'rolify'
 
 # env
-gem "figaro"
+gem 'figaro'
 
 # server
-gem "pg"
-gem "thin"
+gem 'pg'
+gem 'thin'
 
-gem "rack-attack"
+gem 'rack-attack'
 
-gem "pg_search"
+gem 'pg_search'
 
-gem "twitter", "~> 5"
+gem 'twitter', '~> 5'
 
-gem "geocoder"
+gem 'geocoder'
 
-gem "whenever", "~> 0.9", require: false
+gem 'whenever', '~> 0.9', require: false
 
-gem "flip", "~> 1"
+gem 'flip', '~> 1'
 
 # DevOps tools
-gem "rack-mini-profiler"
-gem "flamegraph"
-gem "stackprof"
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof'
 
-gem "capistrano", "~> 3.4"
-gem "capistrano-bundler"
-gem "capistrano-passenger"
-gem "capistrano-rails", "~> 1.1"
-gem "capistrano-rbenv"
-gem "capistrano-rails-console"
+gem 'capistrano', '~> 3.4'
+gem 'capistrano-bundler'
+gem 'capistrano-passenger'
+gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-rbenv'
+gem 'capistrano-rails-console'
 
 # deprecated controller actions
-gem "responders", "~> 2.0"
+gem 'responders', '~> 2.0'
 
 group :development do
-  gem "annotate"
-  gem "guard-bundler"
-  gem "guard-rails"
-  gem "spring"
+  gem 'annotate'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'spring'
 end
 
 group :development, :test do
-  gem "codecov", require: false # code coverage
-  gem "factory_girl_rails"
-  gem "faker"
-  gem "jasmine"
-  gem "pry"
-  gem "web-console", "~> 2.0"
-  gem "webmock", require: false
+  gem 'codecov', require: false # code coverage
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'jasmine'
+  gem 'pry'
+  gem 'rubocop'
+  gem 'web-console', '~> 2.0'
+  gem 'webmock', require: false
 end
 
 group :test do
-  gem "capybara"
-  gem "climate_control"
-  gem "mocha", require: false
-  gem "rake" # for travis
-  gem "vcr"
+  gem 'capybara'
+  gem 'climate_control'
+  gem 'mocha', require: false
+  gem 'rake' # for travis
+  gem 'vcr'
 end
 
 group :production do
-  gem "bugsnag"
-  gem "newrelic_rpm"
-  gem "skylight"
+  gem 'bugsnag'
+  gem 'newrelic_rpm'
+  gem 'skylight'
 end
 
 # For backups
-gem "replicate", "~> 1.5.1"
+gem 'replicate', '~> 1.5.1'

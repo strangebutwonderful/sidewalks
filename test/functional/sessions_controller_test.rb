@@ -1,18 +1,15 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionController::TestCase
-
   setup do
     OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
-      provider: 'twitter',
-      uid: Faker::Number.number(10),
-      info: {
-        name: Faker::Name.name,
-        email: Faker::Internet.email,
-        nickname: Faker::Internet.user_name
-      }
-    })
+    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(provider: "twitter",
+                                                                 uid: Faker::Number.number(10),
+                                                                 info: {
+                                                                   name: Faker::Name.name,
+                                                                   email: Faker::Internet.email,
+                                                                   nickname: Faker::Internet.user_name
+                                                                 })
   end
 
   teardown do
@@ -23,7 +20,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "new should redirect to omniauth" do
     get :new
-    assert_redirected_to '/auth/twitter'
+    assert_redirected_to "/auth/twitter"
   end
 
   test "create should redirect to root" do
@@ -46,5 +43,4 @@ class SessionsControllerTest < ActionController::TestCase
     get :failure
     assert_redirected_to :root
   end
-
 end
