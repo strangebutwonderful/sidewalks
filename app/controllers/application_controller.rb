@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :rack_profile_if_admin
+  before_action :rack_profile_if_admin
 
   helper_method :bugsnag_api_key
   helper_method :bugsnag_api_key?

@@ -1,5 +1,5 @@
 class NoisesController < ApplicationController
-  before_filter :disable_footer, only: [:explore]
+  before_action :disable_footer, only: [:explore]
 
   respond_to :html, :json
 

@@ -3,6 +3,7 @@ coffee_script:
 java_script:
   enabled: true
 ruby:
+  config_file: config/rubocop.yml
   enabled: true
 scss:
   enabled: true
