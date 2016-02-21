@@ -1,1 +1,1 @@
-Rake::Task['test'].enhance ['jasmine:ci']
+Rake::Task["test"].enhance ["jasmine:ci"]

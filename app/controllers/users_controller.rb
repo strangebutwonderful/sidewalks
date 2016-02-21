@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     authorize! :update, @user
 
     if @user.update_attributes(user_params)
-      flash[:notice] = 'User was successfully updated.'
+      flash[:notice] = "User was successfully updated."
     end
 
     redirect_to :root

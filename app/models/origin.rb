@@ -21,8 +21,8 @@ class Origin < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude
 
   scope :where_since, ->(time) do
-    where("#{table_name}.created_at >= ?", time)
-      .order(created_at: :desc)
+    where("#{table_name}.created_at >= ?", time).
+      order(created_at: :desc)
   end
 
   scope :where_nearby, ->(latitude, longitude, distance) do
@@ -42,6 +42,6 @@ class Origin < ActiveRecord::Base
   end
 
   def directions_url
-    'http://maps.google.com/maps?daddr=' + latitude.to_s + ',' + longitude.to_s
+    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
   end
 end

@@ -1,18 +1,18 @@
-require 'test_helper'
+require "test_helper"
 
 class TwitterTranslatorTest < ActiveSupport::TestCase
   def build_twitter_user
     OpenStruct.new(
-      id: 'my_twitter_user_id',
-      name: 'my_twitter_user_name',
-      email: 'my_twitter_user_email@example.org',
-      screen_name: 'my_twitter_screen_name',
+      id: "my_twitter_user_id",
+      name: "my_twitter_user_name",
+      email: "my_twitter_user_email@example.org",
+      screen_name: "my_twitter_screen_name",
       profile_image_uri_https: Faker::Internet.url,
       created_at: 1.hour.ago
     )
   end
 
-  test 'creates user when new user' do
+  test "creates user when new user" do
     twitter_user = build_twitter_user
 
     assert_difference -> { User.count } do
@@ -20,7 +20,7 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
     end
   end
 
-  test 'no new user created after translating an existing user' do
+  test "no new user created after translating an existing user" do
     twitter_user = build_twitter_user
 
     TwitterTranslators::UserTranslator.translate(twitter_user)

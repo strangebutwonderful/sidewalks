@@ -27,8 +27,8 @@ FactoryGirl.define do
 
     association :user, factory: :user
 
-    provider { 'MyProvider' }
-    text { Faker::Lorem.sentences.join(' ') }
+    provider { "MyProvider" }
+    text { Faker::Lorem.sentences.join(" ") }
     created_at { Time.now }
 
     Neighborhood.districts.keys.each do |neighborhood_symbol|

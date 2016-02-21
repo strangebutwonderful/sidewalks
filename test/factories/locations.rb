@@ -33,9 +33,9 @@ FactoryGirl.define do
     longitude { Faker::Address.longitude }
 
     trait :san_francisco_city_hall do
-      address '1 Dr Carlton B Goodlett Pl'
-      city 'San Francisco'
-      state 'CA'
+      address "1 Dr Carlton B Goodlett Pl"
+      city "San Francisco"
+      state "CA"
       zip 94_102
     end
   end

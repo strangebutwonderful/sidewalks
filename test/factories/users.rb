@@ -26,7 +26,7 @@ FactoryGirl.define do
     end
 
     name { Faker::Name.name }
-    provider 'MyString'
+    provider "MyString"
     provider_screen_name { Faker::Internet.user_name }
 
     trait :needs_triage do

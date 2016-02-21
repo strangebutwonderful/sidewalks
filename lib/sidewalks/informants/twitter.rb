@@ -16,19 +16,19 @@ module Sidewalks
       def initialize(config: {})
         @consumer_key = config.fetch(
           :consumer_key,
-          ENV['TWITTER_CONSUMER_KEY']
+          ENV["TWITTER_CONSUMER_KEY"]
         )
         @consumer_secret = config.fetch(
           :consumer_secret,
-          ENV['TWITTER_CONSUMER_SECRET']
+          ENV["TWITTER_CONSUMER_SECRET"]
         )
         @access_token = config.fetch(
           :access_token,
-          ENV['TWITTER_OAUTH_ACCESS_TOKEN']
+          ENV["TWITTER_OAUTH_ACCESS_TOKEN"]
         )
         @access_token_secret = config.fetch(
           :access_token_secret,
-          ENV['TWITTER_OAUTH_ACCESS_TOKEN_SECRET']
+          ENV["TWITTER_OAUTH_ACCESS_TOKEN_SECRET"]
         )
       end
 

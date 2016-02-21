@@ -9,7 +9,7 @@ Sidewalks::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_files = true
-  config.static_cache_control = 'public, max-age=3600'
+  config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -33,7 +33,7 @@ Sidewalks::Application.configure do
   config.active_support.test_order = :random
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: 'example.com' }
+  config.action_mailer.default_url_options = { host: "example.com" }
 
   # when true, eager loads all registered config.eager_load_namespaces.
   # This includes your application, engines, Rails frameworks and

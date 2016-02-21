@@ -18,7 +18,7 @@
 #
 
 class User < ActiveRecord::Base
-  delegate :url_helpers, to: 'Rails.application.routes'
+  delegate :url_helpers, to: "Rails.application.routes"
 
   rolify
 
@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
-  PROVIDER_SIDEWALKS = 'sidewalks'.freeze
-  PROVIDER_TWITTER = 'twitter'.freeze
+  PROVIDER_SIDEWALKS = "sidewalks".freeze
+  PROVIDER_TWITTER = "twitter".freeze
 
   scope :where_has_no_locations, -> { where(locations_count: [nil, 0]) }
   scope :where_has_no_mobile_venues, -> { where(mobile_venues_count: [nil, 0]) }
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   def provider_url
     case provider
     when PROVIDER_TWITTER
-      'https://twitter.com/' + provider_screen_name
+      "https://twitter.com/" + provider_screen_name
     else
       url_helpers.user_path(self)
     end
@@ -62,9 +62,9 @@ class User < ActiveRecord::Base
   end
 
   def update_credentials(auth)
-    if auth['credentials']
-      self.provider_access_token = auth['credentials']['token']
-      self.provider_access_token_secret = auth['credentials']['secret']
+    if auth["credentials"]
+      self.provider_access_token = auth["credentials"]["token"]
+      self.provider_access_token_secret = auth["credentials"]["secret"]
       save!
     end
   end
@@ -91,12 +91,12 @@ class User < ActiveRecord::Base
     logger.info "Creating a user from omniauth: [#{auth.inspect}]"
 
     user = create! do |user|
-      user.provider = auth['provider']
-      user.provider_id = auth['uid']
-      if auth['info']
-        user.name = auth['info']['name']
-        user.email = auth['info']['email']
-        user.provider_screen_name = auth['info']['nickname']
+      user.provider = auth["provider"]
+      user.provider_id = auth["uid"]
+      if auth["info"]
+        user.name = auth["info"]["name"]
+        user.email = auth["info"]["email"]
+        user.provider_screen_name = auth["info"]["nickname"]
       end
     end
 
@@ -107,16 +107,16 @@ class User < ActiveRecord::Base
   def self.explore(params)
     order = params[:order]
 
-    if order && order.casecmp('name') == 0
+    if order && order.casecmp("name") == 0
       order_by_name_ignore_case
     elsif order
       self.order(order)
     else
-      self.order('id')
+      self.order("id")
     end
   end
 
   def self.order_by_name_ignore_case
-    order('lower(name)')
+    order("lower(name)")
   end
 end

@@ -1,8 +1,8 @@
-require 'test_helper'
+require "test_helper"
 
 class FaviconsTest < ActionDispatch::IntegrationTest
-  test 'Favicons are rendered with no suffix by default' do
-    ClimateControl.modify FAVICON_FILE_NAME_SUFFIX: '' do
+  test "Favicons are rendered with no suffix by default" do
+    ClimateControl.modify FAVICON_FILE_NAME_SUFFIX: "" do
       visit root_path
       page.find 'link[href="/favicon.ico"]', visible: false
       page.find 'link[href="/favicon-76x76.png"]', visible: false
@@ -12,8 +12,8 @@ class FaviconsTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'Favicons are rendered with a suffix when specified' do
-    ClimateControl.modify FAVICON_FILE_NAME_SUFFIX: '-test' do
+  test "Favicons are rendered with a suffix when specified" do
+    ClimateControl.modify FAVICON_FILE_NAME_SUFFIX: "-test" do
       visit root_path
       page.find 'link[href="/favicon-test.ico"]', visible: false
       page.find 'link[href="/favicon-test-76x76.png"]', visible: false

@@ -1,7 +1,7 @@
 class SetLocationDefaultCityAndState < ActiveRecord::Migration
   def up
-    change_column_default :locations, :city, 'San Francisco'
-    change_column_default :locations, :state, 'CA'
+    change_column_default :locations, :city, "San Francisco"
+    change_column_default :locations, :state, "CA"
   end
 
   def down

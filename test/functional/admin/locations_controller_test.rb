@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Admin::LocationsControllerTest < ActionController::TestCase
   setup do
@@ -6,13 +6,13 @@ class Admin::LocationsControllerTest < ActionController::TestCase
     @user = FactoryGirl.create(:user)
   end
 
-  test 'FactoryGirl works' do
+  test "FactoryGirl works" do
     assert_difference -> { Location.count } do
       FactoryGirl.create(:location)
     end
   end
 
-  test 'should get index' do
+  test "should get index" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :index
@@ -20,18 +20,18 @@ class Admin::LocationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:locations)
   end
 
-  test 'should get new' do
+  test "should get new" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :new
     assert_response :success
   end
 
-  test 'should create location' do
+  test "should create location" do
     sign_in(FactoryGirl.create(:admin_user))
 
     assert_difference -> { Location.count } do
-      VCR.use_cassette('functional/admin/locations_controller_test/create') do
+      VCR.use_cassette("functional/admin/locations_controller_test/create") do
         post(
           :create,
           location: {
@@ -48,28 +48,28 @@ class Admin::LocationsControllerTest < ActionController::TestCase
     assert_redirected_to admin_location_path(assigns(:location))
   end
 
-  test 'should show location' do
+  test "should show location" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :show, id: @location
     assert_response :success
   end
 
-  test 'should get edit' do
+  test "should get edit" do
     sign_in(FactoryGirl.create(:admin_user))
 
     get :edit, id: @location
     assert_response :success
   end
 
-  test 'should update location' do
+  test "should update location" do
     sign_in(FactoryGirl.create(:admin_user))
 
     put :update, id: @location, location: { address: @location.address, city: @location.city, latitude: @location.latitude, longitude: @location.longitude, state: @location.state, zip: @location.zip }
     assert_redirected_to admin_location_path(assigns(:location))
   end
 
-  test 'should destroy location' do
+  test "should destroy location" do
     sign_in(FactoryGirl.create(:admin_user))
 
     assert_difference -> { Location.count }, -1 do

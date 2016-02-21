@@ -36,10 +36,10 @@ class Admin::UsersController < Admin::AdminController
   # POST /admin/users
   # POST /admin/users.json
   def create
-    if Sidewalks::Informants::Twitter.client
-                                     .follow(params[:user][:provider_screen_name])
+    if Sidewalks::Informants::Twitter.client.
+       follow(params[:user][:provider_screen_name])
 
-      flash[:notice] = 'User was followed.'
+      flash[:notice] = "User was followed."
     end
 
     redirect_to admin_users_path
@@ -49,7 +49,7 @@ class Admin::UsersController < Admin::AdminController
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      flash[:notice] = 'User was successfully updated.'
+      flash[:notice] = "User was successfully updated."
     end
 
     respond_with(:admin, @user)

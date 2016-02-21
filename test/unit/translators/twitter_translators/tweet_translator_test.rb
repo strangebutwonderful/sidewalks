@@ -1,12 +1,12 @@
-require 'test_helper'
+require "test_helper"
 
 class TwitterTranslatorTest < ActiveSupport::TestCase
   def build_twitter_user
     OpenStruct.new(
-      id: 'my_twitter_user_id',
-      name: 'my_twitter_user_name',
-      email: 'my_twitter_user_email@example.org',
-      screen_name: 'my_twitter_screen_name',
+      id: "my_twitter_user_id",
+      name: "my_twitter_user_name",
+      email: "my_twitter_user_email@example.org",
+      screen_name: "my_twitter_screen_name",
       profile_image_uri_https: Faker::Internet.url,
       created_at: 1.hour.ago
     )
@@ -16,28 +16,28 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
     twitter_user = build_twitter_user
 
     OpenStruct.new(
-      id: 'my_twitter_noise_id',
-      text: 'my_twitter_noise_text',
-      full_text: 'my_twitter_noise_text',
+      id: "my_twitter_noise_id",
+      text: "my_twitter_noise_text",
+      full_text: "my_twitter_noise_text",
       created_at: Time.now,
       user: twitter_user
     )
   end
 
-  test 'creates a new noise when translating' do
+  test "creates a new noise when translating" do
     assert_difference -> { Noise.count } do
       TwitterTranslators::TweetTranslator.translate(build_tweet)
     end
   end
 
-  test 'returns a list of noises when translating' do
+  test "returns a list of noises when translating" do
     assert_equal(
       TwitterTranslators::TweetTranslator.translate(build_tweet).length,
       1
     )
   end
 
-  test 'sets values of noises' do
+  test "sets values of noises" do
     tweet = build_tweet
 
     TwitterTranslators::TweetTranslator.translate(tweet).first.tap do |t|
@@ -51,7 +51,7 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
     end
   end
 
-  test 'no new noise when importing old tweet' do
+  test "no new noise when importing old tweet" do
     tweet = build_tweet
 
     TwitterTranslators::TweetTranslator.translate(tweet)

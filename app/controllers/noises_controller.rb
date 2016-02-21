@@ -35,10 +35,10 @@ class NoisesController < ApplicationController
   # GET /noises/1.json
   def show
     @noise = Noise.find(params[:id])
-    @noises = Noise.where_authored_by_user_before(@noise.user_id, @noise.created_at)
-                   .limit(10)
-                   .joins(:user).preload(:user) # cuz nearby overrides includes
-                   .all
+    @noises = Noise.where_authored_by_user_before(@noise.user_id, @noise.created_at).
+              limit(10).
+              joins(:user).preload(:user). # cuz nearby overrides includes
+              all
 
     respond_with @noise
   end

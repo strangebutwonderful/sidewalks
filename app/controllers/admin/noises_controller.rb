@@ -36,7 +36,7 @@ class Admin::NoisesController < Admin::AdminController
     @noise = Noise.find(params[:id])
 
     if @noise.update_attributes(noise_params)
-      flash[:notice] = 'Noise was successfully updated.'
+      flash[:notice] = "Noise was successfully updated."
     end
 
     respond_with(:admin, @noise)
@@ -48,7 +48,7 @@ class Admin::NoisesController < Admin::AdminController
     @noise = Noise.find(params[:id])
     @noise.destroy
 
-    flash[:notice] = 'Noise was successfully deleted.'
+    flash[:notice] = "Noise was successfully deleted."
 
     respond_with(:admin, @noise)
   end

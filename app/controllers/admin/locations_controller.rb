@@ -43,7 +43,7 @@ class Admin::LocationsController < Admin::AdminController
 
     @location.geocode
 
-    flash[:notice] = 'Location was successfully created' if @location.save
+    flash[:notice] = "Location was successfully created" if @location.save
 
     respond_with(:admin, @location)
   end
@@ -58,7 +58,7 @@ class Admin::LocationsController < Admin::AdminController
     @location.geocode if @location.geography_changed?
 
     if @location.update_attributes(location_params)
-      flash[:notice] = 'Location was successfully updated.'
+      flash[:notice] = "Location was successfully updated."
     end
 
     respond_with(:admin, @location)
@@ -70,7 +70,7 @@ class Admin::LocationsController < Admin::AdminController
     @location = Location.find(params[:id])
     @location.destroy
 
-    flash[:notice] = 'Location was successfully deleted.'
+    flash[:notice] = "Location was successfully deleted."
 
     respond_with(:admin, @location)
   end

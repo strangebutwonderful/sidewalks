@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def bugsnag_api_key
-    ENV['BUGSNAG_API_KEY']
+    ENV["BUGSNAG_API_KEY"]
   end
 
   def bugsnag_api_key?
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def google_universal_analytics_tracking_code
-    ENV['GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE']
+    ENV["GOOGLE_UNIVERSAL_ANALYTICS_TRACKING_CODE"]
   end
 
   def google_universal_analytics_tracking_code?

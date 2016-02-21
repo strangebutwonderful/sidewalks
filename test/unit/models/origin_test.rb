@@ -14,22 +14,22 @@
 #  index_origin_on_latitude_and_longitude  (noise_id,latitude,longitude) UNIQUE
 #
 
-require 'test_helper'
+require "test_helper"
 
 class OriginTest < ActiveSupport::TestCase
-  test 'FactoryGirl works' do
+  test "FactoryGirl works" do
     assert_difference -> { Origin.count } do
       FactoryGirl.create(:origin)
     end
   end
 
-  test 'latest scope includes recent tweets' do
+  test "latest scope includes recent tweets" do
     assert_difference -> { Origin.where_since(12.hours.ago).count } do
       FactoryGirl.create(:origin)
     end
   end
 
-  test 'latest scope does not include old tweets' do
+  test "latest scope does not include old tweets" do
     assert_no_difference -> { Origin.where_since(12.hours.ago).count } do
       FactoryGirl.create(:week_old_origin)
     end

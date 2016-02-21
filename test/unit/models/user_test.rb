@@ -16,28 +16,28 @@
 #  locations_count              :integer          default(0), not null
 #
 
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  test 'FactoryGirl works' do
+  test "FactoryGirl works" do
     assert_difference -> { User.count } do
       FactoryGirl.create(:user)
     end
   end
 
-  test 'FactoryGirl admin_user works' do
+  test "FactoryGirl admin_user works" do
     assert_difference -> { User.count } do
       FactoryGirl.create(:admin_user)
     end
   end
 
-  test 'FactoryGirl user_with_original works' do
+  test "FactoryGirl user_with_original works" do
     assert_difference -> { User.count } do
       FactoryGirl.create(:user_with_original)
     end
   end
 
-  test 'Scope where_needs_triage includes triaged' do
+  test "Scope where_needs_triage includes triaged" do
     user = FactoryGirl.create :user, :needs_triage
     assert_includes User.where_needs_triage, user
   end

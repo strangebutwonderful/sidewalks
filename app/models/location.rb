@@ -34,7 +34,7 @@ class Location < ActiveRecord::Base
   end
 
   def directions_url
-    'http://maps.google.com/maps?daddr=' + latitude.to_s + ',' + longitude.to_s
+    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
   end
 
   def latlng?
@@ -50,7 +50,7 @@ class Location < ActiveRecord::Base
   end
 
   def full_street_address
-    address + ', ' + city + ', ' + state + ' ' + zip.to_s
+    address + ", " + city + ", " + state + " " + zip.to_s
   end
 
   def geography_changed?
