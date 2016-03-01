@@ -69,6 +69,7 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'spring'
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
@@ -78,7 +79,6 @@ group :development, :test do
   gem 'jasmine'
   gem 'pry'
   gem 'rubocop'
-  gem 'web-console', '~> 2.0'
   gem 'webmock', require: false
 end
 
