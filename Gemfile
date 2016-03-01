@@ -45,7 +45,7 @@ gem 'twitter', '~> 5'
 
 gem 'geocoder'
 
-gem 'whenever', '~> 0.9', require: false
+gem 'clockwork', require: false
 
 gem 'flip', '~> 1'
 
