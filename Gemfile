@@ -93,6 +93,7 @@ end
 group :production do
   gem 'bugsnag'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
   gem 'skylight'
 end
 
