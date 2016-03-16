@@ -54,16 +54,16 @@ class LatLng
   def self.north_eastern(latlngs)
     raise "Cannot center an empty list of LatLngs" if latlngs.empty?
 
-    lat = latlngs.map( &:latitude ).max
-    long = latlngs.map( &:longitude ).max
+    lat = latlngs.map(&:latitude).max
+    long = latlngs.map(&:longitude).max
     LatLng.new(lat, long)
   end
 
   def self.south_western(latlngs)
     raise "Cannot center an empty list of LatLngs" if latlngs.empty?
 
-    lat = latlngs.map( &:latitude ).min
-    long = latlngs.map( &:longitude ).min
+    lat = latlngs.map(&:latitude).min
+    long = latlngs.map(&:longitude).min
     LatLng.new(lat, long)
   end
 
