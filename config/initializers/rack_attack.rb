@@ -71,4 +71,17 @@ class Rack::Attack
   #    {},   # headers
   #    [""]] # body
   # end
+
+  # Track it using ActiveSupport::Notification
+  # name    => String, name of the event (such as 'render')
+  # start   => Time, when the instrumented block started execution
+  # finish  => Time, when the instrumented block ended execution
+  # id      => String, unique ID for this notification
+  # payload => Hash, the payload
+  ActiveSupport::Notifications.
+    subscribe("rack.attack") do |_, _, _, request_id, req|
+    Rails.logger.info(
+      "Rack::Attack blocked request [#{request_id}], details: #{req.inspect}"
+    )
+  end
 end
