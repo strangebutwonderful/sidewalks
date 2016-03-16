@@ -11,6 +11,7 @@ body {
 .navbar-default {
   background-color: $bg-default;
   border-color: transparent;
+  z-index: $header-navbar-z-index;
 
   .navbar-brand {
     color: $col-default;
