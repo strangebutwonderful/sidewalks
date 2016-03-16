@@ -7,12 +7,6 @@ class NoisesController < ApplicationController
   # GET /noises.json
   def index
     @noise_funnel = NoiseFunnel.new(*explore_params)
-    @map = Map.new(request_latlng, params)
-
-    @noise_funnel.noises.each do |noise|
-      @map.add_latlngs(noise.latlngs)
-    end
-
     @noises = @noise_funnel.noise_grouped_by_user_id
     respond_with @noises
   end
