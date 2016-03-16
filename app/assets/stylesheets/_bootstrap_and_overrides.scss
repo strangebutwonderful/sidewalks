@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,400italic,700italic,100,400,700);
 $font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$body-bg: #eee !default; // $grayLighter
+$body-bg: $wild-sand !default;
 
 // imports
 @import "bootstrap-sprockets";
