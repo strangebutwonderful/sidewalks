@@ -4,7 +4,7 @@
 .card {
   @extend .docket;
   @include word-wrap;
-  background-color: $white;
+  background-color: transparent;
   padding: $base-block-spacing;
   position: relative;
 
@@ -14,9 +14,9 @@
 
   h1 {
     @extend h5;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: normal;
-    line-height: 30px;
+    line-height: 1.4em;
     margin: 0;
     margin-top: -5px;
 

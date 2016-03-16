@@ -1,8 +1,8 @@
-$bg-default      : #0088cc;
-$bg-highlight    : #23527c;
-$col-default     : #eeeeee;
-$col-highlight   : #ffffff;
-$dropdown       : false;
+$bg-default: $white;
+$bg-highlight: #23527c;
+$col-default: $base-type-color;
+$col-highlight: $blue;
+$dropdown: false;
 
 body {
   padding-top: $navbar-height;
