@@ -36,34 +36,6 @@ class LatLngTest < ActiveSupport::TestCase
     assert_not_equal LatLng.new(0, 0), LatLng.new(1, 1)
   end
 
-  test "Expand by north eastern should move north east" do
-    latlng = LatLng.new(0, 0).expand_north_east(LatLng.new(1, 2))
-
-    assert_equal BigDecimal(1), latlng.latitude
-    assert_equal BigDecimal(2), latlng.longitude
-  end
-
-  test "Expand by south western does not move north east" do
-    latlng = LatLng.new(1, 2).expand_north_east(LatLng.new(0, 0))
-
-    assert_equal BigDecimal(1), latlng.latitude
-    assert_equal BigDecimal(2), latlng.longitude
-  end
-
-  test "Expand by south western moves south west" do
-    latlng = LatLng.new(1, 2).expand_south_west(LatLng.new(0, 1))
-
-    assert_equal BigDecimal(0), latlng.latitude
-    assert_equal BigDecimal(1), latlng.longitude
-  end
-
-  test "Expand by north eastern does not move south west" do
-    latlng = LatLng.new(0, 1).expand_south_west(LatLng.new(1, 2))
-
-    assert_equal BigDecimal(0), latlng.latitude
-    assert_equal BigDecimal(1), latlng.longitude
-  end
-
   test "Center should generate the same value latlng for a single entry list" do
     centered_latlng = LatLng.center([LatLng.new(10, 15)])
 

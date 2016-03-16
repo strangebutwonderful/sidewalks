@@ -1,11 +1,17 @@
 <% if noise.latlngs? %>
-  <%# TODO: set location for map %>
+  <%# Make not procedural %>
+  <% noise.map.add_latlngs(last_known_latlng) if last_known_latlng.present? %>
+
   <div id="map-noise-<%= noise.id %>"
     data-cartography-map
-    data-cartography-map-bounds="<%= JSON(noise.map.boundaries) %>"
+    data-cartography-map-bounds="<%= JSON(noise.map.bounding_box) %>"
+    data-cartography-map-boxZoom=false
     data-cartography-map-center="<%= JSON(noise.map.center) %>"
-    data-cartography-map-zoom="<%= noise.map.zoom %>"
+    data-cartography-map-doubleClickZoom=false
+    data-cartography-map-dragging=false
     data-cartography-map-scrollWheelZoom=false
+    data-cartography-map-touchZoom=false
+    data-cartography-map-zoomControl=false
     >
 
     <div data-cartography-map-panel id="map-panel-noise-<%= noise.id %>">

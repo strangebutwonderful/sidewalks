@@ -60,11 +60,10 @@ class App.Cartography.Map
 
     # compose map options
     mapOptions = Lib.Options.load(App.Cartography.Map._mapOptionNames, @_$map, "cartography-map-")
+    mapBounds = @getMapBounds()
 
     # Assign map panel div
     @_map = L.map(@getMapPanelId(), mapOptions)
-    center = @_map.getCenter()
-    zoom = @_map.getZoom()
 
     # Set source of map layers pngs
     L.tileLayer(@getMapTiles(), {
@@ -72,11 +71,10 @@ class App.Cartography.Map
     }).addTo(@_map)
 
     # Set map boundaries
+    @_map.fitBounds(mapBounds)
+
     @bindMapMarkers()
 
-    @_map.panTo(center, { animate: true, duration: 3 })
-    @_map.setZoom(zoom)
-    # @_map.fitBounds(@getMapBounds())
     @bindMapEvents()
 
   contractMap: () ->

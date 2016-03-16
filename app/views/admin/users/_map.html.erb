@@ -1,7 +1,7 @@
 <% if user.latlngs? %>
   <div id="map-user-<%= user.id %>"
     data-cartography-map
-    data-cartography-map-bounds="<%= JSON(user.map.boundaries) %>"
+    data-cartography-map-bounds="<%= JSON(user.map.bounding_box) %>"
     data-cartography-map-center="<%= JSON(user.map.center) %>"
     data-cartography-map-zoom="<%= user.map.zoom %>"
     data-cartography-map-scrollWheelZoom=false

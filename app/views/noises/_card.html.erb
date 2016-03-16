@@ -1,3 +1,4 @@
+<%# Text %>
 <div class="noise card media" id="noise-<%= noise.id %>" data-blocklink data-blocklink-href="<%= noise_url noise %>">
   <% if noise.avatar_image_url.present? %>
     <%= link_to noise.user, class: "avatar pull-right", title: noise.user_name do %>
@@ -20,18 +21,18 @@
   </div>
 </div>
 
+<%# Images %>
 <% noise.image_urls.each do |image_url| %>
-  <div class="card docket">
-    <p>
-      <%= link_to image_url, class: "thumbnail" do %>
-        <%= image_tag image_url %>
-      <% end %>
-    </p>
+  <div class="card-addendum card-addendum-suffix">
+    <%= link_to image_url, class: "thumbnail" do %>
+      <%= image_tag image_url %>
+    <% end %>
   </div>
 <% end %>
 
+<%# Map %>
 <% if noise.latlngs? %>
-  <div class="card docket">
+  <div class="card-addendum card-addendum-suffix">
     <%= render :partial => 'map', :locals => {:noise => noise} %>
   </div>
 <% end %>

@@ -13,20 +13,6 @@ class LatLng
     ]
   end
 
-  def expand_north_east(latlng)
-    self.latitude = latlng.latitude if latlng.latitude > latitude
-    self.longitude = latlng.longitude if latlng.longitude > longitude
-
-    self
-  end
-
-  def expand_south_west(latlng)
-    self.latitude = latlng.latitude if latlng.latitude < latitude
-    self.longitude = latlng.longitude if latlng.longitude < longitude
-
-    self
-  end
-
   def latitude=(value)
     @latitude = value_to_coordinate(value)
   end
@@ -63,6 +49,29 @@ class LatLng
       summed_latitude / BigDecimal.new(latlngs_count),
       summed_longitude / BigDecimal.new(latlngs_count)
     )
+  end
+
+  def self.north_eastern(latlngs)
+    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
+
+    lat = latlngs.map(&:latitude).max
+    long = latlngs.map(&:longitude).max
+    LatLng.new(lat, long)
+  end
+
+  def self.south_western(latlngs)
+    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
+
+    lat = latlngs.map(&:latitude).min
+    long = latlngs.map(&:longitude).min
+    LatLng.new(lat, long)
+  end
+
+  def self.bounding_box(latlngs)
+    [
+      south_western(latlngs).to_a,
+      north_eastern(latlngs).to_a,
+    ]
   end
 
   private
