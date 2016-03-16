@@ -29,3 +29,9 @@
     </p>
   </div>
 <% end %>
+
+<% if noise.latlngs? %>
+  <div class="card docket">
+    <%= render :partial => 'map', :locals => {:noise => noise} %>
+  </div>
+<% end %>
