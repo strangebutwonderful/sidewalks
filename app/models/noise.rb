@@ -120,16 +120,16 @@ class Noise < ActiveRecord::Base
     end
   end
 
-  def latlngs?
+  def lat_lngs?
     origins.any?
   end
 
-  def latlngs
-    @latlngs ||= origins.map(&:latlng)
+  def lat_lngs
+    @lat_lngs ||= origins.map(&:lat_lng)
   end
 
   def map
-    @map ||= Map.new(latlngs) if latlngs?
+    @map ||= Map.new(lat_lngs) if lat_lngs?
   end
 
   def actionablity_upvotable?

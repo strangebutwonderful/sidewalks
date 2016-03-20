@@ -29,16 +29,16 @@ class Origin < ActiveRecord::Base
     near([latitude.to_f, longitude.to_f], distance)
   end
 
-  def latlng?
+  def lat_lng?
     latitude.present? && longitude.present?
   end
 
-  def latlng
-    @latlng ||= LatLng.new(latitude, longitude) if latlng?
+  def lat_lng
+    @lat_lng ||= LatLng.new(latitude, longitude) if lat_lng?
   end
 
   def map
-    @map ||= Map.new(latlngs) if latlngs?
+    @map ||= Map.new(lat_lngs) if lat_lngs?
   end
 
   def directions_url

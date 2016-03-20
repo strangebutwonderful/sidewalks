@@ -1,6 +1,6 @@
-<% if noise.latlngs? %>
+<% if noise.lat_lngs? %>
   <%# Make not procedural %>
-  <% noise.map.add_latlngs(last_known_latlng) if last_known_latlng.present? %>
+  <% noise.map.add_lat_lngs(last_known_lat_lng) if last_known_lat_lng.present? %>
 
   <div id="map-noise-<%= noise.id %>"
     data-cartography-map
@@ -17,10 +17,10 @@
     <div data-cartography-map-panel id="map-panel-noise-<%= noise.id %>">
     </div>
 
-    <% if last_known_latlng.present? %>
+    <% if last_known_lat_lng.present? %>
       <div data-cartography-map-marker
-        data-cartography-map-marker-latitude="<%= last_known_latlng.latitude %>"
-        data-cartography-map-marker-longitude="<%= last_known_latlng.longitude %>"
+        data-cartography-map-marker-latitude="<%= last_known_lat_lng.latitude %>"
+        data-cartography-map-marker-longitude="<%= last_known_lat_lng.longitude %>"
         data-cartography-map-marker-track=true
         data-cartography-map-marker-awesome-icon="user"
         data-cartography-map-marker-awesome-markerColor="cadetblue"

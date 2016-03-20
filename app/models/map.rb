@@ -1,44 +1,32 @@
 class Map
-  attr_accessor :latlngs
+  attr_accessor :lat_lng_group
+  attr_writer :center, :zoom
 
-  def initialize(initial_latlngs = nil, params = {})
-    self.latlngs ||= []
-    add_latlngs(initial_latlngs)
+  delegate(
+    :add_lat_lng,
+    :add_lat_lngs,
+    :bounding_box,
+    :center,
+    to: :lat_lng_group
+  )
+
+  def initialize(initial_lat_lng_group = nil, params = {})
+    self.lat_lng_group = LatLngGroup.new(initial_lat_lng_group)
     self.center = params[:center] if params[:center].present?
     self.zoom = params[:zoom] if params[:zoom].present?
   end
 
-  def add_latlng(value)
-    self.latlngs << value unless value.nil?
-
-    self
-  end
-
-  def add_latlngs(value)
-    value = [value] unless value.is_a? Enumerable
-
-    value.each do |value|
-      add_latlng(value)
-    end
-
-    self
-  end
-
   def bounding_box
-    LatLng.bounding_box(latlngs)
+    lat_lng_group.bounding_box
   end
 
-  def default_latlng
+  def default_lat_lng
     Neighborhood.districts(:civic_center)
   end
 
-  attr_writer :center
-
   def center
-    @center ||= LatLng.center(latlngs).to_a
+    @center ||= lat_lng_group.center.to_a
   end
-
-  attr_writer :zoom
 
   def zoom
     @zoom ||= 16

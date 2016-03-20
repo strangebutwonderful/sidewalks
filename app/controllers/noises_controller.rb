@@ -15,10 +15,10 @@ class NoisesController < ApplicationController
   # GET /explore.json
   def explore
     @noise_funnel = NoiseFunnel.new(*explore_params)
-    @map = Map.new(request_latlng, params)
+    @map = Map.new(request_lat_lng, params)
 
     @noise_funnel.noises.each do |noise|
-      @map.add_latlngs(noise.latlngs)
+      @map.add_lat_lngs(noise.lat_lngs)
     end
 
     @noises = @noise_funnel.noise_grouped_by_user_id

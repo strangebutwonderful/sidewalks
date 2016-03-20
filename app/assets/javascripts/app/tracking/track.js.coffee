@@ -18,7 +18,7 @@ class App.Tracking.Track
     longitude = position.coords.longitude
 
     # Set cookie
-    $.cookie('latlng', "#{latitude},#{longitude}")
+    $.cookie('lat_lng', "#{latitude},#{longitude}")
 
 $ ->
   new App.Tracking.Track();

@@ -37,16 +37,16 @@ class Location < ActiveRecord::Base
     "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
   end
 
-  def latlng?
+  def lat_lng?
     latitude.present? && longitude.present?
   end
 
-  def latlng
-    @latlng ||= LatLng.new(latitude, longitude) if latlng?
+  def lat_lng
+    @lat_lng ||= LatLng.new(latitude, longitude) if lat_lng?
   end
 
   def map
-    @map ||= Map.new(latlngs) if latlngs?
+    @map ||= Map.new(lat_lngs) if lat_lngs?
   end
 
   def full_street_address

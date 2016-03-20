@@ -1,4 +1,4 @@
-<% if user.latlngs? %>
+<% if user.lat_lngs? %>
   <div id="map-user-<%= user.id %>"
     data-cartography-map
     data-cartography-map-bounds="<%= JSON(user.map.bounding_box) %>"
@@ -7,10 +7,10 @@
     data-cartography-map-scrollWheelZoom=false
     >
 
-    <% if last_known_latlng.present? %>
+    <% if last_known_lat_lng.present? %>
       <div data-cartography-map-marker
-        data-cartography-map-marker-latitude="<%= last_known_latlng.latitude %>"
-        data-cartography-map-marker-longitude="<%= last_known_latlng.longitude %>"
+        data-cartography-map-marker-latitude="<%= last_known_lat_lng.latitude %>"
+        data-cartography-map-marker-longitude="<%= last_known_lat_lng.longitude %>"
         data-cartography-map-marker-track=true
         data-cartography-map-marker-awesome-icon="user"
         data-cartography-map-marker-awesome-markerColor="cadetblue"
