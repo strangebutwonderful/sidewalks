@@ -66,8 +66,6 @@ gem 'responders', '~> 2.0'
 
 group :development do
   gem 'annotate'
-  gem 'guard-bundler'
-  gem 'guard-rails'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
@@ -76,7 +74,8 @@ group :development, :test do
   gem 'codecov', require: false # code coverage
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'jasmine'
+  gem 'guard', require: false
+  gem 'guard-minitest', require: false
   gem 'pry'
   gem 'rubocop'
   gem 'webmock', require: false
