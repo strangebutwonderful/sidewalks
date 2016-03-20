@@ -3,7 +3,7 @@ module Cartography
   included do
     helper_method(
       :request_latitude,
-      :request_latlng,
+      :request_lat_lng,
       :request_longitude
     )
   end
@@ -36,7 +36,7 @@ module Cartography
     @request_longitude
   end
 
-  def request_latlng
+  def request_lat_lng
     LatLng.new(request_latitude, request_longitude)
   end
 end

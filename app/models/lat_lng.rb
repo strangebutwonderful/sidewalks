@@ -28,8 +28,8 @@ class LatLng
     ]
   end
 
-  def ==(another_latlng)
-    (latitude == another_latlng.latitude) && (longitude == another_latlng.longitude)
+  def ==(another_lat_lng)
+    (latitude == another_lat_lng.latitude) && (longitude == another_lat_lng.longitude)
   end
 
   private

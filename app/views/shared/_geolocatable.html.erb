@@ -1,4 +1,4 @@
-<%= link_to noises_path(:latitude => last_known_latlng.latitude, :longitude => last_known_latlng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+<%= link_to noises_path(:latitude => last_known_lat_lng.latitude, :longitude => last_known_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
   <span>
     Nearby
   </span>

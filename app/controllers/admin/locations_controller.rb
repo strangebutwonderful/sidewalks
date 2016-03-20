@@ -8,7 +8,7 @@ class Admin::LocationsController < Admin::AdminController
     @map = Map.new
 
     @locations.each do |location|
-      @map.add_latlngs(location.latlng)
+      @map.add_lat_lngs(location.lat_lng)
     end
 
     respond_with(:admin, @locations)

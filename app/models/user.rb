@@ -49,16 +49,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def latlngs?
+  def lat_lngs?
     locations.count > 0
   end
 
-  def latlngs
-    @latlngs ||= locations.map(&:latlng)
+  def lat_lngs
+    @lat_lngs ||= locations.map(&:lat_lng)
   end
 
   def map
-    @map ||= Map.new(latlngs) if latlngs?
+    @map ||= Map.new(lat_lngs) if lat_lngs?
   end
 
   def update_credentials(auth)

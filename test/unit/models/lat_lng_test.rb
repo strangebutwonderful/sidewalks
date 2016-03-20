@@ -26,9 +26,9 @@ class LatLngTest < ActiveSupport::TestCase
   end
 
   test "Latitude and longitude are BigDecimals" do
-    latlng = LatLng.new(0, 0)
-    assert latlng.latitude.is_a? BigDecimal
-    assert latlng.longitude.is_a? BigDecimal
+    lat_lng = LatLng.new(0, 0)
+    assert lat_lng.latitude.is_a? BigDecimal
+    assert lat_lng.longitude.is_a? BigDecimal
   end
 
   test "LatLng equals tests against latitude and longitude" do
