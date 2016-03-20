@@ -15,9 +15,7 @@ class LatLngGroup
   end
 
   def add_lat_lngs(value)
-    values = [value] unless value.is_a? Enumerable
-
-    values.each do |v|
+    Array.wrap(value).each do |v|
       add_lat_lng(v)
     end
 
@@ -54,7 +52,7 @@ class LatLngGroup
   end
 
   def south_western
-   if lat_lngs.empty?
+    if lat_lngs.empty?
       raise "Cannot determine south_western for an empty list of LatLngs"
     end
 
