@@ -180,12 +180,6 @@ GEM
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    jasmine (2.4.0)
-      jasmine-core (~> 2.4)
-      phantomjs
-      rack (>= 1.2.1)
-      rake
-    jasmine-core (2.4.1)
     jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -239,7 +233,6 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
-    phantomjs (2.1.1.0)
     powerpack (0.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -404,7 +397,6 @@ DEPENDENCIES
   geocoder
   guard-bundler
   guard-rails
-  jasmine
   jquery-rails (~> 4.0)
   leaflet-rails (~> 0.7)
   mocha

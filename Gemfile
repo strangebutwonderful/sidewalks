@@ -76,7 +76,6 @@ group :development, :test do
   gem 'codecov', require: false # code coverage
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'jasmine'
   gem 'pry'
   gem 'rubocop'
   gem 'webmock', require: false
