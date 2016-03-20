@@ -1,10 +1,8 @@
 ## Sidewalks
 
 [![Build Status](https://travis-ci.org/strangebutwonderful/sidewalks.png?branch=master)](https://travis-ci.org/strangebutwonderful/sidewalks)
-[![Codeship Status](https://codeship.com/projects/8b4e7b70-a528-0133-20a8-3ead92a16d22/status?branch=master)](https://codeship.com/projects/129526)[![codecov.io](http://codecov.io/github/strangebutwonderful/sidewalks/coverage.svg?branch=master)](http://codecov.io/github/strangebutwonderful/sidewalks?branch=master)
 [![Dependency Status](https://gemnasium.com/strangebutwonderful/sidewalks.png)](https://gemnasium.com/strangebutwonderful/sidewalks)
 [![Code Climate](https://codeclimate.com/github/strangebutwonderful/sidewalks.png)](https://codeclimate.com/github/strangebutwonderful/sidewalks)
-[![PullReview stats](https://www.pullreview.com/github/strangebutwonderful/sidewalks/badges/master.svg?)](https://www.pullreview.com/github/strangebutwonderful/sidewalks/reviews/master)
 
 ### Coverage
 
