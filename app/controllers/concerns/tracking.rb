@@ -9,24 +9,10 @@ module Tracking
   end
 
   def last_known_lat_lng
-    @last_known_lat_lng ||= lat_lng_from_cookie || lat_lng_from_request
+    @last_known_lat_lng ||= lat_lng_from_request
   end
 
   private
-
-  def lat_lng_from_cookie
-    return nil unless cookies[:lat_lng].present?
-
-    @lat_lng_from_cookie ||= begin
-      # cookies[:lat_lng] comes in the form "latitude,longitude"
-      coordinates = cookies[:lat_lng].split(",")
-      LatLng.new(coordinates[0], coordinates[1])
-    end
-  end
-
-  def lat_lng_from_cookie?
-    lat_lng_from_cookie.present?
-  end
 
   def lat_lng_from_request
     @lat_lng_from_request ||= LatLng.new(
