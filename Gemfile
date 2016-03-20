@@ -35,9 +35,10 @@ gem 'figaro'
 
 # server
 gem 'pg'
-gem 'thin'
+gem 'puma'
 
 gem 'rack-attack'
+gem 'rack-timeout'
 
 gem 'pg_search'
 
