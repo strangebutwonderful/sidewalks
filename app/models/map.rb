@@ -2,7 +2,13 @@ class Map
   attr_accessor :lat_lng_group
   attr_writer :center, :zoom
 
-  delegate :add_lat_lng, :add_lat_lngs, :bounding_box, :center, to: :lat_lng_group
+  delegate(
+    :add_lat_lng,
+    :add_lat_lngs,
+    :bounding_box,
+    :center,
+    to: :lat_lng_group
+  )
 
   def initialize(initial_lat_lng_group = nil, params = {})
     self.lat_lng_group = LatLngGroup.new(initial_lat_lng_group)

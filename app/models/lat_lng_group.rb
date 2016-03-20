@@ -9,16 +9,16 @@ class LatLngGroup
   end
 
   def add_lat_lng(value)
-    self.lat_lngs << value unless value.nil?
+    lat_lngs << value unless value.nil?
 
     self
   end
 
   def add_lat_lngs(value)
-    value = [value] unless value.is_a? Enumerable
+    values = [value] unless value.is_a? Enumerable
 
-    value.each do |value|
-      add_lat_lng(value)
+    values.each do |v|
+      add_lat_lng(v)
     end
 
     self
@@ -44,7 +44,9 @@ class LatLngGroup
   end
 
   def north_eastern
-    raise "Cannot determine north eastern for an empty list of LatLngs" if lat_lngs.empty?
+    if lat_lngs.empty?
+      raise "Cannot determine north eastern for an empty list of LatLngs"
+    end
 
     lat = lat_lngs.map(&:latitude).max
     long = lat_lngs.map(&:longitude).max
@@ -52,7 +54,9 @@ class LatLngGroup
   end
 
   def south_western
-    raise "Cannot determine south_western for an empty list of LatLngs" if lat_lngs.empty?
+   if lat_lngs.empty?
+      raise "Cannot determine south_western for an empty list of LatLngs"
+    end
 
     lat = lat_lngs.map(&:latitude).min
     long = lat_lngs.map(&:longitude).min
