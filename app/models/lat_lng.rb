@@ -32,48 +32,6 @@ class LatLng
     (latitude == another_latlng.latitude) && (longitude == another_latlng.longitude)
   end
 
-  def self.center(latlngs)
-    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
-
-    summed_latitude = BigDecimal.new(0)
-    summed_longitude = BigDecimal.new(0)
-
-    latlngs.each do |latlng|
-      summed_latitude += latlng.latitude
-      summed_longitude += latlng.longitude
-    end
-
-    latlngs_count = latlngs.count
-
-    LatLng.new(
-      summed_latitude / BigDecimal.new(latlngs_count),
-      summed_longitude / BigDecimal.new(latlngs_count)
-    )
-  end
-
-  def self.north_eastern(latlngs)
-    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
-
-    lat = latlngs.map(&:latitude).max
-    long = latlngs.map(&:longitude).max
-    LatLng.new(lat, long)
-  end
-
-  def self.south_western(latlngs)
-    raise "Cannot center an empty list of LatLngs" if latlngs.empty?
-
-    lat = latlngs.map(&:latitude).min
-    long = latlngs.map(&:longitude).min
-    LatLng.new(lat, long)
-  end
-
-  def self.bounding_box(latlngs)
-    [
-      south_western(latlngs).to_a,
-      north_eastern(latlngs).to_a,
-    ]
-  end
-
   private
 
   def value_to_coordinate(value)

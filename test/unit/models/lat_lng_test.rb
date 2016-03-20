@@ -35,18 +35,4 @@ class LatLngTest < ActiveSupport::TestCase
     assert_equal LatLng.new(0, 0), LatLng.new(0, 0)
     assert_not_equal LatLng.new(0, 0), LatLng.new(1, 1)
   end
-
-  test "Center should generate the same value latlng for a single entry list" do
-    centered_latlng = LatLng.center([LatLng.new(10, 15)])
-
-    assert_equal BigDecimal(10), centered_latlng.latitude
-    assert_equal BigDecimal(15), centered_latlng.longitude
-  end
-
-  test "Center should generate the average latlng for a list" do
-    centered_latlng = LatLng.center([LatLng.new(1, 1), LatLng.new(3, 3)])
-
-    assert_equal BigDecimal(2), centered_latlng.latitude
-    assert_equal BigDecimal(2), centered_latlng.longitude
-  end
 end

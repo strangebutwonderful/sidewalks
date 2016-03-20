@@ -17,8 +17,8 @@ class MapTest < ActiveSupport::TestCase
       latlngs << LatLng.new(Faker::Address.latitude, Faker::Address.longitude)
     end
 
-    assert_equal 5, Map.new(latlngs).latlngs.count
-    assert_equal latlngs, Map.new(latlngs).latlngs
+    assert_equal 5, Map.new(latlngs).latlng_group.count
+    assert_equal latlngs, Map.new(latlngs).latlng_group.latlngs
   end
 
   test "Map bounding box should map the latlngs" do
