@@ -34,6 +34,7 @@ gem 'rolify'
 gem 'figaro'
 
 # server
+gem 'activerecord-postgis-adapter'
 gem 'pg'
 gem 'puma'
 
