@@ -55,6 +55,10 @@ gem 'rack-mini-profiler'
 gem 'flamegraph'
 gem 'stackprof'
 
+# For backups
+gem 'replicate', '~> 1.5.1'
+
+# Deployments
 gem 'capistrano', '~> 3.4'
 gem 'capistrano-bundler'
 gem 'capistrano-passenger'
@@ -96,6 +100,3 @@ group :production do
   gem 'rails_12factor'
   gem 'skylight'
 end
-
-# For backups
-gem 'replicate', '~> 1.5.1'
