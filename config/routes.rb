@@ -30,5 +30,5 @@ Sidewalks::Application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   resources :search, only: [:index]
 
-  root to: 'noises#index'
+  root to: 'home#welcome'
 end

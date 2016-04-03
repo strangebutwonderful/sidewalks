@@ -7,10 +7,10 @@
     data-cartography-map-scrollWheelZoom=false
     >
 
-    <% if last_known_lat_lng.present? %>
+    <% if request_lat_lng.present? %>
       <div data-cartography-map-marker
-        data-cartography-map-marker-latitude="<%= last_known_lat_lng.latitude %>"
-        data-cartography-map-marker-longitude="<%= last_known_lat_lng.longitude %>"
+        data-cartography-map-marker-latitude="<%= request_lat_lng.latitude %>"
+        data-cartography-map-marker-longitude="<%= request_lat_lng.longitude %>"
         data-cartography-map-marker-track=true
         data-cartography-map-marker-awesome-icon="user"
         data-cartography-map-marker-awesome-markerColor="cadetblue"

@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   include Authentication
-  include Cartography
   include Layout
   include Profiling
-  include Tracking
+  include RequestCartography
 
   protect_from_forgery
 

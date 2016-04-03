@@ -6,7 +6,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <%= link_to noises_path(:latitude => last_known_lat_lng.latitude, :longitude => last_known_lat_lng.longitude), :class => 'navbar-brand geolocatable', :data => { :geolocatable => true, :"geolocatable-state" => "here" } do %>
+  <%= link_to root_path, :class => 'navbar-brand' do %>
     <span>
       Sidewalks
     </span>
@@ -20,7 +20,7 @@
       <%= render '/shared/geolocatable' %>
     </li>
     <li>
-      <%= link_to explore_path(:latitude => last_known_lat_lng.latitude, :longitude => last_known_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+      <%= link_to explore_path(:latitude => request_lat_lng.latitude, :longitude => request_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
         <span>
           Explore
         </span>
