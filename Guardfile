@@ -8,7 +8,6 @@
 # See https://github.com/guard/guard-minitest#options
 # for options and details
 guard :minitest, all_on_start: false, spring: true do
-
   # General 1 to 1 matching
   watch(%r{^app/(.+)\.rb$}) { |m| "test/#{m[1]}_test.rb" }
 

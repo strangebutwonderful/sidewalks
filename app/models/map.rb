@@ -16,9 +16,7 @@ class Map
     self.zoom = params[:zoom] if params[:zoom].present?
   end
 
-  def bounding_box
-    lat_lng_group.bounding_box
-  end
+  delegate :bounding_box, to: :lat_lng_group
 
   def default_lat_lng
     Neighborhood.districts(:civic_center)

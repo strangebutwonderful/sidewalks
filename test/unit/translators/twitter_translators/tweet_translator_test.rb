@@ -19,7 +19,7 @@ class TwitterTranslatorTest < ActiveSupport::TestCase
       id: "my_twitter_noise_id",
       text: "my_twitter_noise_text",
       full_text: "my_twitter_noise_text",
-      created_at: Time.now,
+      created_at: Time.zone.now,
       user: twitter_user
     )
   end
