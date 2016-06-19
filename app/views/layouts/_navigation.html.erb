@@ -17,7 +17,11 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav navbar-right">
     <li>
-      <%= render '/shared/geolocatable' %>
+      <%= link_to noises_path(:latitude => request_lat_lng.latitude, :longitude => request_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+        <span>
+          Nearby
+        </span>
+      <% end %>
     </li>
     <li>
       <%= link_to explore_path(:latitude => request_lat_lng.latitude, :longitude => request_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => true, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>

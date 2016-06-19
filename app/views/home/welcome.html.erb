@@ -1,10 +1,11 @@
 <div class="row cradle">
-  <div class="jumbotron">
+  <div class="card">
     <h1>
-      Hello
+      <%= link_to noises_path(:latitude => request_lat_lng.latitude, :longitude => request_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+        <span>
+          See what's nearby
+        </span>
+      <% end %>
     </h1>
-    <p>
-      <%= render '/shared/geolocatable' %>
-    </p>
   </div>
 </div>
