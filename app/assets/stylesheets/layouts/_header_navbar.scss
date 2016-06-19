@@ -1,5 +1,5 @@
-$bg-default: $white;
-$bg-highlight: $wild-sand;
+$bg-default: $wild-sand;
+$bg-highlight: $very-light-gray;
 $col-default: $base-type-color;
 $col-highlight: $blue;
 $dropdown: false;
@@ -10,7 +10,7 @@ body {
 
 .navbar-default {
   background-color: $bg-default;
-  border-color: transparent;
+  border-color: $very-light-gray;
   z-index: $header-navbar-z-index;
 
   .navbar-brand {
