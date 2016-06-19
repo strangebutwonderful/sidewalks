@@ -1,4 +1,4 @@
-require 'replicate'
+require "replicate"
 
 # Hacked together from
 # https://github.com/rtomayko/replicate/blob/master/bin/replicate
@@ -11,7 +11,6 @@ namespace :replicate do
       bin/rake replicate:dump:noises > test.dump
     DESC
     task noises: :environment do
-
       $stderr.sync = true
       $stdout = $stderr
 
@@ -23,19 +22,19 @@ namespace :replicate do
       out      = STDOUT
       force    = false
 
-      script = 'Noise.where_since(2.hours.ago).all'
+      script = "Noise.where_since(2.hours.ago).all"
       usage.call if script.empty?
 
       Replicate::Dumper.new do |dumper|
         dumper.marshal_to out
         dumper.log_to $stderr, verbose, quiet
-        if script == '-'
+        if script == "-"
           code = $stdin.read
-          objects = dumper.instance_eval(code, '<stdin>', 0)
+          objects = dumper.instance_eval(code, "<stdin>", 0)
         elsif File.exist?(script)
           dumper.load_script script
         else
-          objects = dumper.instance_eval(script, '<argv>', 0)
+          objects = dumper.instance_eval(script, "<argv>", 0)
           dumper.dump objects
         end
       end

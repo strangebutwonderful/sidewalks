@@ -21,25 +21,25 @@ require "test_helper"
 class NoiseTest < ActiveSupport::TestCase
   test "FactoryGirl works" do
     assert_difference -> { Noise.count } do
-      noise = FactoryGirl.create(:noise)
+      FactoryGirl.create(:noise)
     end
   end
 
   test "FactoryGirl noise_with_original works" do
     assert_difference -> { Noise.count } do
-      noise = FactoryGirl.create(:noise_with_original)
+      FactoryGirl.create(:noise_with_original)
     end
   end
 
   test "FactoryGirl noise_with_coordinates works" do
     assert_difference -> { Noise.count } do
-      noise = FactoryGirl.create(:noise_with_coordinates)
+      FactoryGirl.create(:noise_with_coordinates)
     end
   end
 
   test "FactoryGirl week_old_noise works" do
     assert_difference -> { Noise.count } do
-      noise = FactoryGirl.create(:week_old_noise)
+      FactoryGirl.create(:week_old_noise)
     end
   end
 
@@ -56,13 +56,11 @@ class NoiseTest < ActiveSupport::TestCase
   end
 
   test "noise with coordinates generates map" do
-    noise = FactoryGirl.create(:noise_with_coordinates)
-    assert_not_nil(noise.map)
+    assert_not_nil(FactoryGirl.create(:noise_with_coordinates).map)
   end
 
   test "media_urls never returns nil" do
-    noise = FactoryGirl.create(:noise)
-    assert_not_nil noise.media_urls
+    assert_not_nil FactoryGirl.create(:noise).media_urls
   end
 
   test '#explore' do

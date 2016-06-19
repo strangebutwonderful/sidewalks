@@ -29,7 +29,7 @@ FactoryGirl.define do
 
     provider { "MyProvider" }
     text { Faker::Lorem.sentences.join(" ") }
-    created_at { Time.now }
+    created_at { Time.zone.now }
 
     Neighborhood.districts.keys.each do |neighborhood_symbol|
       trait neighborhood_symbol do

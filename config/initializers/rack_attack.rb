@@ -22,7 +22,7 @@ class Rack::Attack
 
   # Throttle all requests by IP (60rpm)
   #
-  # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
+  # Key: "rack::attack:#{Time.zone.now.to_i/:period}:req/ip:#{req.ip}"
   throttle("req/ip", limit: 300, period: 5.minutes, &:ip)
 
   ### Prevent Brute-Force Login Attacks ###
@@ -36,7 +36,7 @@ class Rack::Attack
 
   # Throttle POST requests to /login by IP address
   #
-  # Key: "rack::attack:#{Time.now.to_i/:period}:logins/ip:#{req.ip}"
+  # Key: "rack::attack:#{Time.zone.now.to_i/:period}:logins/ip:#{req.ip}"
   # throttle("logins/ip", limit: 5, period: 20.seconds) do |req|
   #   if req.path == "/login" && req.post?
   #     req.ip
@@ -45,7 +45,7 @@ class Rack::Attack
 
   # Throttle POST requests to /login by email param
   #
-  # Key: "rack::attack:#{Time.now.to_i/:period}:logins/email:#{req.email}"
+  # Key: "rack::attack:#{Time.zone.now.to_i/:period}:logins/email:#{req.email}"
   #
   # Note: This creates a problem where a malicious user could intentionally
   # throttle logins for another user and force their login requests to be

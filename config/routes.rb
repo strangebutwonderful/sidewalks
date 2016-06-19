@@ -1,5 +1,4 @@
 Sidewalks::Application.routes.draw do
-
   namespace :admin do
     resources :config, only: [:index]
     resources :errors, only: [:index]
