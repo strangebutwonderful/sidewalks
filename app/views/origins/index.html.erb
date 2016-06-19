@@ -2,7 +2,11 @@
   <%= render '/shared/search_form' %>
 </div>
 <div class="docket">
-  <%= render '/shared/geolocatable' %>
+  <%= link_to noises_path(:latitude => request_lat_lng.latitude, :longitude => request_lat_lng.longitude), :class => "geolocatable", :data => { :geolocatable => nil, :"geolocatable-state" => "here" }, :title => "See nearby", :disabled => :disabled do %>
+    <span>
+      See what's nearby
+    </span>
+  <% end %>
 </div>
 
 <% if @origins.each do |origin| %>
