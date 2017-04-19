@@ -14,7 +14,7 @@
 #  index_originals_on_importable_id_and_importable_type  (importable_id,importable_type)
 #
 
-class Original < ActiveRecord::Base
+class Original < ApplicationRecord
   belongs_to :importable, polymorphic: true
 
   validates :importable_id, presence: true

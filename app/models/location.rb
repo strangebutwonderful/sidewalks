@@ -20,7 +20,7 @@
 #  unique_user_and_locations                  (user_id,address,city,state,zip) UNIQUE
 #
 
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip

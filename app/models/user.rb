@@ -17,7 +17,7 @@
 #  mobile_venues_count          :integer
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   delegate :url_helpers, to: "Rails.application.routes"
 
   rolify

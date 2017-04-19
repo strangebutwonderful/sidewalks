@@ -90,6 +90,7 @@ group :test do
   gem 'capybara'
   gem 'climate_control'
   gem 'mocha', require: false
+  gem 'rails-controller-testing' # for `assigns` and `assert_template`
   gem 'rake' # for travis
   gem 'vcr'
 end

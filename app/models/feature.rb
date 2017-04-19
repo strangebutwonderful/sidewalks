@@ -9,7 +9,7 @@
 #  updated_at :datetime
 #
 
-class Feature < ActiveRecord::Base
+class Feature < ApplicationRecord
   extend Flip::Declarable
 
   # strategy Flip::CookieStrategy
