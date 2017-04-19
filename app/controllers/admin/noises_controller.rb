@@ -1,61 +1,72 @@
 class Admin::NoisesController < Admin::AdminController
-  respond_to :html, :json
 
   # GET /noises
-  # GET /noises.json
   def index
     @noises = Noise.order(created_at: :desc).limit(50).all
 
-    respond_with(:admin, @noises)
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /noises/triage
-  # GET /noises/triage.json
   def triage
     @noises = Noise.where_needs_triage.limit(50).all
 
-    render :index
+    respond_to do |format|
+      format.html { render :index }
+    end
   end
 
   # GET /noises/1
-  # GET /noises/1.json
   def show
     @noise = Noise.find(params[:id])
 
-    respond_with(:admin, @noise)
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /noises/1/edit
   def edit
     @noise = Noise.find(params[:id])
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # PUT /noises/1
-  # PUT /noises/1.json
   def update
     @noise = Noise.find(params[:id])
 
-    if @noise.update_attributes(noise_params)
-      flash[:notice] = "Noise was successfully updated."
-    end
+    @noise.attributes = noise_params
 
-    respond_with(:admin, @noise)
+    respond_to do |format|
+      @noise.save!
+
+      format.html do
+        redirect_to(
+          [:admin, @noise],
+          notice: "Noise was successfully updated."
+        )
+      end
+    end
   end
 
   # DELETE /noises/1
-  # DELETE /noises/1.json
   def destroy
     @noise = Noise.find(params[:id])
     @noise.destroy
 
     flash[:notice] = "Noise was successfully deleted."
 
-    respond_with(:admin, @noise)
+    redirect_to action: :index
   end
 
   private
 
   def noise_params
-    params.require(:noise).permit(:role_ids, :provider_id, :actionable)
+    params.require(:noise).permit(:actionable)
   end
 end

@@ -58,9 +58,6 @@ gem 'stackprof'
 # For backups
 gem 'replicate', '~> 1.5.1'
 
-# deprecated controller actions
-gem 'responders', '~> 2.0'
-
 group :development do
   gem 'annotate'
   gem 'spring'

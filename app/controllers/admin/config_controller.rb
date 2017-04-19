@@ -1,8 +1,9 @@
 class Admin::ConfigController < Admin::AdminController
-  respond_to :html
 
   # GET /admin
-  # GET /admin.json
   def index
+    respond_to do |format|
+      format.html
+    end
   end
 end
