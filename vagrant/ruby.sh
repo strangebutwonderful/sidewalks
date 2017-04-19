@@ -25,8 +25,8 @@ echo "Initializing rbenv"
 # exec $SHELL
 
 echo "Installing ruby"
-/home/vagrant/.rbenv/bin/rbenv install 2.2.2
-/home/vagrant/.rbenv/bin/rbenv global 2.2.2
+/home/vagrant/.rbenv/bin/rbenv install 2.4.1
+/home/vagrant/.rbenv/bin/rbenv global 2.4.1
 ruby -v
 
 echo "Configuring gems not to install documentation"
