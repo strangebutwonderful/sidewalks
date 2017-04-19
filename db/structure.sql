@@ -58,52 +58,20 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: features; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE features (
-    id integer NOT NULL,
-    key character varying(255) NOT NULL,
-    enabled boolean DEFAULT false NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: features_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE features_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: features_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE features_id_seq OWNED BY features.id;
-
-
---
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE locations (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    address character varying(255) NOT NULL,
-    city character varying(255) DEFAULT 'San Francisco'::character varying NOT NULL,
-    state character varying(255) DEFAULT 'CA'::character varying NOT NULL,
+    address character varying NOT NULL,
+    city character varying DEFAULT 'San Francisco'::character varying NOT NULL,
+    state character varying DEFAULT 'CA'::character varying NOT NULL,
     zip integer NOT NULL,
     latitude numeric(11,8) NOT NULL,
     longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -132,13 +100,13 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 CREATE TABLE noises (
     id integer NOT NULL,
-    provider_id character varying(255) NOT NULL,
+    provider_id character varying NOT NULL,
     user_id integer NOT NULL,
     text text NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    provider character varying(255) NOT NULL,
-    avatar_image_url character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    provider character varying NOT NULL,
+    avatar_image_url character varying,
     actionable boolean
 );
 
@@ -169,10 +137,10 @@ ALTER SEQUENCE noises_id_seq OWNED BY noises.id;
 CREATE TABLE originals (
     id integer NOT NULL,
     importable_id integer NOT NULL,
-    importable_type character varying(255) NOT NULL,
+    importable_type character varying NOT NULL,
     dump json NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -204,8 +172,8 @@ CREATE TABLE origins (
     noise_id integer NOT NULL,
     latitude numeric(11,8) NOT NULL,
     longitude numeric(11,8) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -234,11 +202,11 @@ ALTER SEQUENCE origins_id_seq OWNED BY origins.id;
 
 CREATE TABLE roles (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
+    name character varying NOT NULL,
     resource_id integer,
-    resource_type character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    resource_type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -266,7 +234,7 @@ ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
 --
 
 CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
+    version character varying NOT NULL
 );
 
 
@@ -276,10 +244,10 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE sessions (
     id integer NOT NULL,
-    session_id character varying(255) NOT NULL,
+    session_id character varying NOT NULL,
     data text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -308,15 +276,15 @@ ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    email character varying(255),
-    provider character varying(255) NOT NULL,
-    provider_id character varying(255) NOT NULL,
-    provider_screen_name character varying(255),
-    provider_access_token character varying(255),
-    provider_access_token_secret character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    name character varying NOT NULL,
+    email character varying,
+    provider character varying NOT NULL,
+    provider_id character varying NOT NULL,
+    provider_screen_name character varying,
+    provider_access_token character varying,
+    provider_access_token_secret character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     following boolean DEFAULT false NOT NULL,
     locations_count integer DEFAULT 0 NOT NULL,
     mobile_venues_count integer
@@ -350,13 +318,6 @@ CREATE TABLE users_roles (
     user_id integer NOT NULL,
     role_id integer NOT NULL
 );
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY features ALTER COLUMN id SET DEFAULT nextval('features_id_seq'::regclass);
 
 
 --
@@ -409,19 +370,19 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: features_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY features
-    ADD CONSTRAINT features_pkey PRIMARY KEY (id);
-
-
---
 -- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY locations
     ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: noises_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY noises
+    ADD CONSTRAINT noises_pkey PRIMARY KEY (id);
 
 
 --
@@ -454,14 +415,6 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
-
-
---
--- Name: tweets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY noises
-    ADD CONSTRAINT tweets_pkey PRIMARY KEY (id);
 
 
 --
@@ -505,6 +458,13 @@ CREATE UNIQUE INDEX index_origin_on_latitude_and_longitude ON origins USING btre
 --
 
 CREATE INDEX index_originals_on_importable_id_and_importable_type ON originals USING btree (importable_id, importable_type);
+
+
+--
+-- Name: index_originals_on_importable_type_and_importable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_originals_on_importable_type_and_importable_id ON originals USING btree (importable_type, importable_id);
 
 
 --
@@ -615,4 +575,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151231212940');
 INSERT INTO schema_migrations (version) VALUES ('20160125000102');
 
 INSERT INTO schema_migrations (version) VALUES ('20160125012435');
+
+INSERT INTO schema_migrations (version) VALUES ('20170419195813');
 

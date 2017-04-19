@@ -137,9 +137,6 @@ GEM
       thor (~> 0.14)
     flamegraph (0.1.0)
       fast_stack
-    flip (1.0.1)
-      activesupport (>= 3.0, < 5)
-      i18n
     font-awesome-sass (4.5.0)
       sass (>= 3.2)
     formatador (0.2.5)
@@ -385,7 +382,6 @@ DEPENDENCIES
   faker
   figaro
   flamegraph
-  flip (~> 1)
   font-awesome-sass (~> 4)
   geocoder
   guard

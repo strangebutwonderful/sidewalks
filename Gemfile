@@ -48,8 +48,6 @@ gem 'geocoder'
 
 gem 'clockwork', require: false
 
-gem 'flip', '~> 1'
-
 # DevOps tools
 gem 'rack-mini-profiler'
 gem 'flamegraph'
