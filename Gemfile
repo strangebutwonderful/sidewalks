@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 4.2.7.1'
 
 # assets
 
@@ -51,7 +51,7 @@ gem 'clockwork', require: false
 gem 'flip', '~> 1'
 
 # DevOps tools
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', '>= 0.10.1'
 gem 'flamegraph'
 gem 'stackprof'
 
@@ -100,3 +100,4 @@ group :production do
   gem 'rails_12factor'
   gem 'skylight'
 end
+gem 'nokogiri', '>= 1.7.1'
