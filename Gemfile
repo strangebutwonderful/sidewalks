@@ -34,21 +34,21 @@ gem 'rolify'
 gem 'figaro'
 
 # server
-gem 'pg'
 gem 'puma'
 
 gem 'rack-attack'
 gem 'rack-timeout'
 
+# database
+gem 'pg'
 gem 'pg_search'
 
+# third party integrations
 gem 'twitter', '~> 5'
-
 gem 'geocoder'
 
+# job scheduling
 gem 'clockwork', require: false
-
-gem 'flip', '~> 1'
 
 # DevOps tools
 gem 'rack-mini-profiler'
@@ -57,14 +57,6 @@ gem 'stackprof'
 
 # For backups
 gem 'replicate', '~> 1.5.1'
-
-# Deployments
-gem 'capistrano', '~> 3.4'
-gem 'capistrano-bundler'
-gem 'capistrano-passenger'
-gem 'capistrano-rails', '~> 1.1'
-gem 'capistrano-rbenv'
-gem 'capistrano-rails-console'
 
 # deprecated controller actions
 gem 'responders', '~> 2.0'
