@@ -17,7 +17,7 @@
 #  index_noises_on_user_id  (user_id)
 #
 
-class Noise < ActiveRecord::Base
+class Noise < ApplicationRecord
   include PgSearch
 
   IMAGE_EXTENSIONS = [

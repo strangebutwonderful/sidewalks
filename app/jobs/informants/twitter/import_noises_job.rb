@@ -1,5 +1,5 @@
 module Informants::Twitter
-  class ImportNoisesJob < ActiveJob::Base
+  class ImportNoisesJob < ApplicationJob
     queue_as :default
 
     def perform

@@ -14,7 +14,7 @@
 #  index_origin_on_latitude_and_longitude  (noise_id,latitude,longitude) UNIQUE
 #
 
-class Origin < ActiveRecord::Base
+class Origin < ApplicationRecord
   belongs_to :noise
   has_one :user, through: :noise
 
