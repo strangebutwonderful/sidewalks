@@ -33,10 +33,6 @@ class Location < ApplicationRecord
     end
   end
 
-  def directions_url
-    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
-  end
-
   def lat_lng?
     latitude.present? && longitude.present?
   end
@@ -62,15 +58,5 @@ class Location < ApplicationRecord
 
   def to_origin
     Origin.new(latitude: latitude, longitude: longitude)
-  end
-
-  def backtrack_user_noises
-    success_count = 0
-
-    user.noises.each do |noise|
-      success_count += noise.import_locations(user.locations)
-    end
-
-    success_count
   end
 end

@@ -140,10 +140,6 @@ class Noise < ApplicationRecord
     actionable != false
   end
 
-  def actionablity_resetable?
-    !actionable.nil?
-  end
-
   ###
   # Pull media objects out of noise
   # Media object format:

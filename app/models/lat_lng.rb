@@ -6,13 +6,6 @@ class LatLng
     self.longitude = longitude
   end
 
-  def coordinates
-    [
-      latitude,
-      longitude
-    ]
-  end
-
   def latitude=(value)
     @latitude = value_to_coordinate(value)
   end
