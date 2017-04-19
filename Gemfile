@@ -34,18 +34,20 @@ gem 'rolify'
 gem 'figaro'
 
 # server
-gem 'pg'
 gem 'puma'
 
 gem 'rack-attack'
 gem 'rack-timeout'
 
+# database
+gem 'pg'
 gem 'pg_search'
 
+# third party integrations
 gem 'twitter', '~> 5'
-
 gem 'geocoder'
 
+# job scheduling
 gem 'clockwork', require: false
 
 # DevOps tools
