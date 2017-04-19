@@ -56,14 +56,6 @@ gem 'stackprof'
 # For backups
 gem 'replicate', '~> 1.5.1'
 
-# Deployments
-gem 'capistrano', '~> 3.4'
-gem 'capistrano-bundler'
-gem 'capistrano-passenger'
-gem 'capistrano-rails', '~> 1.1'
-gem 'capistrano-rbenv'
-gem 'capistrano-rails-console'
-
 # deprecated controller actions
 gem 'responders', '~> 2.0'
 
