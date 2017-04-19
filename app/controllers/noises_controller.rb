@@ -1,18 +1,17 @@
 class NoisesController < ApplicationController
   before_action :disable_footer, only: [:explore]
 
-  respond_to :html, :json
-
   # GET /noises
-  # GET /noises.json
   def index
     @noise_funnel = NoiseFunnel.new(*explore_params)
     @noises = @noise_funnel.noise_grouped_by_user_id
-    respond_with @noises
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /explore
-  # GET /explore.json
   def explore
     @noise_funnel = NoiseFunnel.new(*explore_params)
     @map = Map.new(request_lat_lng, params)
@@ -22,11 +21,13 @@ class NoisesController < ApplicationController
     end
 
     @noises = @noise_funnel.noise_grouped_by_user_id
-    respond_with @noises
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /noises/1
-  # GET /noises/1.json
   def show
     @noise = Noise.find(params[:id])
     @noises = Noise.where_authored_by_user_before(@noise.user_id, @noise.created_at).
@@ -34,7 +35,9 @@ class NoisesController < ApplicationController
               joins(:user).preload(:user). # cuz nearby overrides includes
               all
 
-    respond_with @noise
+    respond_to do |format|
+      format.html
+    end
   end
 
   private
