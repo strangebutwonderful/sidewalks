@@ -40,8 +40,4 @@ class Origin < ApplicationRecord
   def map
     @map ||= Map.new(lat_lngs) if lat_lngs?
   end
-
-  def directions_url
-    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
-  end
 end

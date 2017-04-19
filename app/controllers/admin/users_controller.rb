@@ -1,7 +1,7 @@
 class Admin::UsersController < Admin::AdminController
 
   def index
-    @users = User.explore(params).includes(:locations, :roles).all
+    @users = User.order(id: :desc).includes(:locations, :roles).all
 
     respond_to do |format|
       format.html

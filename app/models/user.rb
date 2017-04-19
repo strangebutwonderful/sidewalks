@@ -27,13 +27,12 @@ class User < ApplicationRecord
   has_many :noises, -> { order(created_at: :desc) },
            dependent: :destroy
 
-  attr_reader :provider_url
-
   validates_presence_of :name, :provider, :provider_id, :provider_screen_name
 
   PROVIDER_SIDEWALKS = "sidewalks".freeze
   PROVIDER_TWITTER = "twitter".freeze
 
+  scope :order_by_name_ignore_case, -> { order("LOWER(name)") }
   scope :where_has_no_locations, -> { where(locations_count: [nil, 0]) }
   scope :where_has_no_mobile_venues, -> { where(mobile_venues_count: [nil, 0]) }
   scope :where_needs_triage, -> do
@@ -69,19 +68,6 @@ class User < ApplicationRecord
     end
   end
 
-  def blank
-    [
-      :email,
-      :provider_access_token,
-      :provider_access_token_secret,
-      :provider_screen_name
-    ].each do |attribute|
-      self[attribute] = nil if self[attribute].blank?
-    end
-
-    self
-  end
-
   def self.providers
     providers = [User::PROVIDER_TWITTER]
   end
@@ -102,21 +88,5 @@ class User < ApplicationRecord
 
     user.create_original!(dump: auth.to_json)
     user
-  end
-
-  def self.explore(params)
-    order = params[:order]
-
-    if order && order.casecmp("name") == 0
-      order_by_name_ignore_case
-    elsif order
-      self.order(order)
-    else
-      self.order("id")
-    end
-  end
-
-  def self.order_by_name_ignore_case
-    order("lower(name)")
   end
 end
