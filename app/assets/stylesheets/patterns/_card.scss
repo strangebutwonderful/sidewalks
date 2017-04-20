@@ -7,6 +7,7 @@
   background-color: transparent;
   padding: $base-block-spacing;
   position: relative;
+  white-space: normal; // to restore normalicy when in a stack
 
   &:last-child {
     margin-bottom: 0;

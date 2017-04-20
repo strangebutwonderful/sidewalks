@@ -1,7 +1,24 @@
 <% if @noises.each do |user_id, noises| %>
   <div class="row cradle">
-    <%= render '/noises/card_stack', :noise => noises.first %>
+    <%# Card with details %>
+    <div class="card-deck">
+      <% noises.each do |noise| %>
+        <%= render '/noises/card_stack', noise: noise %>
+      <% end %>
+    </div>
   </div>
+
+  <%# Map %>
+  <div class="row cradle">
+    <% if noises.first.lat_lngs? %>
+      <div class="card-deck">
+        <div class="card-addendum card-addendum-suffix">
+          <%= render :partial => 'noises/map', :locals => {:noise => noises.first} %>
+        </div>
+      </div>
+    <% end %>
+  <div>
+
 <% end.empty? %>
 <div class="row">
     <div class="card">

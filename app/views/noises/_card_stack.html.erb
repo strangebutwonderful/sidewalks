@@ -1,4 +1,6 @@
-<%= render '/noises/card', :noise => noise %>
-<%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
-<%= render :partial => 'admin/noises/actionable_card_addendum', :locals => {:noise => noise} %>
-<%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>
+<div class="card-stack">
+  <%= render '/noises/card', :noise => noise %>
+  <%= render :partial => 'admin/noises/card_addendum', :locals => {:noise => noise} %>
+  <%= render :partial => 'admin/noises/actionable_card_addendum', :locals => {:noise => noise} %>
+  <%= render :partial => 'admin/origins/card_addendum', :locals => {:noise => noise} %>
+</div>

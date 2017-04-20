@@ -29,7 +29,10 @@ class NoiseFunnel
   end
 
   def noise_grouped_by_user_id
-    @noise_grouped_by_user_id ||= noises.group_by &:user_id
+    @noise_grouped_by_user_id ||= noises
+      .sort_by(&:created_at)
+      .reverse
+      .group_by(&:user_id)
   end
 
   private

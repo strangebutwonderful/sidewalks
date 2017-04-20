@@ -29,10 +29,3 @@
     <% end %>
   </div>
 <% end %>
-
-<%# Map %>
-<% if noise.lat_lngs? %>
-  <div class="card-addendum card-addendum-suffix">
-    <%= render :partial => 'noises/map', :locals => {:noise => noise} %>
-  </div>
-<% end %>
