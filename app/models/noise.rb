@@ -17,7 +17,7 @@
 #  index_noises_on_user_id  (user_id)
 #
 
-class Noise < ActiveRecord::Base
+class Noise < ApplicationRecord
   include PgSearch
 
   IMAGE_EXTENSIONS = [
@@ -138,10 +138,6 @@ class Noise < ActiveRecord::Base
 
   def actionablity_downvotable?
     actionable != false
-  end
-
-  def actionablity_resetable?
-    !actionable.nil?
   end
 
   ###

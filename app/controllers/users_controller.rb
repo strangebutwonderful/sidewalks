@@ -1,20 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user_or_redirect_to_root!, only: [:edit, :update]
 
-  respond_to :html, :json
-
   def show
     @user = User.find(params[:id])
     @noises = @user.noises.limit(10)
 
-    respond_with(@user, @noises)
+    respond_to do |format|
+      format.html
+    end
   end
 
   def edit
     @user = User.find(params[:id])
     authorize! :update, @user
 
-    respond_with(@user)
+    respond_to do |format|
+      format.html
+    end
   end
 
   def update

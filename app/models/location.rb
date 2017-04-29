@@ -20,7 +20,7 @@
 #  unique_user_and_locations                  (user_id,address,city,state,zip) UNIQUE
 #
 
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   validates_presence_of :user_id, :address, :city, :latitude, :longitude, :state, :zip
@@ -31,10 +31,6 @@ class Location < ActiveRecord::Base
       location.longitude ||= geocode.longitude
       location.zip ||= geocode.postal_code
     end
-  end
-
-  def directions_url
-    "http://maps.google.com/maps?daddr=" + latitude.to_s + "," + longitude.to_s
   end
 
   def lat_lng?
@@ -62,15 +58,5 @@ class Location < ActiveRecord::Base
 
   def to_origin
     Origin.new(latitude: latitude, longitude: longitude)
-  end
-
-  def backtrack_user_noises
-    success_count = 0
-
-    user.noises.each do |noise|
-      success_count += noise.import_locations(user.locations)
-    end
-
-    success_count
   end
 end

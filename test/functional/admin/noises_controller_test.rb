@@ -30,7 +30,27 @@ class Admin::NoisesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:noises)
   end
 
-  test "anyone should see noise" do
+  test "anyone should not get triage" do
+    get :triage
+    assert_redirected_to :root
+  end
+
+  test "user should not get triage" do
+    sign_in(FactoryGirl.create(:user))
+
+    get :triage
+    assert_redirected_to :root
+  end
+
+  test "admin should get triage" do
+    sign_in(FactoryGirl.create(:admin_user))
+
+    get :triage
+    assert_response :success
+    assert_not_nil assigns(:noises)
+  end
+
+  test "anyone should not see noise" do
     get :show, id: @noise
     assert_redirected_to :root
   end

@@ -1,11 +1,11 @@
 class SearchController < ApplicationController
-  respond_to :html, :json
 
   # GET /search
-  # GET /search.json
   def index
     @noises = Noise.search(params).group_by(&:user_id)
 
-    respond_with @noises
+    respond_to do |format|
+      format.html
+    end
   end
 end

@@ -27,9 +27,6 @@
         data-cartography-map-marker-latitude="<%= location.latitude %>"
         data-cartography-map-marker-longitude="<%= location.longitude %>"
       >
-        <p>
-          <%= link_to "Directions to " + user.name, location.directions_url, :target => "_blank" %>
-        </p>
       </div>
     <% end %>
     <div data-cartography-map-panel id="map-panel-user-<%= user.id %>">
