@@ -30,7 +30,7 @@ set :deploy_to, "/home/deploy/sidewalks"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-# set :rvm, '2.2.2'
+# set :rvm, '2.4.1'
 
 # rbenv
 set :rbenv_type, :user # or :system, depends on your rbenv setup
