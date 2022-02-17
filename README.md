@@ -1,7 +1,6 @@
 ## Sidewalks
 
 [![Build Status](https://travis-ci.org/strangebutwonderful/sidewalks.png?branch=master)](https://travis-ci.org/strangebutwonderful/sidewalks)
-[![Dependency Status](https://gemnasium.com/strangebutwonderful/sidewalks.png)](https://gemnasium.com/strangebutwonderful/sidewalks)
 [![Code Climate](https://codeclimate.com/github/strangebutwonderful/sidewalks.png)](https://codeclimate.com/github/strangebutwonderful/sidewalks)
 
 ### Coverage
